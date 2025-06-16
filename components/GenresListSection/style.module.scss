@@ -1,0 +1,23 @@
+.root{
+
+  :global{
+    .swiper-button-next,
+    .swiper-button-prev{
+      top: 50%
+    }
+
+    .swiper-button-next{
+      right: 5px;
+    }
+
+    .swiper-button-prev{
+      left: 5px;
+    }
+
+    .swiper-button-disabled{
+      display: none;
+    }
+    
+  }
+  
+}

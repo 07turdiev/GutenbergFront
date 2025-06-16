@@ -1,0 +1,9 @@
+{
+  "locales": ["uz", "ru"],
+  "defaultLocale": "ru",
+  "localeDetection": false,
+  "pages": {
+    "*": ["common", "fields"],
+    "/charter": ["about"]
+  }
+}

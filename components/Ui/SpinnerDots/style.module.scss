@@ -1,0 +1,61 @@
+$spinner-color: #a62929;
+$spinner-size: 10;
+$faded-opacity: 0.35;
+$spinner-delay: 0.18;
+$spinner-scale: 0.87;
+$animation-duration: 1.1s;
+$animation-rest: 25;
+
+.wrapper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+}
+
+.spinner {
+  & * {
+    display: inline-block;
+    width: #{$spinner-size}px;
+    height: #{$spinner-size}px;
+    background-color: $spinner-color;
+    border-radius: #{$spinner-size}rem;
+    margin: 0 2px;
+  }
+
+  @for $i from 1 through 3 {
+    & .spinner#{$i} {
+      animation: fade
+      $animation-duration
+      ease-in-out
+      #{$i *
+        $spinner-delay}s
+      infinite
+      both;
+    }
+  }
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0.35;
+    transform: scale(0.87);
+  }
+  37.5% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  75% {
+    opacity: 0.35;
+    transform: scale(0.87);
+  }
+  100% {
+    opacity: 0.35;
+    transform: scale(0.87);
+  }
+}

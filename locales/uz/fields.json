@@ -1,0 +1,25 @@
+{
+  "requiredField": "Maydon talab qilinadi",
+  "requiredPhone": "Telefon raqamingizni kiriting",
+
+  "authorName": "Muallifning ismi",
+  "bookTitle": "Kitob nomi",
+  "releaseYear": "Сhiqarilgan yili",
+  "orderBook": "Buyurtma qilish",
+  "executor": "Ijrochi",
+  "name":"Ism",
+  "login":"Login",
+  "password":"Parol",
+
+  "changePassword": "Parol o'zgartirish",
+  "currentPassword": "Joriy parol",
+  "newPassword": "Yangi Parol",
+  "confirmPassword": "Parolni qayta kiriting",
+  "change":"O'zgartirish",
+  "saveChanges":"O'zgarishlarni saqlang",
+  "uploadPhoto": "Surat yuklang"
+
+
+
+
+}

@@ -1,0 +1,43 @@
+.root{
+  :global{
+    .rangeslider-vertical{
+      height: 100px;
+      width: 6px;
+    }
+    .rangeslider-vertical .rangeslider__fill{
+      background-color:  rgb(255, 215, 0);
+    }
+    .rangeslider .rangeslider__handle{
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      left: -7px;
+    }
+
+  }
+}
+
+.volumeRange{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0;
+  height: 100%;
+}
+
+.volumeTracker{
+  height: 100px;
+  width: 6px;
+  background: #fff;
+  position: relative;
+  overflow: hidden;
+
+}
+
+.volumeControl{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: rgb(255, 215, 0);
+  width: 100%;
+}

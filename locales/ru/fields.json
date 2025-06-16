@@ -1,0 +1,23 @@
+{
+  "requiredField": "Поле обязательное",
+  "requiredPhone": "Введите свой номер телефона",
+
+  "authorName": "Имя автора",
+  "bookTitle": "Название книги",
+  "releaseYear":"Год выпуска",
+  "orderBook": "Заказать",
+  "executor": "Исполнитель",
+  "name":"Имя",
+  "login":"Логин",
+  "password": "Пароль",
+
+  "changePassword": "Изменить пароль",
+  "currentPassword": "Текущий пароль",
+  "newPassword": "Новый пароль",
+  "confirmPassword": "Повторите пароль",
+  "change":"Изменить",
+  "saveChanges":"Сохранить изменения",
+  "uploadPhoto":"Загрузить фото"
+  
+
+}
