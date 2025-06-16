@@ -1,6 +1,6 @@
 {
   "locales": ["uz", "ru"],
-  "defaultLocale": "ru",
+  "defaultLocale": "uz",
   "localeDetection": false,
   "pages": {
     "*": ["common", "fields"],
