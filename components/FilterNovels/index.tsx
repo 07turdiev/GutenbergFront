@@ -79,7 +79,8 @@ const Index:React.FC<Props> = ({title}) => {
 
     useEffect(()=>{
 
-        if(router.query){
+        // Only show filter if there are actual filter parameters
+        if(Object.keys(router.query).length > 0 && (router.query.name || router.query.author || router.query.genre || router.query.category || router.query.lang)){
             setShowFilter(true)
         }
 
