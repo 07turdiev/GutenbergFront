@@ -89,7 +89,7 @@ const Index = () => {
 
                             <div>
                                 <a href="https://t.me/gutenbergnu_bot" target="_blank" rel="noopener noreferrer" className='inline-block hover:opacity-80 transition-opacity'>
-                                    <Image src={TelegramBotBanner} alt="Telegram bot" width={300} height={75}/>
+                                    <Image src={TelegramBotBanner} alt="Telegram bot" width={200} height={50}/>
                                 </a>
                             </div>
                         </div>
