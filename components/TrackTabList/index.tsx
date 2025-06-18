@@ -15,6 +15,7 @@ import {useDispatch} from "react-redux";
 import {selectTrack} from "../../store/selectors/player";
 import {selectAudioTrack} from "../../store/selectors/audio";
 import {fetchAudioOne} from "../../store/actions/audio";
+import {setAudioTrack} from "../../store/reducers/AudioSlice";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import {PlayerContext} from "../contexts/PlayerContext";
 import { Scrollbars } from 'react-custom-scrollbars';
@@ -54,7 +55,29 @@ const Index:React.FC<Props> = ({
         dispatch(pauseTrack());
         dispatch(setCurrentTime(0));
         dispatch(setPlayerLoading(true));
-        await dispatch(fetchAudioOne({locale: lang, slug: track.slug}))
+        
+        // Create track data directly instead of fetching
+        // Handle cover - it might be a string URL or an object with src property
+        const coverObj = typeof novel.cover === 'string' 
+            ? { src: novel.cover } 
+            : (novel.cover || { src: '' });
+            
+        const trackData = {
+            name: track.name,
+            file: track.file,
+            novel: {
+                author: novel.author ? [novel.author] : [],
+                cover: coverObj,
+                name: novel.name,
+                slug: novel.slug
+            },
+            next: null,
+            prev: null
+        };
+        
+        // Dispatch the track data directly to the audio reducer
+        dispatch(setAudioTrack(trackData));
+        
         await dispatch(setActiveTrack({active_slug: track.slug, lang: lang, playImmediately: true}))
         await dispatch(playTrack());
         AudioPlayer.play().catch((e) => {
@@ -87,7 +110,7 @@ const Index:React.FC<Props> = ({
             <Tab.Group selectedIndex={activeTab} onChange={setActiveTab}>
                 <Tab.List className='mb-5'>
                     {
-                        trackList.audioListRu.length ?
+                        trackList && trackList.audioListRu && trackList.audioListRu.length ?
 
                             <Tab
                                 as={Fragment}
@@ -107,7 +130,7 @@ const Index:React.FC<Props> = ({
                     }
 
                     {
-                        trackList.audioListUz.length ?
+                        trackList && trackList.audioListUz && trackList.audioListUz.length ?
                             <Tab
                                 as={Fragment}
                             >
@@ -137,12 +160,12 @@ const Index:React.FC<Props> = ({
                     >
                         <Tab.Panels className='outline-none pr-2 md:pr-3'>
                             {
-                                trackList.audioListRu.length ?
+                                trackList && trackList.audioListRu && trackList.audioListRu.length ?
                                     <Tab.Panel className='outline-none'>
                                             {
                                                 trackList.audioListRu.map((audio)=>{
                                                     return(
-                                                        <AudioCard audio={audio} cover={novel.cover.src} key={audio.file} lang='ru' onClick={()=>playSelectedTrack(audio, 'ru')}/>
+                                                        <AudioCard audio={audio} cover={typeof novel.cover === 'string' ? novel.cover : novel.cover?.src} key={audio.file} lang='ru' onClick={()=>playSelectedTrack(audio, 'ru')}/>
                                                     )
                                                 })
                                             }
@@ -151,12 +174,12 @@ const Index:React.FC<Props> = ({
                             }
 
                             {
-                                trackList.audioListUz.length ?
+                                trackList && trackList.audioListUz && trackList.audioListUz.length ?
                                     <Tab.Panel className='outline-none'>
                                             {
                                                 trackList.audioListUz.map((audio)=>{
                                                     return(
-                                                        <AudioCard audio={audio} cover={novel.cover.src} key={audio.file}  lang='uz' onClick={()=>playSelectedTrack(audio, 'uz')}/>
+                                                        <AudioCard audio={audio} cover={typeof novel.cover === 'string' ? novel.cover : novel.cover?.src} key={audio.file}  lang='uz' onClick={()=>playSelectedTrack(audio, 'uz')}/>
                                                     )
                                                 })
                                             }

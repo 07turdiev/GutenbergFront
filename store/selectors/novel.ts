@@ -14,11 +14,12 @@ export const selectCountOfSaved = createSelector(selectSavedNovels, items => {
     }
 })
 
-export const selectAudioListByLang = createSelector(selectAudioList, (audioList): IAudioList => {
+export const selectAudioListByLang = createSelector([selectNovelOne, selectAudioList], (novel, audioList): IAudioList => {
     let listRu = []
     let listUz = [];
 
-    if(audioList){
+    // First try to use audioList if available (legacy format)
+    if(audioList && audioList.length > 0){
         listRu = audioList.filter(item=>item.file_ru !== null).map( (audio) => {
             return {
                 slug: audio.slug,
@@ -38,6 +39,28 @@ export const selectAudioListByLang = createSelector(selectAudioList, (audioList)
                     order: audio.order
                 }
         });
+    } 
+    // Otherwise use the audio from novel data (new format)
+    else if(novel && novel.audio_list && novel.audio_list.length > 0) {
+        // For new format, we have a single audio file
+        // Determine language based on locale
+        if(novel.locale === 'uz') {
+            listUz = novel.audio_list.map((audio, index) => ({
+                slug: novel.slug,
+                name: audio.name || novel.name,
+                file: audio.file,
+                duration: audio.duration,
+                order: audio.order || index + 1
+            }));
+        } else {
+            listRu = novel.audio_list.map((audio, index) => ({
+                slug: novel.slug,
+                name: audio.name || novel.name,
+                file: audio.file,
+                duration: audio.duration,
+                order: audio.order || index + 1
+            }));
+        }
     }
 
     return  {

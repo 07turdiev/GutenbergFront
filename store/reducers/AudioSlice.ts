@@ -21,7 +21,13 @@ const initialState: AudioState = {
 export const audioSlice = createSlice({
     name: 'audio',
     initialState,
-    reducers: {},
+    reducers: {
+        setAudioTrack: (state, action: PayloadAction<ITrack>) => {
+            state.audio = action.payload;
+            state.loading = false;
+            state.error = '';
+        }
+    },
     extraReducers: {
         [fetchAudioOne.fulfilled.type]: (state, action: PayloadAction<ITrack>) => {
             state.loading = false;
@@ -66,4 +72,5 @@ export const audioSlice = createSlice({
     }
 })
 
+export const { setAudioTrack } = audioSlice.actions;
 export default audioSlice.reducer;

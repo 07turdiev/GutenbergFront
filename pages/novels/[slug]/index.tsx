@@ -340,16 +340,22 @@ const Index = () => {
 
                                 </div>
 
-                                <SectionTitle>
-                                    {t('bookChapters')}
-                                </SectionTitle>
-
                                 {
-                                    trackList ?
-                                        <div className='mb-10'>
-                                            <TrackTabList trackList={trackList} novel={novel}/>
-                                        </div>
-                                    : null
+                                    novel.audio_list && novel.audio_list.length > 0 ? (
+                                        <>
+                                            <SectionTitle>
+                                                {t('bookChapters')}
+                                            </SectionTitle>
+
+                                            {
+                                                trackList ?
+                                                    <div className='mb-10'>
+                                                        <TrackTabList trackList={trackList} novel={novel}/>
+                                                    </div>
+                                                : null
+                                            }
+                                        </>
+                                    ) : null
                                 }
 
 

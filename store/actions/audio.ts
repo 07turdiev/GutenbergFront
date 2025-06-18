@@ -7,8 +7,31 @@ export const fetchAudioOne = createAsyncThunk(
     'audio/fetchAudioOne',
     async ({locale, slug}: {locale: string, slug: string}, thunkApi) => {
         try {
-            const response = await AudioService.fetchAudioOne(locale, slug)
-            return response.data;
+            // In the new API structure, we don't have individual audio endpoints
+            // Instead, we'll get the novel data and extract audio information
+            const state = thunkApi.getState() as any;
+            const novel = state.novelReducer.novel;
+            
+            if (!novel || !novel.audio_list || novel.audio_list.length === 0) {
+                return thunkApi.rejectWithValue('No audio available for this novel');
+            }
+            
+            // Create track data from novel information
+            const audioFile = novel.audio_list[0]; // Using first audio file
+            const track = {
+                name: audioFile.name || novel.name,
+                file: audioFile.file,
+                novel: {
+                    author: novel.author ? [novel.author] : [],
+                    cover: novel.cover || { src: '' },
+                    name: novel.name,
+                    slug: novel.slug
+                },
+                next: null, // No playlist support in new structure
+                prev: null
+            };
+            
+            return track;
         }catch (err){
             errorCatcher(err, thunkApi)
         }

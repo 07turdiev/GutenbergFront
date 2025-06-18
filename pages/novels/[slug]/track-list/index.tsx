@@ -39,6 +39,9 @@ const Index = () => {
         return <ErrorBounder/>
     }
 
+    // Check if novel has audio
+    const hasAudio = novel.audio_list && novel.audio_list.length > 0;
+
     const sendNovelRating = async (rate) => {
         if(!isLogin){
             toast.error('Оценивать могут только авторизованные пользователи', {
@@ -99,11 +102,14 @@ const Index = () => {
 
                         <div className='mb-10'>
                             {
-                                trackList ?
+                                hasAudio && trackList ?
                                     <div className='mb-10'>
                                         <TrackTabList trackList={trackList} novel={novel}/>
                                     </div>
-                                    : null
+                                    : 
+                                    <div className='text-center py-10'>
+                                        <p className='text-gray-500 text-lg'>{t('noAudioAvailable') || 'Bu kitob uchun audio mavjud emas'}</p>
+                                    </div>
                             }
                         </div>
                     </div>

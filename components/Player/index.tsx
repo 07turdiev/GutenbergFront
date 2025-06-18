@@ -192,19 +192,21 @@ const Index = () => {
     }
 
     const setNextPart = () => {
-        if(audioTrack.next){
-            dispatch(fetchAudioOne({locale: active_lang, slug: audioTrack.next}))
-            dispatch(setActiveTrack({active_slug: audioTrack.next, lang: active_lang, playImmediately: true}))
-            dispatch(setCurrentTime(0))
-        }
+        // Next/Prev functionality disabled in new API structure
+        // if(audioTrack.next){
+        //     dispatch(fetchAudioOne({locale: active_lang, slug: audioTrack.next}))
+        //     dispatch(setActiveTrack({active_slug: audioTrack.next, lang: active_lang, playImmediately: true}))
+        //     dispatch(setCurrentTime(0))
+        // }
     }
 
     const setPrevPart = () => {
-        if(audioTrack.prev){
-            dispatch(fetchAudioOne({locale: active_lang, slug: audioTrack.prev}))
-            dispatch(setActiveTrack({active_slug: audioTrack.prev, lang: active_lang, playImmediately: true}))
-            dispatch(setCurrentTime(0))
-        }
+        // Next/Prev functionality disabled in new API structure
+        // if(audioTrack.prev){
+        //     dispatch(fetchAudioOne({locale: active_lang, slug: audioTrack.prev}))
+        //     dispatch(setActiveTrack({active_slug: audioTrack.prev, lang: active_lang, playImmediately: true}))
+        //     dispatch(setCurrentTime(0))
+        // }
     }
 
     const changeVolume = (vol) => {
@@ -341,9 +343,13 @@ const Index = () => {
                                 :
                                     <div className='flex items-center'>
                                         <div className='lg:w-14 lg:h-14 shrink-0 w-10 h-10 bg-gray-200 rounded overflow-hidden relative'>
-                                            <Image quality={100} src={audioTrack.novel.cover.src} width={200} height={200} objectFit='cover' className={classNames({
-                                                'opacity-90':loading
-                                            })}/>
+                                            {audioTrack.novel.cover?.src ? (
+                                                <Image quality={100} src={audioTrack.novel.cover.src} width={200} height={200} objectFit='cover' className={classNames({
+                                                    'opacity-90':loading
+                                                })}/>
+                                            ) : (
+                                                <div className='w-full h-full bg-gray-300' />
+                                            )}
 
                                             {
                                                 loading ?
@@ -358,7 +364,10 @@ const Index = () => {
                                                 </Link>
                                             </h2>
                                             <h3 className='font-medium text-xs md:text-base truncate'>{audioTrack.name}</h3>
-                                            <p className='text-gray-500 text-xs lg:text-md'>{playerNovel?.author.name}</p>
+                                            <p className='text-gray-500 text-xs lg:text-md'>
+                                                {playerNovel?.author?.name || 
+                                                 (audioTrack.novel.author?.[0]?.name || '')}
+                                            </p>
                                         </div>
                                     </div>
                             }

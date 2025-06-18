@@ -22,13 +22,15 @@ const MainLayout = ({children}) => {
         if(rActive && !active_slug) {
             dispatch(setPlayerLoading(true));
             await dispatch(setCurrentTime(Number(rCurrentTime)));
-            await dispatch(fetchAudioOne({locale: rLocale, slug: rActive}))
-            await dispatch(setActiveTrack({active_slug: rActive, lang: rLocale, playImmediately: false}))
+            // TODO: Restore player state from localStorage
+            // For now, we can't fetch individual audio without the novel context
+            // await dispatch(fetchAudioOne({locale: rLocale, slug: rActive}))
+            // await dispatch(setActiveTrack({active_slug: rActive, lang: rLocale, playImmediately: false}))
         }
     }
 
     useEffect(()=>{
-        setPlayer()
+        // setPlayer() // Disabled for now
     }, [rActive])
 
 

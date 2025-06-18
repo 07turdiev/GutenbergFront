@@ -108,8 +108,10 @@ export const fetchAudiosOfNovel = createAsyncThunk(
         ctx?: GetServerSidePropsContext
     }, thunkApi) => {
         try {
-            const response = await NovelService.fetchAudiosOfNovel(config.locale, config.slug, config.opt, config.ctx)
-            return response.data.audio_list
+            // For new Strapi API, audio is included in the novel data
+            // So we'll return an empty array and let the novel data provide the audio
+            // The audio_list is already set in adaptNovelData
+            return []
         }catch (err){
             return thunkApi.rejectWithValue('Ошибка при получение списка аудио')
         }
