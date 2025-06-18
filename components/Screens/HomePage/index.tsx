@@ -52,9 +52,11 @@ const Index = () => {
             <section className="container mx-auto px-3 mb-5">
                 <div className="grid grid-cols-12 lg:grid-rows-2 sm:gap-4 gap-2">
 
-                    <div className="lg:col-span-7 lg:row-span-2 col-span-12 row-span-1">
-                        {actual && <NovelMain novel={actual}/>}
-                    </div>
+                    {actual && (
+                        <div className="lg:col-span-7 lg:row-span-2 col-span-12 row-span-1">
+                            <NovelMain novel={actual}/>
+                        </div>
+                    )}
 
                     {
                         mainTop ?

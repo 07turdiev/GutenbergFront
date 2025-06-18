@@ -56,8 +56,12 @@ const AboutPage = () => {
             <div className="container mx-auto px-3">
                 <h2 className='font-bold mb-3 text-xl'>{t('whatIs')}</h2>
                 <div className="mb-10">
-
-                    <div dangerouslySetInnerHTML={{__html: description?.description}}/>
+                    {description && description.description && (
+                        <div 
+                            className="prose prose-lg max-w-none"
+                            dangerouslySetInnerHTML={{__html: description.description}}
+                        />
+                    )}
                 </div>
 
                 <div className='mr-auto ml-auto' >

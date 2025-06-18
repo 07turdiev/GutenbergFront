@@ -1,16 +1,18 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import AboutService from "../../services/about";
 import {FetchParams} from "../../models/Actions/Params";
+import {adaptAboutData, adaptContactsData, adaptSocialData, adaptStatisticsData} from "../../utils/strapiAdapter";
 
 export const fetchAbout = createAsyncThunk(
     'about/fetchAbout',
     async ({locale, config, ctx} : FetchParams, thunkApi) => {
         try {
             const response = await AboutService.fetchAbout({locale, config, ctx})
-            return response.data
+            return adaptAboutData(response.data)
 
         }catch (err){
-            return thunkApi.rejectWithValue('Ошибка при получение заказов')
+            console.error('fetchAbout error:', err);
+            return thunkApi.rejectWithValue('Error fetching about data')
         }
     }
 )
@@ -20,10 +22,11 @@ export const fetchSocialLinks = createAsyncThunk(
     async ({locale, config, ctx} : FetchParams, thunkApi) => {
         try {
             const response = await AboutService.fetchSocialLinks({locale, config, ctx})
-            return response.data
+            return adaptSocialData(response.data)
 
         }catch (err){
-            return thunkApi.rejectWithValue('Ошибка при получение заказов')
+            console.error('fetchSocialLinks error:', err);
+            return thunkApi.rejectWithValue('Error fetching social links')
         }
     }
 )
@@ -33,10 +36,11 @@ export const fetchContacts= createAsyncThunk(
     async ({locale, config, ctx} : FetchParams, thunkApi) => {
         try {
             const response = await AboutService.fetchContacts({locale, config, ctx})
-            return response.data
+            return adaptContactsData(response.data)
 
         }catch (err){
-            return thunkApi.rejectWithValue('Ошибка при получение заказов')
+            console.error('fetchContacts error:', err);
+            return thunkApi.rejectWithValue('Error fetching contacts')
         }
     }
 )
@@ -46,10 +50,11 @@ export const fetchStatistics= createAsyncThunk(
     async ({locale, config, ctx} : FetchParams, thunkApi) => {
         try {
             const response = await AboutService.fetchStatistics({locale, config, ctx})
-            return response.data
+            return adaptStatisticsData(response.data)
 
         }catch (err){
-            return thunkApi.rejectWithValue('Ошибка при получение заказов')
+            console.error('fetchStatistics error:', err);
+            return thunkApi.rejectWithValue('Error fetching statistics')
         }
     }
 )

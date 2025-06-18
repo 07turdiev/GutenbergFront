@@ -3,9 +3,9 @@ import { setCookies, getCookie  } from 'cookies-next';
 export let API_URL;
 
 if(typeof window !== "undefined"){
-    API_URL = 'https://ak.madaniyat.uz/';
+    API_URL = 'http://localhost:1337/';
 }else {
-    API_URL = 'http://ak.madaniyat.uz/';
+    API_URL = 'http://localhost:1337/';
 }
 
 const $api = axios.create({

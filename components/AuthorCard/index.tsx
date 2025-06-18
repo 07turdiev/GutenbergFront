@@ -20,7 +20,13 @@ const Index:React.FC<Props> = ({author, link}) => {
                 <div className='absolute top-[2px] left-[2px] bg-gray-50 z-12 w-full h-full rounded-full text-2xl flex items-center justify-center font-medium cursor-pointer overflow-hidden'>
                     {
                         author.photo ?
-                            <Image src={author.photo.src} layout='fill' placeholder='blur' blurDataURL={author.photo.base64} objectFit='cover' objectPosition='top center'/>
+                            <Image 
+                                src={author.photo.src} 
+                                layout='fill' 
+                                {...(author.photo.base64 && author.photo.base64 !== '' ? {placeholder: 'blur', blurDataURL: author.photo.base64} : {})}
+                                objectFit='cover' 
+                                objectPosition='top center'
+                            />
                         :
                             <Image src={noPhoto} layout='fill' objectFit='cover' objectPosition='top center'/>
                     }

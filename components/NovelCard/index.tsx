@@ -52,9 +52,16 @@ const Index:React.FC<Props> = ({novel, addToMark}) => {
 
                 {
                     novel.cover ?
-                        <Image quality={100} src={novel.cover.src}  placeholder="blur" blurDataURL={novel.cover.base64} layout='fill' objectFit='cover' objectPosition='top center'/>
+                        <Image 
+                            quality={100} 
+                            src={novel.cover.src}  
+                            {...(novel.cover.base64 && novel.cover.base64 !== '' ? {placeholder: 'blur', blurDataURL: novel.cover.base64} : {})}
+                            layout='fill' 
+                            objectFit='cover' 
+                            objectPosition='top center'
+                        />
                     :
-                        <Image quality={100} src={noPhoto}  placeholder="blur" blurDataURL={noPhoto.src} layout='fill' objectFit='cover' objectPosition='top center'/>
+                        <Image quality={100} src={noPhoto} layout='fill' objectFit='cover' objectPosition='top center'/>
                 }
 
 

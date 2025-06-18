@@ -15,4 +15,3 @@ export const selectAuthorsOptions = createSelector(selectAuthors, (authors) => {
         authorsOption
     };
 })
-

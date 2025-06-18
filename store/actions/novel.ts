@@ -5,6 +5,7 @@ import {toast} from "react-toastify";
 import {GetServerSidePropsContext} from "next";
 import AddToMark from "../../components/Toasts/AddToMark";
 import {FetchParams} from "../../models/Actions/Params";
+import {adaptNovelData, adaptNovelsArray} from "../../utils/strapiAdapter";
 
 
 export const fetchNovels = createAsyncThunk(
@@ -14,7 +15,7 @@ export const fetchNovels = createAsyncThunk(
             const response = await NovelService.fetchNovels(locale, opt, ctx)
             return {
                 meta: response.data.meta,
-                results: response.data.data
+                results: adaptNovelsArray(response.data.data)
             }
 
         }catch (err){
@@ -33,9 +34,28 @@ export const fetchNovelOne = createAsyncThunk(
     }, thunkApi) => {
         try {
             const response = await NovelService.fetchNovelOne(config.locale, config.slug, config.opt, config.ctx)
-            return response.data.data
+            // For single item by slug, we get an array, take the first item
+            const novelData = Array.isArray(response.data.data) ? response.data.data[0] : response.data.data;
+            return adaptNovelData(novelData)
         }catch (err){
             return thunkApi.rejectWithValue('Ошибка при получение новелы')
+        }
+    }
+)
+
+export const fetchNovelByDocumentId = createAsyncThunk(
+    'novel/fetchNovelByDocumentId',
+    async (config: {
+        locale: string,
+        documentId: string,
+        opt?: AxiosRequestConfig,
+        ctx?: GetServerSidePropsContext
+    }, thunkApi) => {
+        try {
+            const response = await NovelService.fetchNovelByDocumentId(config.locale, config.documentId, config.opt, config.ctx)
+            return adaptNovelData(response.data.data)
+        }catch (err){
+            return thunkApi.rejectWithValue('Ошибка при получение новелы по documentId')
         }
     }
 )
@@ -50,7 +70,9 @@ export const fetchPlayerNovel= createAsyncThunk(
     }, thunkApi) => {
         try {
             const response = await NovelService.fetchNovelOne(config.locale, config.slug, config.opt, config.ctx)
-            return response.data.data
+            // For single item by slug, we get an array, take the first item
+            const novelData = Array.isArray(response.data.data) ? response.data.data[0] : response.data.data;
+            return adaptNovelData(novelData)
         }catch (err){
             return thunkApi.rejectWithValue('Ошибка при получение новелы')
         }
@@ -69,7 +91,7 @@ export const fetchNovelActual = createAsyncThunk(
             const response = await NovelService.fetchNovelActual(config.locale, config.opt, config.ctx)
             return {
                 meta: response.data.meta,
-                results: response.data.data
+                results: adaptNovelsArray(response.data.data)
             }
         }catch (err){
             return thunkApi.rejectWithValue('Ошибка при получение новелы')
@@ -159,7 +181,7 @@ export const fetchSavedNovels = createAsyncThunk(
         try {
             const response = await NovelService.fetchSavedNovels(locale, opt, ctx)
             return {
-                results: response.data.data,
+                results: adaptNovelsArray(response.data.data),
                 meta: response.data.meta
             }
         }catch (err){
@@ -174,7 +196,7 @@ export const fetchFollowedNovels = createAsyncThunk(
         try {
             const response = await NovelService.fetchFollowedNovels({locale, config, ctx})
             return {
-                results: response.data.data,
+                results: adaptNovelsArray(response.data.data),
                 meta: response.data.meta
             }
         }catch (err){
@@ -191,7 +213,7 @@ export const fetchAudioNovels = createAsyncThunk(
             const response = await NovelService.fetchAudioNovels(locale, opt, ctx)
             return {
                 meta: response.data.meta,
-                results: response.data.data
+                results: adaptNovelsArray(response.data.data)
             }
         }catch (err){
             return thunkApi.rejectWithValue('Ошибка при получение аудио новелл')
@@ -206,7 +228,7 @@ export const fetchNewNovels = createAsyncThunk(
             const response = await NovelService.fetchNewNovels(locale, opt, ctx)
             return {
                 meta: response.data.meta,
-                results: response.data.data
+                results: adaptNovelsArray(response.data.data)
             }
         }catch (err){
             return thunkApi.rejectWithValue('Ошибка при получение новых новелл')
@@ -221,7 +243,7 @@ export const fetchNovelsByGenre = createAsyncThunk(
             const response = await NovelService.fetchNovelsByGenre(locale, genreSlug, opt, ctx)
             return {
                 meta: response.data.meta,
-                results: response.data.data
+                results: adaptNovelsArray(response.data.data)
             }
         }catch (err){
             return thunkApi.rejectWithValue('Ошибка при получение новелл по жанру')
@@ -236,7 +258,7 @@ export const fetchNovelsByCategory = createAsyncThunk(
             const response = await NovelService.fetchNovelsByCategory(locale, categorySlug, opt, ctx)
             return {
                 meta: response.data.meta,
-                results: response.data.data
+                results: adaptNovelsArray(response.data.data)
             }
         }catch (err){
             return thunkApi.rejectWithValue('Ошибка при получение новелл по категории')

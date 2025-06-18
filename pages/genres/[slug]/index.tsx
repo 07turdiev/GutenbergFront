@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import MainLayout from "../../../layouts/MainLayout";
-import AsideNav from "../../../components/AsideNav";
+import FilterNovels from "../../../components/FilterNovels";
 import {useAppSelector} from "../../../hooks/reducer";
 import {selectNovels} from "../../../store/selectors/novel";
 import {fetchGenresList} from "../../../store/actions/genre";
@@ -70,7 +70,7 @@ const Index = () => {
                 <div className="grid grid-cols-12">
 
                     <div className="lg:col-span-3 col-span-12 hidden lg:block">
-                        <AsideNav/>
+                        <FilterNovels title={query.slug as string}/>
                     </div>
 
                     <div className="lg:col-span-9 col-span-12">

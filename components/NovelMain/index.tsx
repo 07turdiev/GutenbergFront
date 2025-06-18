@@ -20,12 +20,26 @@ const Index:React.FC<Props> = ({novel}) => {
     const { t } = useTranslation('common');
 
 
+    if (!novel) {
+        return (
+            <div className='bg-gray-100 rounded-xl px-3 md:py-8 py-4 h-full flex items-center justify-center'>
+                <span className='text-gray-400'>No novel data available</span>
+            </div>
+        );
+    }
+
     return (
         <div className='bg-gray-100 rounded-xl grid grid-cols-12 gap-3 px-3 md:py-8 py-4 items-center h-full'>
 
             <div className='col-span-4'>
                 <div onClick={() => router.push('/novels/' + novel.slug)} className='lg:h-60 sm:h-52 h-32 w-full relative ml-auto mr-auto cursor-pointer'>
-                    <Image src={novel.cover.src} priority={true} layout='fill' objectFit='contain'/>
+                    {novel.cover && novel.cover.src ? (
+                        <Image src={novel.cover.src} priority={true} layout='fill' objectFit='contain'/>
+                    ) : (
+                        <div className='w-full h-full bg-gray-200 flex items-center justify-center'>
+                            <span className='text-gray-400'>No cover</span>
+                        </div>
+                    )}
                 </div>
             </div>
 
@@ -38,7 +52,9 @@ const Index:React.FC<Props> = ({novel}) => {
                 <div className='flex items-center mb-2 flex-wrap'>
 
 
-                    <div onClick={() => router.push(`/authors/${novel.author.slug}`)} className='text-gray-400 mr-3 hover:text-primary cursor-pointer'>{novel.author.name}</div>
+                    {novel.author && (
+                        <div onClick={() => router.push(`/authors/${novel.author.slug}`)} className='text-gray-400 mr-3 hover:text-primary cursor-pointer'>{novel.author.name}</div>
+                    )}
 
                     <div className='mr-3 flex items-center font-bold'>
                         <ReactStars
@@ -60,7 +76,7 @@ const Index:React.FC<Props> = ({novel}) => {
                 <div className='grid grid-cols-12 items-center'>
                     <div className="col-span-5 sm:col-span-12 gap-2">
                         {
-                            novel.genre.map((genre)=>  {
+                            novel.genre && novel.genre.map((genre)=>  {
                                 return(
                                     <CatBtn onClick={() => router.push(`/genres/${genre}`)} key={uuidv4()} className='text-xs'>
                                         {genre}

@@ -56,11 +56,13 @@ export const authorSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: {
-        [fetchAuthors.fulfilled.type]: (state, action: PayloadAction<IListResponse<IAuthor[]>>) => {
+        [fetchAuthors.fulfilled.type]: (state, action: PayloadAction<{results: IAuthor[], meta: any}>) => {
             state.loading = false;
             state.error = '';
-            state.authors.results = action.payload.results;
-            state.authors.meta = action.payload.meta;
+            if (action.payload && action.payload.results) {
+                state.authors.results = action.payload.results;
+                state.authors.meta = action.payload.meta;
+            }
         },
         [fetchAuthors.pending.type]: (state) => {
             state.loading = true;
@@ -83,10 +85,13 @@ export const authorSlice = createSlice({
             state.error =  action.payload;
         },
 
-        [fetchNovelsOfAuthor.fulfilled.type]: (state, action: PayloadAction<IListResponse<INovel[]>>) => {
+        [fetchNovelsOfAuthor.fulfilled.type]: (state, action: PayloadAction<{results: INovel[], meta: any}>) => {
             state.loading = false;
             state.error = '';
-            state.novels = action.payload;
+            if (action.payload && action.payload.results) {
+                state.novels.results = action.payload.results;
+                state.novels.meta = action.payload.meta;
+            }
         },
         [fetchNovelsOfAuthor.pending.type]: (state) => {
             state.loading = true;
@@ -99,7 +104,9 @@ export const authorSlice = createSlice({
         [fetchAuthorsList.fulfilled.type]: (state, action: PayloadAction<IAuthor[]>) => {
             state.loading = false;
             state.error = '';
-            state.authorsList = action.payload;
+            if (action.payload && Array.isArray(action.payload)) {
+                state.authorsList = action.payload;
+            }
         },
         [fetchAuthorsList.pending.type]: (state) => {
             state.loading = true;
@@ -121,10 +128,12 @@ export const authorSlice = createSlice({
             state.error =  action.payload;
         },
 
-        [fetchFollowedAuthors.fulfilled.type]: (state, action: PayloadAction<IListResponse<IAuthor[]>>) => {
+        [fetchFollowedAuthors.fulfilled.type]: (state, action: PayloadAction<{results: IAuthor[], meta: any}>) => {
             state.loading = false;
-            state.followedAuthors.results = action.payload.results;
-            state.followedAuthors.meta = action.payload.meta;
+            if (action.payload && action.payload.results) {
+                state.followedAuthors.results = action.payload.results;
+                state.followedAuthors.meta = action.payload.meta;
+            }
             state.error = '';
         },
         [fetchFollowedAuthors.pending.type]: (state) => {

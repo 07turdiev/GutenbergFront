@@ -14,7 +14,7 @@ export interface IAuthor {
     locale: string;
     
     // Relations
-    suratilar?: IMedia[];
+    rasmi?: IMedia;
     kitoblars?: Array<{
         id: number;
         documentId: string;
@@ -37,6 +37,9 @@ export interface IAuthor {
         publishedAt: string;
         locale: string;
     }>;
+    
+    // Deprecated fields (for backward compatibility)
+    suratilar?: IMedia[];
 
     // Deprecated fields (for backward compatibility)
     name?: string;

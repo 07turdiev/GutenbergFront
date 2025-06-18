@@ -15,22 +15,29 @@ export default class NovelService {
         return await fetcherJson(`/api/kitoblars?locale=${locale}&${populateParams}`, opt, ctx)
     }
 
-    // Bitta kitob
-    static async fetchNovelOne(locale: string, slug: string, config: AxiosRequestConfig = {}, ctx?: GetServerSidePropsContext): Promise<AxiosResponse<ISingleResponse<INovel>>> {
+    // Bitta kitob - slug orqali
+    static async fetchNovelOne(locale: string, slug: string, config: AxiosRequestConfig = {}, ctx?: GetServerSidePropsContext): Promise<AxiosResponse<IListResponse<INovel[]>>> {
         const populateParams = "populate=audio&populate=muqova&populate=mualliflar&populate=janrlars&populate=kategoriyalars";
-        return await fetcherJson(`/api/kitoblars/${slug}?locale=${locale}&${populateParams}`, config, ctx)
+        // First get by slug to find documentId, then use documentId for detailed data
+        return await fetcherJson(`/api/kitoblars?filters[slug][$eq]=${slug}&locale=${locale}&${populateParams}`, config, ctx)
+    }
+
+    // Bitta kitob - documentId orqali  
+    static async fetchNovelByDocumentId(locale: string, documentId: string, config: AxiosRequestConfig = {}, ctx?: GetServerSidePropsContext): Promise<AxiosResponse<ISingleResponse<INovel>>> {
+        const populateParams = "populate=audio&populate=muqova&populate=mualliflar&populate=janrlars&populate=kategoriyalars";
+        return await fetcherJson(`/api/kitoblars/${documentId}?locale=${locale}&${populateParams}`, config, ctx)
     }
 
     // Dolzarb kitoblar
     static async fetchNovelActual(locale: string, config: AxiosRequestConfig = {}, ctx?: GetServerSidePropsContext): Promise<AxiosResponse<IListResponse<INovel[]>>> {
         const populateParams = "populate=audio&populate=muqova&populate=mualliflar&populate=janrlars&populate=kategoriyalars";
-        return await fetcherJson(`/api/kitoblars/dolzarb?locale=${locale}&${populateParams}`, config, ctx)
+        return await fetcherJson(`/api/kitoblars?filters[dolzarb][$eq]=true&locale=${locale}&${populateParams}`, config, ctx)
     }
 
     // Muallif kitoblari
     static async fetchNovelsOfAuthors(locale: string, slug: string, opt: AxiosRequestConfig = {}, ctx?: GetServerSidePropsContext): Promise<AxiosResponse<IListResponse<INovel[]>>> {
         const populateParams = "populate=audio&populate=muqova&populate=mualliflar&populate=janrlars&populate=kategoriyalars";
-        return await fetcherJson(`/api/mualliflars/${slug}/kitoblar?locale=${locale}&${populateParams}`, opt, ctx)
+        return await fetcherJson(`/api/kitoblars?filters[mualliflar][slug][$eq]=${slug}&locale=${locale}&${populateParams}`, opt, ctx)
     }
 
     // O'quvchi kitoblari (deprecated - reader tushunchasi yo'q)

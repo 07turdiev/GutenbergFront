@@ -5,11 +5,12 @@ import {
     fetchAudiosOfNovel, fetchFollowedNovels,
     fetchNovelActual,
     fetchNovelOne,
+    fetchNovelByDocumentId,
     fetchNovels, fetchPlayerNovel,
     fetchSavedNovels, saveNovel,
 } from "../actions/novel";
 import {IMeta} from "../../models/IMeta";
-import {IListResponse} from "../../models/Response/IListResponse";
+import {IListResponse, ILegacyListResponse} from "../../models/Response/IListResponse";
 import {HYDRATE} from "next-redux-wrapper";
 import {IAudio} from "../../models/IAudio";
 
@@ -66,7 +67,7 @@ export const novelSlice = createSlice({
     reducers: {},
     extraReducers: {
         // Novels
-        [fetchNovels.fulfilled.type]: (state, action: PayloadAction<IListResponse<INovel[]>>) => {
+        [fetchNovels.fulfilled.type]: (state, action: PayloadAction<ILegacyListResponse<INovel[]>>) => {
             state.loading = false;
             state.error = '';
             state.novels.meta = action.payload.meta;
@@ -94,6 +95,20 @@ export const novelSlice = createSlice({
             state.error =  action.payload;
         },
 
+        // Novel by DocumentId detail
+        [fetchNovelByDocumentId.fulfilled.type]: (state, action: PayloadAction<INovel>) => {
+            state.loading = false;
+            state.error = '';
+            state.novel = action.payload;
+        },
+        [fetchNovelByDocumentId.pending.type]: (state) => {
+            state.loading = true;
+        },
+        [fetchNovelByDocumentId.rejected.type]: (state, action: PayloadAction<string>) => {
+            state.loading = false;
+            state.error =  action.payload;
+        },
+
         // Player novel
         [fetchPlayerNovel.fulfilled.type]: (state, action: PayloadAction<INovel>) => {
             state.loading = false;
@@ -109,10 +124,11 @@ export const novelSlice = createSlice({
         },
 
         // Novel actual
-        [fetchNovelActual.fulfilled.type]: (state, action: PayloadAction<INovel>) => {
+        [fetchNovelActual.fulfilled.type]: (state, action: PayloadAction<ILegacyListResponse<INovel[]>>) => {
             state.loading = false;
             state.error = '';
-            state.actual = action.payload;
+            // Set the first novel from the results as the actual novel
+            state.actual = action.payload.results.length > 0 ? action.payload.results[0] : null;
         },
         [fetchNovelActual.pending.type]: (state) => {
             state.loading = true;
@@ -139,7 +155,7 @@ export const novelSlice = createSlice({
         },
 
         //Saved novels
-        [fetchSavedNovels.fulfilled.type]: (state, action: PayloadAction<IListResponse<INovel[]>>) => {
+        [fetchSavedNovels.fulfilled.type]: (state, action: PayloadAction<ILegacyListResponse<INovel[]>>) => {
             state.loading = false;
             state.error = '';
             state.countSaved = action.payload.meta.count;
@@ -167,7 +183,7 @@ export const novelSlice = createSlice({
         },
 
         //Followed novels
-        [fetchFollowedNovels.fulfilled.type]: (state, action: PayloadAction<IListResponse<INovel[]>>) => {
+        [fetchFollowedNovels.fulfilled.type]: (state, action: PayloadAction<ILegacyListResponse<INovel[]>>) => {
             state.loading = false;
             state.error = '';
             state.countSaved = action.payload.meta.count;
