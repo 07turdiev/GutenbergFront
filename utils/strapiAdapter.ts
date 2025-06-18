@@ -175,9 +175,9 @@ export const adaptContactsData = (contacts: any): IContacts => {
     if (!contacts || !contacts.data) return null;
     
     return {
-        address: contacts.data.manzil || '',
+        address: contacts.data.manzili || contacts.data.manzil || '',
         email: contacts.data.email || '',
-        phone: contacts.data.telefon || '',
+        phone: contacts.data.telefoni || contacts.data.telefon || '',
         lng: contacts.data.kenglik || '',
         ltd: contacts.data.uzunlik || ''
     };
