@@ -17,6 +17,7 @@ import advertisingReducer from "./reducers/AdvertisingSlice";
 import orderReducer from "./reducers/OrderSlice";
 import aboutReducer from "./reducers/AboutSlice";
 import notificationsReducer from "./reducers/NotificationsSlive";
+import teamReducer from "./reducers/TeamSlice";
 
 const reducers = combineReducers(
     {
@@ -31,7 +32,8 @@ const reducers = combineReducers(
         orderReducer,
         advertisingReducer,
         aboutReducer,
-        notificationsReducer
+        notificationsReducer,
+        teamReducer
     }
 )
 

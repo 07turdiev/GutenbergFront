@@ -3,6 +3,7 @@ import {IAuthor} from "../models/IAuthors";
 import {IGenre} from "../models/IGenre";
 import {ICategory} from "../models/ICategory";
 import {IAbout, IContacts, ISocial, IStatistics} from "../models/IAbout";
+import {ITeamMember} from "../models/ITeam";
 
 // Convert Strapi rich text to plain text
 export const richTextToPlainText = (richText: IRichTextContent[]): string => {
@@ -205,4 +206,51 @@ export const adaptStatisticsData = (statistics: any): IStatistics => {
         users: statistics.data.foydalanuvchilar_soni || 0,
         readers: statistics.data.oquvchilar_soni || 0
     };
+};
+
+// Convert new Team Member format to backward compatible format
+export const adaptTeamMemberData = (member: ITeamMember): ITeamMember => {
+    if (!member) return null;
+    
+    // Ensure photo URL is absolute
+    let photo = null;
+    if (member.rasmi && member.rasmi.url) {
+        const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:1337';
+        
+        // Process main URL
+        const photoUrl = member.rasmi.url.startsWith('http') 
+            ? member.rasmi.url 
+            : `${baseUrl}${member.rasmi.url}`;
+        
+        // Process formats URLs
+        let formats = null;
+        if (member.rasmi.formats) {
+            formats = {};
+            Object.keys(member.rasmi.formats).forEach(key => {
+                const format = member.rasmi.formats[key];
+                formats[key] = {
+                    ...format,
+                    url: format.url.startsWith('http') 
+                        ? format.url 
+                        : `${baseUrl}${format.url}`
+                };
+            });
+        }
+        
+        photo = {
+            ...member.rasmi,
+            url: photoUrl,
+            formats: formats || member.rasmi.formats
+        };
+    }
+    
+    return {
+        ...member,
+        rasmi: photo
+    };
+};
+
+// Adapt array of team members
+export const adaptTeamMembersArray = (members: ITeamMember[]): ITeamMember[] => {
+    return members.map(member => adaptTeamMemberData(member));
 }; 
