@@ -25,6 +25,13 @@ export const richTextToExcerpt = (richText: IRichTextContent[], maxLength: numbe
     return plainText.length > maxLength ? plainText.substring(0, maxLength) + '...' : plainText;
 };
 
+// Helper function to clean age rate value
+const cleanAgeRate = (ageRate: string): string => {
+    if (!ageRate) return '';
+    // Remove "yosh" prefix and "+" suffix, keep only the number
+    return ageRate.replace(/^yosh/i, '').replace(/\+$/, '');
+};
+
 // Convert new Novel format to backward compatible format
 export const adaptNovelData = (novel: INovel): INovel => {
     if (!novel) return null;
@@ -34,7 +41,7 @@ export const adaptNovelData = (novel: INovel): INovel => {
         // Map new fields to old field names for backward compatibility
         name: novel.nomi || novel.name || '',
         description: novel.tavsifi ? richTextToPlainText(novel.tavsifi) : (novel.description || ''),
-        age_rate: novel.yosh_chegarasi || novel.age_rate || '',
+        age_rate: cleanAgeRate(novel.yosh_chegarasi || novel.age_rate || ''),
         actual: novel.dolzarb ?? novel.actual ?? false,
         new: novel.yangi ?? novel.new ?? false,
         rating: novel.reyting || novel.rating || 0,
