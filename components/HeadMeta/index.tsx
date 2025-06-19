@@ -7,11 +7,12 @@ interface Props {
 	title: string | any;
 	description: string | any;
 	ogImg: string | any;
+	themeColor?: string;
 	children?: ReactNode;
 }
 const sitePath = 'https://ak.technocorp.uz/';
 
-function HeadMeta({ title, description, ogImg, children }: Props) {
+function HeadMeta({ title, description, ogImg, themeColor, children }: Props) {
 
 	const { asPath, locale } = useRouter();
 	
@@ -20,8 +21,12 @@ function HeadMeta({ title, description, ogImg, children }: Props) {
 			<title>{title}</title>
 			<meta name="title" content={title} />
 			<meta name="description" content={description} />
+			
+			{/* Dynamic theme color - overrides the default one in _document.tsx */}
+			{themeColor && <meta name="theme-color" content={themeColor} />}
+			
 			<meta property="og:type" content="website" />
-			            <meta property="og:site_name" content='GutenberNU' />
+			<meta property="og:site_name" content='GutenberNU' />
 			<meta property="og:url" content={`${sitePath}${locale}${asPath}`} />
 			<meta property="og:title" content={title} />
 			<meta property="og:description" content={description} />
@@ -41,8 +46,8 @@ function HeadMeta({ title, description, ogImg, children }: Props) {
 }
 
 HeadMeta.defaultProps = {
-	        title: 'GutenberNU',
-        description: 'GutenberNU — это современная аудио-библиотека в интернете, которая открывает вам доступ к каталогу бестселлеров и классической литературы, включая новинки разных аудио жанров',
+	title: 'GutenberNU',
+	description: 'GutenberNU — это современная аудио-библиотека в интернете, которая открывает вам доступ к каталогу бестселлеров и классической литературы, включая новинки разных аудио жанров',
 	ogImg: `${sitePath}og-default-img.jpg`
 }
 
