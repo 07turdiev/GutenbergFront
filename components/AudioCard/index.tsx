@@ -10,10 +10,8 @@ import PauseButton from "../Ui/PlayerControls/PauseButton";
 import {pauseTrack, playTrack} from "../../store/actions/player";
 import {useDispatch} from "react-redux";
 
-import * as moment from "moment";
-import momentDurationFormatSetup from "moment-duration-format";
 import {selectAudioTrack} from "../../store/selectors/audio";
-momentDurationFormatSetup(moment);
+import { useAudioDuration } from "../../hooks/useAudioDuration";
 
 interface Props {
     lang: string;
@@ -36,7 +34,7 @@ const Index:React.FC<Props> = ({audio, cover, onClick, lang}) => {
     const isActive =  activeTrack === audio.slug && lang === active_lang;
     const isActivePlay =  isActive && !pause && !loading && audioTrack;
 
-    const [trackDuration, setTrackDuration] = useState('00:00')
+    const { duration: trackDuration } = useAudioDuration(audio.file, 'mm:ss');
     const [trackCurrentTime, setTrackCurrentTime] = useState('00:00')
 
     const playBook = () => {
@@ -50,21 +48,15 @@ const Index:React.FC<Props> = ({audio, cover, onClick, lang}) => {
         }
     }
 
-    useEffect(()=>{
-        const duration = moment.duration(audio.duration, "second").format("mm:ss");
-        setTrackDuration(duration)
-    },[])
-
     useEffect(() => {
         if(!isActive){
             setTrackCurrentTime('00:00');
         }else{
-            const currentTimeTrack = moment.duration(currentTime, "second").format("mm:ss", {
-                trim: false
-            });
-            setTrackCurrentTime(currentTimeTrack);
+            const minutes = Math.floor(currentTime / 60);
+            const seconds = Math.floor(currentTime % 60);
+            setTrackCurrentTime(`${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`);
         }
-    },[currentTime])
+    },[currentTime, isActive])
 
 
 

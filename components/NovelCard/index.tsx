@@ -10,9 +10,7 @@ import {useAppSelector} from "../../hooks/reducer";
 import {selectAuth} from "../../store/selectors/auth";
 import noPhoto from '../../assets/images/noPhotoNovel.jpg';
 import novelNew from '../../assets/images/noveNew.svg';
-import * as moment from "moment";
-import momentDurationFormatSetup from "moment-duration-format";
-momentDurationFormatSetup(moment);
+import { useNovelAudioDuration } from "../../hooks/useAudioDuration";
 
 import classNames from "classnames";
 
@@ -25,16 +23,7 @@ const Index:React.FC<Props> = ({novel, addToMark}) => {
 
     const {isLogin} = useAppSelector(selectAuth)
     const router = useRouter();
-
-    let novelDuration;
-
-    if(novel){
-        if(router.locale === 'uz'){
-            novelDuration = moment.duration(novel.duration_uz, "second").format("mm");
-        }else{
-            novelDuration =  moment.duration(novel.duration_ru, "second").format('mm');
-        }
-    }
+    const { duration: novelDuration, isLoading: isLoadingDuration } = useNovelAudioDuration(novel, 'mm');
 
     return (
         <div className='novelCard h-full flex flex-col relative overflow-hidden rounded-md p-1 group '>
@@ -126,7 +115,7 @@ const Index:React.FC<Props> = ({novel, addToMark}) => {
                     {novel.genre[0]}
                 </CatBtn>
                 <span className='text-gray-400 ml-2 text-xs whitespace-nowrap'>
-                    {novelDuration} мин
+                    {isLoadingDuration ? '...' : `${novelDuration} мин`}
                 </span>
             </div>
         </div>

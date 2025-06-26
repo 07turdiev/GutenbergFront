@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import MainLayout from "../../../layouts/MainLayout";
 import {wrapper} from "../../../store/store";
 import {
@@ -30,12 +30,10 @@ import {Navigation} from "swiper";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import NovelCard from "../../../components/NovelCard";
 import noPhotoAuthor from "../../../assets/images/noPhotoAvtor.jpg";
-import * as moment from "moment";
-import momentDurationFormatSetup from "moment-duration-format";
 import useTranslation from 'next-translate/useTranslation';
 import HeadMeta from '../../../components/HeadMeta';
 import { formatPublishedDate } from '../../../utils/dateFormatter';
-momentDurationFormatSetup(moment);
+import { useNovelAudioDuration } from '../../../hooks/useAudioDuration';
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (ctx) => {
     const dispatch = store.dispatch;
@@ -76,6 +74,8 @@ const Index = () => {
     const {right: asideBanner} = useAppSelector(s=>s.advertisingReducer)
     const {locale, query} = useRouter();
     const router = useRouter();
+    
+    const { duration: durationH, isLoading: isLoadingDuration } = useNovelAudioDuration(novel, 'hh:mm:ss');
 
 
     useEffect(()=>{
@@ -131,14 +131,7 @@ const Index = () => {
     }
 
 
-    let durationH;
-    if(novel){
-        if(locale === 'uz'){
-            durationH = moment.duration(novel.duration_uz, "second").format("hh:mm:ss", { trim: false});
-        }else{
-            durationH = moment.duration(novel.duration_ru, "second").format("hh:mm:ss", { trim: false});
-        }
-    }
+
 
 
     const addNovelToMark = async (slug, saved) => {
@@ -224,7 +217,7 @@ const Index = () => {
                                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                               <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                             </svg>
-                                            {durationH}
+                                            {isLoadingDuration ? '...' : durationH}
                                         </span>
 
 
