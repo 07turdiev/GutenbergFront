@@ -120,6 +120,11 @@ const BlogPostPage = () => {
                         )}
                     </div>
 
+                    <div 
+                        className="prose prose-lg max-w-none mb-8"
+                        dangerouslySetInnerHTML={{ __html: blogContentToHtml(post.kontent) }}
+                    />
+
                     {post.youtube_havolasi && (
                         <div className="mb-8">
                             <h3 className="text-lg font-semibold mb-4 flex items-center">
@@ -138,11 +143,6 @@ const BlogPostPage = () => {
                             </div>
                         </div>
                     )}
-
-                    <div 
-                        className="prose prose-lg max-w-none mb-8"
-                        dangerouslySetInnerHTML={{ __html: blogContentToHtml(post.kontent) }}
-                    />
 
                     <div className="border-t pt-8">
                         <h3 className="text-lg font-semibold mb-4">Ulashing:</h3>
