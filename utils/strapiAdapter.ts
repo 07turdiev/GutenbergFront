@@ -260,4 +260,114 @@ export const adaptTeamMemberData = (member: ITeamMember): ITeamMember => {
 // Adapt array of team members
 export const adaptTeamMembersArray = (members: ITeamMember[]): ITeamMember[] => {
     return members.map(member => adaptTeamMemberData(member));
+};
+
+// Convert blog content blocks to HTML
+export const blogContentToHtml = (content: any[]): string => {
+    if (!content || !Array.isArray(content)) return '';
+    
+    return content
+        .map(block => {
+            if (block.type === 'paragraph') {
+                const text = block.children
+                    ?.map((child: any) => {
+                        let textContent = child.text || '';
+                        if (child.bold) textContent = `<strong>${textContent}</strong>`;
+                        if (child.italic) textContent = `<em>${textContent}</em>`;
+                        if (child.underline) textContent = `<u>${textContent}</u>`;
+                        if (child.code) textContent = `<code>${textContent}</code>`;
+                        return textContent;
+                    })
+                    .join('');
+                return `<p>${text}</p>`;
+            } else if (block.type === 'heading') {
+                const level = block.level || 2;
+                const text = block.children?.map((child: any) => child.text || '').join('');
+                return `<h${level}>${text}</h${level}>`;
+            } else if (block.type === 'list') {
+                const tag = block.format === 'ordered' ? 'ol' : 'ul';
+                const items = block.children
+                    ?.map((item: any) => {
+                        const text = item.children?.map((child: any) => child.text || '').join('');
+                        return `<li>${text}</li>`;
+                    })
+                    .join('');
+                return `<${tag}>${items}</${tag}>`;
+            } else if (block.type === 'quote') {
+                const text = block.children?.map((child: any) => child.text || '').join('');
+                return `<blockquote>${text}</blockquote>`;
+            }
+            return '';
+        })
+        .join('')
+        .trim();
+};
+
+// Convert blog content to plain text
+export const blogContentToPlainText = (content: any[]): string => {
+    if (!content || !Array.isArray(content)) return '';
+    
+    return content
+        .map(block => 
+            block.children
+                ?.map((child: any) => child.text || '')
+                .join('')
+        )
+        .join('\n\n')
+        .trim();
+};
+
+// Get blog image URL with base URL
+export const getBlogImageUrl = (image: any): string => {
+    if (!image || !image.url) return '';
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:1337';
+    return image.url.startsWith('http') ? image.url : `${baseUrl}${image.url}`;
+};
+
+// Extract YouTube video ID from various URL formats
+export const extractYouTubeVideoId = (url: string): string | null => {
+    if (!url) return null;
+    
+    // First check if it's an iframe HTML string
+    if (url.includes('<iframe') && url.includes('youtube.com/embed/')) {
+        const iframeSrcMatch = url.match(/src="https:\/\/www\.youtube\.com\/embed\/([^"?]+)/);
+        if (iframeSrcMatch && iframeSrcMatch[1]) {
+            return iframeSrcMatch[1];
+        }
+    }
+    
+    // Handle various YouTube URL formats
+    const patterns = [
+        /(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\n?#]+)/,
+        /youtube\.com\/embed\/([^&\n?#]+)/,
+        /youtube\.com\/v\/([^&\n?#]+)/,
+        /youtube\.com\/watch\?.*&v=([^&\n?#]+)/
+    ];
+    
+    for (const pattern of patterns) {
+        const match = url.match(pattern);
+        if (match && match[1]) {
+            // Remove any additional parameters after the video ID
+            return match[1].split('?')[0];
+        }
+    }
+    
+    // If URL is already just a video ID (e.g., "4L-j3HrDN4M")
+    if (/^[a-zA-Z0-9_-]{11}$/.test(url)) {
+        return url;
+    }
+    
+    return null;
+};
+
+// Check if a string contains YouTube iframe HTML
+export const isYouTubeIframe = (content: string): boolean => {
+    return content && content.includes('<iframe') && content.includes('youtube.com/embed/');
+};
+
+// Extract iframe src URL from iframe HTML
+export const extractIframeSrc = (iframeHtml: string): string | null => {
+    if (!iframeHtml) return null;
+    const srcMatch = iframeHtml.match(/src="([^"]+)"/);
+    return srcMatch ? srcMatch[1] : null;
 }; 
