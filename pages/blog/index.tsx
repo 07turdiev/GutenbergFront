@@ -10,6 +10,7 @@ import { useAppDispatch, useAppSelector } from '../../hooks/reducer';
 import { selectBlogPosts, selectBlogLoading, selectBlogTotalPages, selectBlogCurrentPage } from '../../store/selectors/blog';
 import { setCurrentPage } from '../../store/reducers/BlogSlice';
 import { blogContentToPlainText, getBlogImageUrl } from '../../utils/strapiAdapter';
+import { formatBlogDate } from '../../utils/dateFormatter';
 import { useRouter } from 'next/router';
 import SpinnerDots from '../../components/Ui/SpinnerDots';
 
@@ -21,15 +22,6 @@ const BlogPage = () => {
     const loading = useAppSelector(selectBlogLoading);
     const totalPages = useAppSelector(selectBlogTotalPages);
     const currentPage = useAppSelector(selectBlogCurrentPage);
-
-    const formatDate = (dateString: string) => {
-        const date = new Date(dateString);
-        return date.toLocaleDateString('uz-UZ', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-        });
-    };
 
     const handlePageChange = async (page: number) => {
         dispatch(setCurrentPage(page));
@@ -107,7 +99,7 @@ const BlogPage = () => {
                                     
                                     {/* Sana va ko'rishlar soni */}
                                     <div className="flex items-center justify-between text-sm text-gray-500 mb-3">
-                                        <span>{formatDate(post.chop_sanasi)}</span>
+                                        <span>{formatBlogDate(post.chop_sanasi, router.locale)}</span>
                                         <span>{post.korishlar_soni} ko'rildi</span>
                                     </div>
 

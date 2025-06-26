@@ -10,6 +10,7 @@ import { fetchBlogPostBySlug } from '../../store/actions/blog';
 import { useAppSelector } from '../../hooks/reducer';
 import { selectCurrentBlogPost, selectBlogLoading } from '../../store/selectors/blog';
 import { blogContentToHtml, getBlogImageUrl } from '../../utils/strapiAdapter';
+import { formatBlogDate } from '../../utils/dateFormatter';
 import SpinnerDots from '../../components/Ui/SpinnerDots';
 import YouTubeEmbed from '../../components/Ui/YouTubeEmbed';
 
@@ -19,15 +20,6 @@ const BlogPostPage = () => {
     const { t } = useTranslation('common');
     const post = useAppSelector(selectCurrentBlogPost);
     const loading = useAppSelector(selectBlogLoading);
-
-    const formatDate = (dateString: string) => {
-        const date = new Date(dateString);
-        return date.toLocaleDateString('uz-UZ', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-        });
-    };
 
     const shareOnFacebook = () => {
         window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`, '_blank');
@@ -95,7 +87,7 @@ const BlogPostPage = () => {
                         
                         <div className="flex items-center justify-between text-gray-600 mb-6">
                             <div className="flex items-center space-x-4">
-                                <span>{formatDate(post.chop_sanasi)}</span>
+                                <span>{formatBlogDate(post.chop_sanasi, router.locale)}</span>
                                 <span>•</span>
                                 <span>{post.korishlar_soni} ko'rildi</span>
                             </div>
