@@ -20,7 +20,7 @@
 
   "hi": "Salom",
   "personalInfo": "Shaxsiy maʼlumot",
-  "bookmarks": "Xatcho‘plar",
+  "bookmarks": "Xatcho'plar",
   "notifications": "Bildirishnomalar",
   "subscriptions": "Obunalar",
   "myOrders":"-Mening buyurtmalarim",
@@ -60,7 +60,7 @@
   "termsOfUse": "Foydalanish shartlari",
   "privacyPolicy": "Maxfiylik siyosati",
   "about": "Biz haqimizda",
-  "aboutText": "'Gutenberg nashriyot uyi' hamda nashriyot tomonidan chop etilayotgan kitoblar haqida batafsil ma’lumot olish uchun.",
+  "aboutText": "'Gutenberg nashriyot uyi' hamda nashriyot tomonidan chop etilayotgan kitoblar haqida batafsil ma'lumot olish uchun.",
   "aboutParagraph1": "GutenberNU — bu zamonaviy audio kutubxona boʻlib, u sizga eng koʻp sotilgan kitoblar va klassik adabiyotlar, jumladan, turli janrlardagi yangiliklar: badiiy adabiyotdan tortib, badiiy boʻlmagan kitoblar va biznes adabiyotlarigacha boʻlgan audio katalogga kirish imkonini beradi. Yigirmadan ortiq turli janrlardagi 368 000 dan ortiq audio kitoblar.",
   "aboutParagraph2": "Kutubxonaning odatiy g'oyasi shundan iboratki, alohida kitoblarni sotib olish o'rniga, siz butun katalogga kirishingiz mumkin. Biz kitoblarni sotmaymiz va ularni yuklab olishga majburlamaymiz, lekin biz ularni cheklovlarsiz va turli qurilmalarda o'qish uchun beramiz. Obuna bo'lish kifoya.",
   "aboutParagraph3": "Odatiy ma'noda, elektron kitoblar hozirgacha qog'oz kitoblarga o'xshash edi: bular alohida fayllar bo'lib, ularni biron bir joyda yuklab olish va saqlash kerak, keyin o'quvchi-o'quvchiga tashlash kerak va agar sizda bir nechta o'qish moslamalari bo'lsa, sizda bo'ladi. har bir kutubxonangizda alohida nusxani saqlash uchun. Agar siz nafaqat kitoblarni o'qisangiz, balki tirnoq va xatcho'plarni saqlasangiz, ko'pincha bularning barchasini qo'lda sinxronlashtirishingiz kerak bo'ladi.",
@@ -96,11 +96,12 @@
   "madeByElbek": "Sayt ishlab chiqildi:",
 
   "novelReader": "Ovoz muallifi",
-  "orderSent": "Sizning soʻrovingiz qabul qilindi",
-  "seeOrders": "Soʻrovlar roʻyxati bilan tanishish",
+  "orderSent": "Sizning so'rovingiz qabul qilindi",
+  "seeOrders": "So'rovlar ro'yxati bilan tanishish",
   "aboutAuthor": "Muallif haqida",
   "novelCountTitle": "ta kitob",
   "emailInput": "pochta manzili",
   "requiredEmail": "Elektron pochtani kiriting",
-  "emailCode": "Pochtadagi kodni kiriting"
+  "emailCode": "Pochtadagi kodni kiriting",
+  "address": "Manzil"
 }

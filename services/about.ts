@@ -10,7 +10,7 @@ export default class AboutService {
     }
 
     static async fetchContacts({locale, config, ctx}: FetchParams): Promise<AxiosResponse<IContacts>> {
-        return await fetcherJson(`/api/aloqa?locale=${locale}`, config, ctx)
+        return await fetcherJson(`/api/aloqa`, config, ctx)
     }
 
     static async fetchSocialLinks({locale, config, ctx}: FetchParams): Promise<AxiosResponse<ISocial>> {

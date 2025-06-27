@@ -98,7 +98,8 @@
   "aboutAuthor": "Об авторе",
   "novelCountTitle": "книг",
   "emailInput": "email адрес",
-  "requiredEmail": "Введите email",
-  "emailCode": "Введите полученный код"
+  "requiredEmail": "Введите ваш email",
+  "emailCode": "Введите код с почты",
+  "address": "Адрес"
 
 }
