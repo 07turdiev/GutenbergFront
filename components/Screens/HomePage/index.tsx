@@ -16,8 +16,10 @@ import {selectNovels} from "../../../store/selectors/novel";
 import {selectCategories} from "../../../store/selectors/category";
 import {selectGenres} from "../../../store/selectors/genre";
 import {selectAuthors} from "../../../store/selectors/author";
+import {selectLatestBlogPosts} from "../../../store/selectors/blog";
 import {useRouter} from "next/router";
 import {fetchNovels} from "../../../store/actions/novel";
+import {BlogSlider} from "../../HomeSlider";
 
 const Index = () => {
 
@@ -31,6 +33,7 @@ const Index = () => {
     const {mainBottom, mainTop, middle: sectionBanner} = useAppSelector(s=>s.advertisingReducer)
     const {genres} = useAppSelector(selectGenres)
     const {authors} = useAppSelector(selectAuthors)
+    const latestBlogPosts = useAppSelector(selectLatestBlogPosts)
 
     const router = useRouter();
 
@@ -49,6 +52,12 @@ const Index = () => {
     return (
         <MainLayout>
             <HeadMeta title={t('siteTitle')} description={t('siteTitle')} />
+            
+            {/* Blog Slider Section */}
+            {latestBlogPosts && latestBlogPosts.length > 0 && (
+                <BlogSlider blogPosts={latestBlogPosts} />
+            )}
+            
             <section className="container mx-auto px-3 mb-5">
                 <div className="grid grid-cols-12 lg:grid-rows-2 sm:gap-4 gap-2">
 

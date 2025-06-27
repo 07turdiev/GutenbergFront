@@ -26,6 +26,7 @@ import {
     fetchAdvertisingMainTop,
     fetchAdvertisingSection
 } from "../store/actions/advertising";
+import { fetchLatestBlogPosts } from "../store/actions/blog";
 import React, {useState} from "react";
 import Image from 'next/image';
 import {useRouter} from "next/router";
@@ -56,6 +57,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (ctx
     await dispatch(fetchAdvertisingMainTop({locale: ctx.locale, type: 'main-top'}))
     await dispatch(fetchAdvertisingMainBottom({locale: ctx.locale, type: 'main-bottom'}))
     await dispatch(fetchAdvertisingSection({locale: ctx.locale, type: 'middle'}))
+    await dispatch(fetchLatestBlogPosts({locale: ctx.locale, ctx, limit: 6}))
 
     return {
         props: {
