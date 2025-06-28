@@ -19,7 +19,7 @@ import {selectAuthors} from "../../../store/selectors/author";
 import {selectLatestBlogPosts} from "../../../store/selectors/blog";
 import {useRouter} from "next/router";
 import {fetchNovels} from "../../../store/actions/novel";
-import {BlogSlider} from "../../HomeSlider";
+import {BlogSlider, BooksSlider} from "../../HomeSlider";
 
 const Index = () => {
 
@@ -52,6 +52,11 @@ const Index = () => {
     return (
         <MainLayout>
             <HeadMeta title={t('siteTitle')} description={t('siteTitle')} />
+            
+            {/* Books Slider Section - New Books */}
+            <div className="lg:-mt-32 -mt-20 sm:-mt-24">
+                <BooksSlider />
+            </div>
             
             {/* Blog Slider Section */}
             {latestBlogPosts && latestBlogPosts.length > 0 && (

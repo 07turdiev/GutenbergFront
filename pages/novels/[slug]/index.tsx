@@ -305,7 +305,7 @@ const Index = () => {
                                                         </div>
                                                         <div className='pl-4'>
                                                             <h4 className='font-bold cursor-pointer' onClick={()=>router.push(`/authors/${author.slug}`)}>{author.name}</h4>
-                                                            <span className='text-gray-500'>{author.novels_count} книг</span>
+                                                            <span className='text-gray-500'>{author.novels_count} ta kitob</span>
                                                         </div>
                                                     </div>
                                                     {

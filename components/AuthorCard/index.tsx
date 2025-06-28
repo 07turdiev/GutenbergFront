@@ -37,7 +37,7 @@ const Index:React.FC<Props> = ({author, link}) => {
                 {author.name}
             </div>
             <div className='text-gray-400'>
-                {author.novels_count} книг
+                {author.novels_count} Kitob
             </div>
         </div>
     );
