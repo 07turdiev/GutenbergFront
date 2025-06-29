@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Autoplay, Pagination } from 'swiper';
+import { Navigation, Autoplay } from 'swiper';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import 'swiper/css/pagination';
 import styles from './BooksSlider.module.scss';
 
 interface Author {
@@ -39,6 +38,8 @@ const BooksSlider: React.FC = () => {
   const { t } = useTranslation('common');
   const [books, setBooks] = useState<Book[]>([]);
   const [loading, setLoading] = useState(true);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [swiperInstance, setSwiperInstance] = useState<any>(null);
 
   useEffect(() => {
     fetchLatestBooks();
@@ -74,6 +75,12 @@ const BooksSlider: React.FC = () => {
     router.push(`/novels/${slug}`);
   };
 
+  const handlePaginationClick = (index: number) => {
+    if (swiperInstance) {
+      swiperInstance.slideToLoop(index);
+    }
+  };
+
   if (loading || books.length === 0) {
     return null;
   }
@@ -94,19 +101,18 @@ const BooksSlider: React.FC = () => {
       </div>
       
       <Swiper
-        modules={[Navigation, Autoplay, Pagination]}
+        modules={[Navigation, Autoplay]}
         navigation={{
           nextEl: '.main-slider-button-next',
           prevEl: '.main-slider-button-prev',
-        }}
-        pagination={{
-          clickable: false,
         }}
         autoplay={{
           delay: 5000,
           disableOnInteraction: false,
         }}
         loop={true}
+        onSwiper={setSwiperInstance}
+        onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
         className={styles.mainSwiper}
       >
         {books.map((book) => (
@@ -117,7 +123,7 @@ const BooksSlider: React.FC = () => {
                   <div className={styles.textContent}>
                     <h2 className={styles.bookTitle}>{book.nomi}</h2>
                     <p className={styles.authorName}>
-                      {book.mualliflar?.ismi || 'Noma\'lum muallif'}
+                      {book.mualliflar?.ismi}
                     </p>
                     <div className={styles.priceInfo}>
                       {book.chegirma_narxi ? (
@@ -149,6 +155,19 @@ const BooksSlider: React.FC = () => {
           </SwiperSlide>
         ))}
       </Swiper>
+      
+      {/* Custom Pagination */}
+      <div className={styles.customPagination}>
+        {books.map((_, index) => (
+          <button
+            key={index}
+            className={`${styles.paginationBullet} ${
+              index === activeIndex ? styles.paginationBulletActive : ''
+            }`}
+            onClick={() => handlePaginationClick(index)}
+          />
+        ))}
+      </div>
     </section>
   );
 };

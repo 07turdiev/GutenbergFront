@@ -31,6 +31,7 @@
 
   .navigationButtons {
     .navButton {
+      display: none; // Hide on mobile by default
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
@@ -39,9 +40,14 @@
       color: #a62929;
       transition: all 0.3s ease;
       
+      // Show on tablet and desktop
+      @media (min-width: 768px) {
+        display: block;
+      }
+      
       svg {
-        width: 60px;
-        height: 60px;
+        width: 40px;
+        height: 40px;
         padding: 0.5rem;
         background: #fff;
         border-radius: 50%;
@@ -87,28 +93,37 @@
     height: 100%;
   }
 
-  // Sahifalar butun reklama taxtasi bo'limining pastki qismida joylashgan
-  :global(.swiper-pagination) {
+  // Custom pagination positioned outside Swiper
+  .customPagination {
     position: absolute;
-    bottom: 2rem; 
+    bottom: 2rem;
     left: 50%;
     transform: translateX(-50%);
     z-index: 10;
-    
-    :global(.swiper-pagination-bullet) {
-      width: 12px;
-      height: 12px;
-      background: #a62929;
-      opacity: 0.7;
-      transition: all 0.3s ease;
-      
-      &:global(.swiper-pagination-bullet-active) {
-        opacity: 1;
-        background: #a62929;
-        width: 30px;
-        border-radius: 6px;
-      }
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .paginationBullet {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: none;
+    background: #a62929;
+    opacity: 0.7;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      opacity: 0.9;
     }
+  }
+
+  .paginationBulletActive {
+    opacity: 1;
+    width: 30px;
+    border-radius: 6px;
   }
 
   .slideContent {
