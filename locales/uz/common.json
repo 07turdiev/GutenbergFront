@@ -102,6 +102,8 @@
   "novelCountTitle": "ta kitob",
   "emailInput": "pochta manzili",
   "requiredEmail": "Elektron pochtani kiriting",
-  "emailCode": "Pochtadagi kodni kiriting",
-  "address": "Manzil"
+  "emailCode": "Pochtadagi kodni kiriting", 
+  "address": "Manzil",
+  "detail_slider": "Batafsil",
+  "currency": "so'm"
 }

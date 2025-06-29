@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay, Pagination } from 'swiper';
 import { useRouter } from 'next/router';
+import useTranslation from 'next-translate/useTranslation';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -35,6 +36,7 @@ interface Book {
 
 const BooksSlider: React.FC = () => {
   const router = useRouter();
+  const { t } = useTranslation('common');
   const [books, setBooks] = useState<Book[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -68,20 +70,6 @@ const BooksSlider: React.FC = () => {
     return '/assets/images/noPhotoNovel.jpg';
   };
 
-  const extractTextFromContent = (content: any[]): string => {
-    if (!content || !Array.isArray(content)) return '';
-    
-    return content
-      .map(block => {
-        if (block.children && Array.isArray(block.children)) {
-          return block.children.map((child: any) => child.text || '').join('');
-        }
-        return '';
-      })
-      .join(' ')
-      .substring(0, 150) + '...';
-  };
-
   const handleBookClick = (slug: string) => {
     router.push(`/novels/${slug}`);
   };
@@ -112,7 +100,7 @@ const BooksSlider: React.FC = () => {
           prevEl: '.main-slider-button-prev',
         }}
         pagination={{
-          clickable: true,
+          clickable: false,
         }}
         autoplay={{
           delay: 5000,
@@ -131,24 +119,21 @@ const BooksSlider: React.FC = () => {
                     <p className={styles.authorName}>
                       {book.mualliflar?.ismi || 'Noma\'lum muallif'}
                     </p>
-                    <p className={styles.bookDescription}>
-                      {extractTextFromContent(book.tavsifi)}
-                    </p>
                     <div className={styles.priceInfo}>
                       {book.chegirma_narxi ? (
                         <>
-                          <span className={styles.originalPrice}>{book.narxi.toLocaleString()} so'm</span>
-                          <span className={styles.discountPrice}>{book.chegirma_narxi.toLocaleString()} so'm</span>
+                          <span className={styles.originalPrice}>{book.narxi.toLocaleString()} {t('currency')}</span>
+                          <span className={styles.discountPrice}>{book.chegirma_narxi.toLocaleString()} {t('currency')}</span>
                         </>
                       ) : (
-                        <span className={styles.price}>{book.narxi.toLocaleString()} so'm</span>
+                        <span className={styles.price}>{book.narxi.toLocaleString()} {t('currency')}</span>
                       )}
                     </div>
                     <button 
                       className={styles.shopButton}
                       onClick={() => handleBookClick(book.slug)}
                     >
-                      Sotib olish
+                      {t('detail_slider')}
                     </button>
                   </div>
                   <div className={styles.imageWrapper}>

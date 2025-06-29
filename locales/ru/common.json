@@ -100,6 +100,8 @@
   "emailInput": "email адрес",
   "requiredEmail": "Введите ваш email",
   "emailCode": "Введите код с почты",
-  "address": "Адрес"
+  "address": "Адрес", 
+  "detail_slider": "Подробнее",
+  "currency": "сум"
 
 }
