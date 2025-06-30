@@ -19,7 +19,7 @@ import {selectAuthors} from "../../../store/selectors/author";
 import {selectLatestBlogPosts} from "../../../store/selectors/blog";
 import {useRouter} from "next/router";
 import {fetchNovels} from "../../../store/actions/novel";
-import {BlogSlider, BooksSlider} from "../../HomeSlider";
+import {BooksSlider} from "../../HomeSlider";
 
 const Index = () => {
 
@@ -58,10 +58,7 @@ const Index = () => {
                 <BooksSlider />
             </div>
             
-            {/* Blog Slider Section */}
-            {latestBlogPosts && latestBlogPosts.length > 0 && (
-                <BlogSlider blogPosts={latestBlogPosts} />
-            )}
+
             
             <section className="container mx-auto px-3 mb-5">
                 <div className="grid grid-cols-12 lg:grid-rows-2 sm:gap-4 gap-2">
