@@ -1,0 +1,180 @@
+.popularAuthorsWrapper {
+  padding: 2rem 0;
+  margin-bottom: 3rem;
+
+  .title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #2c2c2c;
+    margin-bottom: 1.5rem;
+    text-align: left;
+    
+    @media (min-width: 768px) {
+      font-size: 1.75rem;
+    }
+  }
+
+  .sliderContainer {
+    position: relative;
+    
+    .navButton {
+      position: absolute;
+      top: 30%;
+      transform: translateY(-50%);
+      z-index: 10;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid #e5e5e5;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      color: #666;
+      
+      &:hover {
+        background: #fff;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        color: #333;
+      }
+
+      &:disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+      }
+
+      &.prevButton {
+        left: -20px;
+      }
+
+      &.nextButton {
+        right: -20px;
+      }
+
+      @media (max-width: 768px) {
+        display: none;
+      }
+    }
+
+    .swiper {
+      padding: 0 10px;
+    }
+  }
+}
+
+.authorCard {
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-5px);
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1rem;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+
+    &:hover {
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+    }
+
+    .avatarWrapper {
+      margin-bottom: 1rem;
+      position: relative;
+
+      .avatar {
+        border-radius: 50%;
+        border: 3px solid #f0f0f0;
+        transition: border-color 0.3s ease;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+      }
+
+      &:hover .avatar {
+        border-color: #a62929;
+      }
+    }
+
+    .infoWrapper {
+      width: 100%;
+
+      .info {
+        .fullName {
+          font-size: 0.95rem;
+          font-weight: 600;
+          color: #2c2c2c;
+          margin-bottom: 0.5rem;
+          line-height: 1.3;
+          text-decoration: none;
+          transition: color 0.3s ease;
+
+          &:hover {
+            color: #a62929;
+          }
+
+          @media (min-width: 768px) {
+            font-size: 1rem;
+          }
+        }
+
+        .subscribers {
+          font-size: 0.8rem;
+          color: #666;
+          
+          .subscribersQuantity {
+            font-weight: 600;
+            color: #2c2c2c;
+          }
+
+          @media (min-width: 768px) {
+            font-size: 0.85rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 480px) {
+  .popularAuthorsWrapper {
+    padding: 1.5rem 0;
+    
+    .title {
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+    }
+  }
+
+  .authorCard .content {
+    padding: 0.75rem;
+    
+    .avatarWrapper {
+      margin-bottom: 0.75rem;
+      
+      .avatar {
+        width: 70px !important;
+        height: 70px !important;
+      }
+    }
+
+    .infoWrapper .info {
+      .fullName {
+        font-size: 0.85rem;
+      }
+
+      .subscribers {
+        font-size: 0.75rem;
+      }
+    }
+  }
+} 

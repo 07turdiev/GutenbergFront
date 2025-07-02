@@ -20,6 +20,7 @@ import {selectLatestBlogPosts} from "../../../store/selectors/blog";
 import {useRouter} from "next/router";
 import {fetchNovels} from "../../../store/actions/novel";
 import {BooksSlider} from "../../HomeSlider";
+import PopularAuthorsSlider from "../../PopularAuthorsSlider";
 
 const Index = () => {
 
@@ -137,6 +138,11 @@ const Index = () => {
 
                 })
             }
+
+            {/* Popular Authors Slider at the bottom */}
+            <section className="container mx-auto px-3 md:mb-12 mb-7">
+                <PopularAuthorsSlider authors={authors.results} />
+            </section>
 
         </MainLayout>
     );

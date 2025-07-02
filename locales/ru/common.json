@@ -102,6 +102,9 @@
   "emailCode": "Введите код с почты",
   "address": "Адрес", 
   "detail_slider": "Подробнее",
-  "currency": "сум"
+  "currency": "сум",
+  "popularAuthors": "Популярные авторы",
+  "subscribeToGetUpdates": "подпишитесь, чтобы узнавать о новых книгах",
+  "subscribers": "подписчик"
 
 }
