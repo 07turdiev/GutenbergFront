@@ -120,7 +120,7 @@ const PopularAuthorsSlider: React.FC<Props> = ({ authors }) => {
                                                 <span className={styles.subscribersQuantity}>
                                                     {getSubscriberCount(author)}
                                                 </span>
-                                                {' '}{t('subscribers')}
+                                                {' '}{t('sliderAuthor_books')}
                                             </div>
                                         </div>
                                     </div>
