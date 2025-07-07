@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useMemo} from 'react';
 import NovelCard from "../NovelCard";
 import {useAppSelector} from "../../hooks/reducer";
 import {
@@ -28,6 +28,25 @@ const Index:React.FC<Props> = ({activeTab, changeTab}) => {
     const { novels, loading } = useAppSelector(selectNovels)
     const {t} = useTranslation('common')
 
+
+    const filteredNovels = useMemo(() => {
+        if (!novels.results) return [];
+        
+        if (activeTab === 'popular') {
+            return novels.results.filter(novel => {
+                const rating = novel.rating || novel.reyting || 0;
+                return rating >= 4;
+            });
+        }
+        
+        if (activeTab === 'new') {
+            return novels.results.filter(novel => {
+                return novel.new || novel.yangi;
+            });
+        }
+        
+        return novels.results;
+    }, [novels.results, activeTab]);
 
     const addNovelToMark = async (slug, saved) => {
         if(!saved){
@@ -72,34 +91,34 @@ const Index:React.FC<Props> = ({activeTab, changeTab}) => {
                 </button>
             </div>
             <div>
-                <div className='bg-gray-100 rounded-b-lg sm:p-5 p-2'>
+                <div className='bg-white rounded-b-lg sm:p-5 p-2 border border-gray-200 shadow-md'>
                     <Swiper
-                        slidesPerView={2}
-                        spaceBetween={5}
+                        slidesPerView={3}
+                        spaceBetween={12}
                         navigation={true}
 
                         modules={[Navigation]}
                         className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-y-6'
                         breakpoints={{
                             480: {
-                                slidesPerView: 3,
-                                spaceBetween: 5,
+                                slidesPerView: 2.5,
+                                spaceBetween: 12,
                                 freeMode: false
                             },
                             768: {
-                                slidesPerView: 4,
-                                spaceBetween: 10,
+                                slidesPerView: 3.5,
+                                spaceBetween: 12,
 
                             },
                             1024: {
-                                slidesPerView: 6,
-                                spaceBetween: 10,
+                                slidesPerView: 5,
+                                spaceBetween: 12,
                             },
                         }}
                     >
 
                         {
-                            novels.results.map((novel) => {
+                            filteredNovels.map((novel) => {
                                 return (
                                     <SwiperSlide key={novel.slug} className='col-span-1'>
                                         <NovelCard novel={novel} addToMark={addNovelToMark}/>

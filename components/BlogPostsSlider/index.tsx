@@ -48,7 +48,6 @@ const BlogPostsSlider: React.FC<BlogPostsSliderProps> = ({ posts }) => {
             delay: 5000,
             disableOnInteraction: false,
           }}
-          loop={true}
           slidesPerView={1}
           spaceBetween={20}
           breakpoints={{
@@ -89,13 +88,19 @@ const BlogPostsSlider: React.FC<BlogPostsSliderProps> = ({ posts }) => {
           ))}
         </Swiper>
         
-        <button className={`${styles.navigationButton} ${styles.prev} blog-slider-button-prev`}>
+        <button 
+          type="button" 
+          className={`${styles.navigationButton} ${styles.prev} blog-slider-button-prev`}
+        >
           <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
           </svg>
         </button>
         
-        <button className={`${styles.navigationButton} ${styles.next} blog-slider-button-next`}>
+        <button 
+          type="button" 
+          className={`${styles.navigationButton} ${styles.next} blog-slider-button-next`}
+        >
           <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
           </svg>

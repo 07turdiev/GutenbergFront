@@ -72,7 +72,7 @@ const BooksSlider: React.FC = () => {
   };
 
   const handleBookClick = (slug: string) => {
-    router.push(`/novels/${slug}`);
+            router.push(`/books/${slug}`);
   };
 
   const handlePaginationClick = (index: number) => {

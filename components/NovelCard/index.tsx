@@ -37,7 +37,7 @@ const Index:React.FC<Props> = ({novel, addToMark}) => {
                     </div>
                 : null
             }
-            <div className='relative h-60 shadow-md w-full mb-3 rounded-md overflow-hidden cursor-pointer' onClick={()=>router.push('/novels/' + novel.slug)}>
+            <div className='relative h-72 shadow-md w-full mb-3 rounded-md overflow-hidden cursor-pointer' onClick={()=>router.push('/books/' + novel.slug)}>
 
                 {
                     novel.cover ?
@@ -58,7 +58,7 @@ const Index:React.FC<Props> = ({novel, addToMark}) => {
 
             <div className='flex mb-1 justify-between items-start '>
 
-                <div className='font-bold grow leading-5 cursor-pointer transition duration-300 group-hover:text-orange-700'  onClick={()=>router.push('/novels/' + novel.slug)}>
+                <div className='font-bold grow leading-5 cursor-pointer transition duration-300 group-hover:text-orange-700'  onClick={()=>router.push('/books/' + novel.slug)}>
                     <TextTruncate
                         key={isLogin}
                         line={2}

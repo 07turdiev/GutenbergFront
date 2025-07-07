@@ -8,7 +8,7 @@ import {useDispatch} from "react-redux";
 import {setIsSaved} from "../../store/actions/player";
 import classNames from "classnames";
 import ReactStars from "react-rating-stars-component";
-import ShareMenu from "../../pages/novels/[slug]/ShareMenu";
+import ShareMenu from "../../pages/books/[slug]/ShareMenu";
 import useTranslation from 'next-translate/useTranslation';
 import {useAppSelector} from "../../hooks/reducer";
 import {selectAuth} from "../../store/selectors/auth";

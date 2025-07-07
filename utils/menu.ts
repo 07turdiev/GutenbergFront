@@ -1,6 +1,7 @@
 export const Routes = {
     main: '/',
     about: '/about',
+    books: '/books',
     genres: '/genres',
     authors: '/authors',
     team: '/team',
@@ -12,7 +13,7 @@ export const Menu = {
     ru: [
         {
             title: 'Книги',
-            href: Routes.genres
+            href: Routes.books
         },
         {
             title: 'Авторы',
@@ -34,7 +35,7 @@ export const Menu = {
     uz: [
         {
             title: 'Kitoblar',
-            href: Routes.genres
+            href: Routes.books
         },
         {
             title: 'Mualliflar',
