@@ -21,6 +21,7 @@ import {useRouter} from "next/router";
 import {fetchNovels} from "../../../store/actions/novel";
 import {BooksSlider} from "../../HomeSlider";
 import PopularAuthorsSlider from "../../PopularAuthorsSlider";
+import BlogPostsSlider from "../../BlogPostsSlider";
 
 const Index = () => {
 
@@ -143,6 +144,12 @@ const Index = () => {
             <section className="container mx-auto px-3 md:mb-12 mb-7">
                 <PopularAuthorsSlider authors={authors.results} />
             </section>
+
+            {latestBlogPosts && latestBlogPosts.length > 0 && (
+                <SectionListWrapper title={t('latestBlogPosts')} moreBtn="/blog">
+                    <BlogPostsSlider posts={latestBlogPosts} />
+                </SectionListWrapper>
+            )}
 
         </MainLayout>
     );

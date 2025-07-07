@@ -43,7 +43,7 @@ const PopularAuthorsSlider: React.FC<Props> = ({ authors }) => {
     return (
         <div className={styles.popularAuthorsWrapper}>
             <h2 className={styles.title}>
-                {t('popularAuthors')} – {t('subscribeToGetUpdates')}
+                {t('popularAuthors')}
             </h2>
             
             <div className={styles.sliderContainer}>
@@ -71,24 +71,20 @@ const PopularAuthorsSlider: React.FC<Props> = ({ authors }) => {
                         nextEl: '.popular-authors-next',
                         prevEl: '.popular-authors-prev',
                     }}
-                    slidesPerView={2}
+                    slidesPerView={1.2}
                     spaceBetween={10}
                     breakpoints={{
                         480: {
-                            slidesPerView: 3,
+                            slidesPerView: 2,
                             spaceBetween: 15,
                         },
                         768: {
-                            slidesPerView: 4,
+                            slidesPerView: 3,
                             spaceBetween: 20,
                         },
                         1024: {
-                            slidesPerView: 5,
-                            spaceBetween: 25,
-                        },
-                        1200: {
-                            slidesPerView: 6,
-                            spaceBetween: 30,
+                            slidesPerView: 4,
+                            spaceBetween: 20,
                         },
                     }}
                     className={styles.swiper}
@@ -104,8 +100,8 @@ const PopularAuthorsSlider: React.FC<Props> = ({ authors }) => {
                                         <Image
                                             src={getImageUrl(author)}
                                             alt={`Avatar ${author.ismi || author.name}`}
-                                            width={88}
-                                            height={88}
+                                            width={60}
+                                            height={60}
                                             className={styles.avatar}
                                             style={{ objectFit: 'cover' }}
                                         />

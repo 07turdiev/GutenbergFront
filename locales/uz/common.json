@@ -107,6 +107,7 @@
   "detail_slider": "Batafsil",
   "currency": "so'm",
   "popularAuthors": "Mashhur mualliflar",
-  "subscribeToGetUpdates": "yangi kitoblar haqida xabar olish uchun obuna bo'ling",
-  "sliderAuthor_books": "ta Kitob"
+  "sliderAuthor_books": "ta Kitob",
+  "latestBlogPosts": "Eng so'nggi maqolalar",
+  "views": "Ko'rishlar"
 }
