@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useMemo} from 'react';
+import React, {useEffect, useState, useMemo, useRef} from 'react';
 import NovelCard from "../NovelCard";
 import {useAppSelector} from "../../hooks/reducer";
 import {
@@ -8,12 +8,13 @@ import {
 } from "../../store/actions/novel";
 import {selectNovels} from "../../store/selectors/novel";
 import { Swiper, SwiperSlide } from 'swiper/react';
-import {FreeMode, Navigation} from "swiper";
+import {Navigation} from "swiper";
 import {useDispatch} from "react-redux";
 import {useRouter} from "next/router";
 import classNames from "classnames";
 import {fetchCategories} from "../../store/actions/category";
 import useTranslation from 'next-translate/useTranslation';
+import styles from './style.module.scss';
 
 
 interface Props {
@@ -22,6 +23,9 @@ interface Props {
 }
 
 const Index:React.FC<Props> = ({activeTab, changeTab}) => {
+    const [isBeginning, setIsBeginning] = useState(true);
+    const [isEnd, setIsEnd] = useState(false);
+    const swiperRef = useRef(null);
 
     const dispatch = useDispatch();
     const {locale} = useRouter();
@@ -70,64 +74,132 @@ const Index:React.FC<Props> = ({activeTab, changeTab}) => {
 
 
     return (
-        <div>
+        <div className={styles.tabContainer}>
+            <div className={styles.sectionTitle}>
+                <div className={styles.titleText}>
+                    {t('booksSliderTitle')}
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 6.25278V19.2528M12 6.25278C10.8321 5.47686 9.24649 5 7.5 5C5.75351 5 4.16789 5.47686 3 6.25278V19.2528C4.16789 18.4769 5.75351 18 7.5 18C9.24649 18 10.8321 18.4769 12 19.2528M12 6.25278C13.1679 5.47686 14.7535 5 16.5 5C18.2465 5 19.8321 5.47686 21 6.25278V19.2528C19.8321 18.4769 18.2465 18 16.5 18C14.7535 18 13.1679 18.4769 12 19.2528" 
+                            stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                    
+                </div>
+            </div>
 
-            <div className='flex items-center'>
+            <div className={styles.tabButtons}>
                 <button
-                    className={classNames('px-2 py-1 text-md mr-2 rounded-lg bg-gray-100 mb-1', {
-                        'text-primary rounded-b-none -mb-1 pb-3' : activeTab === 'popular'
+                    className={classNames(styles.tabButton, {
+                        [styles.active] : activeTab === 'popular'
                     })}
                     onClick={()=>changeTab('popular')}
                 >
                     {t('popular')}
                 </button>
                 <button
-                    className={classNames('px-2 py-1 text-md mr-2 rounded-lg bg-gray-100 mb-1', {
-                        'text-primary rounded-b-none -mb-1 pb-3' : activeTab === 'new'
+                    className={classNames(styles.tabButton, {
+                        [styles.active] : activeTab === 'new'
                     })}
                     onClick={()=>changeTab('new')}
                 >
                     {t('new')}
                 </button>
             </div>
-            <div>
-                <div className='bg-white rounded-b-lg sm:p-5 p-2 border border-gray-200 shadow-md'>
-                    <Swiper
-                        slidesPerView={3}
-                        spaceBetween={12}
-                        navigation={true}
+            <div className={styles.sliderWrapper}>
+                <div className={styles.sliderContainer}>
+                    {!isBeginning && (
+                        <button 
+                            className={`${styles.navButton} ${styles.prevButton}`}
+                            onClick={() => document.querySelector('.swiper-button-prev')?.dispatchEvent(new Event('click'))}
+                        >
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M15 19L8 12L15 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
+                        </button>
+                    )}
+                    {!isEnd && (
+                        <button 
+                            className={`${styles.navButton} ${styles.nextButton}`}
+                            onClick={() => document.querySelector('.swiper-button-next')?.dispatchEvent(new Event('click'))}
+                        >
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9 5L16 12L9 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
+                        </button>
+                    )}
 
-                        modules={[Navigation]}
-                        className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-y-6'
-                        breakpoints={{
-                            480: {
-                                slidesPerView: 2.5,
-                                spaceBetween: 12,
-                                freeMode: false
-                            },
-                            768: {
-                                slidesPerView: 3.5,
-                                spaceBetween: 12,
-
-                            },
-                            1024: {
-                                slidesPerView: 5,
-                                spaceBetween: 12,
-                            },
-                        }}
-                    >
-
-                        {
-                            filteredNovels.map((novel) => {
+                    {loading || filteredNovels.length === 0 ? (
+                        <div className={styles.swiper}>
+                            {loading ? (
+                                <div className={styles.loading}>
+                                    Yuklanmoqda...
+                                </div>
+                            ) : (
+                                <div className={styles.empty}>
+                                    <div className={styles.emptyIcon}>📚</div>
+                                    <div>
+                                        {activeTab === 'popular' 
+                                            ? (locale === 'ru' ? 'Популярные книги не найдены' : 'Mashhur kitoblar topilmadi')
+                                            : (locale === 'ru' ? 'Новые книги не найдены' : 'Yangi kitoblar topilmadi')
+                                        }
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    ) : (
+                        <Swiper
+                            onBeforeInit={(swiper) => {
+                                swiperRef.current = swiper;
+                            }}
+                            slidesPerView={1.8}
+                            spaceBetween={8}
+                            navigation={true}
+                            modules={[Navigation]}
+                            className={styles.swiper}
+                            freeMode={false}
+                            grabCursor={true}
+                            touchRatio={1}
+                            touchAngle={45}
+                            threshold={10}
+                            onSlideChange={(swiper) => {
+                                setIsBeginning(swiper.isBeginning);
+                                setIsEnd(swiper.isEnd);
+                            }}
+                            onSwiper={(swiper) => {
+                                setIsBeginning(swiper.isBeginning);
+                                setIsEnd(swiper.isEnd);
+                            }}
+                            breakpoints={{
+                                360: {
+                                    slidesPerView: 1.5,
+                                    spaceBetween: 8,
+                                },
+                                480: {
+                                    slidesPerView: 2.5,
+                                    spaceBetween: 12,
+                                },
+                                640: {
+                                    slidesPerView: 2.8,
+                                    spaceBetween: 12,
+                                },
+                                768: {
+                                    slidesPerView: 2.5,
+                                    spaceBetween: 12,
+                                },
+                                1024: {
+                                    slidesPerView: 3.4,
+                                    spaceBetween: 12,
+                                },
+                            }}
+                        >
+                            {filteredNovels.map((novel) => {
                                 return (
-                                    <SwiperSlide key={novel.slug} className='col-span-1'>
+                                    <SwiperSlide key={novel.slug} className={styles.slideItem}>
                                         <NovelCard novel={novel} addToMark={addNovelToMark}/>
                                     </SwiperSlide>
                                 )
-                            })
-                        }
-
-                    </Swiper>
+                            })}
+                        </Swiper>
+                    )}
                 </div>
             </div>
         </div>
