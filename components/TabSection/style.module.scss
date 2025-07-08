@@ -47,7 +47,8 @@
 }
 
 .tabButton {
-  padding: 0.5rem 1rem;
+  height: 40px;
+  padding: 0 1.5rem;
   font-size: 1rem;
   margin-right: 0.5rem;
   border-radius: 1rem 1rem 0 0;
@@ -55,10 +56,12 @@
   transition: all 0.3s ease;
   border: 1px solid transparent;
   cursor: pointer;
-  min-width: 80px;
+  min-width: 120px;
   text-align: center;
   position: relative;
-  margin-bottom: -1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &.active {
     color: var(--primary-color, #a62929);
@@ -70,12 +73,13 @@
   }
 
   @media (max-width: 640px) {
-    padding: 0.375rem 1rem;
+    height: 36px;
+    padding: 0 1.25rem;
     font-size: 0.875rem;
     margin-right: 0.25rem;
-    min-width: 70px;
+    min-width: 100px;
     border-radius: 1.5rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0;
     
     &.active {
       border-radius: 1.5rem;
@@ -87,9 +91,10 @@
   }
 
   @media (max-width: 480px) {
-    padding: 0.25rem 0.75rem;
+    height: 32px;
+    padding: 0 1rem;
     font-size: 0.8rem;
-    min-width: 60px;
+    min-width: 90px;
   }
 }
 
@@ -171,11 +176,7 @@
   position: relative;
   z-index: 1;
 
-  :global(.swiper-button-prev),
-  :global(.swiper-button-next) {
-    opacity: 0;
-    pointer-events: none;
-  }
+
 
   @media (min-width: 640px) {
     grid-template-columns: repeat(3, 1fr);

@@ -152,7 +152,7 @@ const Index:React.FC<Props> = ({activeTab, changeTab}) => {
                             }}
                             slidesPerView={1.8}
                             spaceBetween={8}
-                            navigation={true}
+                            navigation={false}
                             modules={[Navigation]}
                             className={styles.swiper}
                             freeMode={false}
