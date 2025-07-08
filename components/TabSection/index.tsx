@@ -8,6 +8,7 @@ import {
 } from "../../store/actions/novel";
 import {selectNovels} from "../../store/selectors/novel";
 import { Swiper, SwiperSlide } from 'swiper/react';
+import type { Swiper as SwiperType } from 'swiper';
 import {Navigation} from "swiper";
 import {useDispatch} from "react-redux";
 import {useRouter} from "next/router";
@@ -25,7 +26,7 @@ interface Props {
 const Index:React.FC<Props> = ({activeTab, changeTab}) => {
     const [isBeginning, setIsBeginning] = useState(true);
     const [isEnd, setIsEnd] = useState(false);
-    const swiperRef = useRef(null);
+    const swiperRef = useRef<SwiperType>();
 
     const dispatch = useDispatch();
     const {locale} = useRouter();
@@ -109,7 +110,7 @@ const Index:React.FC<Props> = ({activeTab, changeTab}) => {
                     {!isBeginning && (
                         <button 
                             className={`${styles.navButton} ${styles.prevButton}`}
-                            onClick={() => document.querySelector('.swiper-button-prev')?.dispatchEvent(new Event('click'))}
+                            onClick={() => swiperRef.current?.slidePrev()}
                         >
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M15 19L8 12L15 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -119,7 +120,7 @@ const Index:React.FC<Props> = ({activeTab, changeTab}) => {
                     {!isEnd && (
                         <button 
                             className={`${styles.navButton} ${styles.nextButton}`}
-                            onClick={() => document.querySelector('.swiper-button-next')?.dispatchEvent(new Event('click'))}
+                            onClick={() => swiperRef.current?.slideNext()}
                         >
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M9 5L16 12L9 19" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
