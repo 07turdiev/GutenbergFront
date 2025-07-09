@@ -1,12 +1,8 @@
 import axios from 'axios';
 import { setCookies, getCookie  } from 'cookies-next';
-export let API_URL;
+import { getApiUrl } from '../config/api';
 
-if(typeof window !== "undefined"){
-    API_URL = 'http://localhost:1337/';
-}else {
-    API_URL = 'http://localhost:1337/';
-}
+export const API_URL = getApiUrl();
 
 const $api = axios.create({
     //withCredentials: true,

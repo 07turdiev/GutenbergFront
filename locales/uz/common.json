@@ -106,9 +106,10 @@
   "address": "Manzil",
   "detail_slider": "Batafsil",
   "currency": "so'm",
-  "popularAuthors": "Mashhur mualliflar",
+  "popularAuthors": "Mualliflar",
   "sliderAuthor_books": "ta Kitob",
   "latestBlogPosts": "Eng so'nggi maqolalar",
   "views": "Ko'rishlar",
-  "booksSliderTitle": "Kitoblar to'plami"
+  "booksSliderTitle": "Kitoblar",
+  "blogPostsTitle": "Maqolalar"
 }

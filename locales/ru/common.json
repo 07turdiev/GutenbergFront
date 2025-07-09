@@ -103,9 +103,10 @@
   "address": "Адрес", 
   "detail_slider": "Подробнее",
   "currency": "сум",
-  "popularAuthors": "Популярные авторы",
+  "popularAuthors": "Авторы",
   "sliderAuthor_books": "книг",
-  "latestBlogPosts": "Последние статьи",
+  "latestBlogPosts": "Статьи",
   "views": "Просмотры",
-  "booksSliderTitle": "Коллекция книг"
+  "booksSliderTitle": "Книги",
+  "blogPostsTitle": "Статьи"
 }

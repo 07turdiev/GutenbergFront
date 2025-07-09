@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import Image from 'next/image';
 import { IBlogPost } from '../../models/IBlog';
+import { ensureAbsoluteUrl } from '../../config/api';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import noPhoto from '../../assets/images/noPhotoNovel.jpg';
@@ -26,9 +27,9 @@ const BlogPostsSlider: React.FC<BlogPostsSliderProps> = ({ posts }) => {
     if (!post.rasmi) return noPhoto.src;
     
     if (post.rasmi.formats?.medium?.url) {
-      return `http://localhost:1337${post.rasmi.formats.medium.url}`;
+      return ensureAbsoluteUrl(post.rasmi.formats.medium.url);
     }
-    return `http://localhost:1337${post.rasmi.url}`;
+    return ensureAbsoluteUrl(post.rasmi.url);
   };
 
   if (!posts || posts.length === 0) {

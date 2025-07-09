@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay } from 'swiper';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
+import { getApiUrl, ensureAbsoluteUrl } from '../../config/api';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import styles from './BooksSlider.module.scss';
@@ -48,7 +49,7 @@ const BooksSlider: React.FC = () => {
   const fetchLatestBooks = async () => {
     try {
       const response = await fetch(
-        `http://localhost:1337/api/kitoblars?locale=${router.locale || 'uz'}&populate=mualliflar&populate=muqova&sort=createdAt:desc&pagination[limit]=3`
+        `${getApiUrl()}api/kitoblars?locale=${router.locale || 'uz'}&populate=mualliflar&populate=muqova&sort=createdAt:desc&pagination[limit]=3`
       );
       const data = await response.json();
       setBooks(data.data || []);
@@ -63,10 +64,10 @@ const BooksSlider: React.FC = () => {
     if (!muqova) return '/assets/images/noPhotoNovel.jpg';
     
     if (muqova.formats?.medium?.url) {
-      return `http://localhost:1337${muqova.formats.medium.url}`;
+      return ensureAbsoluteUrl(muqova.formats.medium.url);
     }
     if (muqova.url) {
-      return `http://localhost:1337${muqova.url}`;
+      return ensureAbsoluteUrl(muqova.url);
     }
     return '/assets/images/noPhotoNovel.jpg';
   };

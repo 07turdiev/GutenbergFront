@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { IAuthor } from '../../models/IAuthors';
+import { ensureAbsoluteUrl } from '../../config/api';
 import noPhoto from '../../assets/images/noPhotoAvtor.jpg';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -24,7 +25,7 @@ const PopularAuthorsSlider: React.FC<Props> = ({ authors }) => {
 
     const getImageUrl = (author: IAuthor): string => {
         if (author.rasmi?.url) {
-            return `http://localhost:1337${author.rasmi.url}`;
+            return ensureAbsoluteUrl(author.rasmi.url);
         }
         if (author.photo?.src) {
             return author.photo.src;
@@ -44,6 +45,10 @@ const PopularAuthorsSlider: React.FC<Props> = ({ authors }) => {
         <div className={styles.popularAuthorsWrapper}>
             <h2 className={styles.title}>
                 {t('popularAuthors')}
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="#a62929">
+                    <path d="M15 7L18 10M6 19L7 15L17 5L20 8L10 18L6 19Z" 
+                    stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
             </h2>
             
             <div className={styles.sliderContainer}>

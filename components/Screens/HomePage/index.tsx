@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import HeadMeta from "../../HeadMeta";
-import NovelMain from "../../NovelMain";
 import AdvertisingCard from "../../AdvertisingCard";
 import TabSection from "../../TabSection";
 import GenresListSection from "../../GenresListSection";
@@ -30,7 +29,6 @@ const Index = () => {
 
 
     const {t} = useTranslation('common')
-    const {actual} = useAppSelector(selectNovels)
     const {categories} = useAppSelector(selectCategories)
     const {mainBottom, mainTop, middle: sectionBanner} = useAppSelector(s=>s.advertisingReducer)
     const {genres} = useAppSelector(selectGenres)
@@ -62,33 +60,27 @@ const Index = () => {
             
 
             
-            <section className="container mx-auto px-3 mb-5">
-                <div className="grid grid-cols-12 lg:grid-rows-2 sm:gap-4 gap-2">
+            {(mainTop || mainBottom) && (
+                <section className="container mx-auto px-3 mb-5">
+                    <div className="grid grid-cols-12 sm:gap-4 gap-2">
+                        {
+                            mainTop ?
+                                <div className="lg:col-span-6 sm:col-span-6 col-span-12">
+                                    <AdvertisingCard banner={mainTop}/>
+                                </div>
+                                : null
+                        }
 
-                    {actual && (
-                        <div className="lg:col-span-7 lg:row-span-2 col-span-12 row-span-1">
-                            <NovelMain novel={actual}/>
-                        </div>
-                    )}
-
-                    {
-                        mainTop ?
-                            <div className="lg:col-span-5 sm:col-span-6 col-span-12">
-                                <AdvertisingCard banner={mainTop}/>
-                            </div>
-                            : null
-                    }
-
-                    {
-                        mainBottom ?
-                            <div className="lg:col-span-5 sm:col-span-6  col-span-12">
-                                <AdvertisingCard left banner={mainBottom}/>
-                            </div>
-                            : null
-                    }
-
-                </div>
-            </section>
+                        {
+                            mainBottom ?
+                                <div className="lg:col-span-6 sm:col-span-6  col-span-12">
+                                    <AdvertisingCard left banner={mainBottom}/>
+                                </div>
+                                : null
+                        }
+                    </div>
+                </section>
+            )}
 
             <section className="container mx-auto px-3 md:mb-12 mb-7">
                 <TabSection activeTab={activeTab} changeTab={changeTab}/>
@@ -146,7 +138,7 @@ const Index = () => {
             </section>
 
             {latestBlogPosts && latestBlogPosts.length > 0 && (
-                <SectionListWrapper title={t('latestBlogPosts')} moreBtn="/blog">
+                <SectionListWrapper title={t('blogPostsTitle')} moreBtn="/blog">
                     <BlogPostsSlider posts={latestBlogPosts} />
                 </SectionListWrapper>
             )}

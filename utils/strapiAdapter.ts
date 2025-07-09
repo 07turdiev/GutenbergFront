@@ -4,6 +4,7 @@ import {IGenre} from "../models/IGenre";
 import {ICategory} from "../models/ICategory";
 import {IAbout, IContacts, ISocial, IStatistics} from "../models/IAbout";
 import {ITeamMember} from "../models/ITeam";
+import { getApiBaseUrl, ensureAbsoluteUrl } from "../config/api";
 
 // Convert Strapi rich text to plain text
 export const richTextToPlainText = (richText: IRichTextContent[]): string => {
@@ -52,14 +53,14 @@ export const adaptNovelData = (novel: INovel): INovel => {
         categories: novel.kategoriyalars?.map(c => adaptCategoryData(c).name || c.nomi) || novel.categories || [],
         published_at: novel.publishedAt || novel.published_at || '',
         cover: novel.muqova ? {
-            src: novel.muqova.url.startsWith('http') ? novel.muqova.url : `http://localhost:1337${novel.muqova.url}`,
+            src: ensureAbsoluteUrl(novel.muqova.url),
             width: novel.muqova.width || 0,
             height: novel.muqova.height || 0,
             base64: ''
         } : (novel.cover || null),
         // Map audio file if available
         audio_list: novel.audio ? [{
-            file: novel.audio.url.startsWith('http') ? novel.audio.url : `http://localhost:1337${novel.audio.url}`,
+            file: ensureAbsoluteUrl(novel.audio.url),
             name: novel.nomi || '',
             duration: novel.audio_davomiyligi || 0,
             order: 1
@@ -78,14 +79,14 @@ export const adaptAuthorData = (author: IAuthor): IAuthor => {
     let photo = null;
     if (author.rasmi && author.rasmi.url) {
         photo = {
-            src: author.rasmi.url.startsWith('http') ? author.rasmi.url : `http://localhost:1337${author.rasmi.url}`,
+            src: ensureAbsoluteUrl(author.rasmi.url),
             width: author.rasmi.width || 0,
             height: author.rasmi.height || 0,
             base64: ''
         };
     } else if (author.suratilar?.[0]?.url) {
         photo = {
-            src: author.suratilar[0].url.startsWith('http') ? author.suratilar[0].url : `http://localhost:1337${author.suratilar[0].url}`,
+            src: ensureAbsoluteUrl(author.suratilar[0].url),
             width: author.suratilar[0].width || 0,
             height: author.suratilar[0].height || 0,
             base64: ''
@@ -222,12 +223,8 @@ export const adaptTeamMemberData = (member: ITeamMember): ITeamMember => {
     // Ensure photo URL is absolute
     let photo = null;
     if (member.rasmi && member.rasmi.url) {
-        const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:1337';
-        
         // Process main URL
-        const photoUrl = member.rasmi.url.startsWith('http') 
-            ? member.rasmi.url 
-            : `${baseUrl}${member.rasmi.url}`;
+        const photoUrl = ensureAbsoluteUrl(member.rasmi.url);
         
         // Process formats URLs
         let formats = null;
@@ -237,9 +234,7 @@ export const adaptTeamMemberData = (member: ITeamMember): ITeamMember => {
                 const format = member.rasmi.formats[key];
                 formats[key] = {
                     ...format,
-                    url: format.url.startsWith('http') 
-                        ? format.url 
-                        : `${baseUrl}${format.url}`
+                    url: ensureAbsoluteUrl(format.url)
                 };
             });
         }
@@ -320,8 +315,7 @@ export const blogContentToPlainText = (content: any[]): string => {
 // Get blog image URL with base URL
 export const getBlogImageUrl = (image: any): string => {
     if (!image || !image.url) return '';
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:1337';
-    return image.url.startsWith('http') ? image.url : `${baseUrl}${image.url}`;
+    return ensureAbsoluteUrl(image.url);
 };
 
 // Extract YouTube video ID from various URL formats

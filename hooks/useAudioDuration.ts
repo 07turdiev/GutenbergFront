@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getAudioDurationCached, formatDuration } from '../utils/audioUtils';
+import { ensureAbsoluteUrl } from '../config/api';
 
 /**
  * Custom hook for loading and formatting audio duration
@@ -67,9 +68,7 @@ const getNovelAudioUrl = (novel: any): string | null => {
     
     // Check for direct audio file (new API structure)
     if (novel.audio?.url) {
-        return novel.audio.url.startsWith('http') 
-            ? novel.audio.url 
-            : `http://localhost:1337${novel.audio.url}`;
+        return ensureAbsoluteUrl(novel.audio.url);
     }
     
     return null;
