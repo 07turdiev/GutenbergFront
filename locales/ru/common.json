@@ -53,6 +53,10 @@
   "filter":"Фильтр",
   "resetFilter": "Сбросить",
 
+  "loginSubtitle": "Войдите в свой аккаунт для доступа ко всем функциям",
+
+  "switchToRegistration": "Переключиться на регистрацию",
+
   "copyRight": "Все права защищены",
   "downloadApp": "Купить через Telegram бот",
   "termsOfUse": "Условия использования",

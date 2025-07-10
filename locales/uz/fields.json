@@ -17,9 +17,8 @@
   "confirmPassword": "Parolni qayta kiriting",
   "change":"O'zgartirish",
   "saveChanges":"O'zgarishlarni saqlang",
-  "uploadPhoto": "Surat yuklang"
+  "uploadPhoto": "Surat yuklang",
 
-
-
+  "passwordMinLength": "Kamida 6 ta belgi"
 
 }

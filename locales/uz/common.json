@@ -55,6 +55,10 @@
   "filter": "Filtr",
   "resetFilter": "Tozalash",
 
+  "loginSubtitle": "Barcha funksiyalarga kirish uchun hisobingizga kiring",
+
+  "switchToRegistration": "Ro'yxatdan o'tishga o'tish",
+
   "copyRight": "Barcha huquqlar himoyalangan",
   "downloadApp": "Telegram bot orqali xarid qiling",
   "termsOfUse": "Foydalanish shartlari",

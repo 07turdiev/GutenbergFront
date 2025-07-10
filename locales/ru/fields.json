@@ -17,7 +17,8 @@
   "confirmPassword": "Повторите пароль",
   "change":"Изменить",
   "saveChanges":"Сохранить изменения",
-  "uploadPhoto":"Загрузить фото"
-  
+  "uploadPhoto":"Загрузить фото",
+
+  "passwordMinLength": "Минимум 6 символов"
 
 }
