@@ -7,11 +7,22 @@
     margin-bottom: 1.5rem;
   }
 
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+
+    @media (max-width: 768px) {
+      margin-bottom: 1rem;
+    }
+  }
+
   .title {
     font-size: 1.5rem;
     font-weight: 600;
     color: #2c2c2c;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0;
     text-align: left;
     display: flex;
     align-items: center;
@@ -19,8 +30,11 @@
     
     @media (max-width: 768px) {
       font-size: 1.25rem;
-      margin-bottom: 1rem;
     }
+  }
+
+  .seeAllButton {
+    flex-shrink: 0;
   }
 
   .sliderContainer {
