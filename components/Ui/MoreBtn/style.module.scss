@@ -7,6 +7,19 @@
   overflow: hidden;
   z-index: 1;
   transition: .3s;
+  font-size: 0.875rem;
+  white-space: nowrap;
+  
+  @media (max-width: 640px) {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
+  
+  @media (max-width: 480px) {
+    padding: 5px 8px;
+    font-size: 0.75rem;
+  }
+  
   &:hover{
     background:  linear-gradient(90deg, #a62929 0%, #8a1f1f 100%);
     color: #fff;

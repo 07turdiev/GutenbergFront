@@ -26,22 +26,18 @@ const Index:React.FC<Props> = ({
     return (
         <section className='container mx-auto px-3 mb-10'>
 
-            <div className="grid grid-cols-2 mb-5">
-                <div className={classNames({
-                    'col-span-1': moreBtn
-                })}>
+            <div className="grid grid-cols-2 gap-2 mb-5 mx-2 sm:mx-0 items-center">
+                <div className="col-span-1 min-w-0">
                     <SectionTitle>{title}</SectionTitle>
                 </div>
                 {
                     moreBtn ?
-                        <div className='col-span-1 text-right'>
+                        <div className='col-span-1 text-right flex justify-end'>
                             <MoreBtn onClick={() => router.push(moreBtn)}>{t('showAll')}</MoreBtn>
                         </div>
-
                     : null
                 }
             </div>
-
 
             {children}
         </section>

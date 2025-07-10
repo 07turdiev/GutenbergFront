@@ -16,12 +16,12 @@ const Index = () => {
     const router = useRouter();
 
     return (
-        <>
-            <div className="text-right mb-5">
+        <div className="w-full">
+            <div className="text-right mb-3 sm:mb-5 mx-2 sm:mx-1">
                 <MoreBtn onClick={() => router.push('subscribes/authors')}>{t('showAll')}</MoreBtn>
             </div>
 
-            <div className='w-full flex shrink-1 container  mx-auto relative overflow-hidden'>
+            <div className='w-full flex shrink-1 container mx-auto relative overflow-hidden'>
                 <Swiper
                     className='w-full'
                     slidesPerView={3}
@@ -48,8 +48,7 @@ const Index = () => {
                     }
                 </Swiper>
             </div>
-
-        </>
+        </div>
 
     );
 };

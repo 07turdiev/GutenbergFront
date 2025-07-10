@@ -47,8 +47,16 @@ const PopularAuthorsSlider: React.FC<Props> = ({ authors }) => {
             {/* Header with title and see all button */}
             <div className={styles.header}>
                 <h2 className={styles.title}>
-                    {t('popularAuthors')}
-                    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" color="#a62929">
+                    <span className="truncate">{t('popularAuthors')}</span>
+                    <svg 
+                        width="20" 
+                        height="20" 
+                        className="sm:w-[30px] sm:h-[30px] flex-shrink-0"
+                        viewBox="0 0 24 24" 
+                        fill="none" 
+                        xmlns="http://www.w3.org/2000/svg" 
+                        color="#a62929"
+                    >
                         <path d="M15 7L18 10M6 19L7 15L17 5L20 8L10 18L6 19Z" 
                         stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
