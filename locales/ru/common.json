@@ -112,5 +112,7 @@
   "latestBlogPosts": "Статьи",
   "views": "Просмотры",
   "booksSliderTitle": "Книги",
-  "blogPostsTitle": "Статьи"
+  "blogPostsTitle": "Статьи",
+  "telegramBotTitle": "Используйте Telegram бота<br/>для покупки книг",
+  "telegramBotButton": "Telegram Bot"
 }

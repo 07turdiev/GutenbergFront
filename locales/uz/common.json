@@ -115,5 +115,7 @@
   "latestBlogPosts": "Eng so'nggi maqolalar",
   "views": "Ko'rishlar",
   "booksSliderTitle": "Kitoblar",
-  "blogPostsTitle": "Maqolalar"
+  "blogPostsTitle": "Maqolalar",
+  "telegramBotTitle": "Kitoblarni sotib olish uchun<br/>Telegram botdan foydalaning",
+  "telegramBotButton": "Telegram Bot"
 }

@@ -26,6 +26,9 @@ module.exports = {
       scale: {
         '99': '0.99',
       },
+      borderWidth: {
+        '3': '3px',
+      },
     },
   },
   plugins: [],

@@ -21,6 +21,7 @@ import {fetchNovels} from "../../../store/actions/novel";
 import {BooksSlider} from "../../HomeSlider";
 import PopularAuthorsSlider from "../../PopularAuthorsSlider";
 import BlogPostsSlider from "../../BlogPostsSlider";
+import TelegramBotSection from "../../TelegramBotSection";
 
 const Index = () => {
 
@@ -131,6 +132,9 @@ const Index = () => {
 
                 })
             }
+
+            {/* Telegram Bot Section */}
+            <TelegramBotSection />
 
             {/* Popular Authors Slider at the bottom */}
             <section className="container mx-auto px-3 md:mb-12 mb-7">
