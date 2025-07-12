@@ -1,9 +1,9 @@
 <svg width="400" height="100" viewBox="0 0 400 100" fill="none" xmlns="http://www.w3.org/2000/svg">
   <!-- Background with rounded corners -->
-  <rect x="2" y="2" width="396" height="96" rx="15" ry="15" stroke="#FF0000" stroke-width="3"/>
+  <rect x="2" y="2" width="396" height="96" rx="50" ry="50" stroke="#fff" stroke-width="3"/>
   
   <svg
-  fill="#FF0000"
+  fill="#fff"
   width="100px"
   height="100px"
   viewBox="0 0 32 32"
@@ -16,7 +16,7 @@
 </svg>
   
   <!-- Second line text -->
-  <text x="150" y="65" font-family="Arial, sans-serif" font-size="35" font-weight="bold" fill="#FF0000">
+  <text x="150" y="65" font-family="Arial, sans-serif" font-size="35" font-weight="bold" fill="#fff">
     Botga o'tish
   </text>
 </svg> 
