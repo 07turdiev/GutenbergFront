@@ -46,6 +46,13 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (ctx
         ctx: ctx
     }));
 
+    // Check if the novel exists in the redux store
+    const state = store.getState();
+    const novel = state.novelReducer.novel;
+    if (!novel) {
+        return { notFound: true };
+    }
+
     await dispatch(fetchAdvertisingRight({
         locale: ctx.locale,
         type: 'right'
@@ -82,7 +89,7 @@ const Index = () => {
         if(!novel){
             return
         }
-        const authorSlug = novel.author.slug;
+        const authorSlug = novel.author?.slug;
 
         if(authorSlug){
             dispatch(fetchAuthorOne({locale: locale, slug: authorSlug, config: {},}))
