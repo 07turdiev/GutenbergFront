@@ -6,10 +6,10 @@ import {IGenre} from "../models/IGenre";
 export default class GenreService {
 
     static async fetchGenres(locale: string, opt: AxiosRequestConfig = {}): Promise<AxiosResponse<IListResponse<IGenre[]>>> {
-        return await $api.get(locale + '/api/genres/', opt)
+        return await $api.get(locale + '/api/janrlars/', opt)
     }
 
     static async fetchGenresList(locale: string, opt: AxiosRequestConfig = {}): Promise<AxiosResponse<IListResponse<IGenre[]>>> {
-        return await $api.get(locale + '/api/genres/list', opt)
+        return await $api.get(locale + '/api/janrlars/', opt)
     }
 }

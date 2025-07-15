@@ -22,9 +22,14 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (ctx
     await dispatch(fetchNovels({locale: ctx.locale, opt: {
         params: {
             ...ctx.query,
-            name: ctx.query.name,
+            ...(ctx.query.name ? {'filters[nomi][$containsi]': ctx.query.name} : {}),
+            ...(ctx.query.author ? {'filters[mualliflar][ismi][$eq]': ctx.query.author} : {}),
+            ...(ctx.query.genre ? {'filters[janrlars][nomi][$eq]': ctx.query.genre} : {}),
+            ...(ctx.query.category ? {'filters[kategoriyalars][nomi][$eq]': ctx.query.category} : {}),
+            ...(ctx.query.lang ? {'filters[locale][$eq]': ctx.query.lang} : {}),
             'pagination[pageSize]': 9,
-            'pagination[page]': ctx.query.p || 1
+            'pagination[page]': ctx.query.p || 1,
+            'sort[0]': 'createdAt:desc'
         }
     }, ctx}));
 
@@ -75,7 +80,7 @@ const Index = () => {
 
                 <FilterNovels title={t('novels')}/>
 
-                <div className="grid grid-cols-3 gap-6 mb-14">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-14">
                     {
                         novels.results.map((novel)=>{
                             return (

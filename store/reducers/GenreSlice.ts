@@ -26,6 +26,21 @@ const initialState: GenreState = {
     error: '',
 }
 
+function adaptStrapiMetaToIMeta(meta): IMeta {
+    if (!meta || !meta.pagination) return null;
+    return {
+        links: {
+            next: null,
+            previous: null
+        },
+        count: meta.pagination.total,
+        page_size: meta.pagination.pageSize,
+        num_pages: meta.pagination.pageCount,
+        current_page: meta.pagination.page,
+        countItemsOnPage: meta.pagination.pageSize
+    };
+}
+
 export const genreSlice = createSlice({
     name: 'genre',
     initialState,
@@ -34,7 +49,8 @@ export const genreSlice = createSlice({
         [fetchGenres.fulfilled.type]: (state, action: PayloadAction<IListResponse<IGenre[]>>) => {
             state.loading = false;
             state.error = '';
-            state.genres = action.payload;
+            state.genres.results = action.payload.data;
+            state.genres.meta = adaptStrapiMetaToIMeta(action.payload.meta);
         },
         [fetchGenres.pending.type]: (state) => {
             state.loading = true;
@@ -44,10 +60,10 @@ export const genreSlice = createSlice({
             state.error =  action.payload;
         },
 
-        [fetchGenresList.fulfilled.type]: (state, action: PayloadAction<IGenre[]>) => {
+        [fetchGenresList.fulfilled.type]: (state, action: PayloadAction<any>) => {
             state.loading = false;
             state.error = '';
-            state.genresList = action.payload;
+            state.genresList = Array.isArray(action.payload.data) ? action.payload.data : action.payload;
         },
         [fetchGenresList.pending.type]: (state) => {
             state.loading = true;
