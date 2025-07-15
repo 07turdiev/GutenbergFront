@@ -22,8 +22,9 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (ctx
     await dispatch(fetchNovels({locale: ctx.locale, opt: {
         params: {
             ...ctx.query,
-            p: ctx.query.p,
-            name: ctx.query.name
+            name: ctx.query.name,
+            'pagination[pageSize]': 9,
+            'pagination[page]': ctx.query.p || 1
         }
     }, ctx}));
 
@@ -74,7 +75,7 @@ const Index = () => {
 
                 <FilterNovels title={t('novels')}/>
 
-                <div className="grid grid-cols-2 gap-4 sm:gap-5 md:gap-6  sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6   mb-14">
+                <div className="grid grid-cols-3 gap-6 mb-14">
                     {
                         novels.results.map((novel)=>{
                             return (
@@ -85,6 +86,7 @@ const Index = () => {
                         })
                     }
                 </div>
+                {novels.meta && <Pagination meta={novels.meta} />}
             </div>
 
         </MainLayout>

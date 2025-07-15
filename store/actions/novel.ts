@@ -6,7 +6,23 @@ import {GetServerSidePropsContext} from "next";
 import AddToMark from "../../components/Toasts/AddToMark";
 import {FetchParams} from "../../models/Actions/Params";
 import {adaptNovelData, adaptNovelsArray} from "../../utils/strapiAdapter";
+import {IMeta} from "../../models/IMeta";
 
+
+function adaptStrapiMetaToIMeta(meta): IMeta {
+    if (!meta || !meta.pagination) return null;
+    return {
+        links: {
+            next: null,
+            previous: null
+        },
+        count: meta.pagination.total,
+        page_size: meta.pagination.pageSize,
+        num_pages: meta.pagination.pageCount,
+        current_page: meta.pagination.page,
+        countItemsOnPage: meta.pagination.pageSize
+    };
+}
 
 export const fetchNovels = createAsyncThunk(
     'novel/fetchNovels',
@@ -14,7 +30,7 @@ export const fetchNovels = createAsyncThunk(
         try {
             const response = await NovelService.fetchNovels(locale, opt, ctx)
             return {
-                meta: response.data.meta,
+                meta: adaptStrapiMetaToIMeta(response.data.meta),
                 results: adaptNovelsArray(response.data.data)
             }
 
