@@ -14,7 +14,7 @@ export const fetchOrders = createAsyncThunk(
             const response = await OrderService.fetchOrders({locale, config, ctx})
             return {
                 meta: response.data,
-                results: response.data.results
+                results: response.data.data
             }
 
         }catch (err){

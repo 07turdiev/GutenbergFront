@@ -8,7 +8,7 @@ export const fetchGenres = createAsyncThunk(
         try {
             const response = await GenreService.fetchGenres(locale, opt)
             return {
-                results:  response.data.results,
+                results:  response.data.data,
                 meta: response.data
             }
         }catch (err){

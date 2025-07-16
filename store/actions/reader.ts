@@ -11,7 +11,7 @@ export const fetchReaders = createAsyncThunk(
             const response = await ReaderService.fetchReaders(locale, opt)
             return {
                 meta: response.data,
-                results: response.data.results
+                results: response.data.data
             }
         }catch (err){
             return thunkApi.rejectWithValue('Ошибка при получение исполнителей')
@@ -37,7 +37,7 @@ export const fetchNovelsOfReader = createAsyncThunk(
         try {
             const response = await NovelService.fetchNovelsOfReaders(locale, slug, opt)
             return {
-                results: response.data.results,
+                results: response.data.data,
                 meta: response.data
             }
         }catch (err){

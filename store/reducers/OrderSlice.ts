@@ -34,8 +34,18 @@ export const orderSlice = createSlice({
         [fetchOrders.fulfilled.type]: (state, action: PayloadAction<IListResponse<IOrder[]>>) => {
             state.loading = false;
             state.error = '';
-            state.orders.results = action.payload.results;
-            state.orders.meta = action.payload.meta;
+            state.orders.results = action.payload.data;
+            state.orders.meta = {
+                links: {
+                    next: null,
+                    previous: null
+                },
+                count: action.payload.meta.pagination.total,
+                page_size: action.payload.meta.pagination.pageSize,
+                num_pages: action.payload.meta.pagination.pageCount,
+                current_page: action.payload.meta.pagination.page,
+                countItemsOnPage: action.payload.data.length
+            };
         },
         [fetchOrders.pending.type]: (state) => {
             state.loading = true;

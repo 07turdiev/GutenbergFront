@@ -19,7 +19,7 @@ interface Props {
 const Index:React.FC<Props> = ({category, activeTab}) => {
 
     const {locale} = useRouter();
-    const [novelsByCat, setNovels] = useState([]);
+    const [novelsByCat, setNovels] = useState<INovel[]>([]);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -33,7 +33,7 @@ const Index:React.FC<Props> = ({category, activeTab}) => {
                     category: category.name
                 }
             })
-            setNovels(response.data.results)
+            setNovels(response.data.data)
         }catch (e){
             console.log(e)
         }

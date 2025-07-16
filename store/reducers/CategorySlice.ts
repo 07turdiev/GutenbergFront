@@ -43,7 +43,20 @@ export const categorySlice = createSlice({
         [fetchCategories.fulfilled.type]: (state, action: PayloadAction<IListResponse<ICategory[]>>) => {
             state.loading = false;
             state.error = '';
-            state.categories = action.payload;
+            state.categories = {
+                results: action.payload.data,
+                meta: {
+                    links: {
+                        next: null,
+                        previous: null
+                    },
+                    count: action.payload.meta.pagination.total,
+                    page_size: action.payload.meta.pagination.pageSize,
+                    num_pages: action.payload.meta.pagination.pageCount,
+                    current_page: action.payload.meta.pagination.page,
+                    countItemsOnPage: action.payload.data.length
+                }
+            };
         },
         [fetchCategories.pending.type]: (state) => {
             state.loading = true;

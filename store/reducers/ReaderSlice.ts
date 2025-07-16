@@ -43,8 +43,18 @@ export const readerSlice = createSlice({
         [fetchReaders.fulfilled.type]: (state, action: PayloadAction<IListResponse<IReader[]>>) => {
             state.loading = false;
             state.error = '';
-            state.readers.results = action.payload.results;
-            state.readers.meta = action.payload.meta;
+            state.readers.results = action.payload.data;
+            state.readers.meta = {
+                links: {
+                    next: null,
+                    previous: null
+                },
+                count: action.payload.meta.pagination.total,
+                page_size: action.payload.meta.pagination.pageSize,
+                num_pages: action.payload.meta.pagination.pageCount,
+                current_page: action.payload.meta.pagination.page,
+                countItemsOnPage: action.payload.data.length
+            };
         },
         [fetchReaders.pending.type]: (state) => {
             state.loading = true;
@@ -70,8 +80,18 @@ export const readerSlice = createSlice({
         [fetchNovelsOfReader.fulfilled.type]: (state, action: PayloadAction<IListResponse<INovel[]>>) => {
             state.loading = false;
             state.error = '';
-            state.novels.results = action.payload.results;
-            state.novels.meta = action.payload.meta;
+            state.novels.results = action.payload.data;
+            state.novels.meta = {
+                links: {
+                    next: null,
+                    previous: null
+                },
+                count: action.payload.meta.pagination.total,
+                page_size: action.payload.meta.pagination.pageSize,
+                num_pages: action.payload.meta.pagination.pageCount,
+                current_page: action.payload.meta.pagination.page,
+                countItemsOnPage: action.payload.data.length
+            };
         },
         [fetchNovelsOfReader.pending.type]: (state) => {
             state.loading = true;
