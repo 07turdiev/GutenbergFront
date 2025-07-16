@@ -91,7 +91,7 @@ const AboutPage = () => {
                                         <CountUp start={0} end={inView ? statistics.novels : 0} duration={2} separator=" "/>
                                     </div>
                                     <h2 className='font-bold text-xl'>
-                                        {t('audioBooksCountText')}
+                                        {t('Books')}
                                     </h2>
                                 </div>
                             </div>
