@@ -97,19 +97,19 @@ const Index:React.FC<Props> = ({activeTab, changeTab}) => {
             <div className={styles.tabButtons}>
                 <button
                     className={classNames(styles.tabButton, {
-                        [styles.active] : activeTab === 'popular'
-                    })}
-                    onClick={()=>changeTab('popular')}
-                >
-                    {t('popular')}
-                </button>
-                <button
-                    className={classNames(styles.tabButton, {
                         [styles.active] : activeTab === 'new'
                     })}
                     onClick={()=>changeTab('new')}
                 >
                     {t('new')}
+                </button>
+                <button
+                    className={classNames(styles.tabButton, {
+                        [styles.active] : activeTab === 'popular'
+                    })}
+                    onClick={()=>changeTab('popular')}
+                >
+                    {t('popular')}
                 </button>
             </div>
             <div className={styles.sliderWrapper}>
