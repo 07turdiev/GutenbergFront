@@ -17,7 +17,7 @@ module.exports = {
         'sitka': ['Sitka Text', 'Sitka', 'serif']
       },
       colors: {
-        primary: '#a62929',
+        primary: '#cd1b17',
         secondary: '#4b4b4b',
         accent: '#8a1f1f',
         light: '#f5f5f5',

@@ -21,7 +21,7 @@
   }
   
   &:hover{
-    background:  linear-gradient(90deg, #a62929 0%, #8a1f1f 100%);
+    background:  linear-gradient(90deg, #cd1b17 0%, #8a1f1f 100%);
     color: #fff;
   }
   &:after{
@@ -32,7 +32,7 @@
     width: calc(100% + 4px);
     height: calc(100% + 4px);
     z-index: -1;
-    background:  linear-gradient(90deg, #a62929 0%, #8a1f1f 100%);
+    background:  linear-gradient(90deg, #cd1b17 0%, #8a1f1f 100%);
     border-radius: 100px;
   }
 }

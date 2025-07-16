@@ -80,7 +80,7 @@
       justify-content: center;
       cursor: pointer;
       transition: all 0.3s ease;
-      color: #a62929;
+      color: #cd1b17;
       
       &:hover {
         background: #f3f4f6;
@@ -161,7 +161,7 @@
       }
 
       &:hover .avatar {
-        border-color: #a62929;
+        border-color: #cd1b17;
       }
     }
 
@@ -186,7 +186,7 @@
           text-overflow: ellipsis;
 
           &:hover {
-            color: #a62929;
+            color: #cd1b17;
           }
 
           @media (max-width: 768px) {
@@ -197,11 +197,11 @@
 
         .subscribers {
           font-size: 0.8rem;
-          color: #a62929;
+          color: #cd1b17;
           
           .subscribersQuantity {
             font-weight: 600;
-            color: #a62929;
+            color: #cd1b17;
           }
 
           @media (max-width: 768px) {

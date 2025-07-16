@@ -6,7 +6,7 @@ class MyDocument extends Document {
       <Html>
         <Head>
           {/* Mobile Browser Address Bar Theming */}
-          <meta name="theme-color" content="#a62929" />
+          <meta name="theme-color" content="#cd1b17" />
           
           {/* iOS Safari Specific */}
           <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -17,7 +17,7 @@ class MyDocument extends Document {
           <meta name="mobile-web-app-capable" content="yes" />
           
           {/* Windows Phone */}
-          <meta name="msapplication-navbutton-color" content="#a62929" />
+          <meta name="msapplication-navbutton-color" content="#cd1b17" />
           
           {/* PWA Manifest */}
           <link rel="manifest" href="/manifest.json" />

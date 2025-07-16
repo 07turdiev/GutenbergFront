@@ -34,11 +34,11 @@ const AboutPage = () => {
                             { locale ==='ru'?
                                 <h1 className='text-2xl font-bold mb-5'>
                                     О проекте <br/>
-                                    <span className='text-white font-sitka'>GUTENBERG</span>
+                                    <span className='text-white CeroPro'>GUTENBERG</span>
                                 </h1>
                                 :
                                 <h1 className='text-2xl font-bold mb-5'>
-                                    <span className='text-white font-sitka'>GUTENBERG
+                                    <span className='text-white CeroPro'>GUTENBERG
                                     <br />
                                     nashiryoti haqida</span>
                                 </h1>
@@ -47,8 +47,13 @@ const AboutPage = () => {
                                 {t('aboutText')}
                             </p>
                         </div>
-                        <div className="col-span-12 sm:col-span-6 relative ">
-                            <Image src={aboutImg}/>
+                        <div className="col-span-12 sm:col-span-6 relative flex sm:justify-end pr-10">
+                            <Image 
+                                src={aboutImg}
+                                width={250}
+                                height={300}
+                                className="w-full max-w-xs h-auto"
+                            />
                         </div>
                     </div>
                 </div>

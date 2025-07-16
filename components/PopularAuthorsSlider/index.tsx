@@ -55,7 +55,7 @@ const PopularAuthorsSlider: React.FC<Props> = ({ authors }) => {
                         viewBox="0 0 24 24" 
                         fill="none" 
                         xmlns="http://www.w3.org/2000/svg" 
-                        color="#a62929"
+                        color="#cd1b17"
                     >
                         <path d="M15 7L18 10M6 19L7 15L17 5L20 8L10 18L6 19Z" 
                         stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>

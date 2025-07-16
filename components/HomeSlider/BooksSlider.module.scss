@@ -38,7 +38,7 @@
       transform: translateY(-50%);
       z-index: 10;
       cursor: pointer;
-      color: #a62929;
+      color: #cd1b17;
       transition: all 0.3s ease;
       
       // Show on tablet and desktop
@@ -111,7 +111,7 @@
     height: 12px;
     border-radius: 50%;
     border: none;
-    background: #a62929;
+    background: #cd1b17;
     opacity: 0.7;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -163,7 +163,7 @@
           font-size: 25px;
           font-weight: 700;
           margin-bottom: 0.5rem;
-          color: #a62929;
+          color: #cd1b17;
           line-height: 1.2;
           
           @media (min-width: 768px) {
@@ -218,7 +218,7 @@
         .shopButton {
           display: inline-block;
           padding: 0.875rem 2.5rem;
-          background-color: #a62929;
+          background-color: #cd1b17;
           color: #fff;
           text-decoration: none;
           border-radius: 4px;
@@ -229,7 +229,7 @@
           font-size: 1rem;
           
           &:hover {
-            background-color: #a62929;
+            background-color: #cd1b17;
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
           }

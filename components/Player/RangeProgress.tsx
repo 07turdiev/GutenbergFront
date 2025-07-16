@@ -35,7 +35,7 @@ const RangeProgress:React.FC<Props> = ({min, max, value, changeProgress}) => {
                                 borderRadius: 0,
                                 background: getTrackBackground({
                                     values: [value],
-                                    colors: ["#a62929", "rgba(0,0,0,0.1)"],
+                                    colors: ["#cd1b17", "rgba(0,0,0,0.1)"],
                                     min: 0,
                                     max: max
                                 }),

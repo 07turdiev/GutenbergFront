@@ -15,7 +15,7 @@ import useTranslation from "next-translate/useTranslation";
 const customStyles = {
     control: (provided, state) => ({
         ...provided,
-        borderColor: state.menuIsOpen ? '#a62929' : "rgb(209, 213, 219)",
+        borderColor: state.menuIsOpen ? '#cd1b17' : "rgb(209, 213, 219)",
         boxShadow: 'none',
         minHeight: `42px`,
         zIndex: 100,
