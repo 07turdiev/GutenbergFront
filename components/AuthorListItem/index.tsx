@@ -27,7 +27,7 @@ const Index:React.FC<Props> = ({author, isReader}) => {
     return (
         <div key={author.slug} className='flex items-center mb-2 px-5 py-2 rounded odd:bg-gray-100 cursor-pointer group' onClick={toDetailPage}>
             <div className='w-[80px] h-[80px] rounded-full relative'>
-                <div className='absolute w-[84px] h-[84px]  bg-gradient-to-r from-orange-300 via-red-500 to-pink-500 rounded-full'/>
+                <div className='absolute w-[84px] h-[84px] bg-[#cd1b17] rounded-full'/>
                 <div className='absolute top-[2px] left-[2px] bg-gray-50 z-12 w-full h-full rounded-full text-2xl flex items-center justify-center font-medium cursor-pointer overflow-hidden'>
                     {
                         author.photo ?
