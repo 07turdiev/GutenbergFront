@@ -37,7 +37,7 @@ const Index:React.FC<Props> = ({novel, addToMark}) => {
                     </div>
                 : null
             }
-            <div className='relative h-72 shadow-md w-full mb-3 rounded-md overflow-hidden cursor-pointer' onClick={()=>router.push('/books/' + novel.slug)}>
+            <div className='relative aspect-[4/5] shadow-md w-full mb-3 rounded-md overflow-hidden cursor-pointer' onClick={()=>router.push('/books/' + novel.slug)}>
 
                 {
                     novel.cover ?
