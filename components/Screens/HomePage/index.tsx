@@ -38,7 +38,7 @@ const Index = () => {
 
     const router = useRouter();
 
-    const [activeTab, setActiveTab] = useState('popular')
+    const [activeTab, setActiveTab] = useState('new')
 
 
     const changeTab = (tabName: string) => {
