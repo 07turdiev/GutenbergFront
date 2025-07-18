@@ -1,7 +1,8 @@
 {
   "siteTitle": "GutenberNU - Nashriyoti",
-  "langUz": "Oʻzbek tili",
-  "langRu": "Rus tili",
+  "langUz": "uz",
+  "langRu": "ru",
+  "langEn": "en",
 
   "loginToReg": "Hisob yo'qmi?",
   "loginToReset": "Parolni tiklash",
@@ -116,5 +117,15 @@
   "booksSliderTitle": "Kitoblar",
   "blogPostsTitle": "Maqolalar",
   "telegramBotTitle": "Kitoblarni sotib olish uchun<br/>Telegram botdan foydalaning",
-  "telegramBotButton": "Telegram Bot"
+  "telegramBotButton": "Telegram Bot",
+  "teamSubtitle": "Bizning professional jamoamiz bilan tanishing",
+  "noDataFound": "Ma'lumotlar topilmadi",
+  "joinUs": "Bizga qo'shiling!",
+  "joinUsDescription": "Agar siz ham bizning jamoamizning bir qismi bo'lishni istasangiz, biz bilan bog'laning",
+  "contact": "Aloqa",
+  "blogSubtitle": "So'nggi yangiliklar, maqolalar va qiziqarli ma'lumotlar",
+  "noBlogPosts": "Hozircha blog postlari mavjud emas",
+  "viewsCount": "ko'rildi",
+  "previous": "Avvalgi",
+  "next": "Keyingi"
 }

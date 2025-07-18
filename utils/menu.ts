@@ -53,5 +53,27 @@ export const Menu = {
             title: 'Biz haqimizda',
             href: Routes.about
         },
+    ],
+    en: [
+        {
+            title: 'Books',
+            href: Routes.books
+        },
+        {
+            title: 'Authors',
+            href: Routes.authors
+        },
+        {
+            title: 'Team',
+            href: Routes.team
+        },
+        {
+            title: 'Blog',
+            href: Routes.blog
+        },
+        {
+            title: 'About us',
+            href: Routes.about
+        },
     ]
 } 

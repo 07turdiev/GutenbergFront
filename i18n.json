@@ -1,5 +1,5 @@
 {
-  "locales": ["uz", "ru"],
+  "locales": ["uz", "ru", "en"],
   "defaultLocale": "uz",
   "localeDetection": false,
   "pages": {

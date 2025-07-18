@@ -1,7 +1,8 @@
 {
   "siteTitle": "GutenberNU - Платформа аудиокниг",
-  "langUz": "Узбекский язык",
-  "langRu": "Русский язык",
+  "langUz": "uz",
+  "langRu": "ru",
+  "langEn": "en",
 
   "loginToReg": "нет аккаунта?",
   "loginToReset": "восстановление пароля",
@@ -113,5 +114,15 @@
   "booksSliderTitle": "Книги",
   "blogPostsTitle": "Статьи",
   "telegramBotTitle": "Используйте Telegram бота<br/>для покупки книг",
-  "telegramBotButton": "Telegram Bot"
+  "telegramBotButton": "Telegram Bot",
+  "teamSubtitle": "Познакомьтесь с нашей профессиональной командой",
+  "noDataFound": "Данные не найдены",
+  "joinUs": "Присоединяйтесь к нам!",
+  "joinUsDescription": "Если вы также хотите стать частью нашей команды, свяжитесь с нами",
+  "contact": "Контакты",
+  "blogSubtitle": "Последние новости, статьи и интересная информация",
+  "noBlogPosts": "Пока нет записей в блоге",
+  "viewsCount": "просмотров",
+  "previous": "Предыдущая",
+  "next": "Следующая"
 }

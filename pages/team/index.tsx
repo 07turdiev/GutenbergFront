@@ -46,7 +46,7 @@ const TeamPage = () => {
                 <div className="text-center mb-12">
                     <h1 className="text-4xl font-bold mb-4">{t('team')}</h1>
                     <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-                        Bizning professional jamoamiz bilan tanishing
+                        {t('teamSubtitle')}
                     </p>
                 </div>
 
@@ -96,12 +96,12 @@ const TeamPage = () => {
                 {teamMembers.length > 0 && (
                     <div className="mt-16 text-center">
                         <div className="bg-gradient-to-r from-primary to-accent text-white rounded-lg p-8">
-                            <h2 className="text-2xl font-bold mb-4">Bizga qo'shiling!</h2>
+                            <h2 className="text-2xl font-bold mb-4">{t('joinUs')}</h2>
                             <p className="text-lg mb-6">
-                                Agar siz ham bizning jamoamizning bir qismi bo'lishni istasangiz, biz bilan bog'laning
+                                {t('joinUsDescription')}
                             </p>
                             <button className="bg-white text-gray-800 px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors">
-                                Aloqa
+                                {t('contact')}
                             </button>
                         </div>
                     </div>
@@ -110,7 +110,7 @@ const TeamPage = () => {
                 {/* Empty state */}
                 {teamMembers.length === 0 && !loading && (
                     <div className="text-center py-12">
-                        <p className="text-gray-500 text-lg">Ma'lumotlar topilmadi</p>
+                        <p className="text-gray-500 text-lg">{t('noDataFound')}</p>
                     </div>
                 )}
             </div>

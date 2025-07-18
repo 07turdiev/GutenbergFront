@@ -3,15 +3,30 @@ import { Menu, Transition } from '@headlessui/react'
 import { Fragment, useEffect, useRef, useState } from 'react'
 import {useRouter} from "next/router";
 import Link from 'next/link';
+import useTranslation from 'next-translate/useTranslation';
 
 const Index = () => {
     const router = useRouter();
-    const { locales, locale: activeLocale } = router
+    const { locales, locale: activeLocale } = router;
+    const { t } = useTranslation('common');
+
+    const getLanguageName = (locale: string) => {
+        switch (locale) {
+            case 'uz':
+                return t('langUz');
+            case 'ru':
+                return t('langRu');
+            case 'en':
+                return t('langEn');
+            default:
+                return locale;
+        }
+    };
 
     return (
         <Menu as="div" className="relative inline-block text-left border-l border-gray-200 lg:pl-3">
             <Menu.Button className="inline-flex justify-center w-full px-4 py-2 text-sm font-medium rounded-md bg-opacity-20 hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
-                {activeLocale}
+                {getLanguageName(activeLocale || 'uz')}
             </Menu.Button>
             <Transition
                 as={Fragment}
@@ -22,7 +37,7 @@ const Index = () => {
                 leaveFrom="transform opacity-100 scale-100"
                 leaveTo="transform opacity-0 scale-95"
             >
-                <Menu.Items className="absolute right-0 w-12 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md overflow-hidden shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                <Menu.Items className="absolute right-0 w-20 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md overflow-hidden shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                     {
                         locales?.map((locale, index) => {
 
@@ -32,7 +47,7 @@ const Index = () => {
                                 return (
                                 <Menu.Item key={locale}>
                                     <Link href={{ pathname, query }} as={asPath} locale={locale}>
-                                        <a className='block text-center px-3 py-1 hover:bg-gray-100 text-sm'>{locale}</a>
+                                        <a className='block text-center px-3 py-1 hover:bg-gray-100 text-sm'>{getLanguageName(locale)}</a>
                                     </Link>
                                 </Menu.Item>
 

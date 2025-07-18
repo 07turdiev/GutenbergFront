@@ -30,7 +30,7 @@ const Header = () => {
                         <div className="flex items-center ml-auto justify-end pl-5 space-x-3">
                             <LocaleSwitcher/>
                             <SearchBtn/>
-                            <AuthButtons/>
+                            {/* <AuthButtons/> */}
                         </div>
                     </div>
                     <div className="lg:col-span-7 lg:order-2 col-span-6 sm:col-span-8">

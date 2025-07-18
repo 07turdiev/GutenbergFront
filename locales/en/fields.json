@@ -1,0 +1,23 @@
+{
+  "requiredField": "Field is required",
+  "requiredPhone": "Enter your phone number",
+
+  "authorName": "Author name",
+  "bookTitle": "Book title",
+  "releaseYear": "Release year",
+  "orderBook": "Order book",
+  "executor": "Performer",
+  "name":"Name",
+  "login":"Login",
+  "password":"Password",
+
+  "changePassword": "Change password",
+  "currentPassword": "Current password",
+  "newPassword": "New password",
+  "confirmPassword": "Confirm password",
+  "change":"Change",
+  "saveChanges":"Save changes",
+  "uploadPhoto": "Upload photo",
+
+  "passwordMinLength": "Minimum 6 characters"
+} 

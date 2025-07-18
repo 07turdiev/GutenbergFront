@@ -43,7 +43,7 @@ const BlogPage = () => {
                 <div className="text-center mb-12">
                     <h1 className="text-4xl font-bold mb-4">{t('blog')}</h1>
                     <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-                        So'nggi yangiliklar, maqolalar va qiziqarli ma'lumotlar
+                        {t('blogSubtitle')}
                     </p>
                 </div>
 
@@ -55,7 +55,7 @@ const BlogPage = () => {
 
                 {!loading && posts.length === 0 && (
                     <div className="text-center py-20">
-                        <p className="text-gray-500 text-lg">Hozircha blog postlari mavjud emas</p>
+                        <p className="text-gray-500 text-lg">{t('noBlogPosts')}</p>
                     </div>
                 )}
 
@@ -100,7 +100,7 @@ const BlogPage = () => {
                                     {/* Sana va ko'rishlar soni */}
                                     <div className="flex items-center justify-between text-sm text-gray-500 mb-3">
                                         <span>{formatBlogDate(post.chop_sanasi, router.locale)}</span>
-                                        <span>{post.korishlar_soni} ko'rildi</span>
+                                        <span>{post.korishlar_soni} {t('viewsCount')}</span>
                                     </div>
 
                                     {/* Sarlavha */}
@@ -137,7 +137,7 @@ const BlogPage = () => {
                                     onClick={() => handlePageChange(currentPage - 1)}
                                     className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors"
                                 >
-                                    Avvalgi
+                                    {t('previous')}
                                 </button>
                             )}
                             
@@ -179,7 +179,7 @@ const BlogPage = () => {
                                     onClick={() => handlePageChange(currentPage + 1)}
                                     className="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors"
                                 >
-                                    Keyingi
+                                    {t('next')}
                                 </button>
                             )}
                         </div>
