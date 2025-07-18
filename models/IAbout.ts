@@ -7,6 +7,7 @@ export interface ISocial{
     instagram_url: string;
     telegram_url: string;
     youtube_url: string;
+    x_url: string;
 }
 
 export interface IContacts{

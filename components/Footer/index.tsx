@@ -6,7 +6,7 @@ import Link from 'next/link';
 import {useAppSelector} from "../../hooks/reducer";
 import {selectTrack} from "../../store/selectors/player";
 import classNames from "classnames";
-import {FacebookIcon, InstagramIcon, TelegramIcon, YoutubeIcon} from "../Ui/Icons/socList";
+import {FacebookIcon, InstagramIcon, TelegramIcon, YoutubeIcon, XIcon} from "../Ui/Icons/socList";
 import useTranslation from 'next-translate/useTranslation';
 import {useDispatch} from "react-redux";
 import {fetchAbout, fetchContacts, fetchSocialLinks} from "../../store/actions/about";
@@ -176,6 +176,15 @@ const Index = () => {
                                                 <Link href={item[1]} key={item[0]}>
                                                     <a className='px-2 inline-block text-white transition' target='_blank'>
                                                         <YoutubeIcon/>
+                                                    </a>
+                                                </Link>
+                                            )
+                                        }
+                                        case 'x_url': {
+                                            return(
+                                                <Link href={item[1]} key={item[0]}>
+                                                    <a className='px-2 inline-block text-white transition' target='_blank'>
+                                                        <XIcon/>
                                                     </a>
                                                 </Link>
                                             )

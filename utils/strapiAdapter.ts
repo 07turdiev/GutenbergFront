@@ -200,7 +200,8 @@ export const adaptSocialData = (social: any): ISocial => {
         facebook_url: social.data.facebook_havolasi || '',
         instagram_url: social.data.instagram_havolasi || '',
         telegram_url: social.data.telegram_havolasi || '',
-        youtube_url: social.data.youtube_havolasi || ''
+        youtube_url: social.data.youtube_havolasi || '',
+        x_url: social.data.x_havolasi || ''
     };
 };
 

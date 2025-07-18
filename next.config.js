@@ -3,7 +3,7 @@ module.exports = {
     reactStrictMode: false,
     ...nextTranslate({
         images: {
-            domains: ['localhost', 'admin.gutenbergnu.uz']
+            domains: ['localhost', 'localhost:1337']
         }
     })
 }
