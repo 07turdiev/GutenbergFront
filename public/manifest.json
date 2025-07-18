@@ -1,7 +1,7 @@
 {
   "name": "GutenberNU",
   "short_name": "GutenberNU",
-  "description": "GutenberNU — это современная аудио-библиотека в интернете, которая открывает вам доступ к каталогу бестселлеров и классической литературы",
+  "description": "GutenberNU — bu zamonaviy internet audio-kutubxonasi bo‘lib, sizga bestsellerlar va klassik adabiyotlar katalogiga kirish imkonini beradi",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
