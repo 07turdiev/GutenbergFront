@@ -114,8 +114,8 @@ const Index = () => {
                 </div>
             </div>
 
-            <div className="container mx-auto px-3 text-sm text-center flex flex-col justify-center md:flex-row gap-2 items-center md:justify-end py-4 md:py-1 text-gray-400">
-                <span>{t('madeByElbek')}</span><a href="https://t.me/turdiev07" target="_blank" className='uppercase hover:text-white transition'>Elbek Turdiyev</a>
+            <div className="container mx-auto px-3 text-sm text-center flex flex-row justify-center md:justify-end py-4 md:py-1 text-gray-400">
+                <span>{t('madeByElbek')}</span><a href="https://t.me/turdiev07" target="_blank" className='uppercase hover:text-white transition ml-1'>Elbek Turdiyev</a>
             </div>
 
             <div className="container mx-auto px-3 mt-2 pb-5">
@@ -123,9 +123,9 @@ const Index = () => {
 
                     <div className="lg:col-span-4 col-span-6">
 
-                        <div className="flex flex-wrap w-full text-sm">
+                        <div className="flex flex-wrap w-full text-sm lg:justify-start justify-center">
 
-                            <p className='md:w-auto md:mb-0 w-full mb-2 opacity-50'>
+                            <p className='md:w-auto md:mb-0 w-full mb-2 opacity-50 text-center lg:text-left'>
                                 {t('copyRight')} © | {(new Date()).getFullYear()}
                             </p>
 
@@ -140,7 +140,7 @@ const Index = () => {
                     </div>
 
                     <div className="lg:col-span-2 col-span-6">
-                        <div className="text-right">
+                        <div className="lg:text-right text-center mt-4 lg:mt-0">
                             {
                                 social.map((item) => {
                                     switch (item[0]){
