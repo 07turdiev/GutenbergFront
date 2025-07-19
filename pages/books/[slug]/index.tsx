@@ -170,6 +170,18 @@ const Index = () => {
                     <SpinnerDots/>
                     :
                     <div className="container mx-auto px-3">
+                        
+                        {/* Back Button */}
+                        <div className="mb-6 mt-10 sm:mt-0">
+                            <Link href="/books">
+                                <a className="inline-flex items-center text-primary hover:text-accent">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 mr-2">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                                    </svg>
+                                    {t('backToBooks')}
+                                </a>
+                            </Link>
+                        </div>
 
                         <div className="grid grid-cols-12 gap-4">
 

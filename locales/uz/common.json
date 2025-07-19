@@ -127,5 +127,6 @@
   "noBlogPosts": "Hozircha blog postlari mavjud emas",
   "viewsCount": "ko'rildi",
   "previous": "Avvalgi",
-  "next": "Keyingi"
+  "next": "Keyingi",
+  "backToBooks": "Kitoblarga qaytish"
 }
