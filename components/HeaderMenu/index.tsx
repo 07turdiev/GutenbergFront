@@ -18,7 +18,7 @@ const Index = () => {
         <div>
 
             <div className='text-right flex lg:hidden w-full justify-end items-center space-x-3'>
-                <MobileAuthIndicator />
+                {/* <MobileAuthIndicator /> */}
                 <button onClick={() => setVisible(!visible)}>
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16m-7 6h7" />
