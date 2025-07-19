@@ -150,5 +150,10 @@
         height: 20px;
       }
     }
+
+    // Hide navigation buttons on mobile devices
+    @media (max-width: 768px) {
+      display: none;
+    }
   }
 } 
