@@ -67,15 +67,29 @@ const BlogPostPage = () => {
             <HeadMeta title={post.sarlavha} description={post.sarlavha} />
             <div className="container mx-auto px-3 mb-10">
                 
-                <div className="mb-8">
-                    <Link href="/blog">
-                        <a className="inline-flex items-center text-primary hover:text-accent">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 mr-2">
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-                            </svg>
-                            Blogga qaytish
-                        </a>
-                    </Link>
+                {/* Breadcrumb Navigation */}
+                <div className="mb-6 mt-10 sm:mt-4">
+                    <nav className="flex items-center text-sm text-gray-600">
+                        <Link href="/">
+                            <a className="text-primary hover:text-accent transition-colors">
+                                {t('home')}
+                            </a>
+                        </Link>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 mx-2 text-gray-400">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                        </svg>
+                        <Link href="/blog">
+                            <a className="text-primary hover:text-accent transition-colors">
+                                {t('blog')}
+                            </a>
+                        </Link>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 mx-2 text-gray-400">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                        </svg>
+                        <span className="text-gray-900 font-medium truncate">
+                            {post ? post.sarlavha : '...'}
+                        </span>
+                    </nav>
                 </div>
 
                 <article className="max-w-4xl mx-auto">

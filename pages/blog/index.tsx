@@ -39,6 +39,23 @@ const BlogPage = () => {
             <HeadMeta title={t('blog')} description={t('blog')} />
             <div className="container mx-auto px-3 mb-10">
                 
+                {/* Breadcrumb Navigation */}
+                <div className="mb-6 mt-10 sm:mt-4">
+                    <nav className="flex items-center text-sm text-gray-600">
+                        <Link href="/">
+                            <a className="text-primary hover:text-accent transition-colors">
+                                {t('home')}
+                            </a>
+                        </Link>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 mx-2 text-gray-400">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                        </svg>
+                        <span className="text-gray-900 font-medium">
+                            {t('blog')}
+                        </span>
+                    </nav>
+                </div>
+
                 {/* Sarlavha */}
                 <div className="text-center mb-12">
                     <h1 className="text-4xl font-bold mb-4">{t('blog')}</h1>
