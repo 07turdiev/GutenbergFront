@@ -1,6 +1,6 @@
 // Centralized API configuration
 export const getApiBaseUrl = (): string => {
-  return process.env.NEXT_PUBLIC_API_BASE_URL || 'http://admin.gutenbergnu.uz';
+  return process.env.NEXT_PUBLIC_API_BASE_URL || 'https://admin.gutenbergnu.uz';
 };
 
 export const getApiUrl = (): string => {
