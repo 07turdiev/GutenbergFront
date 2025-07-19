@@ -194,14 +194,18 @@ export const adaptContactsData = (contacts: any): IContacts => {
 
 // Convert new Social format to backward compatible format
 export const adaptSocialData = (social: any): ISocial => {
-    if (!social || !social.data) return null;
+    if (!social || !social.data) return { social: [] };
+    
+    const socialArray = [
+        ['facebook_url', social.data.facebook_havolasi],
+        ['telegram_url', social.data.telegram_havolasi],
+        ['instagram_url', social.data.instagram_havolasi],
+        ['youtube_url', social.data.youtube_havolasi],
+        ['x_url', social.data.twitter_havolasi], 
+    ].filter(([_, value]) => !!value);
     
     return {
-        facebook_url: social.data.facebook_havolasi || '',
-        instagram_url: social.data.instagram_havolasi || '',
-        telegram_url: social.data.telegram_havolasi || '',
-        youtube_url: social.data.youtube_havolasi || '',
-        x_url: social.data.x_havolasi || ''
+        social: socialArray
     };
 };
 

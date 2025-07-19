@@ -3,11 +3,7 @@ export interface IAbout{
 }
 
 export interface ISocial{
-    facebook_url: string;
-    instagram_url: string;
-    telegram_url: string;
-    youtube_url: string;
-    x_url: string;
+    social: [string, string][];
 }
 
 export interface IContacts{
