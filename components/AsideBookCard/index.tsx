@@ -67,7 +67,7 @@ const Index:React.FC<Props> = ({novel, sendNovelRating}) => {
                 <div className='grid grid-cols-12 gap-4 md:gap-0'>
                     <div className="col-span-4 md:col-span-12">
 
-                        <div className='w-full xl:h-52 sm:h-48 h-32 relative mb-3 rounded-lg overflow-hidden'>
+                        <div className='w-full xl:h-80 lg:h-72 md:h-64 sm:h-56 h-40 relative mb-3 rounded-lg overflow-hidden'>
                             {
                                 novel && novel.cover  ?
                                     <Image quality={100} src={novel.cover} layout='fill' objectFit='cover' priority/>
@@ -75,67 +75,32 @@ const Index:React.FC<Props> = ({novel, sendNovelRating}) => {
                                     <Image src={noPhoto} layout='fill' objectFit='cover'/>
                             }
 
-                        </div>
-
-                        <div className='hidden md:flex'>
-
-                            {
-                                novel.saved ?
-                                    <button className={classNames('w-8 h-8 shrink-0 mr-1 rounded-md border text-white bg-primary border-primary transition hover:border-primary flex items-center justify-center')} onClick={()=>addNovelToMark(novel.slug, novel.saved)} type='button'>
-                                        <svg width="14" height="18" viewBox="0 0 18 21"  xmlns="http://www.w3.org/2000/svg" fill='currentColor'>
-                                            <path d="M14.833 0H3.16634C1.88301 0 0.833008 1.05 0.833008 2.33333V21L8.99968 17.5L17.1663 21V2.33333C17.1663 1.05 16.1163 0 14.833 0ZM14.833 17.5L8.99968 14.9567L3.16634 17.5V3.5C3.16634 2.85833 3.69134 2.33333 4.33301 2.33333H13.6663C14.308 2.33333 14.833 2.85833 14.833 3.5V17.5Z"/>
-                                        </svg>
-                                    </button>
-                                    :
-                                    <button className={classNames('w-8 h-8 shrink-0 mr-1 rounded-md border transition  border-primary text-primary flex items-center justify-center')} onClick={()=>addNovelToMark(novel.slug, novel.saved)}>
-                                        <svg width="14" height="18" viewBox="0 0 18 21"  xmlns="http://www.w3.org/2000/svg" fill='currentColor'>
-                                            <path d="M14.833 0H3.16634C1.88301 0 0.833008 1.05 0.833008 2.33333V21L8.99968 17.5L17.1663 21V2.33333C17.1663 1.05 16.1163 0 14.833 0ZM14.833 17.5L8.99968 14.9567L3.16634 17.5V3.5C3.16634 2.85833 3.69134 2.33333 4.33301 2.33333H13.6663C14.308 2.33333 14.833 2.85833 14.833 3.5V17.5Z"/>
-                                        </svg>
-                                    </button>
-                            }
-
-                            <Menu as="div" className="relative inline-block w-full">
-                                <Menu.Button className='w-full text-white text-sm bg-gradient-to-r from-primary to-accent border-none h-[32px] rounded-md hover:opacity-90 transition active:scale-99  disabled:opacity-25'>
-                                    {t('download') }
-                                </Menu.Button>
-
-                                <Transition
-                                    as={Fragment}
-                                    enter="transition ease-out duration-100"
-                                    enterFrom="transform opacity-0 scale-95"
-                                    enterTo="transform opacity-100 scale-100"
-                                    leave="transition ease-in duration-75"
-                                    leaveFrom="transform opacity-100 scale-100"
-                                    leaveTo="transform opacity-0 scale-95"
+                            {/* Save button positioned on top-right of image */}
+                            <button 
+                                className={classNames(
+                                    'absolute top-2 right-2 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 z-10',
+                                    {
+                                        'bg-red-500 text-white shadow-lg hover:bg-red-600': novel.saved,
+                                        'bg-white text-gray-600 shadow-lg hover:bg-gray-100 hover:text-red-500': !novel.saved
+                                    }
+                                )} 
+                                onClick={()=>addNovelToMark(novel.slug, novel.saved)}
+                            >
+                                <svg 
+                                    width="16" 
+                                    height="16" 
+                                    viewBox="0 0 24 24" 
+                                    fill={novel.saved ? 'currentColor' : 'none'} 
+                                    stroke="currentColor" 
+                                    strokeWidth="2"
                                 >
-                                    <Menu.Items className="absolute right-0 z-10 mt-2 w-[110px] origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                                        <div className="px-1 py-1 ">
-                                            {
-                                                trackList.audioListRu.length ?
-                                                    <Menu.Item>
-                                                        <a href={`https://akback.technocorp.uz/ru/api/novels/${novel.slug}/zip/`} className='block px-3 py-1 text-gray-900 hover:bg-gray-100 transition rounded-md'>ru</a>
-                                                    </Menu.Item>
-                                                : null
-                                            }
-
-                                            {
-                                                trackList.audioListUz.length ?
-                                                    <Menu.Item>
-                                                        <a href={`https://akback.technocorp.uz/uz/api/novels/${novel.slug}/zip/`} className='block px-3 py-1 text-gray-900 hover:bg-gray-100 transition rounded-md'>uz</a>
-                                                    </Menu.Item>
-                                                : null
-                                            }
-
-
-                                        </div>
-
-                                    </Menu.Items>
-                                </Transition>
-
-                            </Menu>
-
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                </svg>
+                            </button>
 
                         </div>
+
+                        {/* Save button moved to image overlay */}
 
                     </div>
 
@@ -180,31 +145,10 @@ const Index:React.FC<Props> = ({novel, sendNovelRating}) => {
 
                 <div className='md:hidden grid grid-cols-12 gap-1 items-center'>
 
-                    <div className="col-span-7 md:col-span-6">
-                        <div className="flex items-center">
-                            {
-                                novel.saved ?
-                                    <button className={classNames('w-9 h-9 shrink-0 mr-1 rounded-md border text-white bg-primary border-primary transition hover:border-primary flex items-center justify-center')} onClick={()=>addNovelToMark(novel.slug, novel.saved)} type='button'>
-                                        <svg width="14" height="18" viewBox="0 0 18 21"  xmlns="http://www.w3.org/2000/svg" fill='currentColor'>
-                                            <path d="M14.833 0H3.16634C1.88301 0 0.833008 1.05 0.833008 2.33333V21L8.99968 17.5L17.1663 21V2.33333C17.1663 1.05 16.1163 0 14.833 0ZM14.833 17.5L8.99968 14.9567L3.16634 17.5V3.5C3.16634 2.85833 3.69134 2.33333 4.33301 2.33333H13.6663C14.308 2.33333 14.833 2.85833 14.833 3.5V17.5Z"/>
-                                        </svg>
-                                    </button>
-                                    :
-                                    <button className={classNames('w-9 h-9 shrink-0 mr-1 rounded-md border transition  border-primary text-primary flex items-center justify-center')} onClick={()=>addNovelToMark(novel.slug, novel.saved)}>
-                                        <svg width="14" height="18" viewBox="0 0 18 21"  xmlns="http://www.w3.org/2000/svg" fill='currentColor'>
-                                            <path d="M14.833 0H3.16634C1.88301 0 0.833008 1.05 0.833008 2.33333V21L8.99968 17.5L17.1663 21V2.33333C17.1663 1.05 16.1163 0 14.833 0ZM14.833 17.5L8.99968 14.9567L3.16634 17.5V3.5C3.16634 2.85833 3.69134 2.33333 4.33301 2.33333H13.6663C14.308 2.33333 14.833 2.85833 14.833 3.5V17.5Z"/>
-                                        </svg>
-                                    </button>
-                            }
-
-                            <ThemeButton block gradient size='xs' color='white' className='h-9'>
-                                {t('download')}(62mb)
-                            </ThemeButton>
+                    <div className="col-span-12">
+                        <div className="flex items-center justify-center">
+                            <ShareMenu/>
                         </div>
-                    </div>
-
-                    <div className="col-span-5 md:col-span-6">
-                        <ShareMenu/>
                     </div>
 
                 </div>

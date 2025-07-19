@@ -171,26 +171,39 @@ const Index = () => {
                     :
                     <div className="container mx-auto px-3">
                         
-                        {/* Back Button */}
-                        <div className="mb-6 mt-10 sm:mt-0">
-                            <Link href="/books">
-                                <a className="inline-flex items-center text-primary hover:text-accent">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 mr-2">
-                                        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
-                                    </svg>
-                                    {t('backToBooks')}
-                                </a>
-                            </Link>
+                        {/* Breadcrumb Navigation */}
+                        <div className="mb-6 mt-10 sm:mt-4">
+                            <nav className="flex items-center text-sm text-gray-600">
+                                <Link href="/">
+                                    <a className="text-primary hover:text-accent transition-colors">
+                                        {t('home')}
+                                    </a>
+                                </Link>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 mx-2 text-gray-400">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                                </svg>
+                                <Link href="/books">
+                                    <a className="text-primary hover:text-accent transition-colors">
+                                        {t('books')}
+                                    </a>
+                                </Link>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 mx-2 text-gray-400">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                                </svg>
+                                <span className="text-gray-900 font-medium truncate">
+                                    {novel ? novel.name : '...'}
+                                </span>
+                            </nav>
                         </div>
 
                         <div className="grid grid-cols-12 gap-4">
 
-                            <div className="lg:col-span-2 md:col-span-3 col-span-12">
+                            <div className="lg:col-span-3 md:col-span-4 col-span-12">
                                 <AsideBookCard novel={novel} sendNovelRating={sendNovelRating}/>
                             </div>
 
-                            <div className="lg:col-span-8 md:col-span-9 col-span-12">
-                                <div className='p-4 bg-gray-100 rounded-lg mb-5'>
+                            <div className="lg:col-span-9 md:col-span-8 col-span-12">
+                                <div className='p-4 lg:p-6 bg-gray-100 rounded-lg mb-5'>
 
                                     <div className="hidden lg:block">
 
@@ -411,7 +424,8 @@ const Index = () => {
 
                             </div>
 
-                            <div className="lg:col-span-2  lg:block hidden relative">
+                            {/* Right sidebar removed to extend main content to site boundaries */}
+                            {/* <div className="lg:col-span-2  lg:block hidden relative">
                                 {
                                     asideBanner && asideBanner.img ?
                                         <div className='relative cursor-pointer'>
@@ -419,7 +433,7 @@ const Index = () => {
                                         </div>
                                         : null
                                 }
-                            </div>
+                            </div> */}
 
                         </div>
 
