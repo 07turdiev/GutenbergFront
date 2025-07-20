@@ -2,17 +2,17 @@ import { createSelector } from '@reduxjs/toolkit'
 import { AppState } from "../store";
 
 
-export const selectGenres = (state:AppState) => state.genresReducer
+export const selectCategories = (state:AppState) => state.categoryReducer
 
-export const selectGenreOptions = createSelector(selectGenres, (genres) => {
-    console.log('DEBUG genresList:', genres.genresList);
-    const GenresOptions =  genres.genresList.map((genre) => {
+export const selectCategoryOptions = createSelector(selectCategories, (categories) => {
+    console.log('DEBUG categoriesList:', categories.categoriesList);
+    const categoriesOptions =  categories.categoriesList.map((category) => {
         return {
-            value: genre.slug,
-            label: genre.nomi || genre.name
+            value: category.slug,
+            label: category.Nomi || category.name
         }
     })
     return  {
-        genresOption: GenresOptions
+        categoriesOption: categoriesOptions
     };
 })

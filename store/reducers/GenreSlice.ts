@@ -3,25 +3,24 @@ import {ICategory} from "../../models/ICategory";
 import {IMeta} from "../../models/IMeta";
 import {IListResponse} from "../../models/Response/IListResponse";
 import {HYDRATE} from "next-redux-wrapper";
-import {IGenre} from "../../models/IGenre";
-import {fetchGenres, fetchGenresList} from "../actions/genre";
+import {fetchCategories, fetchCategoriesList} from "../actions/genre";
 
-interface GenreState {
-    genres: {
-        results: IGenre[];
+interface CategoryState {
+    categories: {
+        results: ICategory[];
         meta: IMeta | null;
     };
-    genresList: IGenre[];
+    categoriesList: ICategory[];
     loading: boolean;
     error: string;
 }
 
-const initialState: GenreState = {
-    genres: {
+const initialState: CategoryState = {
+    categories: {
         results: [],
         meta: null
     },
-    genresList: [],
+    categoriesList: [],
     loading: false,
     error: '',
 }
@@ -41,34 +40,34 @@ function adaptStrapiMetaToIMeta(meta): IMeta {
     };
 }
 
-export const genreSlice = createSlice({
-    name: 'genre',
+export const categorySlice = createSlice({
+    name: 'category',
     initialState,
     reducers: {},
     extraReducers: {
-        [fetchGenres.fulfilled.type]: (state, action: PayloadAction<IListResponse<IGenre[]>>) => {
+        [fetchCategories.fulfilled.type]: (state, action: PayloadAction<IListResponse<ICategory[]>>) => {
             state.loading = false;
             state.error = '';
-            state.genres.results = action.payload.data;
-            state.genres.meta = adaptStrapiMetaToIMeta(action.payload.meta);
+            state.categories.results = action.payload.data;
+            state.categories.meta = adaptStrapiMetaToIMeta(action.payload.meta);
         },
-        [fetchGenres.pending.type]: (state) => {
+        [fetchCategories.pending.type]: (state) => {
             state.loading = true;
         },
-        [fetchGenres.rejected.type]: (state, action: PayloadAction<string>) => {
+        [fetchCategories.rejected.type]: (state, action: PayloadAction<string>) => {
             state.loading = false;
             state.error =  action.payload;
         },
 
-        [fetchGenresList.fulfilled.type]: (state, action: PayloadAction<any>) => {
+        [fetchCategoriesList.fulfilled.type]: (state, action: PayloadAction<any>) => {
             state.loading = false;
             state.error = '';
-            state.genresList = Array.isArray(action.payload.data) ? action.payload.data : action.payload;
+            state.categoriesList = Array.isArray(action.payload.data) ? action.payload.data : action.payload;
         },
-        [fetchGenresList.pending.type]: (state) => {
+        [fetchCategoriesList.pending.type]: (state) => {
             state.loading = true;
         },
-        [fetchGenresList.rejected.type]: (state, action: PayloadAction<string>) => {
+        [fetchCategoriesList.rejected.type]: (state, action: PayloadAction<string>) => {
             state.loading = false;
             state.error =  action.payload;
         },
@@ -76,10 +75,10 @@ export const genreSlice = createSlice({
         [HYDRATE]: (state, action) => {
             return {
                 ...state,
-                ...action.payload.genresReducer,
+                ...action.payload.categoryReducer,
             };
         },
     }
 })
 
-export default genreSlice.reducer;
+export default categorySlice.reducer;

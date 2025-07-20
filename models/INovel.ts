@@ -1,7 +1,6 @@
-import {IAudioListItem} from "./Actions/SetActiveTrack";
 import {IAuthor} from "./IAuthors";
-import {IGenre} from "./IGenre";
 import {ICategory} from "./ICategory";
+import {IAudioListItem} from "./Actions/SetActiveTrack";
 
 // Strapi Rich Text content type
 export interface IRichTextContent {
@@ -81,8 +80,7 @@ export interface INovel {
     audio?: IMedia;
     muqova?: IMedia;
     mualliflar?: IAuthor;
-    janrlars?: IGenre[];
-    kategoriyalars?: ICategory[];
+    kategoriya?: ICategory[];
 
     // Deprecated fields (for backward compatibility)
     name?: string;

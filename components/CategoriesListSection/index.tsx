@@ -2,15 +2,15 @@ import React from 'react';
 import CategoryLabel from "../Ui/CategoryLabel";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from "swiper";
-import {IGenre} from "../../models/IGenre";
+import {ICategory} from "../../models/ICategory";
 import classes from './style.module.scss';
 
 
 interface Props {
-    genres: IGenre[]
+    categories: ICategory[]
 }
 
-const Index:React.FC<Props> = ({genres}) => {
+const Index:React.FC<Props> = ({categories}) => {
     return (
         <Swiper
             slidesPerView={"auto"}
@@ -25,10 +25,10 @@ const Index:React.FC<Props> = ({genres}) => {
             }}
         >
             {
-                genres.map((genre)=>(
-                    <SwiperSlide className='w-auto' key={genre.slug} style={{width: 'auto'}}>
-                        <CategoryLabel slug={genre.name}>
-                            {genre.name}
+                categories.map((category)=>(
+                    <SwiperSlide className='w-auto' key={category.slug} style={{width: 'auto'}}>
+                        <CategoryLabel slug={category.Nomi || category.name}>
+                            {category.Nomi || category.name}
                         </CategoryLabel>
                     </SwiperSlide>
                 ))

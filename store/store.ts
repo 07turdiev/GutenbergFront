@@ -10,7 +10,6 @@ import novelReducer from "./reducers/NovelSlice";
 import categoryReducer from "./reducers/CategorySlice";
 import playerReducer from "./reducers/PlayerSlice";
 import authorsReducer from "./reducers/AuthorsSlice";
-import genresReducer from "./reducers/GenreSlice";
 import audioReducer from "./reducers/AudioSlice";
 import readerReducer from "./reducers/ReaderSlice";
 import advertisingReducer from "./reducers/AdvertisingSlice";
@@ -27,7 +26,6 @@ const reducers = combineReducers(
         novelReducer,
         playerReducer,
         authorsReducer,
-        genresReducer,
         audioReducer,
         readerReducer,
         orderReducer,

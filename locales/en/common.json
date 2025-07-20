@@ -1,6 +1,6 @@
 {
   "siteTitle": "GutenberNU - Publishing House",
-  "langUz": "o‘z",
+  "langUz": "o'z",
   "langRu": "ru",
   "langEn": "en",
 
@@ -48,7 +48,7 @@
 
   "bookTitle": "Title",
   "author": "Author",
-  "genre":"Genre",
+  "genre":"Category",
   "category": "Category",
   "language":"Language",
   "genres":"Books",

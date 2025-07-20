@@ -1,6 +1,6 @@
 {
   "siteTitle": "GutenberNU - Платформа аудиокниг",
-  "langUz": "o‘z",
+  "langUz": "o'z",
   "langRu": "ru",
   "langEn": "en",
 
@@ -47,7 +47,7 @@
 
   "bookTitle":"Название",
   "author": "Автор",
-  "genre":"Жанр",
+  "genre":"Категория",
   "category":"Категория",
   "language":"Язык",
   "genres": "Книги",

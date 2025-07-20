@@ -93,45 +93,45 @@ const Index:React.FC<Props> = ({
 
     return (
 
-            <div className='border border-gray-50 p-1 rounded-md'>
-                <Scrollbars autoHeight
-                            autoHeightMin={100}
-                            autoHeightMax={530}
-                            universal={true}
-                            ref={scrollRef}
+                <div className='border border-gray-50 p-1 rounded-md'>
+                    <Scrollbars autoHeight
+                                autoHeightMin={100}
+                                autoHeightMax={530}
+                                universal={true}
+                                ref={scrollRef}
 
-                >
+                    >
                     <div className='outline-none pr-2 md:pr-3'>
-                        {
-                            trackList && trackList.audioListRu && trackList.audioListRu.length ?
+                            {
+                                trackList && trackList.audioListRu && trackList.audioListRu.length ?
                                 <div className='outline-none'>
-                                        {
-                                            trackList.audioListRu.map((audio)=>{
-                                                return(
-                                                    <AudioCard audio={audio} cover={typeof novel.cover === 'string' ? novel.cover : novel.cover?.src} key={audio.file} lang='ru' onClick={()=>playSelectedTrack(audio, 'ru')}/>
-                                                )
-                                            })
-                                        }
+                                            {
+                                                trackList.audioListRu.map((audio)=>{
+                                                    return(
+                                                        <AudioCard audio={audio} cover={typeof novel.cover === 'string' ? novel.cover : novel.cover?.src} key={audio.file} lang='ru' onClick={()=>playSelectedTrack(audio, 'ru')}/>
+                                                    )
+                                                })
+                                            }
                                 </div>
-                            : null
-                        }
+                                : null
+                            }
 
-                        {
-                            trackList && trackList.audioListUz && trackList.audioListUz.length ?
+                            {
+                                trackList && trackList.audioListUz && trackList.audioListUz.length ?
                                 <div className='outline-none'>
-                                        {
-                                            trackList.audioListUz.map((audio)=>{
-                                                return(
-                                                    <AudioCard audio={audio} cover={typeof novel.cover === 'string' ? novel.cover : novel.cover?.src} key={audio.file}  lang='uz' onClick={()=>playSelectedTrack(audio, 'uz')}/>
-                                                )
-                                            })
-                                        }
+                                            {
+                                                trackList.audioListUz.map((audio)=>{
+                                                    return(
+                                                        <AudioCard audio={audio} cover={typeof novel.cover === 'string' ? novel.cover : novel.cover?.src} key={audio.file}  lang='uz' onClick={()=>playSelectedTrack(audio, 'uz')}/>
+                                                    )
+                                                })
+                                            }
                                 </div>
-                            : null
-                        }
+                                : null
+                            }
                     </div>
-                </Scrollbars>
-            </div>
+                    </Scrollbars>
+                </div>
 
     );
 };

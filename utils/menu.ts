@@ -1,79 +1,79 @@
-export const Routes = {
-    main: '/',
-    about: '/about',
+export const menu = {
+    home: '/',
     books: '/books',
-    genres: '/genres',
+    categories: '/categories',
     authors: '/authors',
+    about: '/about',
     team: '/team',
     blog: '/blog',
-    stock: '/stock',
+    profile: '/profile'
 }
 
 export const Menu = {
     ru: [
         {
             title: 'Книги',
-            href: Routes.books
+            href: menu.books
         },
         {
             title: 'Авторы',
-            href: Routes.authors
+            href: menu.authors
         },
         {
             title: 'Команда',
-            href: Routes.team
+            href: menu.team
         },
         {
             title: 'Блог',
-            href: Routes.blog
+            href: menu.blog
         },
         {
             title: 'О нас',
-            href: Routes.about
+            href: menu.about
         }
     ],
     uz: [
         {
             title: 'Kitoblar',
-            href: Routes.books
+            href: menu.books
         },
         {
             title: 'Mualliflar',
-            href: Routes.authors
+            href: menu.authors
         },
         {
             title: 'Jamoa',
-            href: Routes.team
+            href: menu.team
         },
         {
             title: 'Blog',
-            href: Routes.blog
+            href: menu.blog
         },
         {
             title: 'Biz haqimizda',
-            href: Routes.about
+            href: menu.about
         },
     ],
     en: [
         {
             title: 'Books',
-            href: Routes.books
+            href: menu.books
         },
         {
             title: 'Authors',
-            href: Routes.authors
+            href: menu.authors
         },
         {
             title: 'Team',
-            href: Routes.team
+            href: menu.team
         },
         {
             title: 'Blog',
-            href: Routes.blog
+            href: menu.blog
         },
         {
             title: 'About us',
-            href: Routes.about
+            href: menu.about
         },
     ]
 } 

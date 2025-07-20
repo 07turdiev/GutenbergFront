@@ -254,21 +254,6 @@ export const fetchNewNovels = createAsyncThunk(
     }
 )
 
-export const fetchNovelsByGenre = createAsyncThunk(
-    'novel/fetchNovelsByGenre',
-    async ({locale, genreSlug, opt, ctx} : { locale: string, genreSlug: string, opt?: AxiosRequestConfig, ctx?: GetServerSidePropsContext}, thunkApi) => {
-        try {
-            const response = await NovelService.fetchNovelsByGenre(locale, genreSlug, opt, ctx)
-            return {
-                meta: response.data.meta,
-                results: adaptNovelsArray(response.data.data)
-            }
-        }catch (err){
-            return thunkApi.rejectWithValue('Ошибка при получение новелл по жанру')
-        }
-    }
-)
-
 export const fetchNovelsByCategory = createAsyncThunk(
     'novel/fetchNovelsByCategory',
     async ({locale, categorySlug, opt, ctx} : { locale: string, categorySlug: string, opt?: AxiosRequestConfig, ctx?: GetServerSidePropsContext}, thunkApi) => {

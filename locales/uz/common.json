@@ -1,13 +1,13 @@
 {
   "siteTitle": "GutenberNU - Nashriyoti",
-  "langUz": "o‘z",
+  "langUz": "o'z",
   "langRu": "ru",
   "langEn": "en",
 
   "loginToReg": "Hisob yo'qmi?",
   "loginToReset": "Parolni tiklash",
-  "toReg": "Roʻyxatdan oʻtish",
-  "registrationTitle": "Roʻyxatdan oʻtish",
+  "toReg": "Ro'yxatdan o'tish",
+  "registrationTitle": "Ro'yxatdan o'tish",
   "regToLogin": "Akkauntingiz mavjudmi?",
   "toLogin": "Kirish",
   "nextBtn": "Keyingisi",
@@ -20,7 +20,7 @@
   "logout": "Chiqish",
 
   "hi": "Salom",
-  "personalInfo": "Shaxsiy maʼlumot",
+  "personalInfo": "Shaxsiy ma'lumot",
   "bookmarks": "Xatcho'plar",
   "notifications": "Bildirishnomalar",
   "subscriptions": "Obunalar",
@@ -48,7 +48,7 @@
 
   "bookTitle": "Nomlanish",
   "author": "Muallif",
-  "genre":"Janr",
+  "genre":"Kategoriya",
   "category": "Kategoriya",
   "language":"Til",
   "genres":"Kitoblar",
@@ -69,7 +69,7 @@
   "privacyPolicy": "Maxfiylik siyosati",
   "about": "Biz haqimizda",
   "aboutText": "'Gutenberg nashriyot uyi' hamda nashriyot tomonidan chop etilayotgan kitoblar haqida batafsil ma'lumot olish uchun.",
-  "aboutParagraph1": "GutenberNU — bu zamonaviy audio kutubxona boʻlib, u sizga eng koʻp sotilgan kitoblar va klassik adabiyotlar, jumladan, turli janrlardagi yangiliklar: badiiy adabiyotdan tortib, badiiy boʻlmagan kitoblar va biznes adabiyotlarigacha boʻlgan audio katalogga kirish imkonini beradi. Yigirmadan ortiq turli janrlardagi 368 000 dan ortiq audio kitoblar.",
+  "aboutParagraph1": "GutenberNU — bu zamonaviy audio kutubxona bo'lib, u sizga eng ko'p sotilgan kitoblar va klassik adabiyotlar, jumladan, turli janrlardagi yangiliklar: badiiy adabiyotdan tortib, badiiy bo'lmagan kitoblar va biznes adabiyotlarigacha bo'lgan audio katalogga kirish imkonini beradi. Yigirmadan ortiq turli janrlardagi 368 000 dan ortiq audio kitoblar.",
   "aboutParagraph2": "Kutubxonaning odatiy g'oyasi shundan iboratki, alohida kitoblarni sotib olish o'rniga, siz butun katalogga kirishingiz mumkin. Biz kitoblarni sotmaymiz va ularni yuklab olishga majburlamaymiz, lekin biz ularni cheklovlarsiz va turli qurilmalarda o'qish uchun beramiz. Obuna bo'lish kifoya.",
   "aboutParagraph3": "Odatiy ma'noda, elektron kitoblar hozirgacha qog'oz kitoblarga o'xshash edi: bular alohida fayllar bo'lib, ularni biron bir joyda yuklab olish va saqlash kerak, keyin o'quvchi-o'quvchiga tashlash kerak va agar sizda bir nechta o'qish moslamalari bo'lsa, sizda bo'ladi. har bir kutubxonangizda alohida nusxani saqlash uchun. Agar siz nafaqat kitoblarni o'qisangiz, balki tirnoq va xatcho'plarni saqlasangiz, ko'pincha bularning barchasini qo'lda sinxronlashtirishingiz kerak bo'ladi.",
   "aboutParagraph4": "Ko'p kitob o'qiydiganlar uchun va mamnuniyat bilan biz MyBook-ni kutubxona klubiga aylantirishga qaror qildik, unga qo'shilish orqali siz nafaqat o'zingizda mavjud bo'lgan kitoblarni, balki bizning keng katalogimizdagi nashrlarni ham o'qishingiz mumkin.",

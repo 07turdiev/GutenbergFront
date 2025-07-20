@@ -2,7 +2,7 @@
 export interface ICategory {
     id: number;
     documentId: string;
-    nomi: string;
+    Nomi: string;
     slug: string;
     ota_kategoriya?: string;
     ikonka?: string;

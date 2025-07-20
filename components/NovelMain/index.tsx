@@ -78,7 +78,7 @@ const Index:React.FC<Props> = ({novel}) => {
                         {
                             novel.genre && novel.genre.map((genre)=>  {
                                 return(
-                                    <CatBtn onClick={() => router.push(`/genres/${genre}`)} key={uuidv4()} className='text-xs'>
+                                    <CatBtn onClick={() => router.push(`/categories/${genre}`)} key={uuidv4()} className='text-xs'>
                                         {genre}
                                     </CatBtn>
                                 )

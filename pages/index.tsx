@@ -11,16 +11,14 @@ import NovelMain from "../components/NovelMain";
 import {selectNovels} from "../store/selectors/novel";
 import AdvertisingCard from "../components/AdvertisingCard";
 import TabSection from "../components/TabSection";
-import {fetchCategories} from "../store/actions/category";
-import {selectCategories} from "../store/selectors/category";
+import {fetchCategories} from "../store/actions/genre";
+import {selectCategories} from "../store/selectors/genre";
 import NovelsListSection from "../components/NovelsListSection";
 import {fetchAuthors} from "../store/actions/author";
 import {selectAuthors} from "../store/selectors/author";
 import AuthorsListSection from "../components/AuthorsListSection";
 import SectionListWrapper from "../components/SectionListWrapper";
-import {fetchGenres} from "../store/actions/genre";
-import {selectGenres} from "../store/selectors/genre";
-import GenresListSection from "../components/GenresListSection";
+import CategoriesListSection from "../components/CategoriesListSection";
 import {
     fetchAdvertisingMainBottom,
     fetchAdvertisingMainTop,
@@ -53,7 +51,6 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (ctx
     await dispatch(fetchNovelActual({locale: ctx.locale, ctx}));
     await dispatch(fetchCategories({locale: ctx.locale}))
     await dispatch(fetchAuthors({locale: ctx.locale}))
-    await dispatch(fetchGenres({locale: ctx.locale}))
     await dispatch(fetchAdvertisingMainTop({locale: ctx.locale, type: 'main-top'}))
     await dispatch(fetchAdvertisingMainBottom({locale: ctx.locale, type: 'main-bottom'}))
     await dispatch(fetchAdvertisingSection({locale: ctx.locale, type: 'middle'}))
@@ -66,10 +63,8 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (ctx
     };
 });
 
+const Index: NextPage = () => {
+    return <HomePage />;
+};
 
-
-const index: NextPage = () => {
-    return <HomePage/>
-}
-
-export default index
+export default Index;

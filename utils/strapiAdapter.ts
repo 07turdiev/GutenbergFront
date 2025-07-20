@@ -1,9 +1,9 @@
 import {INovel, IRichTextContent} from "../models/INovel";
-import {IAuthor} from "../models/IAuthors";
-import {IGenre} from "../models/IGenre";
 import {ICategory} from "../models/ICategory";
+import {IAuthor} from "../models/IAuthors";
 import {IAbout, IContacts, ISocial, IStatistics} from "../models/IAbout";
 import {ITeamMember} from "../models/ITeam";
+import {IBlogPost} from "../models/IBlog";
 import { getApiBaseUrl, ensureAbsoluteUrl } from "../config/api";
 
 // Convert Strapi rich text to plain text
@@ -49,8 +49,8 @@ export const adaptNovelData = (novel: INovel): INovel => {
         duration_uz: novel.audio_davomiyligi || novel.duration_uz || 0,
         duration: `${novel.audio_davomiyligi || 0}`, // Convert to string for compatibility
         author: novel.mualliflar ? adaptAuthorData(novel.mualliflar) : (novel.author || null),
-        genre: novel.janrlars?.map(g => adaptGenreData(g).name || g.nomi) || novel.genre || [],
-        categories: novel.kategoriyalars?.map(c => adaptCategoryData(c).name || c.nomi) || novel.categories || [],
+        genre: novel.kategoriya?.map(c => adaptCategoryData(c).name || c.Nomi) || novel.genre || [],
+        categories: novel.kategoriya?.map(c => adaptCategoryData(c).name || c.Nomi) || novel.categories || [],
         published_at: novel.publishedAt || novel.published_at || '',
         cover: novel.muqova ? {
             src: ensureAbsoluteUrl(novel.muqova.url),
@@ -104,23 +104,13 @@ export const adaptAuthorData = (author: IAuthor): IAuthor => {
     };
 };
 
-// Convert new Genre format to backward compatible format  
-export const adaptGenreData = (genre: IGenre): IGenre => {
-    if (!genre) return null;
-    
-    return {
-        ...genre,
-        name: genre.nomi || genre.name || ''
-    };
-};
-
 // Convert new Category format to backward compatible format
 export const adaptCategoryData = (category: ICategory): ICategory => {
     if (!category) return null;
     
     return {
         ...category,
-        name: category.nomi || category.name || '',
+        name: category.Nomi || category.name || '',
         parent: category.ota_kategoriya || category.parent || '',
         icon: category.ikonka || category.icon || ''
     };
@@ -134,11 +124,6 @@ export const adaptNovelsArray = (novels: INovel[]): INovel[] => {
 // Adapt array of authors
 export const adaptAuthorsArray = (authors: IAuthor[]): IAuthor[] => {
     return authors.map(author => adaptAuthorData(author));
-};
-
-// Adapt array of genres
-export const adaptGenresArray = (genres: IGenre[]): IGenre[] => {
-    return genres.map(genre => adaptGenreData(genre));
 };
 
 // Adapt array of categories

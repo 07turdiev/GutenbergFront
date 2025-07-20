@@ -298,11 +298,11 @@ const Index = () => {
                                     </div>
 
                                     <div className='mb-5'>
-                                        <h3 className='font-medium text-xl mb-3'>{t('genre')}</h3>
+                                        <h3 className='font-medium text-xl mb-3'>{t('category')}</h3>
                                         {
                                             novel.genre.map((genre)=>(
                                                 <span key={genre} className='mr-1'>
-                                                    <Link href={`/genres/${genre}`}>
+                                                    <Link href={`/categories/${genre}`}>
                                                         <a className='px-3 py-1 rounded-md bg-red-50 text-primary truncate transition hover:bg-red-200'>{genre}</a>
                                                     </Link>
                                                 </span>

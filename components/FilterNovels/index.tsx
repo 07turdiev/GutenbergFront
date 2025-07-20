@@ -3,11 +3,10 @@ import Select from 'react-select';
 import {useAppSelector} from "../../hooks/reducer";
 import {useRouter} from "next/router";
 import {selectAuthorsOptions} from "../../store/selectors/author";
-import {selectCategoryOptions} from "../../store/selectors/category";
+import {selectCategoryOptions} from "../../store/selectors/genre";
 import ThemeButton from "../Ui/ThemeButton";
 import {useDebounce} from "use-debounce";
 import {useDispatch} from "react-redux";
-import { selectGenreOptions } from "../../store/selectors/genre";
 import useTranslation from "next-translate/useTranslation";
 
 
@@ -52,7 +51,6 @@ interface Props {
 interface IFilterFields {
     name?: string,
     author?: string,
-    genre?: string,
     category?: string,
     lang?: string
 }
@@ -69,7 +67,6 @@ const Index:React.FC<Props> = ({title}) => {
 
     const [filterQuery, setFilterQuery] = useState<IFilterFields>({});
 
-    const {genresOption} = useAppSelector(selectGenreOptions);
     const {categoriesOption} = useAppSelector(selectCategoryOptions);
     const {authorsOption} = useAppSelector(selectAuthorsOptions);
 
@@ -80,7 +77,7 @@ const Index:React.FC<Props> = ({title}) => {
     useEffect(()=>{
 
         // Only show filter if there are actual filter parameters
-        if(Object.keys(router.query).length > 0 && (router.query.name || router.query.author || router.query.genre || router.query.category || router.query.lang)){
+        if(Object.keys(router.query).length > 0 && (router.query.name || router.query.author || router.query.category || router.query.lang)){
             setShowFilter(true)
         }
 
@@ -115,6 +112,16 @@ const Index:React.FC<Props> = ({title}) => {
            router.query = {
                ...router.query,
                [name]: value.value
+           };
+       }else if(name === 'category'){
+           setFilterQuery((query)=>({
+               ...query,
+               [name]: value.value // Use value (slug) instead of label
+           }))
+           // @ts-ignore
+           router.query = {
+               ...router.query,
+               [name]: value.value // Use value (slug) instead of label
            };
        }else{
            setFilterQuery((query)=>({
@@ -203,17 +210,7 @@ const Index:React.FC<Props> = ({title}) => {
 
                             <div className="col-span-1">
                                 <Select
-                                    value={genresOption.filter(item=>item.label === router.query.genre)}
-                                    placeholder={t('genre')}
-                                    styles={customStyles}
-                                    onChange={(value)=>onChange('genre', value)}
-                                    options={genresOption}
-                                />
-                            </div>
-
-                            <div className="col-span-1">
-                                <Select
-                                    value={categoriesOption.filter(item=>item.label === router.query.category)}
+                                    value={categoriesOption.filter(item=>item.value === router.query.category)}
                                     placeholder={t('category')}
                                     styles={customStyles}
                                    onChange={(value)=>onChange('category', value)}

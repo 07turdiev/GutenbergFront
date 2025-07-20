@@ -111,7 +111,7 @@ const Index:React.FC<Props> = ({novel, addToMark}) => {
                 }
             </div>
             <div className="flex items-center w-full mt-auto">
-                <CatBtn size='xs' onClick={()=>router.push(`/genres/${novel.genre[0]}`)}>
+                <CatBtn size='xs' onClick={()=>router.push(`/categories/${novel.genre[0]}`)}>
                     {novel.genre[0]}
                 </CatBtn>
                 <span className='text-gray-400 ml-2 text-xs whitespace-nowrap'>

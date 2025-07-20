@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import HeadMeta from "../../HeadMeta";
 import AdvertisingCard from "../../AdvertisingCard";
 import TabSection from "../../TabSection";
-import GenresListSection from "../../GenresListSection";
+import CategoriesListSection from "../../CategoriesListSection";
 import NovelsListSection from "../../NovelsListSection";
 import SectionListWrapper from "../../SectionListWrapper";
 import AuthorsListSection from "../../AuthorsListSection";
@@ -12,8 +12,7 @@ import {useDispatch} from "react-redux";
 import useTranslation from "next-translate/useTranslation";
 import {useAppSelector} from "../../../hooks/reducer";
 import {selectNovels} from "../../../store/selectors/novel";
-import {selectCategories} from "../../../store/selectors/category";
-import {selectGenres} from "../../../store/selectors/genre";
+import {selectCategories} from "../../../store/selectors/genre";
 import {selectAuthors} from "../../../store/selectors/author";
 import {selectLatestBlogPosts} from "../../../store/selectors/blog";
 import {useRouter} from "next/router";
@@ -32,7 +31,6 @@ const Index = () => {
     const {t} = useTranslation('common')
     const {categories} = useAppSelector(selectCategories)
     const {mainBottom, mainTop, middle: sectionBanner} = useAppSelector(s=>s.advertisingReducer)
-    const {genres} = useAppSelector(selectGenres)
     const {authors} = useAppSelector(selectAuthors)
     const latestBlogPosts = useAppSelector(selectLatestBlogPosts)
 
@@ -94,7 +92,7 @@ const Index = () => {
                             return (
                                 <div key={category.slug}>
                                     <section className="container mx-auto px-3 md:mb-12 mb-7">
-                                        <GenresListSection genres={genres.results}/>
+                                        <CategoriesListSection categories={categories.results}/>
                                     </section>
                                     <NovelsListSection activeTab={activeTab} category={category} key={category.slug}/>
                                 </div>

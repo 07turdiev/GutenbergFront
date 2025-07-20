@@ -6,9 +6,9 @@ import {useAppSelector} from "../../hooks/reducer";
 import {selectNovels} from "../../store/selectors/novel";
 import NovelCard from "../../components/NovelCard";
 import FilterNovels from "../../components/FilterNovels";
-import {fetchGenres, fetchGenresList} from "../../store/actions/genre";
+import {fetchCategories, fetchCategoriesList} from "../../store/actions/genre";
 import {fetchAuthors, fetchAuthorsList} from "../../store/actions/author";
-import {fetchCategories, fetchCategoriesList} from "../../store/actions/category";
+import {fetchCategories as fetchCategoriesOld, fetchCategoriesList as fetchCategoriesListOld} from "../../store/actions/category";
 import Pagination from "../../components/Ui/Pagination";
 import {useRouter} from "next/router";
 import {useDispatch} from "react-redux";
@@ -25,8 +25,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (ctx
             ...ctx.query,
             ...(ctx.query.name ? {'filters[nomi][$containsi]': ctx.query.name} : {}),
             ...(ctx.query.author ? {'filters[mualliflar][ismi][$eq]': ctx.query.author} : {}),
-            ...(ctx.query.genre ? {'filters[janrlars][nomi][$eq]': ctx.query.genre} : {}),
-            ...(ctx.query.category ? {'filters[kategoriyalars][nomi][$eq]': ctx.query.category} : {}),
+            ...(ctx.query.category ? {'filters[kategoriya][slug][$eq]': ctx.query.category} : {}),
             ...(ctx.query.lang ? {'filters[locale][$eq]': ctx.query.lang} : {}),
             'pagination[pageSize]': 9,
             'pagination[page]': ctx.query.p || 1,
@@ -34,9 +33,9 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (ctx
         }
     }, ctx}));
 
-    await dispatch(fetchGenresList({locale: ctx.locale}));
-    await dispatch(fetchAuthorsList({locale: ctx.locale}));
     await dispatch(fetchCategoriesList({locale: ctx.locale}));
+    await dispatch(fetchAuthorsList({locale: ctx.locale}));
+    await dispatch(fetchCategoriesListOld({locale: ctx.locale}));
 
     return {
         props: {},

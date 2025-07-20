@@ -1,15 +1,15 @@
 import $api from "../http";
 import {AxiosRequestConfig, AxiosResponse} from "axios";
 import {IListResponse} from "../models/Response/IListResponse";
-import {IGenre} from "../models/IGenre";
+import {ICategory} from "../models/ICategory";
 
-export default class GenreService {
+export default class CategoryService {
 
-    static async fetchGenres(locale: string, opt: AxiosRequestConfig = {}): Promise<AxiosResponse<IListResponse<IGenre[]>>> {
-        return await $api.get(locale + '/api/janrlars/', opt)
+    static async fetchCategories(locale: string, opt: AxiosRequestConfig = {}): Promise<AxiosResponse<IListResponse<ICategory[]>>> {
+        return await $api.get(locale + '/api/kategoriyas/', opt)
     }
 
-    static async fetchGenresList(locale: string, opt: AxiosRequestConfig = {}): Promise<AxiosResponse<IListResponse<IGenre[]>>> {
-        return await $api.get(locale + '/api/janrlars/', opt)
+    static async fetchCategoriesList(locale: string, opt: AxiosRequestConfig = {}): Promise<AxiosResponse<IListResponse<ICategory[]>>> {
+        return await $api.get(locale + '/api/kategoriyas/', opt)
     }
 }
