@@ -1,13 +1,64 @@
 {
   "name": "GutenberNU",
   "short_name": "GutenberNU",
-  "description": "GutenberNU — bu zamonaviy internet audio-kutubxonasi bo‘lib, sizga bestsellerlar va klassik adabiyotlar katalogiga kirish imkonini beradi",
+  "description": "GutenberNU — bu zamonaviy internet audio-kutubxonasi bo'lib, sizga bestsellerlar va klassik adabiyotlar katalogiga kirish imkonini beradi",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#cd1b17",
   "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "uz",
+  "categories": ["books", "education", "entertainment"],
   "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "16x16",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon.png",
+      "sizes": "32x32",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon.png",
+      "sizes": "48x48",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any"
+    },
     {
       "src": "/favicon.png",
       "sizes": "192x192",
@@ -16,9 +67,41 @@
     },
     {
       "src": "/favicon.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Books",
+      "short_name": "Books",
+      "description": "Browse all books",
+      "url": "/books",
+      "icons": [
+        {
+          "src": "/favicon.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Authors",
+      "short_name": "Authors",
+      "description": "Browse authors",
+      "url": "/authors",
+      "icons": [
+        {
+          "src": "/favicon.png",
+          "sizes": "96x96"
+        }
+      ]
     }
   ]
 } 
