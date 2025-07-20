@@ -1,8 +1,6 @@
 import React, {useContext, useEffect, useRef, useState} from 'react';
 import {INovel} from "../../models/INovel";
-import { Tab } from '@headlessui/react'
 import classNames from "classnames";
-import { Fragment } from 'react'
 import {IAudioList} from "../../models/IAudioList";
 import {
     pauseTrack, playTrack,
@@ -36,8 +34,6 @@ const Index:React.FC<Props> = ({
 
     const [rActive, setRActive] = useLocalStorage('r_active');
     const [, setRLocale] = useLocalStorage('r_locale');
-
-    const [activeTab, setActiveTab] = useState(0);
 
 
     const {player} = useContext(PlayerContext)
@@ -85,17 +81,7 @@ const Index:React.FC<Props> = ({
         });
     }
 
-    useEffect(() => {
-        if(!audioTrack) return
 
-        if(audioTrack.novel.slug !== novel.slug) return;
-
-        if(active_lang === 'ru'){
-            setActiveTab(0)
-        }else{
-            setActiveTab(1)
-        }
-    }, [active_slug, audioTrack, novel]);
 
     useEffect(()=>{
         const audioCard = document.getElementById(active_slug)
@@ -107,90 +93,45 @@ const Index:React.FC<Props> = ({
 
     return (
 
-            <Tab.Group selectedIndex={activeTab} onChange={setActiveTab}>
-                <Tab.List className='mb-5'>
-                    {
-                        trackList && trackList.audioListRu && trackList.audioListRu.length ?
+            <div className='border border-gray-50 p-1 rounded-md'>
+                <Scrollbars autoHeight
+                            autoHeightMin={100}
+                            autoHeightMax={530}
+                            universal={true}
+                            ref={scrollRef}
 
-                            <Tab
-                                as={Fragment}
-                            >
-                                {({selected}) => (
-                                    <div
-                                        className={classNames('px-3 py-1 border border-primary rounded mr-2 text-sm inline-block cursor-pointer', {
-                                            'bg-primary text-white': selected,
-                                            'text-primary': !selected
-                                        })}
-                                    >
-                                        Ру
-                                    </div>
-                                )}
-                            </Tab>
+                >
+                    <div className='outline-none pr-2 md:pr-3'>
+                        {
+                            trackList && trackList.audioListRu && trackList.audioListRu.length ?
+                                <div className='outline-none'>
+                                        {
+                                            trackList.audioListRu.map((audio)=>{
+                                                return(
+                                                    <AudioCard audio={audio} cover={typeof novel.cover === 'string' ? novel.cover : novel.cover?.src} key={audio.file} lang='ru' onClick={()=>playSelectedTrack(audio, 'ru')}/>
+                                                )
+                                            })
+                                        }
+                                </div>
                             : null
-                    }
+                        }
 
-                    {
-                        trackList && trackList.audioListUz && trackList.audioListUz.length ?
-                            <Tab
-                                as={Fragment}
-                            >
-                                {({ selected }) => (
-                                    <div
-                                        className={classNames('px-3 py-1 border border-primary rounded text-sm inline-block cursor-pointer', {
-                                            'bg-primary text-white': selected,
-                                            'text-primary': !selected
-                                        })}
-                                    >
-                                        Uz
-                                    </div>
-                                )}
-                            </Tab>
-                        : null
-                    }
-
-
-                </Tab.List>
-                <div className='border border-gray-50 p-1 rounded-md'>
-                    <Scrollbars autoHeight
-                                autoHeightMin={100}
-                                autoHeightMax={530}
-                                universal={true}
-                                ref={scrollRef}
-
-                    >
-                        <Tab.Panels className='outline-none pr-2 md:pr-3'>
-                            {
-                                trackList && trackList.audioListRu && trackList.audioListRu.length ?
-                                    <Tab.Panel className='outline-none'>
-                                            {
-                                                trackList.audioListRu.map((audio)=>{
-                                                    return(
-                                                        <AudioCard audio={audio} cover={typeof novel.cover === 'string' ? novel.cover : novel.cover?.src} key={audio.file} lang='ru' onClick={()=>playSelectedTrack(audio, 'ru')}/>
-                                                    )
-                                                })
-                                            }
-                                    </Tab.Panel>
-                                : null
-                            }
-
-                            {
-                                trackList && trackList.audioListUz && trackList.audioListUz.length ?
-                                    <Tab.Panel className='outline-none'>
-                                            {
-                                                trackList.audioListUz.map((audio)=>{
-                                                    return(
-                                                        <AudioCard audio={audio} cover={typeof novel.cover === 'string' ? novel.cover : novel.cover?.src} key={audio.file}  lang='uz' onClick={()=>playSelectedTrack(audio, 'uz')}/>
-                                                    )
-                                                })
-                                            }
-                                    </Tab.Panel>
-                                : null
-                            }
-                        </Tab.Panels>
-                    </Scrollbars>
-                </div>
-
-            </Tab.Group>
+                        {
+                            trackList && trackList.audioListUz && trackList.audioListUz.length ?
+                                <div className='outline-none'>
+                                        {
+                                            trackList.audioListUz.map((audio)=>{
+                                                return(
+                                                    <AudioCard audio={audio} cover={typeof novel.cover === 'string' ? novel.cover : novel.cover?.src} key={audio.file}  lang='uz' onClick={()=>playSelectedTrack(audio, 'uz')}/>
+                                                )
+                                            })
+                                        }
+                                </div>
+                            : null
+                        }
+                    </div>
+                </Scrollbars>
+            </div>
 
     );
 };

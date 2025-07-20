@@ -83,6 +83,7 @@ const Index = () => {
     const router = useRouter();
     
     const { duration: durationH, isLoading: isLoadingDuration } = useNovelAudioDuration(novel, 'hh:mm:ss');
+    const [activeTab, setActiveTab] = useState('read');
 
 
     useEffect(()=>{
@@ -310,11 +311,6 @@ const Index = () => {
                                         }
                                     </div>
 
-                                    <div className='mb-5'>
-                                        <h3 className='font-medium text-xl mb-3'>{ t('description') }</h3>
-                                        <div dangerouslySetInnerHTML={{__html: novel.description}}/>
-                                    </div>
-
                                     {
                                         author ?
                                             <div className='pt-3 border-t border-gray-400'>
@@ -366,74 +362,117 @@ const Index = () => {
 
                                 </div>
 
-                                {
-                                    novel.audio_list && novel.audio_list.length > 0 ? (
-                                        <>
-                                            <SectionTitle>
-                                                {t('bookChapters')}
-                                            </SectionTitle>
-
-                                            {
-                                                trackList ?
-                                                    <div className='mb-10'>
-                                                        <TrackTabList trackList={trackList} novel={novel}/>
-                                                    </div>
-                                                : null
-                                            }
-                                        </>
-                                    ) : null
-                                }
-
-
-                                <SectionTitle>
-                                   {t('otherBooks')}
-                                </SectionTitle>
-
-                                {
-                                    novels.results && !novels.results.length ?
-                                        null
-                                        :
-                                        <Swiper
-                                            slidesPerView={2}
-                                            spaceBetween={5}
-                                            navigation={true}
-                                            modules={[Navigation]}
-                                            className='grid grid-cols-4 gap-5 mb-6'
-                                            breakpoints={{
-                                                768: {
-                                                    slidesPerView: 3,
-                                                    spaceBetween: 10,
-                                                },
-                                                1024: {
-                                                    slidesPerView: 4,
-                                                    spaceBetween: 10,
-                                                },
-                                            }}
-                                        >
-                                            {
-                                                novels.results.filter(item=>item.slug !== novel.slug).map((novel)=>(
-                                                    <SwiperSlide key={novel.slug} className='col-span-1'>
-                                                        <NovelCard novel={novel} addToMark={addNovelToMark}/>
-                                                    </SwiperSlide>
-                                                ))
-                                            }
-                                        </Swiper>
-                                }
-
 
 
                             </div>
 
-                            {/* Right sidebar removed to extend main content to site boundaries */}
-                            {/* <div className="lg:col-span-2  lg:block hidden relative">
-                                {
-                                    asideBanner && asideBanner.img ?
-                                        <div className='relative cursor-pointer'>
-                                            <Image src={asideBanner.img.src} width={asideBanner.img.width} height={asideBanner.img.height}/>
+                        </div>
+
+                        {/* Description Section - Full Site Width */}
+                        <div className='w-full bg-gray-100 py-8 lg:py-12 rounded-lg'>
+                            <div className="container mx-auto px-3">
+                                <div className='mb-6 flex justify-center sm:justify-start'>
+                                    <div className='inline-flex rounded-xl border border-gray-200 bg-white overflow-hidden shadow-sm'>
+                                        <button 
+                                            className={`px-4 py-2 font-medium transition-colors flex items-center gap-2 ${
+                                                activeTab === 'read' 
+                                                    ? 'bg-primary text-white' 
+                                                    : 'bg-white text-primary hover:bg-gray-50'
+                                            }`}
+                                            onClick={() => setActiveTab('read')}
+                                        >
+                                            <svg className="w-4 h-4" viewBox="0 0 16 16" fill="currentColor">
+                                                <path fillRule="evenodd" clipRule="evenodd" d="M13 3H3V5H13V3ZM3 7H13V9H3V7ZM3 11H9V13H3V11Z" />
+                                            </svg>
+                                            {t('read')}
+                                        </button>
+                                        <button 
+                                            className={`px-4 py-2 font-medium transition-colors flex items-center gap-2 ${
+                                                activeTab === 'listen' 
+                                                    ? 'bg-primary text-white' 
+                                                    : 'bg-white text-primary hover:bg-gray-50'
+                                            }`}
+                                            onClick={() => setActiveTab('listen')}
+                                        >
+                                            <svg className="w-4 h-4" viewBox="0 0 16 16" fill="currentColor">
+                                                <path d="M13.2692 5.55C12.9792 4.85 12.5592 4.22 12.0192 3.68C11.4792 3.14 10.8592 2.72 10.1492 2.43C8.75922 1.86 7.15922 1.85 5.75922 2.44C5.05922 2.73 4.42922 3.15 3.88922 3.69C3.34922 4.23 2.92922 4.85 2.63922 5.56C2.34922 6.26 2.19922 7 2.19922 7.76V11.96C2.19922 12.95 3.00922 13.76 3.99922 13.76H4.39922C5.38922 13.76 6.19922 12.95 6.19922 11.96V10.56C6.19922 9.57 5.38922 8.76 4.39922 8.76H3.99922C3.89922 8.76 3.79922 8.77 3.69922 8.79V7.76C3.69922 7.2 3.80922 6.65 4.01922 6.13C4.22922 5.61 4.53922 5.15 4.93922 4.75C5.33922 4.35 5.79922 4.04 6.31922 3.83C7.35922 3.4 8.53922 3.4 9.56922 3.83C10.0892 4.05 10.5492 4.36 10.9492 4.75C11.3492 5.15 11.6592 5.61 11.8692 6.13C12.0792 6.65 12.1892 7.19 12.1892 7.76V8.79C12.0892 8.77 11.9892 8.76 11.8892 8.76H11.4892C10.4992 8.76 9.68922 9.57 9.68922 10.56V11.96C9.68922 12.95 10.4992 13.76 11.4892 13.76H11.8892C12.8792 13.76 13.6892 12.95 13.6892 11.96V7.76C13.6892 7 13.5392 6.26 13.2492 5.56L13.2692 5.55Z" />
+                                            </svg>
+                                            {t('listen')}
+                                        </button>
+                                    </div>
+                                </div>
+                                
+                                {activeTab === 'listen' && (
+                                    <div className='mb-4 flex items-center gap-2'>
+                                        <div className='bg-primary text-white px-3 py-1 rounded-full flex items-center gap-1'>
+                                            <svg className="w-3 h-3" viewBox="0 0 16 16" fill="currentColor">
+                                                <path fillRule="evenodd" clipRule="evenodd" d="M13 3H3V5H13V3ZM3 7H13V9H3V7ZM3 11H9V13H3V11Z" />
+                                            </svg>
+                                            <svg className="w-3 h-3" viewBox="0 0 16 16" fill="currentColor">
+                                                <path d="M13.2692 5.55C12.9792 4.85 12.5592 4.22 12.0192 3.68C11.4792 3.14 10.8592 2.72 10.1492 2.43C8.75922 1.86 7.15922 1.85 5.75922 2.44C5.05922 2.73 4.42922 3.15 3.88922 3.69C3.34922 4.23 2.92922 4.85 2.63922 5.56C2.34922 6.26 2.19922 7 2.19922 7.76V11.96C2.19922 12.95 3.00922 13.76 3.99922 13.76H4.39922C5.38922 13.76 6.19922 12.95 6.19922 11.96V10.56C6.19922 9.57 5.38922 8.76 4.39922 8.76H3.99922C3.89922 8.76 3.79922 8.77 3.69922 8.79V7.76C3.69922 7.2 3.80922 6.65 4.01922 6.13C4.22922 5.61 4.53922 5.15 4.93922 4.75C5.33922 4.35 5.79922 4.04 6.31922 3.83C7.35922 3.4 8.53922 3.4 9.56922 3.83C10.0892 4.05 10.5492 4.36 10.9492 4.75C11.3492 5.15 11.6592 5.61 11.8692 6.13C12.0792 6.65 12.1892 7.19 12.1892 7.76V8.79C12.0892 8.77 11.9892 8.76 11.8892 8.76H11.4892C10.4992 8.76 9.68922 9.57 9.68922 10.56V11.96C9.68922 12.95 10.4992 13.76 11.4892 13.76H11.8892C12.8792 13.76 13.6892 12.95 13.6892 11.96V7.76C13.6892 7 13.5392 6.26 13.2492 5.56L13.2692 5.55Z" />
+                                            </svg>
                                         </div>
-                                        : null
-                                }
-                            </div> */}
+                                        <span className='text-sm text-gray-600'>{t('synchronizedWithAudio')}</span>
+                                    </div>
+                                )}
+                                
+                                {activeTab === 'read' && (
+                                    <div>
+                                        <h3 className='font-medium text-xl mb-3'>{ t('description') }</h3>
+                                        <div dangerouslySetInnerHTML={{__html: novel.description}}/>
+                                    </div>
+                                )}
+                                
+                                {activeTab === 'listen' && (
+                                    <div>
+                                        <h3 className='font-medium text-xl mb-3'>{ t('audioDescription') }</h3>
+                                        <div className='mb-6'>
+                                            <TrackTabList trackList={trackList} novel={novel}/>
+                                        </div>
+                                        <div className='mt-8'>
+                                            <h4 className='font-medium text-lg mb-3'>{ t('description') }</h4>
+                                            <div dangerouslySetInnerHTML={{__html: novel.description}}/>
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+
+                        <div className="container mx-auto px-3 mt-8">
+                            <SectionTitle>
+                               {t('otherBooks')}
+                            </SectionTitle>
+
+                            {
+                                novels.results && !novels.results.length ?
+                                    null
+                                    :
+                                    <Swiper
+                                        slidesPerView={2}
+                                        spaceBetween={5}
+                                        navigation={true}
+                                        modules={[Navigation]}
+                                        className='grid grid-cols-4 gap-5 mb-6'
+                                        breakpoints={{
+                                            768: {
+                                                slidesPerView: 3,
+                                                spaceBetween: 10,
+                                            },
+                                            1024: {
+                                                slidesPerView: 4,
+                                                spaceBetween: 10,
+                                            },
+                                        }}
+                                    >
+                                        {
+                                            novels.results.filter(item=>item.slug !== novel.slug).map((novel)=>(
+                                                <SwiperSlide key={novel.slug} className='col-span-1'>
+                                                    <NovelCard novel={novel} addToMark={addNovelToMark}/>
+                                                </SwiperSlide>
+                                            ))
+                                        }
+                                    </Swiper>
+                            }
 
                         </div>
 
