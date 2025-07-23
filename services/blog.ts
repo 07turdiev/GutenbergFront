@@ -8,8 +8,8 @@ import {IBlogPost} from "../models/IBlog";
 
 export default class BlogService {
 
-    static async fetchBlogPosts({locale, config, ctx, page = 1, pageSize = 25}: FetchParams & {page?: number, pageSize?: number}): Promise<AxiosResponse<IListResponse<IBlogPost[]>>> {
-        return await fetcherJson(`/api/blog-postlaris?locale=${locale}&populate=rasmi&pagination[page]=${page}&pagination[pageSize]=${pageSize}`, config, ctx)
+    static async fetchBlogPosts(params: Record<string, any> = {}, config: AxiosRequestConfig = {}, ctx?: GetServerSidePropsContext): Promise<AxiosResponse<IListResponse<IBlogPost[]>>> {
+        return await fetcherJson("/api/blog-postlaris", { ...config, params }, ctx);
     }
 
     static async fetchBlogPostBySlug({locale, slug, config, ctx}: FetchParams & {slug: string}): Promise<AxiosResponse<IListResponse<IBlogPost[]>>> {

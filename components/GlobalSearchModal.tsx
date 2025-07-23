@@ -1,31 +1,22 @@
 import React, { useState, useRef, useEffect } from "react";
+import NovelService from "../services/novels";
+import AuthorService from "../services/author";
+import BlogService from "../services/blog";
 import { useRouter } from "next/router";
 import { useDebounce } from "use-debounce";
 import classNames from "classnames";
-import NovelService from "../../services/novels";
-import AuthorService from "../../services/author";
-import BlogService from "../../services/blog";
 
-// Helper: Ensure absolute image URL
-const ensureAbsoluteUrl = (url: string | undefined | null) => {
+const ensureAbsoluteUrl = (url: string) => {
   if (!url) return "";
   if (url.startsWith("http")) return url;
-  const backend = process.env.NEXT_PUBLIC_API_URL || "http://localhost:1337";
-  return backend.replace(/\/$/, "") + url;
+  return process.env.NEXT_PUBLIC_API_URL
+    ? process.env.NEXT_PUBLIC_API_URL.replace(/\/$/, "") + url
+    : url;
 };
 
-// Helper: Extract author image from possible fields
-const getAuthorImage = (author: any): string => {
-  if (author?.rasmi?.url) return ensureAbsoluteUrl(author.rasmi.url);
-  if (author?.rasmi?.data?.url) return ensureAbsoluteUrl(author.rasmi.data.url);
-  if (author?.photo?.src) return ensureAbsoluteUrl(author.photo.src);
-  return "/assets/images/noPhotoAvtor.jpg";
-};
-
-// Helper: Highlight matched part
 const highlightMatch = (text: string, query: string) => {
   if (!query) return text;
-  const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`, "gi");
+  const regex = new RegExp(`(${query})`, "gi");
   return (
     <span
       dangerouslySetInnerHTML={{
@@ -46,8 +37,7 @@ type Author = {
   id: number;
   ismi: string;
   slug: string;
-  rasmi?: { url?: string; data?: { url?: string } };
-  photo?: { src?: string };
+  rasmi?: { url?: string };
 };
 
 type Blog = {
@@ -57,24 +47,23 @@ type Blog = {
   rasmi?: { url?: string };
 };
 
-type GroupedResult =
-  | { type: "book"; id: number; label: string; image: string; link: string }
-  | { type: "author"; id: number; label: string; image: string; link: string }
-  | { type: "blog"; id: number; label: string; image?: string; link: string };
+type Props = {
+  open: boolean;
+  onClose: () => void;
+};
 
-const SearchForm: React.FC<{ open: boolean; onClose: () => void }> = ({ open, onClose }) => {
+const GlobalSearchModal: React.FC<Props> = ({ open, onClose }) => {
   const [query, setQuery] = useState("");
   const [debouncedQuery] = useDebounce(query, 300);
   const [loading, setLoading] = useState(false);
   const [books, setBooks] = useState<Book[]>([]);
   const [authors, setAuthors] = useState<Author[]>([]);
   const [blogs, setBlogs] = useState<Blog[]>([]);
-  const [groupedResults, setGroupedResults] = useState<GroupedResult[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [groupedResults, setGroupedResults] = useState<any[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
 
-  // Focus input on open
   useEffect(() => {
     if (open && inputRef.current) {
       setTimeout(() => inputRef.current?.focus(), 100);
@@ -84,12 +73,10 @@ const SearchForm: React.FC<{ open: boolean; onClose: () => void }> = ({ open, on
       setBooks([]);
       setAuthors([]);
       setBlogs([]);
-      setGroupedResults([]);
       setActiveIndex(0);
     }
   }, [open]);
 
-  // Keyboard navigation and close
   useEffect(() => {
     if (!open) return;
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -115,10 +102,8 @@ const SearchForm: React.FC<{ open: boolean; onClose: () => void }> = ({ open, on
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [open, groupedResults, activeIndex, onClose, router]);
 
-  // Search logic
   useEffect(() => {
-    // Only search if query is at least 2 non-whitespace characters
-    if (!debouncedQuery || debouncedQuery.trim().length < 2) {
+    if (!debouncedQuery) {
       setBooks([]);
       setAuthors([]);
       setBlogs([]);
@@ -127,60 +112,67 @@ const SearchForm: React.FC<{ open: boolean; onClose: () => void }> = ({ open, on
     }
     setLoading(true);
     const locale = router.locale || "uz";
-    const filter = debouncedQuery.trim();
     Promise.all([
-      NovelService.fetchNovels({
-        ...(filter ? {"filters[nomi][$containsi]": filter} : {}),
-        "locale": locale,
-        "pagination[pageSize]": 5,
-        "populate": "muqova"
-      }),
+      NovelService.fetchNovels(locale, {
+        params: {
+          "filters[nomi][$containsi]": debouncedQuery,
+          "pagination[pageSize]": 5,
+          "populate": "muqova"
+        }
+      }).then((res) => res.data.data),
       AuthorService.fetchAuthors({
-        ...(filter ? {"filters[ismi][$containsi]": filter} : {}),
-        "locale": locale,
-        "pagination[pageSize]": 5,
-        "populate": "rasmi"
-      }),
+        locale,
+        config: {
+          params: {
+            "filters[ismi][$containsi]": debouncedQuery,
+            "pagination[pageSize]": 5,
+            "populate": "rasmi"
+          }
+        }
+      }).then((res) => res.data.data),
       BlogService.fetchBlogPosts({
-        ...(filter ? {"filters[sarlavha][$containsi]": filter} : {}),
-        "locale": locale,
-        "pagination[pageSize]": 5,
-        "populate": "rasmi"
-      }),
+        locale,
+        config: {
+          params: {
+            "filters[sarlavha][$containsi]": debouncedQuery,
+            "pagination[pageSize]": 5,
+            "populate": "rasmi"
+          }
+        }
+      }).then((res) => res.data.data),
     ])
       .then(([books, authors, blogs]) => {
-        setBooks(books?.data?.data || []);
-        setAuthors(authors?.data?.data || []);
-        setBlogs(blogs?.data?.data || []);
-        // Flatten for keyboard navigation
-        const grouped: GroupedResult[] = [];
-        if (books?.data?.data?.length)
+        setBooks(books || []);
+        setAuthors(authors || []);
+        setBlogs(blogs || []);
+        const grouped: any[] = [];
+        if (books.length)
           grouped.push(
-            ...books.data.data.map((b: Book) => ({
-              type: "book" as const,
+            ...books.map((b: Book) => ({
+              type: "book",
               id: b.id,
               label: b.nomi,
-              image: b.muqova?.url ? ensureAbsoluteUrl(b.muqova.url) : "",
+              image: b.muqova?.url ? ensureAbsoluteUrl(b.muqova.url) : null,
               link: `/books/${b.slug}`,
             }))
           );
-        if (authors?.data?.data?.length)
+        if (authors.length)
           grouped.push(
-            ...authors.data.data.map((a: Author) => ({
-              type: "author" as const,
+            ...authors.map((a: Author) => ({
+              type: "author",
               id: a.id,
               label: a.ismi,
-              image: getAuthorImage(a),
+              image: a.rasmi?.url ? ensureAbsoluteUrl(a.rasmi.url) : null,
               link: `/authors/${a.slug}`,
             }))
           );
-        if (blogs?.data?.data?.length)
+        if (blogs.length)
           grouped.push(
-            ...blogs.data.data.map((b: Blog) => ({
-              type: "blog" as const,
+            ...blogs.map((b: Blog) => ({
+              type: "blog",
               id: b.id,
               label: b.sarlavha,
-              image: b.rasmi?.url ? ensureAbsoluteUrl(b.rasmi.url) : undefined,
+              image: b.rasmi?.url ? ensureAbsoluteUrl(b.rasmi.url) : null,
               link: `/blog/${b.slug}`,
             }))
           );
@@ -188,15 +180,13 @@ const SearchForm: React.FC<{ open: boolean; onClose: () => void }> = ({ open, on
         setActiveIndex(0);
       })
       .finally(() => setLoading(false));
-  }, [debouncedQuery, router.locale, router]);
+  }, [debouncedQuery, router.locale]);
 
-  // Modal close on outside click
   const overlayRef = useRef<HTMLDivElement>(null);
   const handleOverlayClick = (e: React.MouseEvent) => {
     if (e.target === overlayRef.current) onClose();
   };
 
-  // Grouped display for UI
   const renderResults = () => {
     if (!debouncedQuery) return null;
     if (loading)
@@ -218,7 +208,7 @@ const SearchForm: React.FC<{ open: boolean; onClose: () => void }> = ({ open, on
             <div className="px-4 pt-4 pb-1 text-xs font-bold text-gray-500">
               Kitoblar
             </div>
-            {books.map((b) => (
+            {books.map((b, i) => (
               <div
                 key={`book-${b.id}`}
                 className={classNames(
@@ -250,7 +240,7 @@ const SearchForm: React.FC<{ open: boolean; onClose: () => void }> = ({ open, on
             <div className="px-4 pt-4 pb-1 text-xs font-bold text-gray-500">
               Mualliflar
             </div>
-            {authors.map((a) => (
+            {authors.map((a, i) => (
               <div
                 key={`author-${a.id}`}
                 className={classNames(
@@ -265,9 +255,9 @@ const SearchForm: React.FC<{ open: boolean; onClose: () => void }> = ({ open, on
                   onClose();
                 }}
               >
-                {getAuthorImage(a) && (
+                {a.rasmi?.url && (
                   <img
-                    src={getAuthorImage(a)}
+                    src={ensureAbsoluteUrl(a.rasmi.url)}
                     alt={a.ismi}
                     className="w-8 h-8 rounded-full object-cover mr-3"
                   />
@@ -282,7 +272,7 @@ const SearchForm: React.FC<{ open: boolean; onClose: () => void }> = ({ open, on
             <div className="px-4 pt-4 pb-1 text-xs font-bold text-gray-500">
               Bloglar
             </div>
-            {blogs.map((b) => (
+            {blogs.map((b, i) => (
               <div
                 key={`blog-${b.id}`}
                 className={classNames(
@@ -353,4 +343,4 @@ const SearchForm: React.FC<{ open: boolean; onClose: () => void }> = ({ open, on
   );
 };
 
-export default SearchForm;
+export default GlobalSearchModal; 

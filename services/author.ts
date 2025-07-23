@@ -10,9 +10,8 @@ import {FetchParams} from "../models/Actions/Params";
 
 export default class AuthorService {
 
-    static async fetchAuthors({locale, config, ctx}: FetchParams): Promise<AxiosResponse<IListResponse<IAuthor[]>>> {
-        const populateParams = "populate=kitoblars&populate=rasmi";
-        return await fetcherJson(`/api/mualliflars?locale=${locale}&${populateParams}`, config, ctx)
+    static async fetchAuthors(params: Record<string, any> = {}, config: AxiosRequestConfig = {}, ctx?: GetServerSidePropsContext): Promise<AxiosResponse<IListResponse<IAuthor[]>>> {
+        return await fetcherJson("/api/mualliflars", { ...config, params }, ctx);
     }
 
     static async fetchAuthorsList({locale, config, ctx}: FetchParams): Promise<AxiosResponse<IListResponse<IAuthor[]>>> {

@@ -7,12 +7,8 @@ import {GetServerSidePropsContext} from "next";
 
 export default class NovelService {
 
-    static async fetchNovels(locale: string, config: AxiosRequestConfig = {}, ctx?: GetServerSidePropsContext): Promise<AxiosResponse<IListResponse<INovel[]>>> {
-        const populateParams = "populate=audio&populate=muqova&populate=mualliflar&populate=kategoriya";
-        const url = `/api/kitoblars?locale=${locale}&${populateParams}`;
-        console.log('DEBUG fetchNovels - URL:', url);
-        console.log('DEBUG fetchNovels - Config:', config);
-        return await fetcherJson(url, config, ctx)
+    static async fetchNovels(params: Record<string, any> = {}, config: AxiosRequestConfig = {}, ctx?: GetServerSidePropsContext): Promise<AxiosResponse<IListResponse<INovel[]>>> {
+        return await fetcherJson("/api/kitoblars", { ...config, params }, ctx);
     }
 
     static async fetchNovelsList(locale: string, config: AxiosRequestConfig = {}, ctx?: GetServerSidePropsContext): Promise<AxiosResponse<IListResponse<INovel[]>>> {
