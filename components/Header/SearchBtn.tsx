@@ -1,7 +1,11 @@
 import React from 'react';
 import SearchForm from '../SearchForm';
 
-const SearchBtn = ({ onClick }) => {
+interface SearchBtnProps {
+    onClick?: () => void;
+}
+
+const SearchBtn: React.FC<SearchBtnProps> = ({ onClick }) => {
     const [showSearch, setShowSearch] = React.useState(false);
     
     return (

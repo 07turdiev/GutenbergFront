@@ -48,10 +48,10 @@ const highlightMatch = (text: string, query: string) => {
 
 interface Props {
   open?: boolean;
-  onClose: () => void;
+  onClose?: () => void;
 }
 
-const SearchForm = ({ open = false, onClose }: Props) => {
+const SearchForm = ({ open = false, onClose = () => {} }: Props) => {
   const router = useRouter();
   const { t } = useTranslation('common');
   const [query, setQuery] = useState("");
