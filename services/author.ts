@@ -11,7 +11,22 @@ import {FetchParams} from "../models/Actions/Params";
 export default class AuthorService {
 
     static async fetchAuthors(params: Record<string, any> = {}, config: AxiosRequestConfig = {}, ctx?: GetServerSidePropsContext): Promise<AxiosResponse<IListResponse<IAuthor[]>>> {
-        return await fetcherJson("/api/mualliflars", { ...config, params }, ctx);
+        const searchParams = new URLSearchParams();
+        for (const key in params) {
+            if (params.hasOwnProperty(key)) {
+                const value = params[key];
+                if (typeof value === 'object' && value !== null) {
+                    for (const subKey in value) {
+                        if (value.hasOwnProperty(subKey)) {
+                            searchParams.append(`${key}[${subKey}]`, value[subKey]);
+                        }
+                    }
+                } else {
+                    searchParams.append(key, value);
+                }
+            }
+        }
+        return await fetcherJson(`/api/mualliflars?${searchParams.toString()}`, config, ctx);
     }
 
     static async fetchAuthorsList({locale, config, ctx}: FetchParams): Promise<AxiosResponse<IListResponse<IAuthor[]>>> {

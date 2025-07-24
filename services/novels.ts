@@ -8,7 +8,24 @@ import {GetServerSidePropsContext} from "next";
 export default class NovelService {
 
     static async fetchNovels(params: Record<string, any> = {}, config: AxiosRequestConfig = {}, ctx?: GetServerSidePropsContext): Promise<AxiosResponse<IListResponse<INovel[]>>> {
-        return await fetcherJson("/api/kitoblars", { ...config, params }, ctx);
+        // URLSearchParams orqali params ni encode qilamiz
+        const searchParams = new URLSearchParams();
+        for (const key in params) {
+            if (params.hasOwnProperty(key)) {
+                const value = params[key];
+                if (typeof value === 'object' && value !== null) {
+                    for (const subKey in value) {
+                        if (value.hasOwnProperty(subKey)) {
+                            searchParams.append(`${key}[${subKey}]`, value[subKey]);
+                        }
+                    }
+                } else {
+                    searchParams.append(key, value);
+                }
+            }
+        }
+        // fetcherJson ga string sifatida uzatamiz
+        return await fetcherJson(`/api/kitoblars?${searchParams.toString()}`, config, ctx);
     }
 
     static async fetchNovelsList(locale: string, config: AxiosRequestConfig = {}, ctx?: GetServerSidePropsContext): Promise<AxiosResponse<IListResponse<INovel[]>>> {

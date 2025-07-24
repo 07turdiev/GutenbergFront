@@ -9,7 +9,22 @@ import {IBlogPost} from "../models/IBlog";
 export default class BlogService {
 
     static async fetchBlogPosts(params: Record<string, any> = {}, config: AxiosRequestConfig = {}, ctx?: GetServerSidePropsContext): Promise<AxiosResponse<IListResponse<IBlogPost[]>>> {
-        return await fetcherJson("/api/blog-postlaris", { ...config, params }, ctx);
+        const searchParams = new URLSearchParams();
+        for (const key in params) {
+            if (params.hasOwnProperty(key)) {
+                const value = params[key];
+                if (typeof value === 'object' && value !== null) {
+                    for (const subKey in value) {
+                        if (value.hasOwnProperty(subKey)) {
+                            searchParams.append(`${key}[${subKey}]`, value[subKey]);
+                        }
+                    }
+                } else {
+                    searchParams.append(key, value);
+                }
+            }
+        }
+        return await fetcherJson(`/api/blog-postlaris?${searchParams.toString()}`, config, ctx);
     }
 
     static async fetchBlogPostBySlug({locale, slug, config, ctx}: FetchParams & {slug: string}): Promise<AxiosResponse<IListResponse<IBlogPost[]>>> {
