@@ -28,7 +28,18 @@ export const fetchNovels = createAsyncThunk(
     'novel/fetchNovels',
     async ({locale, opt, ctx} : { locale: string, opt?: AxiosRequestConfig, ctx?: GetServerSidePropsContext}, thunkApi) => {
         try {
-            const response = await NovelService.fetchNovels(locale, opt, ctx)
+            // Build query params: always include locale and ensure cover (muqova) is populated
+            const params = {
+                locale,
+                populate: 'muqova',
+                ...(opt?.params || {})
+            } as Record<string, any>;
+
+            // Build axios config without the params field to avoid duplication
+            const axiosConfig: AxiosRequestConfig = { ...(opt || {}) };
+            if (axiosConfig.params) delete axiosConfig.params;
+
+            const response = await NovelService.fetchNovels(params, axiosConfig, ctx);
             return {
                 meta: adaptStrapiMetaToIMeta(response.data.meta),
                 results: adaptNovelsArray(response.data.data)

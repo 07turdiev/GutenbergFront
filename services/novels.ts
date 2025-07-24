@@ -7,15 +7,46 @@ import {GetServerSidePropsContext} from "next";
 
 export default class NovelService {
 
-    static async fetchNovels(params: Record<string, any> = {}, config: AxiosRequestConfig = {}, ctx?: GetServerSidePropsContext): Promise<AxiosResponse<IListResponse<INovel[]>>> {
-        // URLSearchParams orqali params ni encode qilamiz
+    static async fetchNovels(param1: any = {}, param2: AxiosRequestConfig = {}, ctx?: GetServerSidePropsContext): Promise<AxiosResponse<IListResponse<INovel[]>>> {
+        /**
+         * This method historically had two different call signatures:
+         *   1) fetchNovels(locale: string, config?: AxiosRequestConfig)
+         *   2) fetchNovels(params: Record<string, any>, config?: AxiosRequestConfig)
+         * In order to maintain backward-compatibility we detect the argument types at runtime and
+         * normalise them into a single `params` object that is then encoded into the query string.
+         */
+
+        let params: Record<string, any> = {};
+        let config: AxiosRequestConfig = { ...(param2 || {}) };
+
+        if (typeof param1 === 'string') {
+            // Old signature – first param is `locale`
+            const locale = param1 as string;
+            // Merge any params that may exist on the config object
+            params = {
+                locale,
+                ...(config.params || {})
+            };
+            // Remove params from axios config so it is not sent twice
+            if (config.params) delete config.params;
+        } else {
+            // New signature – first param is params object
+            params = { ...(param1 || {}) };
+        }
+
+        // Ensure book cover and related relations are always populated unless explicitly specified by the caller
+        if (!('populate' in params)) {
+            params.populate = 'muqova';
+        }
+
+        // Encode params into query string using URLSearchParams
         const searchParams = new URLSearchParams();
         for (const key in params) {
-            if (params.hasOwnProperty(key)) {
+            if (Object.prototype.hasOwnProperty.call(params, key)) {
                 const value = params[key];
                 if (typeof value === 'object' && value !== null) {
                     for (const subKey in value) {
-                        if (value.hasOwnProperty(subKey)) {
+                        if (Object.prototype.hasOwnProperty.call(value, subKey)) {
                             searchParams.append(`${key}[${subKey}]`, value[subKey]);
                         }
                     }
@@ -24,7 +55,7 @@ export default class NovelService {
                 }
             }
         }
-        // fetcherJson ga string sifatida uzatamiz
+
         return await fetcherJson(`/api/kitoblars?${searchParams.toString()}`, config, ctx);
     }
 

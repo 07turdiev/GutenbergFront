@@ -12,7 +12,18 @@ export const fetchAuthors = createAsyncThunk(
     'author/fetchAuthors',
     async ({locale, config} : FetchParams, thunkApi) => {
         try {
-            const response = await AuthorService.fetchAuthors({locale, config})
+            // Construct params ensuring locale and image relation (rasmi) are always included
+            const params = {
+                locale,
+                populate: 'rasmi',
+                ...(config?.params || {})
+            } as Record<string, any>;
+
+            // Prepare axios config (without params to avoid duplication)
+            const axiosConfig: AxiosRequestConfig = { ...(config || {}) };
+            if (axiosConfig.params) delete axiosConfig.params;
+
+            const response = await AuthorService.fetchAuthors(params, axiosConfig);
             return  {
                 results: adaptAuthorsArray(response.data.data),
                 meta: response.data.meta

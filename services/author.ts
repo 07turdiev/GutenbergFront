@@ -10,14 +10,44 @@ import {FetchParams} from "../models/Actions/Params";
 
 export default class AuthorService {
 
-    static async fetchAuthors(params: Record<string, any> = {}, config: AxiosRequestConfig = {}, ctx?: GetServerSidePropsContext): Promise<AxiosResponse<IListResponse<IAuthor[]>>> {
+    static async fetchAuthors(param1: any = {}, param2: AxiosRequestConfig = {}, ctx?: GetServerSidePropsContext): Promise<AxiosResponse<IListResponse<IAuthor[]>>> {
+        /**
+         * Accepts two call styles for backward compatibility:
+         *   1. fetchAuthors(locale: string, config?: AxiosRequestConfig)
+         *   2. fetchAuthors(params: Record<string, any>, config?: AxiosRequestConfig)
+         */
+        let params: Record<string, any> = {};
+        let config: AxiosRequestConfig = { ...(param2 || {}) };
+
+        if (typeof param1 === 'string') {
+            const locale = param1 as string;
+            params = {
+                locale,
+                ...(config.params || {})
+            };
+            if (config.params) delete config.params;
+        } else {
+            params = { ...(param1 || {}) };
+            // Handle legacy call where a nested `config` object was passed inside params
+            if (params.config) {
+                config = { ...(config || {}), ...(params.config as AxiosRequestConfig) };
+                delete params.config;
+            }
+        }
+
+        // Ensure author images are populated unless caller specified otherwise
+        if (!('populate' in params)) {
+            params.populate = 'rasmi';
+        }
+
+        // Encode params to query string
         const searchParams = new URLSearchParams();
         for (const key in params) {
-            if (params.hasOwnProperty(key)) {
+            if (Object.prototype.hasOwnProperty.call(params, key)) {
                 const value = params[key];
                 if (typeof value === 'object' && value !== null) {
                     for (const subKey in value) {
-                        if (value.hasOwnProperty(subKey)) {
+                        if (Object.prototype.hasOwnProperty.call(value, subKey)) {
                             searchParams.append(`${key}[${subKey}]`, value[subKey]);
                         }
                     }
@@ -26,6 +56,7 @@ export default class AuthorService {
                 }
             }
         }
+
         return await fetcherJson(`/api/mualliflars?${searchParams.toString()}`, config, ctx);
     }
 
