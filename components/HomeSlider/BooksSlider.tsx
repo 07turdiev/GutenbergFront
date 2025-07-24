@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay, EffectFade, Pagination } from 'swiper';
 import { useRouter } from 'next/router';
@@ -43,6 +43,8 @@ const BooksSlider: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [activeIndex, setActiveIndex] = useState(0);
   const [swiperInstance, setSwiperInstance] = useState<any>(null);
+  const prevRef = useRef<HTMLButtonElement>(null);
+  const nextRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     fetchLatestBooks();
@@ -98,8 +100,14 @@ const BooksSlider: React.FC = () => {
         <Swiper
           modules={[Navigation, Autoplay, EffectFade]}
           navigation={{
-            nextEl: `.${styles.nextButton}`,
-            prevEl: `.${styles.prevButton}`,
+            prevEl: prevRef.current,
+            nextEl: nextRef.current,
+          }}
+          onBeforeInit={(swiper) => {
+            if (swiper.params.navigation && typeof swiper.params.navigation !== 'boolean') {
+              swiper.params.navigation.prevEl = prevRef.current;
+              swiper.params.navigation.nextEl = nextRef.current;
+            }
           }}
           effect="fade"
           fadeEffect={{
@@ -200,12 +208,18 @@ const BooksSlider: React.FC = () => {
         
         {/* Modern Navigation Buttons */}
         <div className={styles.navigationWrapper}>
-          <button className={`${styles.navButton} ${styles.prevButton}`}>
+          <button 
+            ref={prevRef}
+            className={`${styles.navButton} ${styles.prevButton}`}
+          >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
           </button>
-          <button className={`${styles.navButton} ${styles.nextButton}`}>
+          <button 
+            ref={nextRef}
+            className={`${styles.navButton} ${styles.nextButton}`}
+          >
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
