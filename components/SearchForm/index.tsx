@@ -317,21 +317,21 @@ const SearchForm = ({ open = false, onClose }: Props) => {
   return (
     <div
       ref={overlayRef}
-      className={classNames("fixed inset-0 z-50 flex items-start justify-center bg-black/60 backdrop-blur-sm", styles.searchModal)}
+      className={classNames("fixed inset-0 z-50 flex items-start justify-center bg-black/60 backdrop-blur-sm p-4", styles.searchModal)}
       onClick={handleOverlayClick}
       aria-modal="true"
       role="dialog"
       tabIndex={-1}
     >
       <div
-        className={classNames("bg-white rounded-2xl shadow-2xl mt-20 w-full max-w-2xl mx-4 relative transition-all duration-300 transform", styles.searchContent)}
+        className={classNames("bg-white rounded-2xl shadow-2xl mt-4 md:mt-20 w-full max-w-2xl relative transition-all duration-300 transform", styles.searchContent)}
         onClick={(e) => e.stopPropagation()}
         role="document"
       >
         {/* Header Section */}
-        <div className="border-b border-gray-100 px-6 py-5">
+        <div className="border-b border-gray-100 px-4 md:px-6 py-4 md:py-5">
           <div className="flex items-center justify-between">
-            <h2 className="text-xl font-semibold text-gray-800">{t('searchTitle')}</h2>
+            <h2 className="text-lg md:text-xl font-semibold text-gray-800">{t('searchTitle')}</h2>
             <button
               className="p-2 rounded-lg text-gray-400 hover:text-[#cd1b17] hover:bg-red-50 transition-all"
               onClick={onClose}
@@ -345,15 +345,15 @@ const SearchForm = ({ open = false, onClose }: Props) => {
           
           {/* Search Input */}
           <div className="relative mt-4">
-            <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-              <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div className="absolute inset-y-0 left-0 pl-3 md:pl-4 flex items-center pointer-events-none">
+              <svg className="h-4 w-4 md:h-5 md:w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
             </div>
             <input
               ref={inputRef}
               type="text"
-              className="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl text-base focus:border-[#cd1b17] focus:outline-none transition-colors"
+              className="w-full pl-10 md:pl-12 pr-10 md:pr-4 py-2.5 md:py-3 border-2 border-gray-200 rounded-xl text-sm md:text-base focus:border-[#cd1b17] focus:outline-none transition-colors"
               placeholder={t('searchPlaceholder')}
               value={query}
               onChange={(e) => setQuery(e.target.value)}
@@ -361,7 +361,7 @@ const SearchForm = ({ open = false, onClose }: Props) => {
             />
             {query && (
               <button
-                className="absolute inset-y-0 right-0 pr-4 flex items-center"
+                className="absolute inset-y-0 right-0 pr-3 md:pr-4 flex items-center"
                 onClick={() => setQuery('')}
               >
                 <svg className="h-4 w-4 text-gray-400 hover:text-[#cd1b17] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -373,7 +373,7 @@ const SearchForm = ({ open = false, onClose }: Props) => {
         </div>
 
         {/* Results Section */}
-        <div className="max-h-[60vh] overflow-y-auto">
+        <div className="max-h-[70vh] md:max-h-[60vh] overflow-y-auto">
           {loading ? (
             <div className="flex items-center justify-center py-20">
               <div className="flex space-x-2">
@@ -406,7 +406,7 @@ const SearchForm = ({ open = false, onClose }: Props) => {
             <>
               {books.length > 0 && (
                 <div className="border-b border-gray-100 last:border-0">
-                  <div className="px-6 py-3 bg-gray-50">
+                  <div className="px-4 md:px-6 py-3 bg-gray-50">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-2">
                         <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -422,7 +422,7 @@ const SearchForm = ({ open = false, onClose }: Props) => {
                       <div
                         key={`book-${b.id}`}
                         className={classNames(
-                          "flex items-center px-6 py-3 cursor-pointer transition-all hover:bg-red-50 group",
+                          "flex items-center px-4 md:px-6 py-3 cursor-pointer transition-all hover:bg-red-50 group",
                           groupedResults[activeIndex]?.id === b.id &&
                             groupedResults[activeIndex]?.type === "book"
                             ? "bg-red-50"
@@ -468,7 +468,7 @@ const SearchForm = ({ open = false, onClose }: Props) => {
               
               {authors.length > 0 && (
                 <div className="border-b border-gray-100 last:border-0">
-                  <div className="px-6 py-3 bg-gray-50">
+                  <div className="px-4 md:px-6 py-3 bg-gray-50">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-2">
                         <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -484,7 +484,7 @@ const SearchForm = ({ open = false, onClose }: Props) => {
                       <div
                         key={`author-${a.id}`}
                         className={classNames(
-                          "flex items-center px-6 py-3 cursor-pointer transition-all hover:bg-red-50 group",
+                          "flex items-center px-4 md:px-6 py-3 cursor-pointer transition-all hover:bg-red-50 group",
                           groupedResults[activeIndex]?.id === a.id &&
                             groupedResults[activeIndex]?.type === "author"
                             ? "bg-red-50"
@@ -525,7 +525,7 @@ const SearchForm = ({ open = false, onClose }: Props) => {
               
               {blogs.length > 0 && (
                 <div>
-                  <div className="px-6 py-3 bg-gray-50">
+                  <div className="px-4 md:px-6 py-3 bg-gray-50">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center space-x-2">
                         <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -541,7 +541,7 @@ const SearchForm = ({ open = false, onClose }: Props) => {
                       <div
                         key={`blog-${b.id}`}
                         className={classNames(
-                          "flex items-center px-6 py-3 cursor-pointer transition-all hover:bg-red-50 group",
+                          "flex items-center px-4 md:px-6 py-3 cursor-pointer transition-all hover:bg-red-50 group",
                           groupedResults[activeIndex]?.id === b.id &&
                             groupedResults[activeIndex]?.type === "blog"
                             ? "bg-red-50"
@@ -583,9 +583,9 @@ const SearchForm = ({ open = false, onClose }: Props) => {
           )}
         </div>
 
-        {/* Footer - Keyboard shortcuts */}
+        {/* Footer - Keyboard shortcuts - Hidden on mobile */}
         {(books.length > 0 || authors.length > 0 || blogs.length > 0) && (
-          <div className="border-t border-gray-100 px-6 py-3 bg-gray-50">
+          <div className="hidden md:block border-t border-gray-100 px-4 md:px-6 py-3 bg-gray-50">
             <div className="flex items-center justify-between text-xs text-gray-500">
               <div className="flex items-center space-x-4">
                 <span className="flex items-center space-x-1">
