@@ -8,26 +8,26 @@
   z-index: 1;
   margin-top: -5rem; // -80px mobil uchun (pt-20)
   padding-top: 6rem; // Header bilan bir xil balandlik
-  padding-bottom: 2.5rem; // Pagination uchun minimal joy
+  margin-bottom: 2rem;
   
   @media (min-width: 640px) {
     margin-top: -6rem; // -96px sm (sm:pt-24)
     padding-top: 5rem; // Header bilan bir xil
-    padding-bottom: 3rem;
+    margin-bottom: 2rem;
   }
   
   @media (min-width: 768px) {
     min-height: 500px;
     margin-top: -6rem; // -96px sm (sm:pt-24)
     padding-top: 6rem; // Header bilan bir xil
-    padding-bottom: 3.5rem;
+    margin-bottom: 2rem;
   }
   
   @media (min-width: 1024px) {
     min-height: 600px;
     margin-top: -8rem; // -128px lg uchun (lg:pt-32)
     padding-top: 7rem; // Header bilan bir xil
-    padding-bottom: 4rem;
+    margin-bottom: 2rem;
   }
 }
 
@@ -211,7 +211,7 @@
       
       .priceWrapper {
         display: flex;
-        align-items: baseline;
+        align-items: center;
         gap: 8px;
         
         @media (min-width: 640px) {
@@ -223,6 +223,7 @@
         font-size: 20px;
         font-weight: 700;
         color: #2d3436;
+        line-height: 1.2;
         
         @media (min-width: 640px) {
           font-size: 24px;
@@ -259,6 +260,7 @@
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
+        line-height: 1.2;
         
         @media (min-width: 640px) {
           font-size: 24px;
