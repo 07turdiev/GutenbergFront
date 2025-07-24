@@ -1,262 +1,662 @@
+// Modern Slider Styles
 .billboard {
   position: relative;
-  display: flex;
-  align-items: center;
-  padding: 0 0 7rem 0; 
-  background-color: #f3f4f6;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  min-height: 6px;
-  margin-bottom: 1.5rem;
-  
-  // Fonni sarlavhaning pastki qismigacha kengaytirish
+  width: 100%;
+  min-height: 400px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #f5f5f5 0%, #fafafa 100%);
+  z-index: 1;
   margin-top: -5rem; // -80px mobil uchun (pt-20)
-  padding-top: 8rem; // 80px + kamaytirilgan tarkib to'ldirish
+  padding-top: 6rem; // Header bilan bir xil balandlik
+  padding-bottom: 2.5rem; // Pagination uchun minimal joy
   
   @media (min-width: 640px) {
     margin-top: -6rem; // -96px sm (sm:pt-24)
-    padding-top: 8rem; // 96px + kamaytirilgan tarkib to'ldirish
+    padding-top: 5rem; // Header bilan bir xil
+    padding-bottom: 3rem;
   }
   
   @media (min-width: 768px) {
     min-height: 500px;
     margin-top: -6rem; // -96px sm (sm:pt-24)
-    padding-top: 8rem; // 96px + kamaytirilgan tarkib to'ldirish
+    padding-top: 6rem; // Header bilan bir xil
+    padding-bottom: 3.5rem;
   }
   
   @media (min-width: 1024px) {
-    margin-top: 5rem; // -128px Kompyuter uchun (lg:pt-32)
-    padding-top: 4rem; // 128px + kamaytirilgan tarkib to'ldirish
-  } 
+    min-height: 600px;
+    margin-top: -8rem; // -128px lg uchun (lg:pt-32)
+    padding-top: 7rem; // Header bilan bir xil
+    padding-bottom: 4rem;
+  }
+}
 
-  .navigationButtons {
-    .navButton {
-      display: none; // Hide on mobile by default
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 10;
+.sliderContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.mainSwiper {
+  width: 100%;
+  height: 100%;
+}
+
+.slideContent {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 350px;
+  display: flex;
+  align-items: center;
+  padding: 1rem 0;
+  
+  @media (min-width: 640px) {
+    min-height: 400px;
+    padding: 1.5rem 0;
+  }
+  
+  @media (min-width: 768px) {
+    min-height: 500px;
+    padding: 2rem 0;
+  }
+  
+  @media (min-width: 1024px) {
+    min-height: 600px;
+    padding: 2.5rem 0;
+  }
+}
+
+
+
+
+
+.bookInfo {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  align-items: center;
+  width: 100%;
+  
+  @media (min-width: 640px) {
+    gap: 2rem;
+  }
+  
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+  
+  @media (min-width: 1024px) {
+    gap: 3rem;
+  }
+  
+  @media (min-width: 1280px) {
+    gap: 3rem;
+  }
+}
+
+.textContent {
+  order: 2;
+  text-align: center;
+  
+  @media (min-width: 768px) {
+    order: 1;
+    text-align: left;
+  }
+  
+
+  
+  .bookTitle {
+    margin-bottom: 12px;
+    animation: fadeInUp 0.7s ease-out;
+    
+    @media (min-width: 640px) {
+      margin-bottom: 16px;
+    }
+    
+    .titleText {
+      font-size: 20px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #2d3436 0%, #000000 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.1;
+      
+      @media (min-width: 480px) {
+        font-size: 24px;
+      }
+      
+      @media (min-width: 640px) {
+        font-size: 28px;
+        line-height: 1.2;
+      }
+      
+      @media (min-width: 768px) {
+        font-size: 36px;
+      }
+      
+      @media (min-width: 1024px) {
+        font-size: 48px;
+      }
+      
+      @media (min-width: 1200px) {
+        font-size: 56px;
+      }
+    }
+  }
+  
+  .authorName {
+    font-size: 14px;
+    color: #636e72;
+    margin-bottom: 16px;
+    animation: fadeInUp 0.8s ease-out;
+    
+    @media (min-width: 640px) {
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+    
+    @media (min-width: 768px) {
+      font-size: 18px;
+      margin-bottom: 24px;
+    }
+    
+    .authorLabel {
+      color: #b2bec3;
+      font-weight: 400;
+    }
+  }
+  
+  .priceSection {
+    margin-bottom: 20px;
+    animation: fadeInUp 0.9s ease-out;
+    
+    @media (min-width: 640px) {
+      margin-bottom: 24px;
+    }
+    
+    @media (min-width: 768px) {
+      margin-bottom: 32px;
+    }
+    
+    .priceInfo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      
+      @media (min-width: 640px) {
+        gap: 16px;
+        flex-wrap: nowrap;
+      }
+      
+      @media (min-width: 768px) {
+        justify-content: flex-start;
+      }
+      
+      .discountBadge {
+        padding: 3px 8px;
+        background: linear-gradient(135deg, #00b894 0%, #00cec9 100%);
+        color: white;
+        font-size: 12px;
+        font-weight: 600;
+        border-radius: 12px;
+        animation: pulse 2s infinite;
+        
+        @media (min-width: 640px) {
+          padding: 4px 12px;
+          font-size: 14px;
+          border-radius: 16px;
+        }
+      }
+      
+      .priceWrapper {
+        display: flex;
+        align-items: baseline;
+        gap: 8px;
+        
+        @media (min-width: 640px) {
+          gap: 12px;
+        }
+      }
+      
+      .price {
+        font-size: 20px;
+        font-weight: 700;
+        color: #2d3436;
+        
+        @media (min-width: 640px) {
+          font-size: 24px;
+        }
+        
+        @media (min-width: 768px) {
+          font-size: 28px;
+        }
+        
+        @media (min-width: 1024px) {
+          font-size: 32px;
+        }
+      }
+      
+      .originalPrice {
+        font-size: 14px;
+        color: #b2bec3;
+        text-decoration: line-through;
+        opacity: 0.7;
+        
+        @media (min-width: 640px) {
+          font-size: 16px;
+        }
+        
+        @media (min-width: 768px) {
+          font-size: 18px;
+        }
+      }
+      
+      .discountPrice {
+        font-size: 20px;
+        font-weight: 700;
+        background: linear-gradient(135deg, #cd1b17 0%, #e63946 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        
+        @media (min-width: 640px) {
+          font-size: 24px;
+        }
+        
+        @media (min-width: 768px) {
+          font-size: 28px;
+        }
+        
+        @media (min-width: 1024px) {
+          font-size: 32px;
+        }
+      }
+    }
+  }
+  
+  .buttonGroup {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    animation: fadeInUp 1s ease-out;
+    
+    @media (min-width: 640px) {
+      gap: 16px;
+    }
+    
+    @media (min-width: 768px) {
+      justify-content: flex-start;
+    }
+    
+    .primaryButton {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 20px;
+      background: linear-gradient(135deg, #cd1b17 0%, #e63946 100%);
+      color: white;
+      border: none;
+      border-radius: 25px;
+      font-size: 14px;
+      font-weight: 600;
       cursor: pointer;
-      color: #cd1b17;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(205, 27, 23, 0.3);
+      
+      @media (min-width: 640px) {
+        gap: 12px;
+        padding: 14px 24px;
+        border-radius: 35px;
+        font-size: 15px;
+      }
+      
+      @media (min-width: 768px) {
+        padding: 16px 32px;
+        border-radius: 50px;
+        font-size: 16px;
+      }
+      
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(205, 27, 23, 0.4);
+        
+        .arrowIcon {
+          transform: translateX(4px);
+        }
+      }
+      
+      .arrowIcon {
+        width: 16px;
+        height: 16px;
+        transition: transform 0.3s ease;
+        
+        @media (min-width: 640px) {
+          width: 18px;
+          height: 18px;
+        }
+        
+        @media (min-width: 768px) {
+          width: 20px;
+          height: 20px;
+        }
+      }
+    }
+    
+    .secondaryButton {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      background: white;
+      border: 2px solid #f1f3f5;
+      border-radius: 50%;
+      cursor: pointer;
       transition: all 0.3s ease;
       
-      // Show on tablet and desktop
+      @media (min-width: 640px) {
+        width: 48px;
+        height: 48px;
+      }
+      
       @media (min-width: 768px) {
-        display: block;
+        width: 52px;
+        height: 52px;
       }
       
       svg {
-        width: 40px;
-        height: 40px;
-        padding: 0.5rem;
-        background: #fff;
-        border-radius: 50%;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        width: 20px;
+        height: 20px;
+        stroke: #cd1b17;
+        transition: all 0.3s ease;
         
-        @media (min-width: 1200px) {
-          width: 80px;
-          height: 80px;
+        @media (min-width: 640px) {
+          width: 22px;
+          height: 22px;
+        }
+        
+        @media (min-width: 768px) {
+          width: 24px;
+          height: 24px;
         }
       }
       
       &:hover {
-        transform: translateY(-50%) scale(1.1);
+        background: #cd1b17;
+        border-color: #cd1b17;
+        transform: scale(1.1);
         
         svg {
-          background: rgba(255, 255, 255, 1);
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        }
-      }
-      
-      &.prevButton {
-        left: 0;
-        padding-left: 1rem;
-        
-        @media (min-width: 1400px) {
-          left: 3rem;
-        }
-      }
-      
-      &.nextButton {
-        right: 0;
-        padding-right: 1rem;
-        
-        @media (min-width: 1400px) {
-          right: 3rem;
+          stroke: white;
+          fill: white;
         }
       }
     }
   }
+}
 
-  .mainSwiper {
-    width: 100%;
-    height: 100%;
+.imageSection {
+  order: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 100%;
+  overflow: hidden;
+  
+  @media (min-width: 768px) {
+    order: 2;
   }
+  
+  .imageWrapper {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    max-width: 100%;
+    margin: 0 auto;
+    
+    @media (min-width: 480px) {
+      width: 220px;
+      height: 220px;
+    }
+    
+    @media (min-width: 640px) {
+      width: 250px;
+      height: 250px;
+    }
+    
+    @media (min-width: 768px) {
+      width: 300px;
+      height: 300px;
+      margin: 0;
+    }
+    
+    @media (min-width: 1024px) {
+      width: 350px;
+      height: 350px;
+    }
+    
+    @media (min-width: 1280px) {
+      width: 400px;
+      height: 400px;
+    }
+    
 
-  // Custom pagination positioned outside Swiper
-  .customPagination {
+    
+    .bookImage {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      transition: transform 0.3s ease;
+      
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+    
+
+  }
+}
+
+// Navigation Buttons
+.navigationWrapper {
+  .navButton {
     position: absolute;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 10;
+    top: 45%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 8px;
-  }
-
-  .paginationBullet {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    border: none;
-    background: #cd1b17;
-    opacity: 0.7;
-    cursor: pointer;
+    justify-content: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
-
+    z-index: 15;
+    
+    @media (min-width: 768px) {
+      top: 50%;
+    }
+    
+    @media (min-width: 1024px) {
+      width: 60px;
+      height: 60px;
+    }
+    
+    svg {
+      width: 20px;
+      height: 20px;
+      stroke: #2d3436;
+      stroke-width: 2.5;
+      transition: all 0.3s ease;
+      
+      @media (min-width: 1024px) {
+        width: 24px;
+        height: 24px;
+      }
+    }
+    
     &:hover {
-      opacity: 0.9;
+      background: #cd1b17;
+      transform: translateY(-50%) scale(1.1);
+      box-shadow: 0 6px 30px rgba(205, 27, 23, 0.3);
+      
+      svg {
+        stroke: white;
+      }
+    }
+    
+    &.prevButton {
+      left: 1rem;
+      
+      @media (min-width: 1024px) {
+        left: 2rem;
+      }
+    }
+    
+    &.nextButton {
+      right: 1rem;
+      
+      @media (min-width: 1024px) {
+        right: 2rem;
+      }
+    }
+    
+    // Hide on mobile
+    @media (max-width: 767px) {
+      display: none;
     }
   }
+}
 
-  .paginationBulletActive {
-    opacity: 1;
+// Custom Pagination
+.customPagination {
+  position: absolute;
+  bottom: 0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  
+  @media (min-width: 640px) {
+    bottom: 1rem;
+    gap: 8px;
+  }
+  
+  @media (min-width: 768px) {
+    bottom: 1.25rem;
+  }
+  
+  @media (min-width: 1024px) {
+    bottom: 1.5rem;
+  }
+}
+
+.paginationBullet {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(205, 27, 23, 0.4);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  
+  @media (min-width: 640px) {
+    width: 12px;
+    height: 12px;
+  }
+  
+  &:hover {
+    background: rgba(205, 27, 23, 0.6);
+    transform: scale(1.1);
+  }
+}
+
+.paginationBulletActive {
+  background: #cd1b17;
+  width: 24px;
+  border-radius: 5px;
+  transform: scale(1);
+  
+  @media (min-width: 640px) {
     width: 30px;
     border-radius: 6px;
   }
+  
+  &:hover {
+    background: #cd1b17;
+    transform: scale(1.05);
+  }
+}
 
-  .slideContent {
+// Loading State
+.loadingSlider {
+  width: 100%;
+  height: 100%;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  @media (min-width: 768px) {
+    min-height: 500px;
+  }
+  
+  @media (min-width: 1024px) {
+    min-height: 600px;
+  }
+  
+  .shimmer {
     width: 100%;
     height: 100%;
-    display: flex;
-    align-items: center;
-    padding-top: 2rem;
-    
-    @media (min-width: 768px) {
-      padding-top: 0;
-    }
-    
-    .bookInfo {
-      display: flex;
-      flex-direction: column-reverse;
-      align-items: center;
-      gap: 2rem;
-      
-      @media (min-width: 768px) {
-        flex-direction: row;
-        gap: 3rem;
-      }
-      
-      .textContent {
-        flex: 1;
-        text-align: center;
-        padding: 0 1rem;
-        
-        @media (min-width: 768px) {
-          text-align: left;
-          padding: 0 2rem;
-        }
-        
-        .bookTitle {
-          font-size: 25px;
-          font-weight: 700;
-          margin-bottom: 0.5rem;
-          color: #cd1b17;
-          line-height: 1.2;
-          
-          @media (min-width: 768px) {
-            font-size: 35px;
-          }
-          
-          @media (min-width: 1200px) {
-            font-size: 35px;
-          }
-        }
-        
-        .authorName {
-          font-size: 1.125rem;
-          color: #000;
-          margin-bottom: 1rem;
-          
-          @media (min-width: 768px) {
-            font-size: 1.25rem;
-          }
-        }
-        
-        .priceInfo {
-          margin-bottom: 1.5rem;
-          display: flex;
-          align-items: center;
-          gap: 1rem;
-          justify-content: center;
-          
-          @media (min-width: 768px) {
-            justify-content: flex-start;
-          }
-          
-          .price {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: #000;
-          }
-          
-          .originalPrice {
-            font-size: 1.125rem;
-            color: #414141;
-            text-decoration: line-through;
-          }
-          
-          .discountPrice {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: #000;
-          }
-        }
-        
-        .shopButton {
-          display: inline-block;
-          padding: 0.875rem 2.5rem;
-          background-color: #cd1b17;
-          color: #fff;
-          text-decoration: none;
-          border-radius: 4px;
-          font-weight: 500;
-          transition: all 0.3s ease;
-          border: none;
-          cursor: pointer;
-          font-size: 1rem;
-          
-          &:hover {
-            background-color: #cd1b17;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-          }
-        }
-      }
-      
-      .imageWrapper {
-        flex: 1;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        max-width: 300px;
-        
-        @media (min-width: 768px) {
-          max-width: 400px;
-        }
-        
-        @media (min-width: 1200px) {
-          max-width: 450px;
-        }
-        
-        .bookImage {
-          width: 100%;
-          aspect-ratio: 1 / 1;
-          object-fit: cover;
-        }
-      }
-    }
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+}
+
+// Animations
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
   }
 } 

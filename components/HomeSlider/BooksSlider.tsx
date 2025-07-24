@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Autoplay } from 'swiper';
+import { Navigation, Autoplay, EffectFade, Pagination } from 'swiper';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { getApiUrl, ensureAbsoluteUrl } from '../../config/api';
 import 'swiper/css';
 import 'swiper/css/navigation';
+import 'swiper/css/effect-fade';
+import 'swiper/css/pagination';
 import styles from './BooksSlider.module.scss';
 
 interface Author {
@@ -49,7 +51,7 @@ const BooksSlider: React.FC = () => {
   const fetchLatestBooks = async () => {
     try {
       const response = await fetch(
-        `${getApiUrl()}api/kitoblars?locale=${router.locale || 'uz'}&populate=mualliflar&populate=muqova&sort=createdAt:desc&pagination[limit]=3`
+        `${getApiUrl()}api/kitoblars?locale=${router.locale || 'uz'}&populate=mualliflar&populate=muqova&sort=createdAt:desc&pagination[limit]=5`
       );
       const data = await response.json();
       setBooks(data.data || []);
@@ -73,101 +75,142 @@ const BooksSlider: React.FC = () => {
   };
 
   const handleBookClick = (slug: string) => {
-            router.push(`/books/${slug}`);
+    router.push(`/books/${slug}`);
   };
 
-  const handlePaginationClick = (index: number) => {
-    if (swiperInstance) {
-      swiperInstance.slideToLoop(index);
-    }
-  };
+  if (loading) {
+    return (
+      <section className={styles.billboard}>
+        <div className={styles.loadingSlider}>
+          <div className={styles.shimmer}></div>
+        </div>
+      </section>
+    );
+  }
 
-  if (loading || books.length === 0) {
+  if (books.length === 0) {
     return null;
   }
 
   return (
     <section id="billboard" className={styles.billboard}>
-      <div className={styles.navigationButtons}>
-        <div className={`${styles.navButton} ${styles.prevButton} main-slider-button-prev`}>
-          <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-          </svg>
-        </div>
-        <div className={`${styles.navButton} ${styles.nextButton} main-slider-button-next`}>
-          <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-          </svg>
-        </div>
-      </div>
-      
-      <Swiper
-        modules={[Navigation, Autoplay]}
-        navigation={{
-          nextEl: '.main-slider-button-next',
-          prevEl: '.main-slider-button-prev',
-        }}
-        autoplay={{
-          delay: 5000,
-          disableOnInteraction: false,
-        }}
-        loop={true}
-        onSwiper={setSwiperInstance}
-        onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
-        className={styles.mainSwiper}
-      >
-        {books.map((book) => (
-          <SwiperSlide key={book.id}>
-            <div className={styles.slideContent}>
-              <div className="container mx-auto px-4">
-                <div className={styles.bookInfo}>
-                  <div className={styles.textContent}>
-                    <h2 className={styles.bookTitle}>{book.nomi}</h2>
-                    <p className={styles.authorName}>
-                      {book.mualliflar?.ismi}
-                    </p>
-                    <div className={styles.priceInfo}>
-                      {book.chegirma_narxi ? (
-                        <>
-                          <span className={styles.originalPrice}>{book.narxi.toLocaleString()} {t('currency')}</span>
-                          <span className={styles.discountPrice}>{book.chegirma_narxi.toLocaleString()} {t('currency')}</span>
-                        </>
-                      ) : (
-                        <span className={styles.price}>{book.narxi.toLocaleString()} {t('currency')}</span>
-                      )}
+      <div className={styles.sliderContainer}>
+        <Swiper
+          modules={[Navigation, Autoplay, EffectFade]}
+          navigation={{
+            nextEl: `.${styles.nextButton}`,
+            prevEl: `.${styles.prevButton}`,
+          }}
+          effect="fade"
+          fadeEffect={{
+            crossFade: true
+          }}
+          autoplay={{
+            delay: 6000,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: true,
+          }}
+          speed={800}
+          loop={true}
+          onSwiper={setSwiperInstance}
+          onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
+          className={styles.mainSwiper}
+        >
+          {books.map((book, index) => (
+            <SwiperSlide key={book.id}>
+              <div className={styles.slideContent}>
+                <div className="container mx-auto px-3">
+                  <div className={styles.bookInfo}>
+                    <div className={styles.textContent}>
+                      <h2 className={styles.bookTitle}>
+                        <span className={styles.titleText}>{book.nomi}</span>
+                      </h2>
+                      <p className={styles.authorName}>
+                        <span className={styles.authorLabel}>{t('author')}:</span> {book.mualliflar?.ismi}
+                      </p>
+                      
+                      <div className={styles.priceSection}>
+                        <div className={styles.priceInfo}>
+                          {book.chegirma_narxi ? (
+                            <>
+                              <div className={styles.discountBadge}>
+                                -{Math.round((1 - book.chegirma_narxi / book.narxi) * 100)}%
+                              </div>
+                              <div className={styles.priceWrapper}>
+                                <span className={styles.originalPrice}>{book.narxi.toLocaleString()} {t('currency')}</span>
+                                <span className={styles.discountPrice}>{book.chegirma_narxi.toLocaleString()} {t('currency')}</span>
+                              </div>
+                            </>
+                          ) : (
+                            <span className={styles.price}>{book.narxi.toLocaleString()} {t('currency')}</span>
+                          )}
+                        </div>
+                      </div>
+                      
+                      <div className={styles.buttonGroup}>
+                        <button 
+                          className={styles.primaryButton}
+                          onClick={() => handleBookClick(book.slug)}
+                        >
+                          <span>{t('detail_slider')}</span>
+                          <svg className={styles.arrowIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                          </svg>
+                        </button>
+                        <button className={styles.secondaryButton}>
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                          </svg>
+                        </button>
+                      </div>
                     </div>
-                    <button 
-                      className={styles.shopButton}
-                      onClick={() => handleBookClick(book.slug)}
-                    >
-                      {t('detail_slider')}
-                    </button>
-                  </div>
-                  <div className={styles.imageWrapper}>
-                    <img 
-                      src={getImageUrl(book.muqova)} 
-                      alt={book.nomi}
-                      className={styles.bookImage}
-                    />
+                    
+                    <div className={styles.imageSection}>
+                      <div className={styles.imageWrapper}>
+                        <img 
+                          src={getImageUrl(book.muqova)} 
+                          alt={book.nomi}
+                          className={styles.bookImage}
+                        />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
-      
-      {/* Custom Pagination */}
-      <div className={styles.customPagination}>
-        {books.map((_, index) => (
-          <button
-            key={index}
-            className={`${styles.paginationBullet} ${
-              index === activeIndex ? styles.paginationBulletActive : ''
-            }`}
-            onClick={() => handlePaginationClick(index)}
-          />
-        ))}
+            </SwiperSlide>
+          ))}
+        </Swiper>
+        
+        {/* Custom Pagination */}
+        <div className={styles.customPagination}>
+          {books.map((_, index) => (
+            <button
+              key={index}
+              className={`${styles.paginationBullet} ${
+                index === activeIndex ? styles.paginationBulletActive : ''
+              }`}
+              onClick={() => {
+                if (swiperInstance) {
+                  swiperInstance.slideToLoop(index);
+                }
+              }}
+            />
+          ))}
+        </div>
+        
+        {/* Modern Navigation Buttons */}
+        <div className={styles.navigationWrapper}>
+          <button className={`${styles.navButton} ${styles.prevButton}`}>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          <button className={`${styles.navButton} ${styles.nextButton}`}>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </div>
       </div>
     </section>
   );
