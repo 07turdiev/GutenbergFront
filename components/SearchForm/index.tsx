@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useDebounce } from "use-debounce";
 import classNames from "classnames";
+import useTranslation from "next-translate/useTranslation";
 import NovelService from "../../services/novels";
 import AuthorService from "../../services/author";
 import BlogService from "../../services/blog";
@@ -52,6 +53,7 @@ interface Props {
 
 const SearchForm = ({ open = false, onClose }: Props) => {
   const router = useRouter();
+  const { t } = useTranslation('common');
   const [query, setQuery] = useState("");
   const [debouncedQuery] = useDebounce(query, 300);
   const [loading, setLoading] = useState(false);
@@ -329,11 +331,11 @@ const SearchForm = ({ open = false, onClose }: Props) => {
         {/* Header Section */}
         <div className="border-b border-gray-100 px-6 py-5">
           <div className="flex items-center justify-between">
-            <h2 className="text-xl font-semibold text-gray-800">Qidiruv</h2>
+            <h2 className="text-xl font-semibold text-gray-800">{t('searchTitle')}</h2>
             <button
               className="p-2 rounded-lg text-gray-400 hover:text-[#cd1b17] hover:bg-red-50 transition-all"
               onClick={onClose}
-              aria-label="Yopish"
+              aria-label={t('searchClose')}
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -352,10 +354,10 @@ const SearchForm = ({ open = false, onClose }: Props) => {
               ref={inputRef}
               type="text"
               className="w-full pl-12 pr-4 py-3 border-2 border-gray-200 rounded-xl text-base focus:border-[#cd1b17] focus:outline-none transition-colors"
-              placeholder="Kitob, muallif yoki blog qidiring..."
+              placeholder={t('searchPlaceholder')}
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              aria-label="Qidirish"
+              aria-label={t('searchLabel')}
             />
             {query && (
               <button
@@ -387,8 +389,8 @@ const SearchForm = ({ open = false, onClose }: Props) => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <p className="text-gray-500 text-lg">Hech narsa topilmadi</p>
-              <p className="text-gray-400 text-sm mt-1">Boshqa so'zlar bilan qidirib ko'ring</p>
+              <p className="text-gray-500 text-lg">{t('searchNoResults')}</p>
+              <p className="text-gray-400 text-sm mt-1">{t('searchNoResultsDescription')}</p>
             </div>
           ) : !debouncedQuery || debouncedQuery.trim().length < 2 ? (
             <div className="text-center py-20">
@@ -397,8 +399,8 @@ const SearchForm = ({ open = false, onClose }: Props) => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 16l2.879-2.879m0 0a3 3 0 104.243-4.242 3 3 0 00-4.243 4.242zM21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <p className="text-gray-600 text-lg">Qidiruvni boshlang</p>
-              <p className="text-gray-400 text-sm mt-1">Kamida 2 ta harf kiriting</p>
+              <p className="text-gray-600 text-lg">{t('searchStartSearching')}</p>
+              <p className="text-gray-400 text-sm mt-1">{t('searchMinChars')}</p>
             </div>
           ) : (
             <>
@@ -410,9 +412,9 @@ const SearchForm = ({ open = false, onClose }: Props) => {
                         <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                         </svg>
-                        <h3 className="text-sm font-semibold text-gray-700">Kitoblar</h3>
+                        <h3 className="text-sm font-semibold text-gray-700">{t('searchBooksSection')}</h3>
                       </div>
-                      <span className="text-xs text-gray-500">{books.length} ta natija</span>
+                      <span className="text-xs text-gray-500">{books.length} {t('searchResultsCount')}</span>
                     </div>
                   </div>
                   <div className="divide-y divide-gray-50">
@@ -446,7 +448,7 @@ const SearchForm = ({ open = false, onClose }: Props) => {
                             </div>
                           )}
                           {b.yangi && (
-                            <span className="absolute -top-1 -right-1 bg-[#cd1b17] text-white text-xs px-1.5 py-0.5 rounded-full font-medium">Yangi</span>
+                            <span className="absolute -top-1 -right-1 bg-[#cd1b17] text-white text-xs px-1.5 py-0.5 rounded-full font-medium">{t('searchNewLabel')}</span>
                           )}
                         </div>
                         <div className="ml-4 flex-1">
@@ -472,9 +474,9 @@ const SearchForm = ({ open = false, onClose }: Props) => {
                         <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
-                        <h3 className="text-sm font-semibold text-gray-700">Mualliflar</h3>
+                        <h3 className="text-sm font-semibold text-gray-700">{t('searchAuthorsSection')}</h3>
                       </div>
-                      <span className="text-xs text-gray-500">{authors.length} ta natija</span>
+                      <span className="text-xs text-gray-500">{authors.length} {t('searchResultsCount')}</span>
                     </div>
                   </div>
                   <div className="divide-y divide-gray-50">
@@ -509,7 +511,7 @@ const SearchForm = ({ open = false, onClose }: Props) => {
                         <div className="ml-4 flex-1">
                           <p className="font-medium text-gray-900 group-hover:text-[#cd1b17]">{highlightMatch(a.ismi, debouncedQuery)}</p>
                           {a.kitoblars && a.kitoblars.length > 0 && (
-                            <p className="text-sm text-gray-500 mt-0.5">{a.kitoblars.length} ta kitob</p>
+                            <p className="text-sm text-gray-500 mt-0.5">{a.kitoblars.length} {t('searchBooksCount')}</p>
                           )}
                         </div>
                         <svg className="w-4 h-4 text-gray-400 group-hover:text-[#cd1b17] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -529,9 +531,9 @@ const SearchForm = ({ open = false, onClose }: Props) => {
                         <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
                         </svg>
-                        <h3 className="text-sm font-semibold text-gray-700">Bloglar</h3>
+                        <h3 className="text-sm font-semibold text-gray-700">{t('searchBlogsSection')}</h3>
                       </div>
-                      <span className="text-xs text-gray-500">{blogs.length} ta natija</span>
+                      <span className="text-xs text-gray-500">{blogs.length} {t('searchResultsCount')}</span>
                     </div>
                   </div>
                   <div className="divide-y divide-gray-50">
@@ -589,15 +591,15 @@ const SearchForm = ({ open = false, onClose }: Props) => {
                 <span className="flex items-center space-x-1">
                   <kbd className="px-1.5 py-0.5 bg-white border border-gray-300 rounded text-xs">↑</kbd>
                   <kbd className="px-1.5 py-0.5 bg-white border border-gray-300 rounded text-xs">↓</kbd>
-                  <span>Tanlash</span>
+                  <span>{t('searchKeyboardSelect')}</span>
                 </span>
                 <span className="flex items-center space-x-1">
                   <kbd className="px-1.5 py-0.5 bg-white border border-gray-300 rounded text-xs">Enter</kbd>
-                  <span>Ochish</span>
+                  <span>{t('searchKeyboardOpen')}</span>
                 </span>
                 <span className="flex items-center space-x-1">
                   <kbd className="px-1.5 py-0.5 bg-white border border-gray-300 rounded text-xs">Esc</kbd>
-                  <span>Yopish</span>
+                  <span>{t('searchKeyboardClose')}</span>
                 </span>
               </div>
             </div>
