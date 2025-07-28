@@ -29,7 +29,8 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (ctx
             ...(ctx.query.lang ? {'filters[locale][$eq]': ctx.query.lang} : {}),
             'pagination[pageSize]': 9,
             'pagination[page]': ctx.query.p || 1,
-            'sort[0]': 'createdAt:desc'
+            'sort[0]': 'createdAt:desc',
+            populate: 'muqova,kategoriya'
         }
     }, ctx}));
 

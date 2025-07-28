@@ -44,7 +44,12 @@ export default class NovelService {
         for (const key in params) {
             if (Object.prototype.hasOwnProperty.call(params, key)) {
                 const value = params[key];
-                if (typeof value === 'object' && value !== null) {
+                if (Array.isArray(value)) {
+                    // Handle arrays by adding multiple parameters with the same key
+                    value.forEach(item => {
+                        searchParams.append(key, item);
+                    });
+                } else if (typeof value === 'object' && value !== null) {
                     for (const subKey in value) {
                         if (Object.prototype.hasOwnProperty.call(value, subKey)) {
                             searchParams.append(`${key}[${subKey}]`, value[subKey]);
