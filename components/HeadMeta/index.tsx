@@ -10,7 +10,7 @@ interface Props {
 	themeColor?: string;
 	children?: ReactNode;
 }
-const sitePath = 'https://ak.technocorp.uz/';
+const sitePath = 'https://gutenbergnu.uz/';
 
 function HeadMeta({ title, description, ogImg, themeColor, children }: Props) {
 

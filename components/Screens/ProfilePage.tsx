@@ -95,7 +95,7 @@ const ProfilePage = () => {
                                         {
                                             currentUser.img
                                                 ?
-                                                <Image src={`http://akback.technocorp.uz/${currentUser.img}`} width={90} height={90} objectFit='cover' objectPosition='top center'/>
+                                                <Image src={`https://admin.gutenbergnu.uz/${currentUser.img}`} width={90} height={90} objectFit='cover' objectPosition='top center'/>
                                                 :
                                                 <span className='text-2xl font-bold text-black uppercase'>{currentUser.username[0]}</span>
                                         }
