@@ -8,7 +8,7 @@ import Player from "../components/Player";
 import {Provider} from 'react-redux';
 import {PlayerContextProvider} from "../components/contexts/PlayerContext";
 import {useRouter} from "next/router";
-import SpinnerDots from "../components/Ui/SpinnerDots";
+import TopProgressBar from "../components/Ui/TopProgressBar";
 import SearchForm from "../components/SearchForm";
 
 const MyApp: React.FC<AppProps> = ({ Component, ...rest  }) => {
@@ -52,11 +52,7 @@ const MyApp: React.FC<AppProps> = ({ Component, ...rest  }) => {
     return (
         <Provider store={store}>
             <PlayerContextProvider>
-                {loading && (
-                    <div className="fixed inset-0 z-50 bg-white bg-opacity-75 flex items-center justify-center">
-                        <SpinnerDots />
-                    </div>
-                )}
+                <TopProgressBar isLoading={loading} />
                 <Component {...props.pageProps} />
                 <ToastContainer />
                 <Player/>
