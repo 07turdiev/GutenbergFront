@@ -1,41 +1,89 @@
-# TypeScript Next.js example
+# GutenberNU - Audio Kutubxona
 
-This is a really simple project that shows the usage of Next.js with TypeScript.
+O'zbekistondagi eng yirik audio kutubxona platformasi. Audio kitoblar, romanlar va hikoyalar bepul tinglash imkoniyati.
 
-## Deploy your own
+## 🚀 Xususiyatlar
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example) or preview live with [StackBlitz](https://stackblitz.com/github/vercel/next.js/tree/canary/examples/with-typescript)
+- **Audio Kitoblar**: Minglab audio kitoblar va romanlar
+- **Mualliflar**: O'zbek va jahon adabiyotining eng yaxshi mualliflari
+- **Kategoriyalar**: Turli janrlar va kategoriyalar
+- **Blog**: Audio adabiyot haqida maqolalar va yangiliklar
+- **Responsive Design**: Barcha qurilmalarda ishlaydi
+- **SEO Optimized**: Google va boshqa qidiruv tizimlarida yuqori pozitsiyalar
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-typescript&project-name=with-typescript&repository-name=with-typescript)
+## 🛠 Texnologiyalar
 
-## How to use it?
+- **Frontend**: Next.js, React, TypeScript
+- **Styling**: Tailwind CSS, SCSS
+- **State Management**: Redux Toolkit
+- **Internationalization**: next-translate
+- **Audio Player**: Custom audio player
+- **SEO**: Structured data, meta tags, sitemap
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init) or [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/) to bootstrap the example:
+## 📦 O'rnatish
 
 ```bash
-npx create-next-app --example with-typescript with-typescript-app
-# or
-yarn create next-app --example with-typescript with-typescript-app
+# Dependencelarni o'rnatish
+npm install
+
+# Development serverini ishga tushirish
+npm run dev
+
+# Production build
+npm run build
+
+# Production serverini ishga tushirish
+npm start
 ```
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+## 🔧 SEO Optimizatsiyasi
 
-## Notes
+Sayt quyidagi SEO optimizatsiyalariga ega:
 
-This example shows how to integrate the TypeScript type system into Next.js. Since TypeScript is supported out of the box with Next.js, all we have to do is to install TypeScript.
+- **Sitemap.xml**: Barcha sahifalar uchun avtomatik sitemap
+- **Robots.txt**: Qidiruv tizimlari uchun yo'riqnoma
+- **Meta Tags**: Har bir sahifa uchun optimallashtirilgan meta taglar
+- **Structured Data**: JSON-LD formatda structured data
+- **Open Graph**: Social media uchun optimallashtirilgan
+- **Canonical URLs**: Duplicate content muammolarini oldini oladi
+- **Language Alternates**: Ko'p tilli SEO
 
+## 📊 Performance
+
+- **Image Optimization**: Next.js Image komponenti bilan optimallashtirilgan
+- **Lazy Loading**: Rasmlar va kontent lazy loading
+- **Code Splitting**: Avtomatik code splitting
+- **Compression**: Gzip compression
+- **Caching**: Browser va server caching
+
+## 🌐 Deployment
+
+Sayt Vercel yoki boshqa hosting platformalarida deploy qilish mumkin:
+
+```bash
+# Vercel deployment
+vercel --prod
+
+# Custom server deployment
+npm run build
+npm start
 ```
-npm install --save-dev typescript
-```
 
-To enable TypeScript's features, we install the type declarations for React and Node.
+## 📈 Analytics
 
-```
-npm install --save-dev @types/react @types/react-dom @types/node
-```
+- Google Analytics 4
+- Google Search Console
+- Performance monitoring
 
-When we run `next dev` the next time, Next.js will start looking for any `.ts` or `.tsx` files in our project and builds it. It even automatically creates a `tsconfig.json` file for our project with the recommended settings.
+## 🤝 Contributing
 
-Next.js has built-in TypeScript declarations, so we'll get autocompletion for Next.js' modules straight away.
+Loyihaga hissa qo'shish uchun:
 
-A `type-check` script is also added to `package.json`, which runs TypeScript's `tsc` CLI in `noEmit` mode to run type-checking separately. You can then include this, for example, in your `test` scripts.
+1. Repositoryni fork qiling
+2. Feature branch yarating
+3. O'zgarishlarni commit qiling
+4. Pull request yuboring
+
+## 📄 License
+
+MIT License - batafsil ma'lumot uchun [LICENSE](LICENSE) faylini ko'ring.

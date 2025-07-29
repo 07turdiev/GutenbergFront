@@ -34,34 +34,35 @@ export default class NovelService {
             params = { ...(param1 || {}) };
         }
 
-        // Ensure book cover and related relations are always populated unless explicitly specified by the caller
-        if (!('populate' in params)) {
-            params.populate = 'muqova';
+        // Use the same populate format as other functions
+        const populateParams = "populate=muqova";
+        const queryParams = new URLSearchParams();
+        
+        // Add locale
+        if (params.locale) {
+            queryParams.append('locale', params.locale);
         }
-
-        // Encode params into query string using URLSearchParams
-        const searchParams = new URLSearchParams();
+        
+        // Add populate params
+        queryParams.append('populate', 'muqova');
+        
+        // Add other params
         for (const key in params) {
-            if (Object.prototype.hasOwnProperty.call(params, key)) {
+            if (key !== 'locale' && key !== 'populate') {
                 const value = params[key];
-                if (Array.isArray(value)) {
-                    // Handle arrays by adding multiple parameters with the same key
-                    value.forEach(item => {
-                        searchParams.append(key, item);
-                    });
-                } else if (typeof value === 'object' && value !== null) {
+                if (typeof value === 'object' && value !== null) {
                     for (const subKey in value) {
                         if (Object.prototype.hasOwnProperty.call(value, subKey)) {
-                            searchParams.append(`${key}[${subKey}]`, value[subKey]);
+                            queryParams.append(`${key}[${subKey}]`, value[subKey]);
                         }
                     }
                 } else {
-                    searchParams.append(key, value);
+                    queryParams.append(key, value);
                 }
             }
         }
 
-        return await fetcherJson(`/api/kitoblars?${searchParams.toString()}`, config, ctx);
+        return await fetcherJson(`/api/kitoblars?${queryParams.toString()}`, config, ctx);
     }
 
     static async fetchNovelsList(locale: string, config: AxiosRequestConfig = {}, ctx?: GetServerSidePropsContext): Promise<AxiosResponse<IListResponse<INovel[]>>> {

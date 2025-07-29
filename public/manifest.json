@@ -1,7 +1,7 @@
 {
-  "name": "GutenberNU",
+  "name": "GutenberNU - Audio Kutubxona",
   "short_name": "GutenberNU",
-  "description": "GutenberNU — bu zamonaviy internet audio-kutubxonasi bo'lib, sizga bestsellerlar va klassik adabiyotlar katalogiga kirish imkonini beradi",
+  "description": "O'zbekistondagi eng yirik audio kutubxona. Audio kitoblar, romanlar va hikoyalar bepul tinglash imkoniyati.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",

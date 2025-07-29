@@ -47,6 +47,25 @@ class MyDocument extends Document {
             href="https://fonts.googleapis.com/css2?family=Sitka+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap"
             rel="stylesheet"
           />
+          
+          {/* Google Analytics */}
+          <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', 'GA_MEASUREMENT_ID', {
+                  page_title: 'GutenberNU',
+                  page_location: window.location.href,
+                });
+              `,
+            }}
+          />
+          
+          {/* Google Search Console */}
+          <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE" />
         </Head>
         <body>
           <Main />

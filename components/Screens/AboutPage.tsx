@@ -26,7 +26,12 @@ const AboutPage = () => {
 
     return (
         <>
-            <HeadMeta title={t('about')} description={t('aboutText')} />
+            <HeadMeta 
+                title="GutenberNU Haqida | O'zbekistondagi Eng Yirik Audio Kutubxona" 
+                description="GutenberNU - O'zbekistondagi eng yirik audio kutubxona. Minglab audio kitoblar, yuzlab mualliflar va millionlab tinglovchilar. Audio adabiyot dunyosiga sayohat."
+                keywords="gutenbernu haqida, o'zbek audio kutubxona, audio kitoblar platformasi, gutenbernu tarix, audio adabiyot"
+                ogImg="https://gutenbergnu.uz/og-default-img.jpg"
+            />
             <div className='bg-primary py-12 -mt-10 mb-10'>
                 <div className="container mx-auto px-3">
                     <div className="grid grid-cols-12 items-center gap-5">

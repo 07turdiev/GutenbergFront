@@ -29,8 +29,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (ctx
             ...(ctx.query.lang ? {'filters[locale][$eq]': ctx.query.lang} : {}),
             'pagination[pageSize]': 9,
             'pagination[page]': ctx.query.p || 1,
-            'sort[0]': 'createdAt:desc',
-            populate: 'muqova,kategoriya'
+            'sort[0]': 'createdAt:desc'
         }
     }, ctx}));
 
@@ -74,7 +73,12 @@ const Index = () => {
 
     return (
         <MainLayout>
-            <HeadMeta title={t('novels')} description={t('novels')} />
+            <HeadMeta 
+                title="Audio Kitoblar va Romanlar | GutenberNU Audio Kutubxona" 
+                description="GutenberNU audio kutubxonasida minglab audio kitoblar, romanlar va hikoyalar. Zamonaviy va klassik adabiyotlar audio formatda. Bepul tinglash va yuklab olish."
+                keywords="audio kitoblar, audio romanlar, o'zbek audio kitoblar, bepul audio kitoblar, online audio kutubxona, audio hikoyalar, audiokitoblar"
+                ogImg="https://gutenbergnu.uz/og-default-img.jpg"
+            />
             <div className="container mx-auto px-3 ">
 
                 {/* Breadcrumb Navigation */}

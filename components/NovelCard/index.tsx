@@ -42,15 +42,27 @@ const Index:React.FC<Props> = ({novel, addToMark}) => {
                 {
                     novel.cover ?
                         <Image 
-                            quality={100} 
+                            quality={85} 
                             src={novel.cover.src}  
                             {...(novel.cover.base64 && novel.cover.base64 !== '' ? {placeholder: 'blur', blurDataURL: novel.cover.base64} : {})}
                             layout='fill' 
                             objectFit='cover' 
                             objectPosition='top center'
+                            alt={novel.name}
+                            priority={false}
+                            loading="lazy"
                         />
                     :
-                        <Image quality={100} src={noPhoto} layout='fill' objectFit='cover' objectPosition='top center'/>
+                        <Image 
+                            quality={85} 
+                            src={noPhoto} 
+                            layout='fill' 
+                            objectFit='cover' 
+                            objectPosition='top center'
+                            alt={novel.name}
+                            priority={false}
+                            loading="lazy"
+                        />
                 }
 
 
@@ -112,9 +124,9 @@ const Index:React.FC<Props> = ({novel, addToMark}) => {
             </div>
             <div className="flex items-center w-full mt-auto">
                 {novel.genre && novel.genre.length > 0 && (
-                    <CatBtn size='xs' onClick={()=>router.push(`/categories/${novel.genre[0]}`)}>
-                        {novel.genre[0]}
-                    </CatBtn>
+                <CatBtn size='xs' onClick={()=>router.push(`/categories/${novel.genre[0]}`)}>
+                    {novel.genre[0]}
+                </CatBtn>
                 )}
                 <span className='text-gray-400 ml-2 text-xs whitespace-nowrap'>
                     {isLoadingDuration ? '...' : `${novelDuration} мин`}

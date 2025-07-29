@@ -17,7 +17,12 @@ const AuthorsPage = () => {
 
     return (
         <div>
-            <HeadMeta title={t('authorsPage')} description={t('authorsPage')} />
+            <HeadMeta 
+                title="O'zbek Mualliflar va Yozuvchilar | GutenberNU Audio Kutubxona" 
+                description="GutenberNU audio kutubxonasida O'zbekistonning eng yaxshi mualliflar va yozuvchilari. Audio kitoblar, romanlar va hikoyalar mualliflarining to'liq ro'yxati."
+                keywords="o'zbek mualliflar, o'zbek yozuvchilar, audio kitob mualliflari, o'zbek adabiyot mualliflari, gutenbernu mualliflar"
+                ogImg="https://gutenbergnu.uz/og-default-img.jpg"
+            />
             <div className="container mx-auto px-3 mb-10">
 
                 {/* Breadcrumb Navigation */}
