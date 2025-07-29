@@ -150,5 +150,6 @@
   "searchNewLabel": "New",
   "searchKeyboardSelect": "Select",
   "searchKeyboardOpen": "Open",
-  "searchKeyboardClose": "Close"
+  "searchKeyboardClose": "Close",
+  "searchTooltip": "Search ctrl+k"
 } 

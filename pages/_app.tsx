@@ -9,11 +9,13 @@ import {Provider} from 'react-redux';
 import {PlayerContextProvider} from "../components/contexts/PlayerContext";
 import {useRouter} from "next/router";
 import SpinnerDots from "../components/Ui/SpinnerDots";
+import SearchForm from "../components/SearchForm";
 
 const MyApp: React.FC<AppProps> = ({ Component, ...rest  }) => {
     const {store, props} = wrapper.useWrappedStore(rest);
     const router = useRouter();
     const [loading, setLoading] = useState(false);
+    const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
 
     useEffect(() => {
         const handleStart = () => {
@@ -34,6 +36,19 @@ const MyApp: React.FC<AppProps> = ({ Component, ...rest  }) => {
         };
     }, [router]);
 
+    // Ctrl+K keyboard shortcut for search
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                e.preventDefault();
+                setIsSearchModalOpen(true);
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, []);
+
     return (
         <Provider store={store}>
             <PlayerContextProvider>
@@ -45,6 +60,10 @@ const MyApp: React.FC<AppProps> = ({ Component, ...rest  }) => {
                 <Component {...props.pageProps} />
                 <ToastContainer />
                 <Player/>
+                <SearchForm 
+                    open={isSearchModalOpen} 
+                    onClose={() => setIsSearchModalOpen(false)} 
+                />
             </PlayerContextProvider>
         </Provider>
     )

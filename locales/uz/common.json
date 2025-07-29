@@ -150,5 +150,6 @@
   "searchNewLabel": "Yangi",
   "searchKeyboardSelect": "Tanlash",
   "searchKeyboardOpen": "Ochish",
-  "searchKeyboardClose": "Yopish"
+  "searchKeyboardClose": "Yopish",
+  "searchTooltip": "Qidirish ctrl+k"
 }

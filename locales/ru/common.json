@@ -147,5 +147,6 @@
   "searchNewLabel": "Новое",
   "searchKeyboardSelect": "Выбрать",
   "searchKeyboardOpen": "Открыть",
-  "searchKeyboardClose": "Закрыть"
+  "searchKeyboardClose": "Закрыть",
+  "searchTooltip": "Поиск ctrl+k"
 }
