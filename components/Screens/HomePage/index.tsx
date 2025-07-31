@@ -52,8 +52,8 @@ const Index = () => {
     return (
         <MainLayout>
             <HeadMeta 
-                title="GutenberNU - Zamonaviy Audio Kutubxona | Audio Kitoblar va Audiokitoblar" 
-                description="GutenberNU - O'zbekistondagi eng yirik audio kutubxona. Audio kitoblar, audiokitoblar, romanlar va hikoyalar. Zamonaviy va klassik adabiyotlar audio formatda. Bepul tinglash imkoniyati."
+                title="Gutenberg - Zamonaviy Audio Kutubxona" 
+                description="Gutenberg - O'zbekistondagi eng yirik audio kutubxona. Audio kitoblar, audiokitoblar, romanlar va hikoyalar. Zamonaviy va klassik adabiyotlar audio formatda. Bepul tinglash imkoniyati."
                 keywords="audio kitoblar, audiokitoblar, audio romanlar, audio hikoyalar, o'zbek audio kitoblar, bepul audio kitoblar, online audio kutubxona, gutenbernu"
                 ogImg="https://gutenbergnu.uz/og-default-img.jpg"
             />
