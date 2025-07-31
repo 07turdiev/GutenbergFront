@@ -37,9 +37,9 @@ const BlogPage = () => {
     return (
         <MainLayout>
             <HeadMeta 
-                title="Audio Kitoblar Blog | GutenberNU Audio Kutubxona" 
-                description="GutenberNU audio kutubxonasining blog sahifasi. Audio kitoblar haqida maqolalar, yangiliklar, tavsiyalar va audio adabiyot dunyosi haqida ma'lumotlar."
-                keywords="audio kitoblar blog, audio kitob yangiliklar, audio adabiyot maqolalar, gutenbernu blog, audio kitob tavsiyalar"
+                title="Audio Kitoblar Blog | Gutenberg Audio Kutubxona" 
+                description="Gutenberg audio kutubxonasining blog sahifasi. Audio kitoblar haqida maqolalar, yangiliklar, tavsiyalar va audio adabiyot dunyosi haqida ma'lumotlar."
+                keywords="audio kitoblar blog, audio kitob yangiliklar, audio adabiyot maqolalar, Gutenberg blog, audio kitob tavsiyalar"
                 ogImg="https://gutenbergnu.uz/og-default-img.jpg"
             />
             <div className="container mx-auto px-3 mb-10">

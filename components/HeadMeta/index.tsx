@@ -40,7 +40,7 @@ function HeadMeta({ title, description, ogImg, themeColor, keywords, canonical, 
 			
 			{/* Open Graph */}
 			<meta property="og:type" content="website" />
-			<meta property="og:site_name" content='GutenberNU' />
+			<meta property="og:site_name" content='Gutenberg' />
 			<meta property="og:url" content={fullUrl} />
 			<meta property="og:title" content={title} />
 			<meta property="og:description" content={description} />
@@ -59,7 +59,7 @@ function HeadMeta({ title, description, ogImg, themeColor, keywords, canonical, 
 
 			{/* Additional SEO meta tags */}
 			<meta name="robots" content="index, follow" />
-			<meta name="author" content="GutenberNU" />
+			<meta name="author" content="Gutenberg" />
 			<meta name="viewport" content="width=device-width, initial-scale=1" />
 			
 			{/* Structured Data */}
@@ -69,7 +69,7 @@ function HeadMeta({ title, description, ogImg, themeColor, keywords, canonical, 
 					__html: JSON.stringify({
 						"@context": "https://schema.org",
 						"@type": "WebSite",
-						"name": "GutenberNU",
+						"name": "Gutenberg",
 						"description": description,
 						"url": sitePath,
 						"potentialAction": {
@@ -87,8 +87,8 @@ function HeadMeta({ title, description, ogImg, themeColor, keywords, canonical, 
 }
 
 HeadMeta.defaultProps = {
-	title: 'GutenberNU',
-	description: 'GutenberNU — это современная аудио-библиотека в интернете, которая открывает вам доступ к каталогу бестселлеров и классической литературы, включая новинки разных аудио жанров',
+	title: 'Gutenberg',
+	description: 'Gutenberg — это современная аудио-библиотека в интернете, которая открывает вам доступ к каталогу бестселлеров и классической литературы, включая новинки разных аудио жанров',
 	ogImg: `${sitePath}og-default-img.jpg`
 }
 

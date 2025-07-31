@@ -66,8 +66,8 @@ const Index = () => {
     return (
         <MainLayout>
             <HeadMeta 
-                title="Audio Kitob Kategoriyalari | GutenberNU Audio Kutubxona" 
-                description="GutenberNU audio kutubxonasida turli kategoriyalardagi audio kitoblar: romanlar, hikoyalar, tarix, ilm-fan, diniy kitoblar va boshqalar."
+                title="Audio Kitob Kategoriyalari | Gutenberg Audio Kutubxona" 
+                description="Gutenberg audio kutubxonasida turli kategoriyalardagi audio kitoblar: romanlar, hikoyalar, tarix, ilm-fan, diniy kitoblar va boshqalar."
                 keywords="audio kitob kategoriyalari, audio romanlar, audio hikoyalar, diniy audio kitoblar, tarix audio kitoblar, ilm-fan audio kitoblar"
                 ogImg="https://gutenbergnu.uz/og-default-img.jpg"
             />

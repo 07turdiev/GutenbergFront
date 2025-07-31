@@ -12,7 +12,7 @@ const StructuredData: React.FC<StructuredDataProps> = ({ type, data }) => {
         return {
           "@context": "https://schema.org",
           "@type": "WebSite",
-          "name": "GutenberNU",
+          "name": "Gutenberg",
           "description": "O'zbekistondagi eng yirik audio kutubxona",
           "url": "https://gutenbergnu.uz",
           "potentialAction": {
@@ -22,7 +22,7 @@ const StructuredData: React.FC<StructuredDataProps> = ({ type, data }) => {
           },
           "publisher": {
             "@type": "Organization",
-            "name": "GutenberNU",
+            "name": "Gutenberg",
             "url": "https://gutenbergnu.uz"
           }
         };
@@ -41,7 +41,7 @@ const StructuredData: React.FC<StructuredDataProps> = ({ type, data }) => {
           "image": data.image,
           "publisher": {
             "@type": "Organization",
-            "name": "GutenberNU"
+            "name": "Gutenberg"
           },
           "inLanguage": "uz",
           "genre": data.category
@@ -58,7 +58,7 @@ const StructuredData: React.FC<StructuredDataProps> = ({ type, data }) => {
           "jobTitle": "Yozuvchi",
           "worksFor": {
             "@type": "Organization",
-            "name": "GutenberNU"
+            "name": "Gutenberg"
           }
         };
       
@@ -71,11 +71,11 @@ const StructuredData: React.FC<StructuredDataProps> = ({ type, data }) => {
           "image": data.image,
           "author": {
             "@type": "Organization",
-            "name": "GutenberNU"
+            "name": "Gutenberg"
           },
           "publisher": {
             "@type": "Organization",
-            "name": "GutenberNU",
+            "name": "Gutenberg",
             "logo": {
               "@type": "ImageObject",
               "url": "https://gutenbergnu.uz/logo.png"
@@ -93,7 +93,7 @@ const StructuredData: React.FC<StructuredDataProps> = ({ type, data }) => {
         return {
           "@context": "https://schema.org",
           "@type": "Organization",
-          "name": "GutenberNU",
+          "name": "Gutenberg",
           "description": "O'zbekistondagi eng yirik audio kutubxona",
           "url": "https://gutenbergnu.uz",
           "logo": "https://gutenbergnu.uz/logo.png",

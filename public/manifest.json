@@ -1,6 +1,6 @@
 {
-  "name": "GutenberNU - Audio Kutubxona",
-  "short_name": "GutenberNU",
+  "name": "Gutenberg - Audio Kutubxona",
+  "short_name": "Gutenberg",
   "description": "O'zbekistondagi eng yirik audio kutubxona. Audio kitoblar, romanlar va hikoyalar bepul tinglash imkoniyati.",
   "start_url": "/",
   "display": "standalone",
