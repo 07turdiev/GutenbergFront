@@ -42,9 +42,9 @@ class MyDocument extends Document {
           <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
           <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png" />
           
-          {/* Sitka font import */}
+          {/* Google Fonts: Poppins */}
           <link
-            href="https://fonts.googleapis.com/css2?family=Sitka+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
             rel="stylesheet"
           />
           

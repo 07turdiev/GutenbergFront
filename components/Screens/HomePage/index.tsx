@@ -21,6 +21,7 @@ import {BooksSlider} from "../../HomeSlider";
 import PopularAuthorsSlider from "../../PopularAuthorsSlider";
 import BlogPostsSlider from "../../BlogPostsSlider";
 import TelegramBotSection from "../../TelegramBotSection";
+import CTASection from "../../CTASection";
 import StructuredData from "../../StructuredData";
 
 const Index = () => {
@@ -63,6 +64,9 @@ const Index = () => {
             <div className="lg:-mt-32 -mt-20 sm:-mt-24">
                 <BooksSlider />
             </div>
+            
+            {/* CTA section after main slider */}
+            <CTASection />
             
 
             

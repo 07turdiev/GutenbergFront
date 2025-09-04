@@ -13,7 +13,7 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        'sans': ['Roboto', 'system-ui'],
+        'sans': ['Poppins', 'system-ui', 'sans-serif'],
         'sitka': ['Sitka Text', 'Sitka', 'serif']
       },
       colors: {
