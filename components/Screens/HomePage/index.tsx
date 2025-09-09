@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import HeadMeta from "../../HeadMeta";
 import AdvertisingCard from "../../AdvertisingCard";
-import TabSection from "../../TabSection";
+// import TabSection from "../../TabSection";
+import BooksShowcaseSection from "../../BooksShowcaseSection";
 import CategoriesListSection from "../../CategoriesListSection";
 import NovelsListSection from "../../NovelsListSection";
 import SectionListWrapper from "../../SectionListWrapper";
@@ -94,8 +95,8 @@ const Index = () => {
                 </section>
             )}
 
-            <section className="container mx-auto px-3 md:mb-12 mb-7">
-                <TabSection activeTab={activeTab} changeTab={changeTab}/>
+            <section className="container mx-auto px-3 md:mb-12 mb-7 md:mt-16 mt-10">
+                <BooksShowcaseSection />
             </section>
 
             {
