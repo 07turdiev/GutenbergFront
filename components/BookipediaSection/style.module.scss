@@ -124,4 +124,107 @@
 
 .articleCard:hover .arrowCircle { background-color: #009DFF; color: #FFFFFF; }
 
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  .bookipediaSection {
+    padding: 40px 0;
+  }
+
+  .sectionContainer {
+    width: 100%;
+    padding: 0 20px;
+  }
+
+  .sectionHeader {
+    flex-direction: column;
+    margin-bottom: 40px;
+    gap: 20px;
+  }
+
+  .sectionTitle {
+    font-size: 32px;
+    width: 358px;
+  }
+
+  .sectionDetails {
+    max-width: 100%;
+    width: 358px;
+  }
+
+  .sectionDescription {
+    font-size: 16px;
+    line-height: 24px;
+    margin-bottom: 20px;
+  }
+
+  .sectionLink {
+    font-size: 16px;
+    gap: 15px;
+  }
+
+  .articlesGrid {
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .articleCard {
+    width: 100%;
+    max-width: 358px;
+  }
+
+  .cardContent {
+    padding: 20px 15px;
+  }
+
+  .cardText h3 {
+    font-size: 18px;
+  }
+
+  .cardText p {
+    font-size: 14px;
+  }
+
+  .arrowCircle {
+    width: 32px;
+    height: 32px;
+    font-size: 20px;
+  }
+
+  .sectionLink .arrowCircle {
+    width: 20px;
+    height: 20px;
+    font-size: 16px;
+  }
+
+  /* Reset middle card height on mobile */
+  .articlesGrid .articleCard:nth-child(2) .cardImageWrapper {
+    height: auto;
+  }
+
+  .articlesGrid .articleCard:nth-child(2) .cardImageWrapper img {
+    height: auto;
+    object-fit: initial;
+  }
+}
+
+@media (max-width: 480px) {
+  .sectionContainer {
+    padding: 0 15px;
+  }
+
+  .sectionTitle {
+    font-size: 28px;
+    width: 100%;
+  }
+
+  .sectionDetails {
+    width: 100%;
+  }
+
+  .articleCard {
+    max-width: 100%;
+  }
+}
+
 
