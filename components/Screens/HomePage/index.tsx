@@ -25,6 +25,7 @@ import TelegramBotSection from "../../TelegramBotSection";
 import CTASection from "../../CTASection";
 import AboutPublisherSection from "../../AboutPublisherSection";
 import StructuredData from "../../StructuredData";
+import BookipediaSection from "../../BookipediaSection";
 
 const Index = () => {
 
@@ -97,6 +98,10 @@ const Index = () => {
 
             <section className="container mx-auto px-3 md:mb-12 mb-7 md:mt-16 mt-10">
                 <BooksShowcaseSection />
+            </section>
+
+            <section className="container mx-auto px-3 md:mb-12 mb-7">
+                <BookipediaSection />
             </section>
 
             {
