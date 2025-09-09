@@ -17,14 +17,7 @@ const CTASection: React.FC = () => {
                     >
                         Gutenberg NU
                     </a>
-                    <a
-                        href="https://ovozly.uz"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="px-6 sm:px-8 py-3 rounded-full bg-red-600 hover:bg-red-700 text-white font-semibold text-center w-full sm:w-auto"
-                    >
-                        Ovozly
-                    </a>
+                    
                 </div>
             </div>
         </section>

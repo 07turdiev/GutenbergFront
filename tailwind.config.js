@@ -11,6 +11,14 @@ module.exports = {
       'lg': '1024px', // => @media (min-width: 1024px) { ... }
       'xl': '1170px', // => @media (min-width: 1280px) { ... }
     },
+    container: {
+      center: true,
+      padding: '1rem',
+      screens: {
+        xl: '1305px',
+        '2xl': '1305px',
+      },
+    },
     extend: {
       fontFamily: {
         'sans': ['Poppins', 'system-ui', 'sans-serif'],

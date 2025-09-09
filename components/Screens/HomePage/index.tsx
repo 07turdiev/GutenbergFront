@@ -22,6 +22,7 @@ import PopularAuthorsSlider from "../../PopularAuthorsSlider";
 import BlogPostsSlider from "../../BlogPostsSlider";
 import TelegramBotSection from "../../TelegramBotSection";
 import CTASection from "../../CTASection";
+import AboutPublisherSection from "../../AboutPublisherSection";
 import StructuredData from "../../StructuredData";
 
 const Index = () => {
@@ -67,6 +68,7 @@ const Index = () => {
             
             {/* CTA section after main slider */}
             <CTASection />
+            <AboutPublisherSection />
             
 
             

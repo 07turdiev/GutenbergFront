@@ -85,7 +85,7 @@ const AboutPage = () => {
                                         <Image src={authorsCountImg}/>
                                     </div>
                                     <div className='text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent'>
-                                        <CountUp start={0} end={inView ? statistics.authors : 0} duration={2} separator=" "/>
+                                        <CountUp start={0} end={inView ? (statistics?.authors ?? 0) : 0} duration={2} separator=" "/>
                                     </div>
                                     <h2 className='font-bold text-xl'>
                                         {t('authorsCountText')}
@@ -98,7 +98,7 @@ const AboutPage = () => {
                                         <Image src={booksCountImg}/>
                                     </div>
                                     <div className='text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent mb-3'>
-                                        <CountUp start={0} end={inView ? statistics.novels : 0} duration={2} separator=" "/>
+                                        <CountUp start={0} end={inView ? (statistics?.novels ?? 0) : 0} duration={2} separator=" "/>
                                     </div>
                                     <h2 className='font-bold text-xl'>
                                         {t('Books')}
@@ -111,7 +111,7 @@ const AboutPage = () => {
                                         <Image src={personCountImg}/>
                                     </div>
                                     <div className='text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent mb-3'>
-                                        <CountUp start={0} end={inView ? statistics.users : 0} duration={2} separator=" "/>
+                                        <CountUp start={0} end={inView ? (statistics?.users ?? 0) : 0} duration={2} separator=" "/>
                                     </div>
                                     <h2 className='font-bold text-xl'>
                                         {t('readersCountText')}
