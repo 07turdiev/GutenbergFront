@@ -1,0 +1,247 @@
+.authorsSection {
+  width: 100%;
+  padding: 40px 0 60px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.sectionContainer {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 60px;
+}
+
+.sectionTitle {
+  font-size: 64px;
+  font-weight: 400;
+  line-height: 96px;
+  color: #212121;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.titleLine1 {
+  display: block;
+}
+
+.titleLine2Row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.titleLine2 {
+  display: inline-block;
+}
+
+.titleLine2Row .btn {
+  margin-left: auto;
+}
+
+.headerActions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+  align-self: flex-end;
+}
+
+.btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 30px;
+  height: 60px;
+  border-radius: 75px;
+  font-size: 20px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+}
+
+
+
+.arrowIcon {
+  font-size: 24px;
+}
+
+.btnSecondary {
+  background: rgba(0, 157, 255, 0.1);
+  color: #009DFF;
+  border: 1px solid #009DFF;
+  font-weight: 400;
+}
+
+
+
+.btnSecondary:hover {
+  background: rgba(0, 157, 255, 0.2);
+}
+
+.authorsCarouselWrapper {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding-bottom: 20px;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  cursor: grab;
+}
+
+.carouselContainer {
+  position: relative;
+}
+
+.navButton {
+  position: absolute;
+  top: 274px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #009DFF;
+  background: rgba(255,255,255,0.9);
+  color: #009DFF;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+  cursor: pointer;
+  z-index: 1;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.navButton:hover {
+  transform: scale(1.06);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+}
+
+.prevButton { left: -20px; }
+.nextButton { right: -20px; }
+
+@media (max-width: 640px) {
+  .navButton { top: 160px; }
+  .prevButton { left: 10px; }
+  .nextButton { right: 10px; }
+}
+
+@media (max-width: 1024px) and (min-width: 641px) {
+  .navButton { top: 200px; }
+}
+
+.authorsCarouselWrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.authorsCarouselWrapper {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.authorCard {
+  width: 400px;
+  flex-shrink: 0;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.3s ease;
+  scroll-snap-align: start;
+}
+
+.authorCard:hover {
+  transform: translateY(-10px);
+}
+
+.authorImage {
+  width: 100%;
+  height: 547px;
+  border-radius: 20px;
+  background-color: #C4C4C4;
+  display: block;
+  object-fit: cover;
+}
+
+.authorInfo {
+  padding: 25px 15px;
+}
+.authorCard:hover .authorInfo h3,
+.authorCard:hover .authorInfo p {
+  color: #009DFF;
+}
+.authorInfo h3 {
+  font-size: 24px;
+  font-weight: 500;
+  color: #212121;
+  margin: 0 0 10px 0;
+}
+
+.authorInfo p {
+  font-size: 20px;
+  font-weight: 400;
+  margin: 0;
+}
+
+.roleDefault {
+  color: #383838;
+}
+
+.roleBlue {
+  color: #009DFF;
+}
+
+@media (max-width: 1024px) {
+  .authorsSection { padding: 32px 0 48px; }
+  .sectionTitle {
+    font-size: 44px;
+    line-height: 64px;
+  }
+  .authorCard {
+    width: 300px;
+  }
+  .authorImage {
+    height: 400px;
+  }
+}
+
+@media (max-width: 640px) {
+  .authorsSection { padding: 24px 0 36px; }
+  .sectionHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .sectionTitle {
+    font-size: 32px;
+    line-height: 44px;
+  }
+  .btn {
+    padding: 8px 14px;
+    height: 36px;
+    font-size: 14px;
+    border-radius: 60px;
+  }
+  .authorsCarouselWrapper {
+    gap: 12px;
+  }
+  .navButton {
+    display: none;
+  }
+  .authorCard {
+    width: 240px;
+  }
+  .authorImage {
+    height: 320px;
+  }
+}
+
+

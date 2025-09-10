@@ -19,9 +19,9 @@ import {selectLatestBlogPosts} from "../../../store/selectors/blog";
 import {useRouter} from "next/router";
 import {fetchNovels} from "../../../store/actions/novel";
 import {BooksSlider} from "../../HomeSlider";
-import PopularAuthorsSlider from "../../PopularAuthorsSlider";
+// import PopularAuthorsSlider from "../../PopularAuthorsSlider";
+import AuthorsSection from "../../AuthorsSection";
 import BlogPostsSlider from "../../BlogPostsSlider";
-import TelegramBotSection from "../../TelegramBotSection";
 import CTASection from "../../CTASection";
 import AboutPublisherSection from "../../AboutPublisherSection";
 import StructuredData from "../../StructuredData";
@@ -150,12 +150,9 @@ const Index = () => {
                 })
             }
 
-            {/* Telegram Bot Section */}
-            <TelegramBotSection />
-
-            {/* Popular Authors Slider at the bottom */}
+            {/* Authors Section (new) */}
             <section className="container mx-auto px-3 md:mb-12 mb-7">
-                <PopularAuthorsSlider authors={authors.results} />
+                <AuthorsSection authors={authors.results} />
             </section>
 
             {latestBlogPosts && latestBlogPosts.length > 0 && (
