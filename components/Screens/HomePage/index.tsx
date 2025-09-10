@@ -155,11 +155,7 @@ const Index = () => {
                 <AuthorsSection authors={authors.results} />
             </section>
 
-            {latestBlogPosts && latestBlogPosts.length > 0 && (
-                <SectionListWrapper title={t('blogPostsTitle')} moreBtn="/blog">
-                    <BlogPostsSlider posts={latestBlogPosts} />
-                </SectionListWrapper>
-            )}
+           
 
         </MainLayout>
     );

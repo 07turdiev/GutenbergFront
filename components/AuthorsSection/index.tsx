@@ -41,6 +41,8 @@ const AuthorsSection: React.FC<AuthorsSectionProps> = ({ authors }) => {
         return list.slice(-4);
     }, [authors]);
 
+    const showNav = (items?.length || 0) >= 4;
+
     const getCardWidth = (): number => {
         const card = wrapperRef.current?.querySelector(`.${styles.authorCard}`) as HTMLElement | null;
         if (!card) return 0;
@@ -68,12 +70,14 @@ const AuthorsSection: React.FC<AuthorsSectionProps> = ({ authors }) => {
         const wrap = wrapperRef.current;
         if (!wrap) return;
         clearInterval(autoTimerRef.current);
-        autoTimerRef.current = setInterval(() => {
-            const idx = getCurrentIndex();
-            const total = items?.length || 1;
-            const next = (idx + 1) % total;
-            snapToIndex(next);
-        }, 5000);
+        if ((items?.length || 0) >= 2) {
+            autoTimerRef.current = setInterval(() => {
+                const idx = getCurrentIndex();
+                const total = items?.length || 1;
+                const next = (idx + 1) % total;
+                snapToIndex(next);
+            }, 5000);
+        }
         return () => clearInterval(autoTimerRef.current);
     }, [items?.length]);
 
@@ -171,16 +175,20 @@ const AuthorsSection: React.FC<AuthorsSectionProps> = ({ authors }) => {
                 </header>
 
                 <div className={styles.carouselContainer}>
-                    <button type="button" className={`${styles.navButton} ${styles.prevButton}`} onClick={goPrev} aria-label="Previous">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M15 19l-7-7 7-7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                        </svg>
-                    </button>
-                    <button type="button" className={`${styles.navButton} ${styles.nextButton}`} onClick={goNext} aria-label="Next">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M9 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                        </svg>
-                    </button>
+                    {showNav && (
+                        <>
+                            <button type="button" className={`${styles.navButton} ${styles.prevButton}`} onClick={goPrev} aria-label="Previous">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M15 19l-7-7 7-7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                </svg>
+                            </button>
+                            <button type="button" className={`${styles.navButton} ${styles.nextButton}`} onClick={goNext} aria-label="Next">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M9 5l7 7-7 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                </svg>
+                            </button>
+                        </>
+                    )}
                     <main
                         ref={wrapperRef}
                         className={styles.authorsCarouselWrapper}
