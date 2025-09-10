@@ -139,17 +139,20 @@
 
 @media (min-width: 768px) {
     .mobile { display: none; }
-    .desktop { display: block; position: relative; height: 502px; }
+    .desktop {
+        display: grid;
+        grid-template-columns: 400px 1fr 241px;
+        grid-template-rows: auto auto auto;
+        gap: 20px;
+        align-items: start;
+    }
 
     .metricAbs {
-        position: absolute;
-        left: 0;
-        top: 0;
+        grid-column: 1 / 2;
+        grid-row: 1 / 2;
         display: flex;
         align-items: center;
         gap: 10px;
-        width: auto;
-        height: 30px;
         white-space: nowrap;
     }
 
@@ -161,21 +164,20 @@
     }
 
     .headingAbs {
-        position: absolute;
-        left: 400px;
-        top: 20px;
-        width: 900px;
-        height: 192px;
+        grid-column: 2 / 4;
+        grid-row: 1 / 2;
         font-weight: 400;
         font-size: 64px;
         line-height: 96px;
         color: #212121;
+        padding-left: 20px; /* Aligns with contentAbs original position */
     }
 
     .arrowAbs {
-        position: absolute;
-        right: 136px;
-        top: 120px;
+        grid-column: 3 / 4;
+        grid-row: 1 / 2;
+        justify-self: end;
+        align-self: center;
         width: 60px;
         height: 60px;
         border: none;
@@ -185,6 +187,8 @@
         justify-content: center;
         cursor: pointer;
         transition: opacity .2s ease-in-out;
+        margin-top: -60px; /* Adjust to position correctly */
+        margin-right: -80px;
     }
 
     .arrowAbs:hover { opacity: .9; }
@@ -192,58 +196,54 @@
     .arrowIconDesk { display: none; }
 
     .descAbs {
-        position: absolute;
-        left: 0;
-        top: 53px;
-        width: 290px;
-        height: 189px;
+        grid-column: 1 / 2;
+        grid-row: 2 / 3;
         font-weight: 400;
         font-size: 18px;
         line-height: 27px;
         color: #383838;
+        margin-top: 23px; /* Original top: 53px, metricAbs height is ~30px */
     }
 
     .imageAbs {
-        position: absolute;
-        left: 0;
-        top: 268px;
+        grid-column: 1 / 2;
+        grid-row: 3 / 4;
         width: 402px;
         height: 234px;
         background: #C4C4C4;
         border-radius: 20px;
         overflow: hidden;
+        margin-top: 25px; /* Original top: 268px, descAbs is ~189px high with top 53px */
     }
 
-    .contentAbs { position: absolute; left: 525px; top: 0; }
+    .contentAbs {
+        grid-column: 2 / 3;
+        grid-row: 2 / 4;
+        padding-left: 125px; /* Original left: 525px, first col is 400px */
+        padding-top: 100px; /* original top was 298px for title */
+    }
 
     .contentTitleAbs {
-        position: absolute;
-        left: 0;
-        top: 298px;
-        width: 130px;
-        height: 30px;
         font-weight: 500;
         font-size: 20px;
         line-height: 30px;
         color: #212121;
+        margin-bottom: 23px; /* original text top 351, title top 298, height 30 -> 351-(298+30)=23 */
     }
 
     .contentTextAbs {
-        position: absolute;
-        left: 0;
-        top: 351px;
-        width: 364px;
-        height: 150px;
         font-weight: 400;
         font-size: 20px;
         line-height: 30px;
         color: #212121;
+        max-width: 364px;
     }
 
     .ctaAbs {
-        position: absolute;
-        left: 510px;
-        top: 442px;
+        grid-column: 3/4;
+        grid-row: 3/4;
+        align-self: end;
+        margin-bottom: 20px;
         width: 241px;
         height: 60px;
         display: flex;
