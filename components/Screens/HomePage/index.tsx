@@ -26,6 +26,7 @@ import CTASection from "../../CTASection";
 import AboutPublisherSection from "../../AboutPublisherSection";
 import StructuredData from "../../StructuredData";
 import BookipediaSection from "../../BookipediaSection";
+import TestimonialsSection from "../../TestimonialsSection";
 
 const Index = () => {
 
@@ -155,7 +156,10 @@ const Index = () => {
                 <AuthorsSection authors={authors.results} />
             </section>
 
-           
+            {/* Testimonials Section (bottom) */}
+            <section className="container mx-auto px-3 md:mb-12 mb-7">
+                <TestimonialsSection />
+            </section>
 
         </MainLayout>
     );

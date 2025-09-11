@@ -165,5 +165,7 @@
   "searchKeyboardSelect": "Tanlash",
   "searchKeyboardOpen": "Ochish",
   "searchKeyboardClose": "Yopish",
-  "searchTooltip": "Qidirish ctrl+k"
+  "searchTooltip": "Qidirish ctrl+k",
+  "testimonials_pretitle": "Iqtiboslar",
+  "testimonials_title": "Donolar nima deydi?"
 }

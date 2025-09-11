@@ -165,5 +165,7 @@
   "searchKeyboardSelect": "Select",
   "searchKeyboardOpen": "Open",
   "searchKeyboardClose": "Close",
-  "searchTooltip": "Search ctrl+k"
+  "searchTooltip": "Search ctrl+k",
+  "testimonials_pretitle": "Testimonials",
+  "testimonials_title": "What do people say about us?"
 } 

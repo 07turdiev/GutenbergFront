@@ -161,5 +161,7 @@
   "searchKeyboardSelect": "Выбрать",
   "searchKeyboardOpen": "Открыть",
   "searchKeyboardClose": "Закрыть",
-  "searchTooltip": "Поиск ctrl+k"
+  "searchTooltip": "Поиск ctrl+k",
+  "testimonials_pretitle": "Отзывы",
+  "testimonials_title": "Что говорят люди о нас?"
 }
