@@ -1,0 +1,107 @@
+.siteFooter {
+    width: 100%;
+    padding: 8px 0 30px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.footerContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 40px;
+}
+
+.footerLeft {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+}
+
+.logo a {
+    display: inline-flex;
+    align-items: center;
+}
+
+.logo a::after { display: none; }
+
+.footerNav {
+    display: flex;
+    gap: 80px;
+}
+
+.navColumn h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #212121;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.navColumn ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.navColumn ul li a {
+    font-size: 16px;
+    font-weight: 400;
+    color: #212121;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.navColumn ul li a:hover {
+    color: #007bff;
+}
+
+.footerRight {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+.socialGroup p {
+    font-size: 12px;
+    font-weight: 400;
+    color: #212121;
+    margin: 0 0 15px 0;
+}
+
+.socialList {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 10px;
+}
+
+.socialList li a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border: 1px solid #696969;
+    border-radius: 50%;
+    color: #212121;
+    font-size: 20px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.socialList li a:hover {
+    background-color: #212121;
+    color: #ffffff;
+}
+
+@media (max-width: 768px) {
+    .footerNav {
+        gap: 40px;
+    }
+}

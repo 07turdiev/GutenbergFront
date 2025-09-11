@@ -167,5 +167,11 @@
   "searchKeyboardClose": "Yopish",
   "searchTooltip": "Qidirish ctrl+k",
   "testimonials_pretitle": "Iqtiboslar",
-  "testimonials_title": "Donolar nima deydi?"
+  "testimonials_title": "Donolar nima deydi?",
+  "footer_activity": "Faoliyat",
+  "footer_publisher": "Nashriyot",
+  "footer_legal": "Huquqiy",
+  "footer_subscribe": "Obuna bo'ling",
+  "footer_quick_contact": "Tezkor aloqa",
+  "publisherDocuments": "Nashriyot hujjatlari"
 }

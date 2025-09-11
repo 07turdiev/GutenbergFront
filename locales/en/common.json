@@ -167,5 +167,11 @@
   "searchKeyboardClose": "Close",
   "searchTooltip": "Search ctrl+k",
   "testimonials_pretitle": "Testimonials",
-  "testimonials_title": "What do people say about us?"
+  "testimonials_title": "What do people say about us?",
+  "footer_activity": "Activity",
+  "footer_publisher": "Publisher",
+  "footer_legal": "Legal",
+  "footer_subscribe": "Subscribe",
+  "footer_quick_contact": "Quick contact",
+  "publisherDocuments": "Publisher documents"
 } 

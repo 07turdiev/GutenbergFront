@@ -163,5 +163,11 @@
   "searchKeyboardClose": "Закрыть",
   "searchTooltip": "Поиск ctrl+k",
   "testimonials_pretitle": "Отзывы",
-  "testimonials_title": "Что говорят люди о нас?"
+  "testimonials_title": "Что говорят люди о нас?",
+  "footer_activity": "Деятельность",
+  "footer_publisher": "Издательство",
+  "footer_legal": "Юридическое",
+  "footer_subscribe": "Подписка",
+  "footer_quick_contact": "Быстрая связь",
+  "publisherDocuments": "Документы издательства"
 }
