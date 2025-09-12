@@ -168,16 +168,16 @@ const BooksSlider: React.FC = () => {
         {/* Content area */}
         <div className={styles.contentArea}>
           <div key={`title-${activeBook.id}-${activeIndex}`} className={`${styles.textContent} ${styles.fadeText}`}>
-            <p className={styles.preTitle}>{activeBook.mualliflar?.ismi || ''}</p>
-            <h1 className={styles.mainTitle}>{activeBook.nomi}</h1>
+            <h5 className={styles.mainTitle}>{activeBook.nomi}</h5>
           </div>
 
-          <div key={`desc-${activeBook.id}-${activeIndex}`} className={`${styles.descriptionArea} ${styles.fadeText}`}>
+          
+        </div>
+        <div key={`desc-${activeBook.id}-${activeIndex}`} className={`${styles.descriptionArea} ${styles.fadeText}`}>
             {description ? (
               <p className={styles.description}>{description}</p>
             ) : null}
           </div>
-        </div>
         <div className={styles.actions}>
           <Link href={`/books/${activeBook.slug}`} >
           <button className={styles.btnPrimary}>Kitob haqida</button>
