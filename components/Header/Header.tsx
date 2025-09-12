@@ -53,7 +53,7 @@ const Header = () => {
                 <div className='container mx-auto px-3 relative z-30'>
                     <nav className="flex items-center justify-between">
                         {/* Left */}
-                        <div className="flex items-center gap-4 flex-1">
+                        <div className="flex items-center gap-7 flex-1">
                             <button
                                 onClick={toggleMenu}
                                 className="inline-flex items-center gap-2 text-gray-700 hover:text-black"
@@ -67,7 +67,7 @@ const Header = () => {
                             {/* Mobile logo (left-shifted) */}
                             <div className='md:hidden w-28 cursor-pointer' onClick={()=>router.push('/')}> <SiteLogo/> </div>
 
-                            <div className="hidden md:flex items-center gap-3">
+                            <div className="hidden md:flex items-center gap-5">
                                 <button
                                     onClick={() => setShowSearch(true)}
                                     className="inline-flex items-center gap-2 text-gray-700 hover:text-black"
@@ -96,7 +96,7 @@ const Header = () => {
                         </div>
 
                         {/* Right */}
-                        <div className="flex items-center gap-3 justify-end flex-1">
+                        <div className="flex items-center gap-6 justify-end flex-1">
                             <div className="hidden lg:block"><LocaleSwitcher/></div>
                             <button
                                 onClick={() => router.push('/#contact')}
@@ -106,7 +106,7 @@ const Header = () => {
                             </button>
 
                             {/* Mobile right-side icons */}
-                            <div className="md:hidden inline-flex items-center gap-1">
+                            <div className="md:hidden inline-flex items-center gap-3">
                                 <button
                                     className="w-10 h-10 inline-flex items-center justify-center rounded-full text-gray-700 hover:bg-gray-100"
                                     onClick={() => setShowSearch(true)}
