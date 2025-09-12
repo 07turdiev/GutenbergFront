@@ -1,43 +1,216 @@
 import React from 'react';
 import SiteLogo from "../SiteLogo/SiteLogo";
 import {useRouter} from "next/router";
-import HeaderMenu from '../HeaderMenu';
 import SearchBtn from "./SearchBtn";
 import LocaleSwitcher from '../LocaleSwitcher';
-import AuthButtons from './AuthButtons';
-
 import classes from './style.module.scss';
 import classNames from "classnames";
+import SearchForm from "../SearchForm";
+import Link from 'next/link';
+import useTranslation from 'next-translate/useTranslation';
 
 
 const Header = () => {
 
-    const router = useRouter()
+    const router = useRouter();
+    const { t } = useTranslation('common');
+    const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+    const [showSearch, setShowSearch] = React.useState(false);
+
+    const toggleMenu = () => setIsMenuOpen(v => !v);
+    const closeMenu = () => setIsMenuOpen(false);
+
+    // Menu sections for the drawer
+    const menuSections = React.useMemo(() => {
+        const isActive = (url: string) => url !== '#' && (router.asPath === url || router.asPath.startsWith(url + '/'));
+        return [
+            {
+                title: t('menuMainSection'),
+                items: [
+                    { text: t('home'), url: '/', active: isActive('/') },
+                    { text: t('books'), url: '/books', active: isActive('/books') },
+                    { text: t('bookipedia'), url: '#', active: false },
+                    { text: t('authorsPage'), url: '/authors', active: isActive('/authors') },
+                ],
+            },
+            {
+                title: t('menuAboutSection'),
+                items: [
+                    { text: t('about'), url: '/about', active: isActive('/about') },
+                    { text: t('contact'), url: '/#contact', active: router.asPath.includes('#contact') },
+                    { text: t('termsOfUse'), url: '#', active: false },
+                    { text: t('privacyPolicy'), url: '#', active: false },
+                    { text: t('publisherDocuments'), url: '#', active: false },
+                ],
+            },
+        ];
+    }, [router.asPath]);
 
     return (
         <>
             <div className='py-5 shadow-lg fixed top-0 left-0 w-full z-50'>
                 <div className={classNames('absolute top-0 left-0 w-full h-full ',  classes.blurred)} />
                 <div className='container mx-auto px-3 relative z-30'>
-                    <div className="grid grid-cols-12 items-center">
-                        <div className="lg:col-span-2 col-span-6 sm:col-span-4">
-                            <div className='xl:w-44 w-32 cursor-pointer' onClick={()=>router.push('/')}> <SiteLogo/> </div>
-                        </div>
-                        <div className="lg:col-span-3 col-span-8 lg:order-3 hidden lg:block">
-                            <div className="flex items-center ml-auto justify-end pl-5 space-x-3">
-                                <LocaleSwitcher/>
-                                <SearchBtn />
-                                {/* <AuthButtons/> */}
+                    <nav className="flex items-center justify-between">
+                        {/* Left */}
+                        <div className="flex items-center gap-4 flex-1">
+                            <button
+                                onClick={toggleMenu}
+                                className="inline-flex items-center gap-2 text-gray-700 hover:text-black"
+                            >
+                                <span className="hidden md:inline text-base">{t('menu')}</span>
+                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                                </svg>
+                            </button>
+
+                            {/* Mobile logo (left-shifted) */}
+                            <div className='md:hidden w-28 cursor-pointer' onClick={()=>router.push('/')}> <SiteLogo/> </div>
+
+                            <div className="hidden md:flex items-center gap-3">
+                                <button
+                                    onClick={() => setShowSearch(true)}
+                                    className="inline-flex items-center gap-2 text-gray-700 hover:text-black"
+                                >
+                                    <span>{t('search')}</span>
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                    </svg>
+                                </button>
+                                <span className="text-gray-700">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 11 11" fill="none" className="w-5 h-5">
+                                        <path d="M3.55762 3.19231V1" stroke="#383838" strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round"/>
+                                        <path d="M5.75 3.19231V1" stroke="#383838" strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round"/>
+                                        <path d="M7.94238 3.19231V1" stroke="#383838" strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round"/>
+                                        <path d="M9.76923 2.09619H1.73077C1.32718 2.09619 1 2.42337 1 2.82696V9.76927C1 10.1729 1.32718 10.5 1.73077 10.5H9.76923C10.1728 10.5 10.5 10.1729 10.5 9.76927V2.82696C10.5 2.42337 10.1728 2.09619 9.76923 2.09619Z" stroke="#383838" strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round"/>
+                                        <path d="M3.19238 5.75H8.30777" stroke="#383838" strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round"/>
+                                        <path d="M3.19238 7.94238H6.11546" stroke="#383838" strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round"/>
+                                    </svg>
+                                </span>
                             </div>
                         </div>
-                        <div className="lg:col-span-7 lg:order-2 col-span-6 sm:col-span-8">
-                            <div className='lg:flex lg:justify-center'>
-                                <HeaderMenu/>
+
+                        {/* Center logo */}
+                        <div className="hidden md:block absolute left-1/2 -translate-x-1/2">
+                            <div className='xl:w-44 w-32 cursor-pointer' onClick={()=>router.push('/')}> <SiteLogo/> </div>
+                        </div>
+
+                        {/* Right */}
+                        <div className="flex items-center gap-3 justify-end flex-1">
+                            <div className="hidden lg:block"><LocaleSwitcher/></div>
+                            <button
+                                onClick={() => router.push('/#contact')}
+                                className="hidden md:inline-flex items-center justify-center px-6 py-3 rounded-full bg-[#EB0000] text-white font-medium shadow-[0_5px_15px_-5px_rgba(235,0,0,0.5)]"
+                            >
+                                {t('contact')}
+                            </button>
+
+                            {/* Mobile right-side icons */}
+                            <div className="md:hidden inline-flex items-center gap-1">
+                                <button
+                                    className="w-10 h-10 inline-flex items-center justify-center rounded-full text-gray-700 hover:bg-gray-100"
+                                    onClick={() => setShowSearch(true)}
+                                    aria-label="Search"
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                    </svg>
+                                </button>
+                                <LocaleSwitcher />
+                            </div>
+                        </div>
+                    </nav>
+
+                    {/* Off-canvas left menu with smooth slide */}
+                    <div
+                        className={classNames(
+                            "fixed inset-0 z-40 transition pointer-events-none",
+                            isMenuOpen ? "pointer-events-auto" : ""
+                        )}
+                        aria-hidden={!isMenuOpen}
+                    >
+                        {/* Overlay */}
+                        <div
+                            onClick={closeMenu}
+                            className={classNames(
+                                "absolute inset-0 bg-black/40 transition-opacity duration-300",
+                                isMenuOpen ? "opacity-100" : "opacity-0"
+                            )}
+                        />
+                        {/* Drawer */}
+                        <div
+                            className={classNames(
+                                "absolute top-0 left-0 h-full w-[90%] max-w-[524px] bg-white shadow-2xl px-10 py-7 flex flex-col transform transition-transform duration-400",
+                                isMenuOpen ? "translate-x-0" : "-translate-x-full"
+                            )}
+                        >
+                            {/* Header */}
+                            <div className="flex items-center justify-between pb-7">
+                                <button onClick={() => router.push('/')} className="inline-flex items-center">
+                                    <span className="text-[32px] font-extrabold text-[#1a2a52] leading-none">gutenberg<span className="text-[#4c6fff]">.</span></span>
+                                </button>
+                                <button
+                                    className="w-9 h-9 inline-flex items-center justify-center rounded-full hover:bg-gray-100"
+                                    onClick={closeMenu}
+                                    aria-label="Close menu"
+                                >
+                                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </button>
+                            </div>
+
+                            {/* Body */}
+                            <div className="flex-1 overflow-y-auto pl-[60px]">
+                                {menuSections.map(section => (
+                                    <div key={section.title} className="mb-12">
+                                        <h2 className="text-[22px] font-semibold text-black mb-5">{section.title}</h2>
+                                        <ul className="flex flex-col gap-5">
+                                            {section.items.map(item => (
+                                                <li key={item.text}>
+                                                    {item.url === '#' ? (
+                                                        <span
+                                                            className={classNames(
+                                                                "inline-block text-[20px] font-normal text-black px-4 py-1.5 rounded-2xl",
+                                                                item.active ? "bg-[#D9F0FF] border border-[#009DFF] text-[#009DFF]" : "hover:bg-gray-50"
+                                                            )}
+                                                        >
+                                                            {item.text}
+                                                        </span>
+                                                    ) : (
+                                                        <Link href={item.url}>
+                                                            <a
+                                                                onClick={closeMenu}
+                                                                className={classNames(
+                                                                    "inline-block text-[20px] font-normal text-black px-4 py-1.5 rounded-2xl transition",
+                                                                    item.active ? "bg-[#D9F0FF] border border-[#009DFF] text-[#009DFF]" : "hover:bg-gray-50"
+                                                                )}
+                                                            >
+                                                                {item.text}
+                                                            </a>
+                                                        </Link>
+                                                    )}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                ))}
+                            </div>
+
+                            {/* Footer */}
+                            <div className="pt-7 pl-[60px]">
+                                <p className="text-[16px] font-light leading-6 text-black">
+                                    &copy; {t('copyRight')}<br />
+                                    {t('companyFooter')}
+                                </p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            {/* Global search modal controlled here */}
+            <SearchForm open={showSearch} onClose={() => setShowSearch(false)} />
         </>
     );
 };

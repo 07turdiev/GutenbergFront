@@ -174,4 +174,10 @@
   "footer_subscribe": "Subscribe",
   "footer_quick_contact": "Quick contact",
   "publisherDocuments": "Publisher documents"
-} 
+  ,
+  "menu": "Menu",
+  "menuMainSection": "- Main",
+  "menuAboutSection": "- About",
+  "bookipedia": "Bookipedia",
+  "companyFooter": "\"Gutenberg Publishing House\" LLC - 2025."
+}
