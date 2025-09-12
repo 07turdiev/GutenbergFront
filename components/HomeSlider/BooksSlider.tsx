@@ -1,13 +1,8 @@
-import React, { useEffect, useState, useRef } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Autoplay, EffectFade, Pagination } from 'swiper';
+import React, { useEffect, useState, useMemo } from 'react';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { getApiUrl, ensureAbsoluteUrl } from '../../config/api';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/effect-fade';
-import 'swiper/css/pagination';
 import styles from './BooksSlider.module.scss';
 
 interface Author {
@@ -30,8 +25,8 @@ interface Book {
   nomi: string;
   slug: string;
   tavsifi: any[];
-  narxi: number;
-  chegirma_narxi?: number;
+  narxi?: number | null;
+  chegirma_narxi?: number | null;
   mualliflar: Author;
   muqova: BookCover;
 }
@@ -42,9 +37,7 @@ const BooksSlider: React.FC = () => {
   const [books, setBooks] = useState<Book[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeIndex, setActiveIndex] = useState(0);
-  const [swiperInstance, setSwiperInstance] = useState<any>(null);
-  const prevRef = useRef<HTMLButtonElement>(null);
-  const nextRef = useRef<HTMLButtonElement>(null);
+  const [animationKey, setAnimationKey] = useState(0);
 
   useEffect(() => {
     fetchLatestBooks();
@@ -76,15 +69,50 @@ const BooksSlider: React.FC = () => {
     return '/assets/images/noPhotoNovel.jpg';
   };
 
-  const handleBookClick = (slug: string) => {
-    router.push(`/books/${slug}`);
+  // Strapi richtext to plain text (best-effort)
+  const extractPlainText = (tavsifi: any[] | undefined): string => {
+    if (!tavsifi || !Array.isArray(tavsifi)) return '';
+    try {
+      const walk = (nodes: any[]): string =>
+        nodes
+          .map((node) => {
+            if (typeof node === 'string') return node;
+            if (node?.text) return node.text as string;
+            if (Array.isArray(node?.children)) return walk(node.children);
+            return '';
+          })
+          .join(' ');
+      return walk(tavsifi).replace(/\s+/g, ' ').trim();
+    } catch {
+      return '';
+    }
   };
+
+  useEffect(() => {
+    if (!books.length) return;
+    const durationMs = 6000; // Keep in sync with CSS animation duration
+    const id = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % books.length);
+      setAnimationKey((k) => k + 1);
+    }, durationMs);
+    return () => clearInterval(id);
+  }, [books.length]);
+
+  const activeBook = books[activeIndex];
+  const description = useMemo(() => {
+    const text = extractPlainText(activeBook?.tavsifi);
+    if (!text) return '';
+    if (text.length <= 220) return text;
+    return text.slice(0, 217) + '...';
+  }, [activeBook]);
 
   if (loading) {
     return (
-      <section className={styles.billboard}>
-        <div className={styles.loadingSlider}>
-          <div className={styles.shimmer}></div>
+      <section className={styles.heroSlider}>
+        <div className={styles.sliderContainer}>
+          <div className={styles.loadingSlider}>
+            <div className={styles.shimmer}></div>
+          </div>
         </div>
       </section>
     );
@@ -95,135 +123,66 @@ const BooksSlider: React.FC = () => {
   }
 
   return (
-    <section id="billboard" className={styles.billboard}>
+    <section className={styles.heroSlider}>
       <div className={styles.sliderContainer}>
-        <Swiper
-          modules={[Navigation, Autoplay, EffectFade]}
-          navigation={{
-            prevEl: prevRef.current,
-            nextEl: nextRef.current,
-          }}
-          onBeforeInit={(swiper) => {
-            if (swiper.params.navigation && typeof swiper.params.navigation !== 'boolean') {
-              swiper.params.navigation.prevEl = prevRef.current;
-              swiper.params.navigation.nextEl = nextRef.current;
-            }
-          }}
-          effect="fade"
-          fadeEffect={{
-            crossFade: true
-          }}
-          autoplay={{
-            delay: 6000,
-            disableOnInteraction: false,
-            pauseOnMouseEnter: true,
-          }}
-          speed={800}
-          loop={true}
-          onSwiper={setSwiperInstance}
-          onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
-          className={styles.mainSwiper}
-        >
-          {books.map((book, index) => (
-            <SwiperSlide key={book.id}>
-              <div className={styles.slideContent}>
-                <div className="container mx-auto px-3">
-                  <div className={styles.bookInfo}>
-                    <div className={styles.textContent}>
-                      <h2 className={styles.bookTitle}>
-                        <span className={styles.titleText}>{book.nomi}</span>
-                      </h2>
-                      <p className={styles.authorName}>
-                        <span className={styles.authorLabel}>{t('author')}:</span> {book.mualliflar?.ismi}
-                      </p>
-                      
-                      <div className={styles.priceSection}>
-                        <div className={styles.priceInfo}>
-                          {book.chegirma_narxi ? (
-                            <>
-                              <div className={styles.discountBadge}>
-                                -{Math.round((1 - book.chegirma_narxi / book.narxi) * 100)}%
-                              </div>
-                              <div className={styles.priceWrapper}>
-                                <span className={styles.originalPrice}>{book.narxi.toLocaleString()} {t('currency')}</span>
-                                <span className={styles.discountPrice}>{book.chegirma_narxi.toLocaleString()} {t('currency')}</span>
-                              </div>
-                            </>
-                          ) : (
-                            <span className={styles.price}>{book.narxi.toLocaleString()} {t('currency')}</span>
-                          )}
-                        </div>
-                      </div>
-                      
-                      <div className={styles.buttonGroup}>
-                        <button 
-                          className={styles.primaryButton}
-                          onClick={() => handleBookClick(book.slug)}
-                        >
-                          <span>{t('detail_slider')}</span>
-                          <svg className={styles.arrowIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                          </svg>
-                        </button>
-                        <button className={styles.secondaryButton}>
-                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                          </svg>
-                        </button>
-                      </div>
-                    </div>
-                    
-                    <div className={styles.imageSection}>
-                      <div className={styles.imageWrapper}>
-                        <img 
-                          src={getImageUrl(book.muqova)} 
-                          alt={book.nomi}
-                          className={styles.bookImage}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-        
-        {/* Custom Pagination */}
-        <div className={styles.customPagination}>
-          {books.map((_, index) => (
-            <button
-              key={index}
-              className={`${styles.paginationBullet} ${
-                index === activeIndex ? styles.paginationBulletActive : ''
-              }`}
-              onClick={() => {
-                if (swiperInstance) {
-                  swiperInstance.slideToLoop(index);
-                }
-              }}
+        {/* Decorative path */}
+        <svg className={styles.pathSvg} viewBox="0 0 234 878" preserveAspectRatio="none">
+          <path d="M-97 -9.00001C84.1494 -9.00001 231 188.89 231 433C231 677.11 84.1494 875 -97 875" 
+                stroke="url(#paint0_linear_78_660)" strokeWidth="5" fill="none" />
+          <defs>
+            <linearGradient id="paint0_linear_78_660" x1="67" y1="746.187" x2="67" y2="118.98" gradientUnits="userSpaceOnUse">
+              <stop stopColor="#FF0066"/>
+              <stop offset="0.3" stopColor="#AE00FF"/>
+              <stop offset="0.6" stopColor="#0022FF"/>
+              <stop offset="1" stopColor="#00EEFF"/>
+            </linearGradient>
+          </defs>
+        </svg>
+
+        {/* Moving book image */}
+        <div key={animationKey} className={styles.bookAnimationWrapper}>
+          <div className={styles.bookImageWrapper}>
+            <img
+              src={getImageUrl(activeBook.muqova)}
+              alt={activeBook.nomi}
+              className={styles.bookImage}
             />
-          ))}
+          </div>
         </div>
-        
-        {/* Modern Navigation Buttons */}
-        <div className={styles.navigationWrapper}>
-          <button 
-            ref={prevRef}
-            className={`${styles.navButton} ${styles.prevButton}`}
-          >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
-          <button 
-            ref={nextRef}
-            className={`${styles.navButton} ${styles.nextButton}`}
-          >
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
+
+        <div className={styles.statsCard}>
+            <span>1K+</span>
+            <p>Sotib olindi</p>
+            <div className={styles.userIcons}>
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrW16gsPNbf_y5hry38tQj-LVvYGRWPb2kvA&s" alt="user" />
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrW16gsPNbf_y5hry38tQj-LVvYGRWPb2kvA&s" alt="user" />
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrW16gsPNbf_y5hry38tQj-LVvYGRWPb2kvA&s" alt="user" />
+            </div>
+            <button className={styles.arrowBtn}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26" fill="none">
+                <path d="M11.1538 18.5377L16.6923 12.9993L11.1538 7.46081M1 12.9993C1 6.37185 6.37258 0.999268 13 0.999267C19.6274 0.999266 25 6.37185 25 12.9993C25 19.6267 19.6274 24.9993 13 24.9993C6.37258 24.9993 1 19.6267 1 12.9993Z" stroke="#009DFF" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </button>
+          </div>
+
+        {/* Content area */}
+        <div className={styles.contentArea}>
+          <div key={`title-${activeBook.id}-${activeIndex}`} className={`${styles.textContent} ${styles.fadeText}`}>
+            <p className={styles.preTitle}>{activeBook.mualliflar?.ismi || ''}</p>
+            <h1 className={styles.mainTitle}>{activeBook.nomi}</h1>
+          </div>
+
+          <div key={`desc-${activeBook.id}-${activeIndex}`} className={`${styles.descriptionArea} ${styles.fadeText}`}>
+            {description ? (
+              <p className={styles.description}>{description}</p>
+            ) : null}
+          </div>
+        </div>
+        <div className={styles.actions}>
+          <Link href={`/books/${activeBook.slug}`} >
+          <button className={styles.btnPrimary}>Kitob haqida</button>
+          
+          </Link>
         </div>
       </div>
     </section>
