@@ -44,7 +44,7 @@ const Header = () => {
                 ],
             },
         ];
-    }, [router.asPath]);
+    }, [router.asPath, router.locale, t]);
 
     return (
         <>
