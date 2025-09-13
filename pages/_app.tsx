@@ -39,7 +39,7 @@ const MyApp: React.FC<AppProps> = ({ Component, ...rest  }) => {
     // Ctrl+K keyboard shortcut for search
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
-            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'f') {
                 e.preventDefault();
                 setIsSearchModalOpen(true);
             }
