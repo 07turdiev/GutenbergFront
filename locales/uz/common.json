@@ -182,5 +182,9 @@
   "soldCount": "1K+",
   "soldText": "Sotib olindi",
   "aboutBook": "Kitob haqida",
-  "swipeHint": "Chapga va o'nga siljitib kitoblarni almashtiring"
+  "swipeHint": "Chapga va o'nga siljitib kitoblarni almashtiring",
+  "goBack": "Orqaga qaytish",
+  "pageNotFound": "Sahifa mavjud emas",
+  "error404": "404",
+  "errorMessage": "Sahifaga o'zga sayyoraliklar hujum qildi.<br>Jangda yengilgan sayt, sahifani boy berdi.<br>Hammasiga Ilon Mask aybdor!"
 }

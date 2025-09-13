@@ -1,0 +1,324 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@800&family=Poppins:wght@300;400;700&display=swap');
+
+.notFoundPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+  padding: 40px 20px;
+  background-color: #FFFFFF;
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+}
+
+/* --- Header --- */
+.pageHeader {
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 1240px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+}
+
+.logo {
+  font-size: 32px;
+  font-weight: 800;
+  color: #1a2a52;
+  text-decoration: none;
+  
+  &::after { 
+    content: '.'; 
+    color: #4c6fff; 
+  }
+}
+
+.btn {
+  background: #009DFF;
+  color: white;
+  padding: 10px 30px;
+  border-radius: 75px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 20px;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: scale(1.005);
+    box-shadow: 0 10px 20px -5px rgba(0, 157, 255, 0.4);
+  }
+}
+
+/* --- Main Content --- */
+.contentWrapper {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.errorCode {
+  font-family: 'Nunito', sans-serif;
+  font-size: 150px;
+  font-weight: 800;
+  color: #0F70EB;
+  letter-spacing: 5px;
+  margin: 0;
+  line-height: 1;
+}
+
+.errorMessage {
+  font-size: 30px;
+  font-weight: 300;
+  line-height: 1.5;
+  color: #000;
+  margin: 40px 0;
+  max-width: 635px;
+}
+
+/* --- Social Links --- */
+.socialLinks {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+  
+  a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50px;
+    height: 50px;
+    border: 1px solid #696969;
+    border-radius: 50%;
+    color: #212121;
+    font-size: 20px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      background-color: #212121;
+      color: #FFFFFF;
+      border-color: #212121;
+    }
+  }
+}
+
+/* --- UFO Animation --- */
+.illustrationWrapper {
+  position: relative;
+  width: 350px;
+  height: 200px; /* Adjusted for beam */
+  margin-bottom: -50px;
+}
+
+.ufo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation: float 4s ease-in-out infinite;
+}
+
+.ufoTop {
+  width: 60px;
+  height: 60px;
+  background-color: #0F70EB;
+  border-radius: 50%;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: -30px;
+}
+
+.ufoBody {
+  width: 150px;
+  height: 70px;
+  background-color: #E0E0E0;
+  border-radius: 70px 70px 0 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.ufoLight {
+  width: 20px;
+  height: 20px;
+  background-color: #47E6B1;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 15px #47E6B1;
+  animation: blink 2s infinite;
+}
+
+.ufoBeam {
+  width: 100px;
+  height: 150px;
+  background: linear-gradient(to bottom, rgba(15, 112, 235, 0.4), rgba(15, 112, 235, 0));
+  position: absolute;
+  left: 50%;
+  top: 70px;
+  transform: translateX(-50%) perspective(150px) rotateX(20deg);
+  border-radius: 0 0 50% 50%;
+  opacity: 0.8;
+  animation: beam-flicker 3s infinite;
+}
+
+/* Background Particles */
+.particle {
+  position: absolute;
+  background-color: #F55F44;
+  border-radius: 50%;
+  opacity: 0;
+  animation-name: sparkle;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  
+  &:nth-child(3n) { 
+    background-color: #4D8AF0; 
+  }
+  
+  &:nth-child(4n) { 
+    background-color: #47E6B1; 
+  }
+}
+
+/* Keyframes */
+@keyframes float {
+  0%, 100% { 
+    transform: translate(-50%, -50%) translateY(0); 
+  }
+  50% { 
+    transform: translate(-50%, -50%) translateY(-20px); 
+  }
+}
+
+@keyframes blink {
+  0%, 100% { 
+    opacity: 1; 
+  }
+  50% { 
+    opacity: 0.3; 
+  }
+}
+
+@keyframes beam-flicker {
+  0%, 100% { 
+    opacity: 0.8; 
+  }
+  50% { 
+    opacity: 0.6; 
+  }
+}
+
+@keyframes sparkle {
+  0% { 
+    transform: translateY(0); 
+    opacity: 0; 
+  }
+  20% { 
+    opacity: 1; 
+  }
+  80% { 
+    opacity: 1; 
+  }
+  100% { 
+    transform: translateY(100px); 
+    opacity: 0; 
+  }
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
+  .errorCode { 
+    font-size: 100px; 
+  }
+  
+  .errorMessage { 
+    font-size: 20px; 
+  }
+  
+  .pageHeader {
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+    transform: none;
+    left: auto;
+    top: auto;
+    margin-bottom: 40px;
+  }
+  
+  .illustrationWrapper {
+    width: 280px;
+    height: 160px;
+  }
+  
+  .ufoTop {
+    width: 50px;
+    height: 50px;
+    top: -25px;
+  }
+  
+  .ufoBody {
+    width: 120px;
+    height: 60px;
+    border-radius: 60px 60px 0 0;
+  }
+  
+  .ufoBeam {
+    width: 80px;
+    height: 120px;
+    top: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  .notFoundPage {
+    padding: 20px 15px;
+  }
+  
+  .errorCode { 
+    font-size: 80px; 
+    letter-spacing: 2px;
+  }
+  
+  .errorMessage { 
+    font-size: 18px; 
+    margin: 30px 0;
+  }
+  
+  .logo {
+    font-size: 28px;
+  }
+  
+  .btn {
+    font-size: 18px;
+    padding: 8px 24px;
+  }
+  
+  .socialLinks {
+    gap: 8px;
+    
+    a {
+      width: 45px;
+      height: 45px;
+      font-size: 18px;
+    }
+  }
+  
+  .illustrationWrapper {
+    width: 250px;
+    height: 140px;
+  }
+}

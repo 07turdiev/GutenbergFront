@@ -182,5 +182,9 @@
   "soldCount": "1K+",
   "soldText": "Sold",
   "aboutBook": "About book",
-  "swipeHint": "Swipe left and right to change books"
+  "swipeHint": "Swipe left and right to change books",
+  "goBack": "Go Back",
+  "pageNotFound": "Page Not Found",
+  "error404": "404",
+  "errorMessage": "Aliens attacked the page.<br>In battle, the site lost, the page surrendered.<br>Elon Musk is to blame for everything!"
 }
