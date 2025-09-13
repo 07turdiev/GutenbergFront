@@ -8,17 +8,15 @@ import classNames from "classnames";
 import SearchForm from "../SearchForm";
 import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
+import { useMenu } from '../contexts/MenuContext';
 
 
 const Header = () => {
 
     const router = useRouter();
     const { t } = useTranslation('common');
-    const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+    const { isMenuOpen, toggleMenu, closeMenu } = useMenu();
     const [showSearch, setShowSearch] = React.useState(false);
-
-    const toggleMenu = () => setIsMenuOpen(v => !v);
-    const closeMenu = () => setIsMenuOpen(false);
 
     // Menu sections for the drawer
     const menuSections = React.useMemo(() => {

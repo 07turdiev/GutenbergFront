@@ -7,15 +7,16 @@ import React, {useEffect, useRef, useState} from "react";
 import Player from "../components/Player";
 import {Provider} from 'react-redux';
 import {PlayerContextProvider} from "../components/contexts/PlayerContext";
+import {MenuProvider, useMenu} from "../components/contexts/MenuContext";
 import {useRouter} from "next/router";
 import TopProgressBar from "../components/Ui/TopProgressBar";
 import SearchForm from "../components/SearchForm";
 
-const MyApp: React.FC<AppProps> = ({ Component, ...rest  }) => {
-    const {store, props} = wrapper.useWrappedStore(rest);
+const AppContent: React.FC<{Component: any, pageProps: any}> = ({ Component, pageProps }) => {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
     const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
+    const { toggleMenu } = useMenu();
 
     useEffect(() => {
         const handleStart = () => {
@@ -36,30 +37,48 @@ const MyApp: React.FC<AppProps> = ({ Component, ...rest  }) => {
         };
     }, [router]);
 
-    // Ctrl+K keyboard shortcut for search
+    // Keyboard shortcuts
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
-            if ((e.ctrlKey || e.metaKey) && e.key === 'f') {
+            // Ctrl+F or Cmd+F for search
+            if (e.key === 'f' || e.key === 'F') {
                 e.preventDefault();
                 setIsSearchModalOpen(true);
+            }
+            // M key for menu toggle
+            if (e.key === 'm' || e.key === 'M') {
+                e.preventDefault();
+                toggleMenu();
             }
         };
 
         window.addEventListener('keydown', handleKeyDown);
         return () => window.removeEventListener('keydown', handleKeyDown);
-    }, []);
+    }, [toggleMenu]);
+
+    return (
+        <>
+            <TopProgressBar isLoading={loading} />
+            <Component {...pageProps} />
+            <ToastContainer />
+            <Player/>
+            <SearchForm 
+                open={isSearchModalOpen} 
+                onClose={() => setIsSearchModalOpen(false)} 
+            />
+        </>
+    )
+}
+
+const MyApp: React.FC<AppProps> = ({ Component, ...rest  }) => {
+    const {store, props} = wrapper.useWrappedStore(rest);
 
     return (
         <Provider store={store}>
             <PlayerContextProvider>
-                <TopProgressBar isLoading={loading} />
-                <Component {...props.pageProps} />
-                <ToastContainer />
-                <Player/>
-                <SearchForm 
-                    open={isSearchModalOpen} 
-                    onClose={() => setIsSearchModalOpen(false)} 
-                />
+                <MenuProvider>
+                    <AppContent Component={Component} pageProps={props.pageProps} />
+                </MenuProvider>
             </PlayerContextProvider>
         </Provider>
     )

@@ -9,7 +9,11 @@ import {selectTrack} from "../store/selectors/player";
 import {useDispatch} from "react-redux";
 import {fetchAudioOne} from "../store/actions/audio";
 
-const MainLayout = ({children}) => {
+interface MainLayoutProps {
+    children: React.ReactNode;
+}
+
+const MainLayout: React.FC<MainLayoutProps> = ({children}) => {
 
     const dispatch = useDispatch();
 
@@ -36,7 +40,7 @@ const MainLayout = ({children}) => {
 
     return (
         <div className='h-full flex flex-col'>
-            <Header/>
+            <Header />
             <div className='lg:pt-32 pt-20 sm:pt-24 flex-grow'>
                 {children}
             </div>
