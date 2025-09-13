@@ -151,8 +151,8 @@ const BooksSlider: React.FC = () => {
         </div>
 
         <div className={styles.statsCard}>
-            <span>1K+</span>
-            <p>Sotib olindi</p>
+            <span>{t('soldCount')}</span>
+            <p>{t('soldText')}</p>
             <div className={styles.userIcons}>
               <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrW16gsPNbf_y5hry38tQj-LVvYGRWPb2kvA&s" alt="user" />
               <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrW16gsPNbf_y5hry38tQj-LVvYGRWPb2kvA&s" alt="user" />
@@ -180,7 +180,7 @@ const BooksSlider: React.FC = () => {
           </div>
         <div className={styles.actions}>
           <Link href={`/books/${activeBook.slug}`} >
-          <button className={styles.btnPrimary}>Kitob haqida</button>
+          <button className={styles.btnPrimary}>{t('aboutBook')}</button>
           
           </Link>
         </div>

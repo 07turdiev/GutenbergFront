@@ -169,11 +169,13 @@
   "footer_legal": "Юридическое",
   "footer_subscribe": "Подписка",
   "footer_quick_contact": "Быстрая связь",
-  "publisherDocuments": "Документы издательства"
-  ,
+  "publisherDocuments": "Документы издательства",
   "menu": "Меню",
   "menuMainSection": "- Основное",
   "menuAboutSection": "- О нас",
   "bookipedia": "Bookipedia",
-  "companyFooter": "ООО \"Издательство Гутенберг\" - 2025."
+  "companyFooter": "ООО \"Издательство Гутенберг\" - 2025.",
+  "soldCount": "1K+",
+  "soldText": "Продано",
+  "aboutBook": "О книге"
 }
