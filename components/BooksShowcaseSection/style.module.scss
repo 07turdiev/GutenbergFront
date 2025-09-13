@@ -256,6 +256,17 @@
 .cardPositionCenter:hover .cardBackgroundHover { opacity: 1; transform: rotate(-10deg) scale(1); }
 .cardPositionCenter:hover .cardContent { transform: rotate(10deg); }
 
+// Mobile active state instead of hover
+@media (max-width: 768px) {
+  .cardPositionCenter .cardBackgroundHover { 
+    opacity: 1; 
+    transform: rotate(-10deg) scale(1); 
+  }
+  .cardPositionCenter .cardContent { 
+    transform: rotate(10deg); 
+  }
+}
+
 .sectionFooter {
   position: absolute;
   bottom: 0;

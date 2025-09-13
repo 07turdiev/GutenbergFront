@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState, useMemo, useRef } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
@@ -38,6 +38,12 @@ const BooksSlider: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [activeIndex, setActiveIndex] = useState(0);
   const [animationKey, setAnimationKey] = useState(0);
+  
+  // Touch/swipe handling
+  const touchStartX = useRef<number>(0);
+  const touchEndX = useRef<number>(0);
+  const sliderRef = useRef<HTMLDivElement>(null);
+  const [showSwipeHint, setShowSwipeHint] = useState(true);
 
   useEffect(() => {
     fetchLatestBooks();
@@ -88,6 +94,35 @@ const BooksSlider: React.FC = () => {
     }
   };
 
+  // Swipe detection functions
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.targetTouches[0].clientX;
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStartX.current || !touchEndX.current) return;
+    
+    const distance = touchStartX.current - touchEndX.current;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+
+    if (isLeftSwipe && books.length > 0) {
+      // Swipe left - next book
+      setActiveIndex((prev) => (prev + 1) % books.length);
+      setAnimationKey((k) => k + 1);
+      setShowSwipeHint(false); // Hide hint after first swipe
+    } else if (isRightSwipe && books.length > 0) {
+      // Swipe right - previous book
+      setActiveIndex((prev) => (prev - 1 + books.length) % books.length);
+      setAnimationKey((k) => k + 1);
+      setShowSwipeHint(false); // Hide hint after first swipe
+    }
+  };
+
   useEffect(() => {
     if (!books.length) return;
     const durationMs = 6000; // Keep in sync with CSS animation duration
@@ -97,6 +132,16 @@ const BooksSlider: React.FC = () => {
     }, durationMs);
     return () => clearInterval(id);
   }, [books.length]);
+
+  // Hide swipe hint after 5 seconds
+  useEffect(() => {
+    if (showSwipeHint) {
+      const timer = setTimeout(() => {
+        setShowSwipeHint(false);
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [showSwipeHint]);
 
   const activeBook = books[activeIndex];
   const description = useMemo(() => {
@@ -124,7 +169,13 @@ const BooksSlider: React.FC = () => {
 
   return (
     <section className={styles.heroSlider}>
-      <div className={styles.sliderContainer}>
+      <div 
+        ref={sliderRef}
+        className={styles.sliderContainer}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
         {/* Decorative path */}
         <svg className={styles.pathSvg} viewBox="0 0 234 878" preserveAspectRatio="none">
           <path d="M-97 -9.00001C84.1494 -9.00001 231 188.89 231 433C231 677.11 84.1494 875 -97 875" 
@@ -184,6 +235,13 @@ const BooksSlider: React.FC = () => {
           
           </Link>
         </div>
+        
+        {/* Swipe indicator for mobile */}
+        {showSwipeHint && (
+          <div className={styles.swipeIndicator}>
+            {t('swipeHint')}
+          </div>
+        )}
       </div>
     </section>
   );

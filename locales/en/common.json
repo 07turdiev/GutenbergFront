@@ -181,5 +181,6 @@
   "companyFooter": "\"Gutenberg Publishing House\" LLC - 2025.",
   "soldCount": "1K+",
   "soldText": "Sold",
-  "aboutBook": "About book"
+  "aboutBook": "About book",
+  "swipeHint": "Swipe left and right to change books"
 }
