@@ -85,6 +85,28 @@ const Index = () => {
     const { duration: durationH, isLoading: isLoadingDuration } = useNovelAudioDuration(novel, 'hh:mm:ss');
     const [activeTab, setActiveTab] = useState('read');
     const [isImageModalOpen, setIsImageModalOpen] = useState(false);
+    const genres = [
+        'Fan',
+        'Texnika',
+        'Badiiy',
+        'Ilmiy',
+        'Komiks',
+        'She’riy',
+        'Moliya',
+        'Innovatsiya',
+    ];
+    const [activeGenre, setActiveGenre] = useState<string>('Innovatsiya');
+    const galleryImages = [
+        { id: 1, url: 'https://placehold.co/507x374/e0e0e0/e0e0e0' },
+        { id: 2, url: 'https://placehold.co/507x374/d4d4d4/d4d4d4' },
+        { id: 3, url: 'https://placehold.co/507x374/c8c8c8/c8c8c8' },
+    ];
+    const [isGalleryOpen, setIsGalleryOpen] = useState(false);
+    const [activeGalleryIndex, setActiveGalleryIndex] = useState(0);
+    const openGallery = (index: number) => { setActiveGalleryIndex(index); setIsGalleryOpen(true); };
+    const closeGallery = () => setIsGalleryOpen(false);
+    const nextImage = () => setActiveGalleryIndex(prev => (prev + 1) % galleryImages.length);
+    const prevImage = () => setActiveGalleryIndex(prev => (prev - 1 + galleryImages.length) % galleryImages.length);
 
 
     useEffect(()=>{
@@ -215,7 +237,7 @@ const Index = () => {
                                             :
                                             <div className="w-full h-[555px] rounded-[30px] bg-gray-300"/>
                                     }
-                                </div>
+                            </div>
 
                                 <div className="flex flex-col">
                                     <h1
@@ -281,111 +303,138 @@ const Index = () => {
                             )}
                         </div>
 
-                        {/* Description Section - Full Site Width */}
-                        <div className='w-full bg-gray-100 py-8 lg:py-12 rounded-lg'>
-                            <div className="container mx-auto px-3">
-                                <div className='mb-6 flex justify-center sm:justify-start'>
-                                    <div className='inline-flex rounded-xl border border-gray-200 bg-white overflow-hidden shadow-sm'>
+                        {/* Genres Section */}
+                        <div className="w-full py-8">
+                            <div className="flex justify-center">
+                                <div className="flex items-center gap-3 sm:gap-4 max-w-[1200px] overflow-x-auto pb-3 px-1">
+                                    {genres.map((genre) => (
                                         <button 
-                                            className={`px-4 py-2 font-medium transition-colors flex items-center gap-2 ${
-                                                activeTab === 'read' 
-                                                    ? 'bg-primary text-white' 
-                                                    : 'bg-white text-primary hover:bg-gray-50'
-                                            }`}
-                                            onClick={() => setActiveTab('read')}
+                                            key={genre}
+                                            onClick={() => setActiveGenre(genre)}
+                                            className={
+                                                `flex items-center px-6 py-2 h-[50px] rounded-[75px] text-[20px] font-[400] whitespace-nowrap transition ` +
+                                                (activeGenre === genre
+                                                    ? 'bg-[#009DFF] text-white font-[700] border border-[#009DFF]'
+                                                    : 'bg-[rgba(0,157,255,0.1)] text-[#009DFF] border border-[#009DFF] hover:bg-[rgba(0,157,255,0.15)]')
+                                            }
                                         >
-                                                <svg className="w-4 h-4" viewBox="0 0 16 16" fill="currentColor">
-                                                <path fillRule="evenodd" clipRule="evenodd" d="M13 3H3V5H13V3ZM3 7H13V9H3V7ZM3 11H9V13H3V11Z" />
-                                            </svg>
-                                            {t('read')}
+                                            {genre}
                                         </button>
-                                        <button 
-                                            className={`px-4 py-2 font-medium transition-colors flex items-center gap-2 ${
-                                                activeTab === 'listen' 
-                                                    ? 'bg-primary text-white' 
-                                                    : 'bg-white text-primary hover:bg-gray-50'
-                                            }`}
-                                            onClick={() => setActiveTab('listen')}
-                                        >
-                                            <svg className="w-4 h-4" viewBox="0 0 16 16" fill="currentColor">
-                                                <path d="M13.2692 5.55C12.9792 4.85 12.5592 4.22 12.0192 3.68C11.4792 3.14 10.8592 2.72 10.1492 2.43C8.75922 1.86 7.15922 1.85 5.75922 2.44C5.05922 2.73 4.42922 3.15 3.88922 3.69C3.34922 4.23 2.92922 4.85 2.63922 5.56C2.34922 6.26 2.19922 7 2.19922 7.76V11.96C2.19922 12.95 3.00922 13.76 3.99922 13.76H4.39922C5.38922 13.76 6.19922 12.95 6.19922 11.96V10.56C6.19922 9.57 5.38922 8.76 4.39922 8.76H3.99922C3.89922 8.76 3.79922 8.77 3.69922 8.79V7.76C3.69922 7.2 3.80922 6.65 4.01922 6.13C4.22922 5.61 4.53922 5.15 4.93922 4.75C5.33922 4.35 5.79922 4.04 6.31922 3.83C7.35922 3.4 8.53922 3.4 9.56922 3.83C10.0892 4.05 10.5492 4.36 10.9492 4.75C11.3492 5.15 11.6592 5.61 11.8692 6.13C12.0792 6.65 12.1892 7.19 12.1892 7.76V8.79C12.0892 8.77 11.9892 8.76 11.8892 8.76H11.4892C10.4992 8.76 9.68922 9.57 9.68922 10.56V11.96C9.68922 12.95 10.4992 13.76 11.4892 13.76H11.8892C12.8792 13.76 13.6892 12.95 13.6892 11.96V7.76C13.6892 7 13.5392 6.26 13.2492 5.56L13.2692 5.55Z" />
-                                            </svg>
-                                            {t('listen')}
-                                        </button>
-                                    </div>
+                                    ))}
                                 </div>
-                                
-                                {activeTab === 'listen' && (
-                                    <div className='mb-4 flex items-center gap-2'>
-                                        <div className='bg-primary text-white px-3 py-1 rounded-full flex items-center gap-1'>
-                                            <svg className="w-3 h-3" viewBox="0 0 16 16" fill="currentColor">
-                                                <path fillRule="evenodd" clipRule="evenodd" d="M13 3H3V5H13V3ZM3 7H13V9H3V7ZM3 11H9V13H3V11Z" />
-                                            </svg>
-                                            <svg className="w-3 h-3" viewBox="0 0 16 16" fill="currentColor">
-                                                <path d="M13.2692 5.55C12.9792 4.85 12.5592 4.22 12.0192 3.68C11.4792 3.14 10.8592 2.72 10.1492 2.43C8.75922 1.86 7.15922 1.85 5.75922 2.44C5.05922 2.73 4.42922 3.15 3.88922 3.69C3.34922 4.23 2.92922 4.85 2.63922 5.56C2.34922 6.26 2.19922 7 2.19922 7.76V11.96C2.19922 12.95 3.00922 13.76 3.99922 13.76H4.39922C5.38922 13.76 6.19922 12.95 6.19922 11.96V10.56C6.19922 9.57 5.38922 8.76 4.39922 8.76H3.99922C3.89922 8.76 3.79922 8.77 3.69922 8.79V7.76C3.69922 7.2 3.80922 6.65 4.01922 6.13C4.22922 5.61 4.53922 5.15 4.93922 4.75C5.33922 4.35 5.79922 4.04 6.31922 3.83C7.35922 3.4 8.53922 3.4 9.56922 3.83C10.0892 4.05 10.5492 4.36 10.9492 4.75C11.3492 5.15 11.6592 5.61 11.8692 6.13C12.0792 6.65 12.1892 7.19 12.1892 7.76V8.79C12.0892 8.77 11.9892 8.76 11.8892 8.76H11.4892C10.4992 8.76 9.68922 9.57 9.68922 10.56V11.96C9.68922 12.95 10.4992 13.76 11.4892 13.76H11.8892C12.8792 13.76 13.6892 12.95 13.6892 11.96V7.76C13.6892 7 13.5392 6.26 13.2492 5.56L13.2692 5.55Z" />
-                                            </svg>
-                                        </div>
-                                        <span className='text-sm text-gray-600'>{t('synchronizedWithAudio')}</span>
-                                    </div>
-                                )}
-                                
-                                {activeTab === 'read' && (
-                                    <div>
-                                        <h3 className='font-medium text-xl mb-3'>{ t('description') }</h3>
-                                        <div dangerouslySetInnerHTML={{__html: novel.description}}/>
-                                    </div>
-                                )}
-                                
-                                {activeTab === 'listen' && (
-                                    <div>
-                                        <h3 className='font-medium text-xl mb-3'>{ t('audioDescription') }</h3>
-                                        <div className='mb-6'>
-                                            <TrackTabList trackList={trackList} novel={novel}/>
-                                        </div>
-                                        <div className='mt-8'>
-                                            <h4 className='font-medium text-lg mb-3'>{ t('description') }</h4>
-                                            <div dangerouslySetInnerHTML={{__html: novel.description}}/>
                                         </div>
                                     </div>
-                                )}
+
+                        {/* About Work Section (Description + Gallery) */}
+                        <div className="flex justify-center py-10 lg:py-16 bg-[#fdfdff]">
+                            <div className="w-full max-w-[1240px] px-3">
+                                <div className="flex items-center justify-between mb-10 flex-wrap gap-5">
+                                    <h2 className="text-[48px] lg:text-[64px] font-normal text-[#212121]">Asar haqida</h2>
+                                    <a href="#" className="inline-flex items-center justify-center px-6 py-3 gap-4 bg-[#EB0000] rounded-[75px] text-white no-underline text-[20px] font-semibold transition hover:shadow-[0_10px_20px_-5px_rgba(235,0,0,0.4)]">
+                                        <span>Fragment o'qish</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none">
+                                            <path d="M1.6313 1.68437L13.6313 1.68437M13.6313 1.68437L13.6313 13.6844M13.6313 1.68437L2 13.3157" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                                        </svg>
+                                    </a>
+                                    </div>
+
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-10">
+                                    {galleryImages.map((image, index) => (
+                                        <div key={image.id} className="cursor-pointer overflow-hidden rounded-[20px]" onClick={() => openGallery(index)}>
+                                            <img src={image.url} alt="gallery" className="w-full h-[280px] md:h-[374px] object-cover bg-[#C4C4C4] rounded-[20px] transition-transform duration-300 ease-in-out hover:scale-[1.05]"/>
+                                        </div>
+                                    ))}
+                                        </div>
+
+                                <p className="text-[20px] md:text-[22px] lg:text-[26px] leading-relaxed text-justify text-[#383838]">
+                                    <span dangerouslySetInnerHTML={{ __html: novel?.description || '' }} />
+                                </p>
                             </div>
                         </div>
+                        {isGalleryOpen && (
+                            <div className="fixed inset-0 bg-black/90 z-[1000] flex items-center justify-between" onClick={closeGallery}>
+                                <button className="ml-5 bg-[rgba(40,40,40,0.5)] border border-[rgba(255,255,255,0.2)] text-white rounded-full w-[50px] h-[50px] text-[20px] flex items-center justify-center hover:bg-[rgba(60,60,60,0.7)] transition" onClick={(e) => { e.stopPropagation(); prevImage(); }}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-5 h-5">
+                                        <path fillRule="evenodd" d="M10.78 12.28a.75.75 0 01-1.06 0L5.47 8.03a.75.75 0 010-1.06l4.25-4.25a.75.75 0 111.06 1.06L7.06 7.5l3.72 3.72a.75.75 0 010 1.06z" clipRule="evenodd" />
+                                    </svg>
+                                </button>
+                                <img src={galleryImages[activeGalleryIndex].url} alt="gallery-large" className="max-w-[calc(100vw-160px)] max-h-[calc(100vh-80px)] object-contain rounded-[10px] mx-2" onClick={(e) => e.stopPropagation()} />
+                                <button className="mr-5 bg-[rgba(40,40,40,0.5)] border border-[rgba(255,255,255,0.2)] text-white rounded-full w-[50px] h-[50px] text-[20px] flex items-center justify-center hover:bg-[rgba(60,60,60,0.7)] transition" onClick={(e) => { e.stopPropagation(); nextImage(); }}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-5 h-5 rotate-180">
+                                        <path fillRule="evenodd" d="M10.78 12.28a.75.75 0 01-1.06 0L5.47 8.03a.75.75 0 010-1.06l4.25-4.25a.75.75 0 111.06 1.06L7.06 7.5l3.72 3.72a.75.75 0 010 1.06z" clipRule="evenodd" />
+                                    </svg>
+                                </button>
+                                <button className="absolute top-[30px] right-[30px] bg-[rgba(40,40,40,0.5)] border border-[rgba(255,255,255,0.2)] text-white rounded-full w-[50px] h-[50px] text-[20px] flex items-center justify-center hover:bg-[rgba(60,60,60,0.7)] transition" onClick={(e) => { e.stopPropagation(); closeGallery(); }}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+                                        <path fillRule="evenodd" d="M6.225 4.811a.75.75 0 011.06 0L12 9.525l4.715-4.714a.75.75 0 111.06 1.06L13.06 10.586l4.715 4.715a.75.75 0 11-1.06 1.06L12 11.646l-4.715 4.715a.75.75 0 11-1.06-1.06l4.714-4.715-4.714-4.715a.75.75 0 010-1.06z" clipRule="evenodd" />
+                                    </svg>
+                                </button>
+                            </div>
+                        )}
 
                         <div className="container mx-auto px-3 mt-8">
-                            <SectionTitle>
-                               {t('otherBooks')}
-                            </SectionTitle>
+                            <div className="flex items-center justify-between mb-20 flex-wrap gap-5">
+                                <h2 className="text-[48px] lg:text-[64px] font-normal text-[#212121]">Sotuvdagi kitoblar</h2>
+                                <div className="flex items-center gap-2">
+                                    <a href="#" className="inline-flex items-center justify-center px-6 py-3 gap-4 bg-[#EB0000] rounded-[75px] text-white no-underline text-[20px] font-semibold transition hover:scale-[1.05] hover:shadow-[0_10px_20px_-5px_rgba(235,0,0,0.4)]">
+                                        <span>Bo'limga o'tish</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none">
+                                            <path d="M1.6313 1.68437L13.6313 1.68437M13.6313 1.68437L13.6313 13.6844M13.6313 1.68437L2 13.3157" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                                        </svg>
+                                    </a>
+                                    <a href="#" className="inline-flex items-center justify-center px-6 py-3 h-[60px] rounded-[75px] text-[20px] font-normal bg-[rgba(0,157,255,0.1)] text-[#009DFF] border border-[#009DFF]">
+                                        Barchasi
+                                    </a>
+                                </div>
+                            </div>
 
-                            {
-                                novels.results && !novels.results.length ?
-                                    null
-                                    :
+                            {novels.results && novels.results.length > 0 && (
                                     <Swiper
                                         slidesPerView={2}
-                                        spaceBetween={5}
+                                    spaceBetween={20}
                                         navigation={true}
                                         modules={[Navigation]}
-                                        className='grid grid-cols-4 gap-5 mb-6'
+                                    className='mb-6'
                                         breakpoints={{
                                             768: {
                                                 slidesPerView: 3,
-                                                spaceBetween: 10,
+                                            spaceBetween: 20,
                                             },
                                             1024: {
-                                                slidesPerView: 4,
-                                                spaceBetween: 10,
+                                            slidesPerView: 3,
+                                            spaceBetween: 20,
+                                        },
+                                        1280: {
+                                            slidesPerView: 3,
+                                            spaceBetween: 20,
                                             },
                                         }}
                                     >
-                                        {
-                                            novels.results.filter(item=>item.slug !== novel.slug).map((novel)=>(
-                                                <SwiperSlide key={novel.slug} className='col-span-1'>
-                                                    <NovelCard novel={novel} addToMark={addNovelToMark}/>
+                                    {novels.results
+                                        .filter(item => item.slug !== novel.slug)
+                                        .map((item) => (
+                                            <SwiperSlide key={item.slug} className='col-span-1'>
+                                                <Link href={`/books/${item.slug}`}>
+                                                    <a className="block no-underline group">
+                                                        <div className="mb-6">
+                                                            <img
+                                                                src={item?.cover?.src || 'https://placehold.co/400x547/e0e0e0/e0e0e0'}
+                                                                alt={item?.name || 'book'}
+                                                                className="w-full h-[547px] rounded-[30px] bg-[#C4C4C4] object-cover"
+                                                            />
+                                                        </div>
+                                                        <div className="px-4">
+                                                            <h3 className="text-[24px] font-medium text-[#212121] mb-2 truncate transition-colors group-hover:text-[#009DFF]">{item?.name}</h3>
+                                                            {item?.author?.name && (
+                                                                <p className="text-[20px] font-normal text-[#383838] truncate transition-colors group-hover:text-[#009DFF]">{item.author.name}</p>
+                                                            )}
+                                                        </div>
+                                                    </a>
+                                                </Link>
                                                 </SwiperSlide>
-                                            ))
-                                        }
+                                        ))}
                                     </Swiper>
-                            }
+                            )}
 
                         </div>
 
