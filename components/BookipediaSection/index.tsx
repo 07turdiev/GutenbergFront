@@ -38,7 +38,7 @@ const BookipediaSection: React.FC = () => {
 
     return (
         <section className={styles.bookipediaSection}>
-            <div className={styles.sectionContainer}>
+            <div className={`${styles.sectionContainer} container`}>
                 <header className={styles.sectionHeader}>
                     <h2 className={styles.sectionTitle}>Bookipedia</h2>
                     <div className={styles.sectionDetails}>

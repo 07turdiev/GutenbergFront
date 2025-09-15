@@ -9,6 +9,7 @@ import {
     fetchNovels, fetchPlayerNovel,
     fetchSavedNovels, saveNovel,
 } from "../actions/novel";
+import { fetchNovelsByCategory } from "../actions/novel";
 import {IMeta} from "../../models/IMeta";
 import {IListResponse, ILegacyListResponse} from "../../models/Response/IListResponse";
 import {HYDRATE} from "next-redux-wrapper";
@@ -77,6 +78,21 @@ export const novelSlice = createSlice({
             state.loading = true;
         },
         [fetchNovels.rejected.type]: (state, action: PayloadAction<string>) => {
+            state.loading = false;
+            state.error =  action.payload;
+        },
+
+        // Novels by category (reuse same state bucket)
+        [fetchNovelsByCategory.fulfilled.type]: (state, action: PayloadAction<ILegacyListResponse<INovel[]>>) => {
+            state.loading = false;
+            state.error = '';
+            state.novels.meta = action.payload.meta;
+            state.novels.results = action.payload.results
+        },
+        [fetchNovelsByCategory.pending.type]: (state) => {
+            state.loading = true;
+        },
+        [fetchNovelsByCategory.rejected.type]: (state, action: PayloadAction<string>) => {
             state.loading = false;
             state.error =  action.payload;
         },

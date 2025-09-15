@@ -1,6 +1,6 @@
 .booksSection {
   width: 100%;
-  padding: 80px 0;
+  padding: 50px 0;
   display: flex;
   justify-content: center;
   font-family: 'Poppins', sans-serif;
@@ -11,12 +11,12 @@
   }
 
   @media (max-width: 480px) {
-    padding: 24px 0;
+    padding: 0px 0;
   }
 }
 
 .sectionContainer {
-  width: 1251px;
+  width: 100%;
   position: relative;
   height: 800px;
 
@@ -37,7 +37,7 @@
   }
 }
 
-.sectionHeader, .sectionFooter { padding: 0 20px; }
+.sectionHeader, .sectionFooter { padding: 0; }
 @media (max-width: 480px) {
   .sectionHeader, .sectionFooter { padding: 0; }
 }

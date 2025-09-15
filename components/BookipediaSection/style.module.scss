@@ -1,17 +1,16 @@
 .bookipediaSection {
   width: 100%;
-  padding: 80px 0;
+  padding: 8px 0;
   display: flex;
   justify-content: center;
   font-family: 'Poppins', sans-serif;
 }
 
 .sectionContainer { 
-  width: 1251px; 
+  width: 100%; 
   
   @media (max-width: 1024px) {
     width: 100%;
-    padding: 0 1rem;
   }
 }
 

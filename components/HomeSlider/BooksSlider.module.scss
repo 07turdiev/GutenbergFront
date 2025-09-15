@@ -35,7 +35,6 @@
 .heroSlider {
   position: relative;
   width: 100%;
-  min-height: 850px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -44,21 +43,6 @@
   overflow: hidden;
   isolation: isolate;
   z-index: 1;
-
-  @media (max-width: 1023px) {
-    min-height: 720px;
-    margin-top: 90px;
-  }
-
-  @media (max-width: 767px) {
-    min-height: 500px;
-    padding: 1rem 0;
-  }
-
-  @media (max-width: 480px) {
-    min-height: 450px;
-    padding: 0.5rem 0;
-  }
 }
 
 .sliderContainer {
@@ -66,18 +50,18 @@
   width: 100%;
   height: 100%;
   max-width: none;
-  min-height: 700px;
+  min-height: 850px;
   touch-action: pan-y;
   user-select: none;
   contain: layout style paint;
   z-index: 1;
 
   @media (max-width: 1023px) {
-    min-height: 620px;
+    min-height: 720px;
   }
 
   @media (max-width: 767px) {
-    min-height: 460px;
+    min-height: 500px;
     padding: 0 1rem;
     cursor: grab;
     
@@ -87,16 +71,15 @@
   }
 
   @media (max-width: 480px) {
-    min-height: 420px;
+    min-height: 450px;
     padding: 0 0.75rem;
   }
 }
 
 .pathSvg {
   position: absolute;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
+  top: 50px;
+  left: 150px;
   width: 234px;
   height: 878px;
   pointer-events: none;
@@ -528,7 +511,7 @@
 .bookAnimationWrapper {
   position: absolute;
   top: 0;
-  left: -50px;
+  left: 50px;
   width: 320px;
   height: 420px;
   z-index: 10;

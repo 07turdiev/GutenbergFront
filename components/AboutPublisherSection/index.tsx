@@ -9,7 +9,7 @@ const AboutPublisherSection: React.FC = () => {
     const { t } = useTranslation('common');
     return (
         <section className={styles.section}>
-            <div className={styles.container}>
+            <div className={`${styles.container} container`}>
                 {/* Mobile layout */}
                 <div className={styles.mobile}>
                     {/* Metric Container - Biz haqimizda */}

@@ -6,7 +6,8 @@ import {
     fetchAudiosOfNovel,
     fetchNovelOne,
     rateNovel,
-    saveNovel
+    saveNovel,
+    fetchNovelsByCategory
 } from "../../../store/actions/novel";
 import {useAppSelector} from "../../../hooks/reducer";
 import classNames from "classnames";
@@ -53,6 +54,24 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (ctx
         return { notFound: true };
     }
 
+    // Fetch novels by the first category (same genre) of the current novel
+    const firstCategorySlug = novel?.kategoriya && Array.isArray(novel.kategoriya) && novel.kategoriya.length > 0
+        ? novel.kategoriya[0].slug
+        : null;
+    if (firstCategorySlug) {
+        await dispatch(fetchNovelsByCategory({
+            locale: ctx.locale,
+            categorySlug: firstCategorySlug,
+            opt: {
+                params: {
+                    'pagination[pageSize]': 9,
+                    'sort[0]': 'createdAt:desc'
+                }
+            },
+            ctx: ctx
+        }));
+    }
+
     await dispatch(fetchAdvertisingRight({
         locale: ctx.locale,
         type: 'right'
@@ -71,7 +90,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (ctx
 const Index = () => {
 
     const dispatch = useDispatch();
-    const { novel, audioList } = useAppSelector(selectNovels);
+    const { novel, audioList, novels: novelsByCategory } = useAppSelector(selectNovels);
     const {t} = useTranslation('common')
 
     const {author, novels, loading: authorLoading} = useAppSelector(selectAuthors);
@@ -374,7 +393,7 @@ const Index = () => {
 
                         <div className="container mx-auto px-3 mt-8">
                             <div className="flex items-center justify-between mb-20 flex-wrap gap-5">
-                                <h2 className="text-[48px] lg:text-[64px] font-normal text-[#212121]">Sotuvdagi kitoblar</h2>
+                                <h2 className="text-[48px] lg:text-[64px] font-normal text-[#212121]">Shu janrdagi kitoblar</h2>
                                 <div className="flex items-center gap-2">
                                     <a href="#" className="inline-flex items-center justify-center px-6 py-3 gap-4 bg-[#EB0000] rounded-[75px] text-white no-underline text-[20px] font-semibold transition hover:scale-[1.05] hover:shadow-[0_10px_20px_-5px_rgba(235,0,0,0.4)]">
                                         <span>Bo'limga o'tish</span>
@@ -388,29 +407,32 @@ const Index = () => {
                                 </div>
                             </div>
 
-                            {novels.results && novels.results.length > 0 && (
+                            {novelsByCategory.results && novelsByCategory.results.length > 0 && (
                                     <Swiper
-                                        slidesPerView={2}
+                                        slidesPerView={1.5}
                                     spaceBetween={20}
-                                        navigation={true}
+                                        navigation={false}
                                         modules={[Navigation]}
                                     className='mb-6'
                                         breakpoints={{
                                             768: {
                                                 slidesPerView: 3,
                                             spaceBetween: 20,
+                                            navigation: true,
                                             },
                                             1024: {
                                             slidesPerView: 3,
                                             spaceBetween: 20,
+                                            navigation: true,
                                         },
                                         1280: {
                                             slidesPerView: 3,
                                             spaceBetween: 20,
+                                            navigation: true,
                                             },
                                         }}
                                     >
-                                    {novels.results
+                                    {novelsByCategory.results
                                         .filter(item => item.slug !== novel.slug)
                                         .map((item) => (
                                             <SwiperSlide key={item.slug} className='col-span-1'>
@@ -420,14 +442,12 @@ const Index = () => {
                                                             <img
                                                                 src={item?.cover?.src || 'https://placehold.co/400x547/e0e0e0/e0e0e0'}
                                                                 alt={item?.name || 'book'}
-                                                                className="w-full h-[547px] rounded-[30px] bg-[#C4C4C4] object-cover"
+                                                                className="w-full h-[320px] sm:h-[420px] lg:h-[547px] rounded-[30px] bg-[#C4C4C4] object-cover"
                                                             />
                                                         </div>
                                                         <div className="px-4">
                                                             <h3 className="text-[24px] font-medium text-[#212121] mb-2 truncate transition-colors group-hover:text-[#009DFF]">{item?.name}</h3>
-                                                            {item?.author?.name && (
-                                                                <p className="text-[20px] font-normal text-[#383838] truncate transition-colors group-hover:text-[#009DFF]">{item.author.name}</p>
-                                                            )}
+                                                            <p className="text-[20px] font-normal text-[#383838] truncate transition-colors group-hover:text-[#009DFF]">{item?.author?.name || '-'}</p>
                                                         </div>
                                                     </a>
                                                 </Link>

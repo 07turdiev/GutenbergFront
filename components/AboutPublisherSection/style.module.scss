@@ -6,11 +6,6 @@
 
 .container {
     width: 100%;
-    max-width: 1305px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 1rem; /* px-4 */
-    padding-right: 1rem;
 }
 
 /* Mobile (default) */
@@ -162,19 +157,19 @@
 
     .headingAbs {
         position: absolute;
-        left: 400px;
+        left: 470px;
         top: 20px;
-        width: 900px;
+        width: 800px;
         height: 192px;
         font-weight: 400;
-        font-size: 64px;
+        font-size: 50px;
         line-height: 96px;
         color: #212121;
     }
 
     .arrowAbs {
         position: absolute;
-        right: 136px;
+        right: 80px;
         top: 120px;
         width: 60px;
         height: 60px;
@@ -242,10 +237,10 @@
 
     .ctaAbs {
         position: absolute;
-        left: 510px;
+        left: 385px;
         top: 442px;
-        width: 241px;
-        height: 60px;
+        width: 200px;
+        height: 50px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -262,7 +257,7 @@
 
     .ctaAbs:hover { opacity: .95; }
 
-    .ctaTextAbs { font-weight: 600; font-size: 20px; line-height: 30px; }
+    .ctaTextAbs { font-weight: 600; font-size: 15px; line-height: 30px; }
 }
 
 
