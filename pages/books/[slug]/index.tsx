@@ -35,6 +35,7 @@ import useTranslation from 'next-translate/useTranslation';
 import HeadMeta from '../../../components/HeadMeta';
 import { formatPublishedDate } from '../../../utils/dateFormatter';
 import { useNovelAudioDuration } from '../../../hooks/useAudioDuration';
+import GenresSection from '../../../components/GenresSection';
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (ctx) => {
     const dispatch = store.dispatch;
@@ -323,26 +324,7 @@ const Index = () => {
                         </div>
 
                         {/* Genres Section */}
-                        <div className="w-full py-8">
-                            <div className="flex justify-center">
-                                <div className="flex items-center gap-3 sm:gap-4 max-w-[1200px] overflow-x-auto pb-3 px-1">
-                                    {genres.map((genre) => (
-                                        <button 
-                                            key={genre}
-                                            onClick={() => setActiveGenre(genre)}
-                                            className={
-                                                `flex items-center px-6 py-2 h-[50px] rounded-[75px] text-[20px] font-[400] whitespace-nowrap transition ` +
-                                                (activeGenre === genre
-                                                    ? 'bg-[#009DFF] text-white font-[700] border border-[#009DFF]'
-                                                    : 'bg-[rgba(0,157,255,0.1)] text-[#009DFF] border border-[#009DFF] hover:bg-[rgba(0,157,255,0.15)]')
-                                            }
-                                        >
-                                            {genre}
-                                        </button>
-                                    ))}
-                                </div>
-                                        </div>
-                                    </div>
+                        <GenresSection genres={genres} activeGenre={activeGenre} onSelect={setActiveGenre} />
 
                         {/* About Work Section (Description + Gallery) */}
                         <div className="flex justify-center py-10 lg:py-16 bg-[#fdfdff]">

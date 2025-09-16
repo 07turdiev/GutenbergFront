@@ -16,6 +16,8 @@ import SearchForm from "../../components/SearchForm";
 import HeadMeta from '../../components/HeadMeta';
 import useTranslation from 'next-translate/useTranslation';
 import Link from 'next/link';
+import {BooksSlider} from "../../components/HomeSlider";
+import GenresSection from "../../components/GenresSection";
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (ctx) => {
     const dispatch = store.dispatch;
@@ -50,6 +52,18 @@ const Index = () => {
     const {t} = useTranslation('common')
     const dispatch = useDispatch();
 
+    const genres = [
+        'Fan',
+        'Texnika',
+        'Badiiy',
+        'Ilmiy',
+        'Komiks',
+        "She’riy",
+        'Moliya',
+        'Innovatsiya',
+    ];
+    const [activeGenre, setActiveGenre] = useState<string>('Innovatsiya');
+
     const addNovelToMark = async (slug, saved) => {
         if(!saved){
             await dispatch(saveNovel({
@@ -79,11 +93,34 @@ const Index = () => {
                 keywords="audio kitoblar, audio romanlar, o'zbek audio kitoblar, bepul audio kitoblar, online audio kutubxona, audio hikoyalar, audiokitoblar"
                 ogImg="https://gutenbergnu.uz/og-default-img.jpg"
             />
+            {/* Breadcrumb Navigation */}
+            <div className="mb-6 mt-10 sm:mt-4">
+                    <nav className="flex items-center text-sm text-gray-600 display: flex" aria-label="Breadcrumb">
+                        <Link href="/">
+                            <a className="text-primary hover:text-accent transition-colors">
+                                {t('home')}
+                            </a>
+                        </Link>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 mx-2 text-gray-400">
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                        </svg>
+                        <span className="text-gray-900 font-medium">
+                            {t('books')}
+                        </span>
+                    </nav>
+                </div>
+                
+            {/* Books Slider Section */}
+            <div className="lg:-mt-32 -mt-20 sm:-mt-24">
+                <BooksSlider />
+            </div>
+            {/* Genres Section (after slider) */}
+            <GenresSection genres={genres} activeGenre={activeGenre} onSelect={setActiveGenre}/>
             <div className="container mx-auto px-3 ">
 
                 {/* Breadcrumb Navigation */}
                 <div className="mb-6 mt-10 sm:mt-4">
-                    <nav className="flex items-center text-sm text-gray-600">
+                    <nav className="flex items-center text-sm text-gray-600 display: flex" aria-label="Breadcrumb">
                         <Link href="/">
                             <a className="text-primary hover:text-accent transition-colors">
                                 {t('home')}
