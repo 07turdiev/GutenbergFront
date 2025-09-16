@@ -216,6 +216,11 @@ const BooksSlider: React.FC = () => {
             </button>
           </div>
 
+        {/* Site Slogan */}
+        <div className={styles.sloganContainer}>
+          <h2 className={styles.sloganText}>{t('siteSlogan')}</h2>
+        </div>
+
         {/* Content area */}
         <div className={styles.contentArea}>
           <div key={`title-${activeBook.id}-${activeIndex}`} className={`${styles.textContent} ${styles.fadeText}`}>
