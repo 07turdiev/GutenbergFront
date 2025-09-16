@@ -1,6 +1,6 @@
 .authorsSection {
   width: 100%;
-  padding: 40px 0 60px;
+  padding: 40px 0;
   font-family: 'Poppins', sans-serif;
 }
 
@@ -150,7 +150,7 @@
 }
 
 .authorCard {
-  width: 400px;
+  width: 357px;
   flex-shrink: 0;
   text-decoration: none;
   color: inherit;
@@ -158,9 +158,7 @@
   scroll-snap-align: start;
 }
 
-.authorCard:hover {
-  transform: translateY(-10px);
-}
+
 
 .authorImage {
   width: 100%;
@@ -177,6 +175,7 @@
 .authorCard:hover .authorInfo h3,
 .authorCard:hover .authorInfo p {
   color: #009DFF;
+  transition: all 0.3s ease;
 }
 .authorInfo h3 {
   font-size: 24px;
