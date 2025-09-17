@@ -40,6 +40,18 @@
   margin-bottom: 25px;
 }
 
+.authorOverlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 12px 16px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.6) 60%, rgba(0,0,0,0.85) 100%);
+}
+
 .bookInfo { padding: 0 15px; }
 .titleDefault { font-size: 24px; font-weight: 500; margin: 0 0 10px 0; color: #212121; }
 .authorDefault { font-size: 20px; font-weight: 400; margin: 0; color: #383838; }
