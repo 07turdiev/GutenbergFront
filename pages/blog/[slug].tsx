@@ -36,7 +36,7 @@ const BlogPostPage = () => {
     if (loading) {
         return (
             <MainLayout>
-                <HeadMeta title={t('blog')} description={t('blog')} />
+                <HeadMeta title={t('bookipedia')} description={t('bookipedia')} />
                 <div className="container mx-auto px-3 mb-10">
                     <div className="flex justify-center py-20">
                         <SpinnerDots />
@@ -49,12 +49,12 @@ const BlogPostPage = () => {
     if (!post) {
         return (
             <MainLayout>
-                <HeadMeta title={t('blog')} description={t('blog')} />
+                <HeadMeta title={t('bookipedia')} description={t('bookipedia')} />
                 <div className="container mx-auto px-3 mb-10">
                     <div className="text-center py-20">
                         <h1 className="text-2xl font-bold mb-4">Post topilmadi</h1>
-                        <Link href="/blog">
-                            <a className="text-primary hover:text-accent">Blogga qaytish</a>
+                        <Link href="/bookipedia">
+                            <a className="text-primary hover:text-accent">Bookipediaga qaytish</a>
                         </Link>
                     </div>
                 </div>
@@ -78,9 +78,9 @@ const BlogPostPage = () => {
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 mx-2 text-gray-400">
                             <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
                         </svg>
-                        <Link href="/blog">
+                        <Link href="/bookipedia">
                             <a className="text-primary hover:text-accent transition-colors">
-                                {t('blog')}
+                                {t('bookipedia')}
                             </a>
                         </Link>
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 mx-2 text-gray-400">

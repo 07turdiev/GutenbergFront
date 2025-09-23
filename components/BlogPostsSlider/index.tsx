@@ -20,7 +20,7 @@ const BlogPostsSlider: React.FC<BlogPostsSliderProps> = ({ posts }) => {
   const { t } = useTranslation('common');
 
   const handlePostClick = (slug: string) => {
-    router.push(`/blog/${slug}`);
+    router.push(`/bookipedia/${slug}`);
   };
 
   const getImageUrl = (post: IBlogPost): string => {

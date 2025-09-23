@@ -181,7 +181,7 @@ const SearchForm = ({ open = false, onClose = () => {} }: Props) => {
               id: b.id,
               label: b.sarlavha,
               image: b.rasmi?.url ? ensureAbsoluteUrl(b.rasmi.url) : undefined,
-              link: `/blog/${b.slug}`,
+              link: `/bookipedia/${b.slug}`,
             }))
           );
         setGroupedResults(grouped);
@@ -292,7 +292,7 @@ const SearchForm = ({ open = false, onClose = () => {} }: Props) => {
                     : ""
                 )}
                 onClick={() => {
-                  router.push(`/blog/${b.slug}`);
+                  router.push(`/bookipedia/${b.slug}`);
                   onClose();
                 }}
               >
@@ -548,7 +548,7 @@ const SearchForm = ({ open = false, onClose = () => {} }: Props) => {
                             : ""
                         )}
                         onClick={() => {
-                          router.push(`/blog/${b.slug}`);
+                          router.push(`/bookipedia/${b.slug}`);
                           onClose();
                         }}
                       >

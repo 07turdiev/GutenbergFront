@@ -37,9 +37,9 @@ const BlogPage = () => {
     return (
         <MainLayout>
             <HeadMeta 
-                title="Audio Kitoblar Blog | Gutenberg Audio Kutubxona" 
-                description="Gutenberg audio kutubxonasining blog sahifasi. Audio kitoblar haqida maqolalar, yangiliklar, tavsiyalar va audio adabiyot dunyosi haqida ma'lumotlar."
-                keywords="audio kitoblar blog, audio kitob yangiliklar, audio adabiyot maqolalar, Gutenberg blog, audio kitob tavsiyalar"
+                title="Bookipedia | Gutenberg" 
+                description="Gutenberg Bookipedia sahifasi. Kitoblar, audio kitoblar va adabiyot haqidagi maqolalar, yangiliklar va tavsiyalar."
+                keywords="bookipedia, kitob maqolalari, audio kitob yangiliklar, Gutenberg blog, audio kitob tavsiyalar"
                 ogImg="https://gutenbergnu.uz/og-default-img.jpg"
             />
             <div className="container mx-auto px-3 mb-10">
@@ -56,14 +56,14 @@ const BlogPage = () => {
                             <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
                         </svg>
                         <span className="text-gray-900 font-medium">
-                            {t('blog')}
+                            {t('bookipedia')}
                         </span>
                     </nav>
                 </div>
 
                 {/* Sarlavha */}
                 <div className="text-center mb-12">
-                    <h1 className="text-4xl font-bold mb-4">{t('blog')}</h1>
+                    <h1 className="text-4xl font-bold mb-4">{t('bookipedia')}</h1>
                     <p className="text-gray-600 text-lg max-w-2xl mx-auto">
                         {t('blogSubtitle')}
                     </p>
@@ -136,7 +136,7 @@ const BlogPage = () => {
                                     </p>
                                     
                                     {/* Batafsil tugmasi */}
-                                    <Link href={`/blog/${post.slug}`}>
+                                    <Link href={`/bookipedia/${post.slug}`}>
                                         <a className="inline-flex items-center text-primary hover:text-accent font-medium text-sm">
                                             {t('readMore')}
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 ml-1">

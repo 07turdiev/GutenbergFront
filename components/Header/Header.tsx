@@ -27,7 +27,7 @@ const Header = () => {
                 items: [
                     { text: t('home'), url: '/', active: isActive('/') },
                     { text: t('books'), url: '/books', active: isActive('/books') },
-                    { text: t('bookipedia'), url: '#', active: false },
+                    { text: t('bookipedia'), url: '/bookipedia', active: isActive('/bookipedia') },
                     { text: t('authorsPage'), url: '/authors', active: isActive('/authors') },
                 ],
             },
@@ -46,12 +46,12 @@ const Header = () => {
 
     return (
         <>
-            <div className='py-5 shadow-lg fixed top-0 left-0 w-full z-50'>
+            <div className='py-3 shadow-lg fixed top-0 left-0 w-full z-50'>
                 <div className={classNames('absolute top-0 left-0 w-full h-full ',  classes.blurred)} />
                 <div className='container mx-auto px-3 relative z-30'>
                     <nav className="flex items-center justify-between">
                         {/* Left */}
-                        <div className="flex items-center gap-7 flex-1">
+                        <div className="flex items-center gap-5 flex-1">
                             <button
                                 onClick={toggleMenu}
                                 className="inline-flex items-center gap-2 text-gray-700 hover:text-black"
@@ -63,9 +63,9 @@ const Header = () => {
                             </button>
 
                             {/* Mobile logo (left-shifted) */}
-                            <div className='md:hidden w-28 cursor-pointer' onClick={()=>router.push('/')}> <SiteLogo/> </div>
+                            <div className='md:hidden w-24 cursor-pointer' onClick={()=>router.push('/')}> <SiteLogo white/> </div>
 
-                            <div className="hidden md:flex items-center gap-5">
+                            <div className="hidden md:flex items-center gap-4">
                                 <button
                                     onClick={() => setShowSearch(true)}
                                     className="inline-flex items-center gap-2 text-gray-700 hover:text-black"
@@ -90,23 +90,23 @@ const Header = () => {
 
                         {/* Center logo */}
                         <div className="hidden md:block absolute left-1/2 -translate-x-1/2">
-                            <div className='xl:w-44 w-32 cursor-pointer' onClick={()=>router.push('/')}> <SiteLogo/> </div>
+                            <div className='xl:w-36 w-28 cursor-pointer' onClick={()=>router.push('/')}> <SiteLogo white/> </div>
                         </div>
 
                         {/* Right */}
-                        <div className="flex items-center gap-6 justify-end flex-1">
+                        <div className="flex items-center gap-4 justify-end flex-1">
                             <div className="hidden lg:block"><LocaleSwitcher/></div>
                             <button
                                 onClick={() => router.push('/#contact')}
-                                className="hidden md:inline-flex items-center justify-center px-6 py-3 rounded-full bg-[#EB0000] text-white font-medium shadow-[0_5px_15px_-5px_rgba(235,0,0,0.5)]"
+                                className="hidden md:inline-flex items-center justify-center px-5 py-2.5 rounded-full bg-[#EB0000] text-white font-medium shadow-[0_5px_15px_-5px_rgba(235,0,0,0.5)]"
                             >
                                 {t('contact')}
                             </button>
 
                             {/* Mobile right-side icons */}
-                            <div className="md:hidden inline-flex items-center gap-3">
+                            <div className="md:hidden inline-flex items-center gap-2.5">
                                 <button
-                                    className="w-10 h-10 inline-flex items-center justify-center rounded-full text-gray-700 hover:bg-gray-100"
+                                    className="w-9 h-9 inline-flex items-center justify-center rounded-full text-gray-700 hover:bg-gray-100"
                                     onClick={() => setShowSearch(true)}
                                     aria-label="Search"
                                 >

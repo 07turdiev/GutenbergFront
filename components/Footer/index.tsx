@@ -39,7 +39,7 @@ const Index = () => {
             links: [
                 { text: t('books'), url: '/books' },
                 { text: t('authorsPage'), url: '/authors' },
-                { text: t('blog'), url: '/blog' }
+                { text: t('bookipedia'), url: '/bookipedia' }
             ],
         },
         {

@@ -32,7 +32,7 @@ const BookipediaSection: React.FC = () => {
             title: post.sarlavha,
             category: 'Bookipedia',
             imageUrl: getImageUrl(post),
-            url: `/blog/${post.slug}`,
+            url: `/bookipedia/${post.slug}`,
         }));
     }, [latestBlogPosts]);
 

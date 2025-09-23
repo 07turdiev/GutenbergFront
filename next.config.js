@@ -31,6 +31,20 @@ module.exports = {
                 }
             ]
         },
+        async redirects() {
+            return [
+                {
+                    source: '/blog',
+                    destination: '/bookipedia',
+                    permanent: true,
+                },
+                {
+                    source: '/blog/:slug',
+                    destination: '/bookipedia/:slug',
+                    permanent: true,
+                },
+            ];
+        },
         // Compression
         compress: true,
         // Performance optimizatsiyasi

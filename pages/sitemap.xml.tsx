@@ -34,7 +34,7 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
     '/books',
     '/categories',
     '/genres',
-    '/blog',
+    '/bookipedia',
     '/team',
     '/profile',
   ]

@@ -5,7 +5,7 @@ export const menu = {
     authors: '/authors',
     about: '/about',
     team: '/team',
-    blog: '/blog',
+    blog: '/bookipedia',
     profile: '/profile'
 }
 
@@ -24,7 +24,7 @@ export const Menu = {
             href: menu.team
         },
         {
-            title: 'Блог',
+            title: 'Bookipedia',
             href: menu.blog
         },
         {
@@ -46,7 +46,7 @@ export const Menu = {
             href: menu.team
         },
         {
-            title: 'Blog',
+            title: 'Bookipedia',
             href: menu.blog
         },
         {
@@ -68,7 +68,7 @@ export const Menu = {
             href: menu.team
         },
         {
-            title: 'Blog',
+            title: 'Bookipedia',
             href: menu.blog
         },
         {
