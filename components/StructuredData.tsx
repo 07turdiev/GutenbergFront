@@ -84,8 +84,8 @@ const StructuredData: React.FC<StructuredDataProps> = ({ type, data }) => {
           "datePublished": data.publishedAt,
           "dateModified": data.updatedAt,
           "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": `https://gutenbergnu.uz/blog/${data.slug}`
+          "@type": "WebPage",
+          "@id": `https://gutenbergnu.uz/bookipedia/${data.slug}`
           }
         };
       

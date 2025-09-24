@@ -41,7 +41,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({children}) => {
     return (
         <div className='h-full flex flex-col'>
             <Header />
-            <div className='lg:pt-32 pt-20 sm:pt-24 flex-grow'>
+            <div className='lg:pt-24 pt-16 sm:pt-20 flex-grow'>
                 {children}
             </div>
 

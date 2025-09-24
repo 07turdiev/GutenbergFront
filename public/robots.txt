@@ -20,6 +20,6 @@ Allow: /books/
 Allow: /authors/
 Allow: /categories/
 Allow: /genres/
-Allow: /blog/
+Allow: /bookipedia/
 Allow: /about/
 Allow: /team/ 

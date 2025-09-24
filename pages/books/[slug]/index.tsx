@@ -224,7 +224,7 @@ const Index = () => {
                     <div className="container mx-auto px-3">
                         
                         {/* Breadcrumb Navigation */}
-                        <div className="mb-6 mt-10 sm:mt-4">
+                        <div className="mb-4 mt-2 sm:mt-2">
                             <nav className="flex items-center text-sm text-gray-600">
                                 <Link href="/">
                                     <a className="text-primary hover:text-accent transition-colors">

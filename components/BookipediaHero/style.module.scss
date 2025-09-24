@@ -1,0 +1,213 @@
+.heroContainer {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 50px;
+  max-width: 1200px;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.imageColumn {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 452px;
+  height: 585px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.contentColumn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.statsCard {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background-color: #F8F8F8;
+  border-radius: 20px;
+  padding: 12px 18px;
+  width: 262px;
+  height: 61px;
+}
+
+.statsCard span { color: #009DFF; font-weight: 600; font-size: 14px; }
+.statsCard p { font-size: 10px; color: #383838; }
+
+.userIcons { display: flex; margin-left: auto; }
+.userIcons img { width: 33px; height: 33px; border-radius: 50%; margin-left: -10px; border: 2px solid #F8F8F8; }
+
+.arrowBtn { background: none; color: #009DFF; cursor: pointer; }
+
+.mainTitle {
+  font-size: 60px;
+  font-weight: 800;
+  line-height: 1.0;
+  letter-spacing: 0.01em;
+  color: #212121;
+  margin: 0;
+  max-width: 800px;
+}
+
+.descriptionAndActions {
+  display: flex;
+  align-items: flex-start;
+  gap: 25px;
+  flex-wrap: wrap;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.btnRead {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 30px;
+  width: 125px;
+  height: 60px;
+  background: #EB0000;
+  border-radius: 15px;
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.btnRead:hover { background-color: #d10000; }
+
+.btnBookmark, .btnShare {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  border: 1px solid;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btnBookmark { background: rgba(0, 136, 255, 0.3); border-color: #0088FF; color: #009DFF; font-size: 20px; }
+.btnBookmark:hover { background: rgba(0, 136, 255, 0.5); }
+
+.btnShare { background: rgba(88, 187, 67, 0.31); border-color: #58BB43; color: #58BB43; }
+.btnShare:hover { background: rgba(88, 187, 67, 0.5); }
+
+.description {
+  font-size: 20px;
+  line-height: 30px;
+  color: #383838;
+  max-width: 3089px;
+  margin: 0;
+}
+
+/* <= 320 — very small phones */
+@media (max-width: 320px) {
+  .heroContainer { grid-template-columns: 1fr; gap: 18px; text-align: center; }
+  .imageColumn { order: -1; }
+  .imageWrapper { width: 240px; height: 320px; }
+  .statsCard { width: 210px; height: 54px; margin: 0 auto; }
+  .userIcons img { width: 26px; height: 26px; }
+  .arrowBtn { width: 24px; height: 24px; }
+  .mainTitle { font-size: 26px; line-height: 1.05; max-width: 100%; }
+  .descriptionAndActions { flex-direction: column; align-items: center; }
+  .btnRead { height: 48px; padding: 10px 20px; font-size: 16px; }
+  .btnBookmark, .btnShare { width: 42px; height: 42px; }
+  .description { font-size: 16px; line-height: 24px; max-width: 100%; }
+}
+
+/* 321–375 — small modern phones */
+@media (min-width: 321px) and (max-width: 375px) {
+  .heroContainer { grid-template-columns: 1fr; gap: 22px; text-align: center; }
+  .imageColumn { order: -1; }
+  .imageWrapper { width: 270px; height: 350px; }
+  .statsCard { width: 220px; height: 56px; margin: 0 auto; }
+  .userIcons img { width: 28px; height: 28px; }
+  .arrowBtn { width: 24px; height: 24px; }
+  .mainTitle { font-size: 30px; line-height: 1.05; max-width: 100%; }
+  .descriptionAndActions { flex-direction: column; align-items: center; }
+  .btnRead { height: 50px; padding: 12px 22px; font-size: 17px; }
+  .btnBookmark, .btnShare { width: 44px; height: 44px; }
+  .description { font-size: 16px; line-height: 26px; max-width: 100%; }
+}
+
+/* 376–425 — large phones */
+@media (min-width: 376px) and (max-width: 425px) {
+  .heroContainer { grid-template-columns: 1fr; gap: 24px; text-align: center; }
+  .imageColumn { order: -1; }
+  .imageWrapper { width: 310px; height: 400px; }
+  .statsCard { width: 232px; height: 58px; margin: 0 auto; }
+  .userIcons img { width: 30px; height: 30px; }
+  .arrowBtn { width: 24px; height: 24px; }
+  .mainTitle { font-size: 34px; line-height: 1.05; max-width: 100%; }
+  .descriptionAndActions { flex-direction: column; align-items: center; }
+  .btnRead { height: 52px; padding: 12px 24px; font-size: 18px; }
+  .btnBookmark, .btnShare { width: 46px; height: 46px; }
+  .description { font-size: 17px; line-height: 26px; max-width: 100%; }
+}
+
+/* 426–768 — tablet portrait */
+@media (min-width: 426px) and (max-width: 768px) {
+  .heroContainer { grid-template-columns: 1fr; gap: 28px; text-align: center; }
+  .imageColumn { order: -1; }
+  .imageWrapper { width: 360px; height: 470px; }
+  .statsCard { width: 246px; height: 60px; margin: 0 auto; }
+  .userIcons img { width: 31px; height: 31px; }
+  .mainTitle { font-size: 40px; line-height: 1.06; max-width: 100%; }
+  .descriptionAndActions { flex-direction: column; align-items: center; }
+  .btnRead { height: 56px; padding: 14px 26px; font-size: 18px; }
+  .btnBookmark, .btnShare { width: 50px; height: 50px; }
+  .description { font-size: 18px; line-height: 28px; max-width: 95%; }
+}
+
+/* 769–1024 — tablet landscape / small laptop */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .heroContainer { grid-template-columns: 1fr; gap: 32px; text-align: center; }
+  .imageColumn { order: -1; }
+  .imageWrapper { width: 420px; height: 540px; }
+  .statsCard { width: 254px; height: 60px; margin: 0 auto; }
+  .mainTitle { font-size: 48px; line-height: 1.06; max-width: 900px; margin-left: auto; margin-right: auto; }
+  .descriptionAndActions { flex-direction: column; align-items: center; }
+  .btnRead { height: 58px; padding: 14px 28px; font-size: 19px; }
+  .btnBookmark, .btnShare { width: 52px; height: 52px; }
+  .description { font-size: 18px; line-height: 30px; max-width: 85%; }
+}
+
+/* 1025–1280 — normal laptop / small desktop */
+@media (min-width: 1025px) and (max-width: 1280px) {
+  .heroContainer { grid-template-columns: 1fr 1.4fr; gap: 40px; }
+  .imageWrapper { width: 440px; height: 580px; }
+  .mainTitle { font-size: 56px; }
+}
+
+/* 1281–1440 — large laptop / small desktop monitor */
+@media (min-width: 1281px) and (max-width: 1440px) {
+  .heroContainer { grid-template-columns: 1fr 1.5fr; gap: 48px; }
+  .imageWrapper { width: 480px; height: 620px; }
+  .mainTitle { font-size: 64px; }
+}
+
+
+
+
