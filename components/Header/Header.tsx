@@ -98,9 +98,17 @@ const Header = () => {
                             <div className="hidden lg:block"><LocaleSwitcher/></div>
                             <button
                                 onClick={() => router.push('/#contact')}
-                                className="hidden md:inline-flex items-center justify-center px-5 py-2.5 rounded-full bg-[#EB0000] text-white font-medium shadow-[0_5px_15px_-5px_rgba(235,0,0,0.5)]"
+                                className="hidden md:inline-flex items-center justify-center h-11 px-5 py-2.5 rounded-full bg-[#EB0000] text-white font-medium shadow-[0_5px_15px_-5px_rgba(235,0,0,0.5)] relative overflow-hidden group transition-all duration-300 ease-out group-hover:w-11 group-hover:px-0"
                             >
-                                {t('contact')}
+                                <span className="block transition-all duration-300 ease-out group-hover:opacity-0 group-hover:translate-y-2">{t('contact')}</span>
+                                <span
+                                    aria-hidden
+                                    className="absolute inset-0 flex items-center justify-center -translate-y-full opacity-0 transition-all duration-300 ease-out group-hover:translate-y-0 group-hover:opacity-100"
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 25 25" fill="none">
+                                        <path d="M10.2661 4.75722C9.96241 3.9979 9.22699 3.5 8.40918 3.5H5.65841C4.61197 3.5 3.76367 4.3481 3.76367 5.39453C3.76367 14.2892 10.9745 21.5 19.8691 21.5C20.9156 21.5 21.7637 20.6516 21.7637 19.6052L21.7641 16.854C21.7641 16.0361 21.2664 15.3009 20.507 14.9971L17.8706 13.9429C17.1885 13.6701 16.412 13.7929 15.8476 14.2632L15.1672 14.8307C14.3725 15.4929 13.2033 15.4402 12.4719 14.7088L10.5559 12.7911C9.82446 12.0596 9.77041 10.8913 10.4326 10.0967L11 9.4163C11.4703 8.85195 11.5942 8.07516 11.3213 7.39309L10.2661 4.75722Z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                    </svg>
+                                </span>
                             </button>
 
                             {/* Mobile right-side icons */}
