@@ -7,7 +7,7 @@ import { GetServerSideProps } from 'next';
 import { wrapper } from '../../store/store';
 import { fetchBlogPosts } from '../../store/actions/blog';
 import { useAppDispatch, useAppSelector } from '../../hooks/reducer';
-import { selectBlogPosts, selectBlogLoading, selectBlogTotalPages, selectBlogCurrentPage } from '../../store/selectors/blog';
+import { selectBlogPosts, selectBlogLoading, selectBlogTotalPages, selectBlogCurrentPage, selectBlogError } from '../../store/selectors/blog';
 import { setCurrentPage } from '../../store/reducers/BlogSlice';
 import { blogContentToPlainText, getBlogImageUrl } from '../../utils/strapiAdapter';
 import { formatBlogDate } from '../../utils/dateFormatter';
@@ -24,6 +24,7 @@ const BookipediaPage = () => {
     const loading = useAppSelector(selectBlogLoading);
     const totalPages = useAppSelector(selectBlogTotalPages);
     const currentPage = useAppSelector(selectBlogCurrentPage);
+    const error = useAppSelector(selectBlogError);
 
     const handlePageChange = async (page: number) => {
         dispatch(setCurrentPage(page));
@@ -72,9 +73,9 @@ const BookipediaPage = () => {
                     </div>
                 )}
 
-                {!loading && posts.length === 0 && (
+                {!loading && (posts.length === 0 || !!error) && (
                     <div className="text-center py-20">
-                        <p className="text-gray-500 text-lg">{t('noBlogPosts')}</p>
+                        <p className="text-gray-500 text-lg">Hech narsa yo'q!</p>
                     </div>
                 )}
 
