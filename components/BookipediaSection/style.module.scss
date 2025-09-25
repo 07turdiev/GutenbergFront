@@ -1,4 +1,148 @@
 .bookipediaSection {
+  margin-top: 100px;
+  padding-bottom: 80px;
+  font-family: 'Poppins', sans-serif;
+  background-color: #fff;
+}
+
+.sectionContainer {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 80px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.sectionTitle {
+  font-size: 64px;
+  font-weight: 400;
+  color: #212121;
+}
+
+.sectionDescription {
+  font-size: 20px;
+  line-height: 30px;
+  color: #383838;
+  max-width: 442px;
+}
+
+.articlesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 60px 20px;
+  margin-bottom: 60px;
+}
+
+.articleCard {
+  text-decoration: none;
+  color: inherit;
+  border-radius: 30px;
+  background-color: #ffffff;
+  border: 1px solid transparent;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.articleCard:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.15);
+}
+
+.cardImageWrapper img {
+  width: 100%;
+  height: 402px;
+  border-radius: 30px;
+  background-color: #C4C4C4;
+  display: block;
+  object-fit: cover;
+}
+
+.cardContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 15px;
+}
+
+.cardText h3 {
+  font-size: 20px;
+  font-weight: 400;
+  color: #212121;
+  margin: 0 0 5px 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cardText p {
+  font-size: 16px;
+  font-weight: 400;
+  color: #009DFF;
+  margin: 0;
+}
+
+.arrowCircle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 39px;
+  height: 39px;
+  border: 1px solid #009DFF;
+  border-radius: 50%;
+  color: #009DFF;
+  font-size: 24px;
+  flex-shrink: 0;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.articleCard:hover .arrowCircle {
+  color: #FFFFFF;
+}
+
+.sectionFooter {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btnLoadMore {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 30px;
+  height: 60px;
+  background: #EB0000;
+  border-radius: 20px;
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btnLoadMore:hover {
+  transform: scale(1.05);
+  box-shadow: 0 10px 20px -5px rgba(235, 0, 0, 0.4);
+}
+
+@media (max-width: 1024px) {
+  .articlesGrid { grid-template-columns: repeat(2, 1fr); }
+  .sectionFooter { justify-content: center; }
+}
+
+@media (max-width: 768px) {
+  .sectionTitle { font-size: 48px; }
+  .articlesGrid { grid-template-columns: 1fr; }
+}
+
+.bookipediaSection {
   width: 100%;
   padding: 8px 0;
   display: flex;
@@ -47,15 +191,10 @@
   gap: 20px;
 }
 
-.articlesGrid {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 20px;
-}
 
 .articleCard {
-  width: 400px;
+  display: flex;
+  flex-direction: column;
   text-decoration: none;
   color: inherit;
   transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
@@ -66,35 +205,34 @@
 }
 
 .articleCard:hover {
-  transform: translateY(-10px);
+  transform: translateY(-3px);
   box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.15);
   border-color: #e0e0e0;
 }
 
+.cardImageWrapper { 
+  height: 380px; 
+  overflow: hidden; 
+  margin-bottom: 15px;
+}
+
 .cardImageWrapper img {
   width: 100%;
-  height: auto;
+  height: 100%;
   border-radius: 30px 30px 30px 30px;
   background-color: #C4C4C4;
   display: block;
-}
-
-/* Make the middle (second) card have a fixed height of 382px */
-.articlesGrid .articleCard:nth-child(2) .cardImageWrapper {
-  height: 305px;
-  overflow: hidden;
-}
-
-.articlesGrid .articleCard:nth-child(2) .cardImageWrapper img {
-  height: 100%;
   object-fit: cover;
 }
+
+/* Ensure all cards use identical image height */
 
 .cardContent {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 25px 15px;
+  padding: 15px 15px;
+  height: 100px;
 }
 
 .cardText h3 {
@@ -128,7 +266,6 @@
 
 .sectionLink .arrowCircle { font-size: 18px; width: 24px; height: 24px; }
 
-  .articleCard:hover .arrowCircle { background-color: #009DFF; color: #FFFFFF; }
 
   /* Mobile hover effects */
   @media (max-width: 768px) {
@@ -189,9 +326,12 @@
   .articleCard {
     width: 100%;
     max-width: 100%;
+    height: auto;
     border: 1px solid #e0e0e0;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
+
+  /* Keep fixed image height across devices */
 
   .cardContent {
     padding: 20px 15px;
@@ -254,6 +394,62 @@
     border: 1px solid #e0e0e0;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   }
+}
+
+/* <= 320 — very small phones */
+@media (max-width: 320px) {
+  .articlesGrid { grid-template-columns: 1fr; justify-content: stretch; }
+  .articleCard { width: 100%; height: auto; }
+  .cardImageWrapper { height: 240px; margin-bottom: 12px; }
+}
+
+/* 321–375 — small modern phones */
+@media (min-width: 321px) and (max-width: 375px) {
+  .articlesGrid { grid-template-columns: 1fr; justify-content: stretch; }
+  .articleCard { width: 100%; height: auto; }
+  .cardImageWrapper { height: 270px; margin-bottom: 12px; }
+}
+
+/* 376–425 — large phones */
+@media (min-width: 376px) and (max-width: 425px) {
+  .articlesGrid { grid-template-columns: 1fr; justify-content: stretch; }
+  .articleCard { width: 100%; height: auto; }
+  .cardImageWrapper { height: 300px; margin-bottom: 12px; }
+}
+
+/* 426–768 — tablet portrait */
+@media (min-width: 426px) and (max-width: 768px) {
+  .articlesGrid { grid-template-columns: repeat(2, 1fr); justify-content: center; column-gap: 16px; row-gap: 18px; }
+  .articleCard { width: 100%; height: auto; }
+  .cardImageWrapper { height: 320px; }
+}
+
+/* 769–1024 — tablet landscape / small laptop */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .articlesGrid { grid-template-columns: repeat(2, 1fr); justify-content: center; column-gap: 18px; row-gap: 20px; }
+  .articleCard { width: 100%; height: auto; }
+  .cardImageWrapper { height: 340px; }
+}
+
+/* 1025–1280 — normal laptop / small desktop (base sizing kept) */
+@media (min-width: 1025px) and (max-width: 1280px) {
+  .articlesGrid { grid-template-columns: repeat(3, 1fr); }
+  .articleCard { width: 100%; height: 490px; }
+  .cardImageWrapper { height: 380px; }
+}
+
+/* 1281–1440 — large laptop / small desktop monitor */
+@media (min-width: 1281px) and (max-width: 1440px) {
+  .articlesGrid { grid-template-columns: repeat(3, 1fr); }
+  .articleCard { width: 100%; height: 490px; }
+  .cardImageWrapper { height: 392px; }
+}
+
+/* > 1440 — very large screens / 4K / TV */
+@media (min-width: 1441px) {
+  .articlesGrid { grid-template-columns: repeat(3, 1fr); }
+  .articleCard { width: 100%; height: 476px; }
+  .cardImageWrapper { height: 402px; }
 }
 
 

@@ -58,10 +58,10 @@ export interface IBlogPost {
     kontent: IBlogContentBlock[];
     chop_sanasi: string;
     korishlar_soni: number;
-    youtube_havolasi?: string;
+    youtube_havolasi?: string | null;
     createdAt: string;
     updatedAt: string;
     publishedAt: string;
     locale: string;
-    rasmi?: IBlogImage;
+    rasmi?: IBlogImage | null;
 } 

@@ -308,6 +308,73 @@ export const getBlogImageUrl = (image: any): string => {
     return ensureAbsoluteUrl(image.url);
 };
 
+// Adapt new Bookipedia API item to IBlogPost
+export const adaptBookipediaPost = (item: any): IBlogPost => {
+    if (!item) return null as any;
+
+    const image = item.Rasmi || item.Rasmi_asosiy || null;
+
+    const contentText: string = item.Matn || '';
+    const contentBlocks: any[] = contentText
+        ? [
+            {
+                type: 'paragraph',
+                children: [
+                    {
+                        text: contentText,
+                        type: 'text'
+                    }
+                ]
+            }
+        ]
+        : [];
+
+    const viewsRaw = item.korishlar_soni ?? item.Obunachilar ?? 0;
+    const views = typeof viewsRaw === 'string' ? parseInt(viewsRaw, 10) || 0 : (viewsRaw || 0);
+
+    // Ensure absolute URL on main image and formats
+    let adaptedImage = image;
+    if (adaptedImage && adaptedImage.url) {
+        adaptedImage = {
+            ...adaptedImage,
+            url: ensureAbsoluteUrl(adaptedImage.url),
+            formats: adaptedImage.formats
+                ? Object.keys(adaptedImage.formats).reduce((acc: any, key: string) => {
+                    const f = adaptedImage.formats[key];
+                    acc[key] = {
+                        ...f,
+                        url: ensureAbsoluteUrl(f.url)
+                    };
+                    return acc;
+                }, {})
+                : adaptedImage.formats
+        };
+    }
+
+    const adapted: IBlogPost = {
+        id: item.id,
+        documentId: item.documentId,
+        sarlavha: item.Nomi || '',
+        slug: item.slug || '',
+        kontent: contentBlocks,
+        chop_sanasi: item.Sana || item.createdAt || '',
+        korishlar_soni: views,
+        youtube_havolasi: null,
+        createdAt: item.createdAt || '',
+        updatedAt: item.updatedAt || '',
+        publishedAt: item.publishedAt || '',
+        locale: item.locale || 'uz',
+        rasmi: adaptedImage || null
+    };
+
+    return adapted;
+};
+
+export const adaptBookipediaArray = (items: any[]): IBlogPost[] => {
+    if (!Array.isArray(items)) return [] as IBlogPost[];
+    return items.map((i) => adaptBookipediaPost(i));
+};
+
 // Extract YouTube video ID from various URL formats
 export const extractYouTubeVideoId = (url: string): string | null => {
     if (!url) return null;
