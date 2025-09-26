@@ -1,5 +1,5 @@
 .bookipediaSection {
-  margin-top: 100px;
+  margin-top: 50px;
   padding-bottom: 80px;
   font-family: 'Poppins', sans-serif;
   background-color: #fff;
@@ -278,12 +278,11 @@
 /* Mobile Responsive Styles */
 @media (max-width: 768px) {
   .bookipediaSection {
-    padding: 40px 0;
+    padding: 1px 0;
   }
 
   .sectionContainer {
     width: 100%;
-    padding: 0 1rem;
     max-width: 100%;
   }
 

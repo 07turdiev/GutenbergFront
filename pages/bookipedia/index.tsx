@@ -75,7 +75,7 @@ const BookipediaPage = () => {
 
                 {!loading && (posts.length === 0 || !!error) && (
                     <div className="text-center py-20">
-                        <p className="text-gray-500 text-lg">Hech narsa yo'q!</p>
+                        <p className="text-gray-500 text-lg">{t('nothingHere')}</p>
                     </div>
                 )}
 

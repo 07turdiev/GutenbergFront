@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import styles from './style.module.scss';
 import Link from 'next/link';
+import useTranslation from 'next-translate/useTranslation';
 import { IBlogPost } from '../../models/IBlog';
 import { getBlogImageUrl } from '../../utils/strapiAdapter';
 
@@ -9,6 +10,7 @@ interface BookipediaSectionProps {
 }
 
 const BookipediaSection: React.FC<BookipediaSectionProps> = ({ posts }) => {
+    const { t } = useTranslation('common');
     const [visibleCount, setVisibleCount] = useState<number>(6);
 
     const safePosts = Array.isArray(posts) ? posts : [];
@@ -19,9 +21,9 @@ const BookipediaSection: React.FC<BookipediaSectionProps> = ({ posts }) => {
         <section className={styles.bookipediaSection}>
             <div className={styles.sectionContainer}>
                 <header className={styles.sectionHeader}>
-                    <h2 className={styles.sectionTitle}>Bookipedia</h2>
+                    <h2 className={styles.sectionTitle}>{t('bookipedia')}</h2>
                     <p className={styles.sectionDescription}>
-                        Nashriyotimiz tomonidan e'lon qilingan kitoblar va kitobxonlikka oid qiziqarli blogpostlarni shu yerda o'qishingiz mumkin
+                        {t('bookipediaDescription')}
                     </p>
                 </header>
 
@@ -35,7 +37,7 @@ const BookipediaSection: React.FC<BookipediaSectionProps> = ({ posts }) => {
                                 <div className={styles.cardContent}>
                                     <div className={styles.cardText}>
                                         <h3>{post.sarlavha}</h3>
-                                        <p>Bookipedia</p>
+                                        <p>{t('bookipedia')}</p>
                                     </div>
                                     <span className={styles.arrowCircle}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="39" height="39" viewBox="0 0 39 39" fill="none">
@@ -50,7 +52,7 @@ const BookipediaSection: React.FC<BookipediaSectionProps> = ({ posts }) => {
 
                 {hasMore && (
                     <footer className={styles.sectionFooter}>
-                        <button className={styles.btnLoadMore} onClick={() => setVisibleCount((c) => c + 3)}>Yana</button>
+                        <button className={styles.btnLoadMore} onClick={() => setVisibleCount((c) => c + 3)}>{t('loadMore')}</button>
                     </footer>
                 )}
             </div>
