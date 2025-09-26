@@ -30,7 +30,7 @@ export default class BlogService {
                 }
             }
         }
-        // Ensure media is returned
+        // Ensure media for LIST view: use Rasmi for card thumbnail
         searchParams.append('populate', 'Rasmi');
         // Call new Bookipedia endpoint
         const res: any = await fetcherJson(`/api/bookipedias?${searchParams.toString()}`, config, ctx);
@@ -43,7 +43,7 @@ export default class BlogService {
     }
 
     static async fetchBlogPostBySlug({locale, slug, config, ctx}: FetchParams & {slug: string}): Promise<AxiosResponse<IListResponse<IBlogPost[]>>> {
-        const res: any = await fetcherJson(`/api/bookipedias?locale=${locale}&filters[slug][$eq]=${slug}&populate=Rasmi`, config, ctx);
+        const res: any = await fetcherJson(`/api/bookipedias?locale=${locale}&filters[slug][$eq]=${slug}&populate=Rasmi_asosiy&populate=Rams1&populate=Rasm2&populate=Rasm3`, config, ctx);
         const adapted = {
             data: adaptBookipediaArray(res.data.data),
             meta: res.data.meta

@@ -147,7 +147,9 @@ export const richTextToHtml = (richText: IRichTextContent[]): string => {
                         return text;
                     })
                     .join('');
-                return `<p>${content}</p>`;
+                // Convert newline characters to HTML line breaks
+                const contentWithBreaks = content.replace(/\n/g, '<br/>' );
+                return `<p>${contentWithBreaks}</p>`;
             }
             return '';
         })
@@ -261,7 +263,8 @@ export const blogContentToHtml = (content: any[]): string => {
                         if (child.italic) textContent = `<em>${textContent}</em>`;
                         if (child.underline) textContent = `<u>${textContent}</u>`;
                         if (child.code) textContent = `<code>${textContent}</code>`;
-                        return textContent;
+                        // Convert newlines inside inline runs
+                        return textContent.replace(/\n/g, '<br/>' );
                     })
                     .join('');
                 return `<p>${text}</p>`;
@@ -312,7 +315,7 @@ export const getBlogImageUrl = (image: any): string => {
 export const adaptBookipediaPost = (item: any): IBlogPost => {
     if (!item) return null as any;
 
-    const image = item.Rasmi || item.Rasmi_asosiy || null;
+    const image = item.Rasmi_asosiy || item.Rasmi || null;
 
     const contentText: string = item.Matn || '';
     const contentBlocks: any[] = contentText
@@ -351,6 +354,20 @@ export const adaptBookipediaPost = (item: any): IBlogPost => {
         };
     }
 
+    // Build gallery from Rams1, Rasm2, Rasm3 (array)
+    const galleryItems: any[] = [];
+    const imageCandidates = [item.Rams1, item.Rasm2];
+    imageCandidates.forEach((img) => {
+        if (img && img.url) {
+            galleryItems.push(img);
+        }
+    });
+    if (Array.isArray(item.Rasm3)) {
+        item.Rasm3.forEach((img: any) => {
+            if (img && img.url) galleryItems.push(img);
+        });
+    }
+
     const adapted: IBlogPost = {
         id: item.id,
         documentId: item.documentId,
@@ -366,6 +383,13 @@ export const adaptBookipediaPost = (item: any): IBlogPost => {
         locale: item.locale || 'uz',
         rasmi: adaptedImage || null
     };
+
+    // Attach optional fields without breaking IBlogPost typing at use sites
+    (adapted as any).reyting = item.Reyting ?? null;
+    (adapted as any).gallery = galleryItems.map((img: any) => ({
+        id: img?.id,
+        url: ensureAbsoluteUrl(img?.url)
+    }));
 
     return adapted;
 };

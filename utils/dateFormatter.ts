@@ -98,6 +98,26 @@ export const formatBlogDate = (dateString: string, locale: string = 'uz'): strin
 };
 
 /**
+ * Formats a date string as D.MM.YYYY (e.g., 4.09.2025)
+ * - Day has no leading zero
+ * - Month is two digits with leading zero
+ */
+export const formatDateDayMonthYearDots = (dateString: string | undefined): string => {
+  if (!dateString) return '';
+
+  try {
+    const date = new Date(dateString);
+    const day = date.getDate();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}.${month}.${year}`;
+  } catch (error) {
+    console.error('Error formatting D.MM.YYYY date:', error);
+    return dateString || '';
+  }
+}
+
+/**
  * Formats a date as relative time (e.g., "2 kun oldin")
  * @param dateString - Date string from API
  * @param locale - Locale string ('uz' or 'ru')
