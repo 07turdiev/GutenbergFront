@@ -27,6 +27,13 @@
   box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.1);
 }
 
+.imageWrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 
 
 .contentColumn {
@@ -63,6 +70,12 @@
   color: #212121;
   margin: 0;
   max-width: 800px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .descriptionAndActions {
@@ -120,6 +133,38 @@
   color: #383838;
   max-width: 3089px;
   margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.copiedToast {
+  position: fixed;
+  top: 100px;
+  right: 20px;
+  background: #58BB43;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(88, 187, 67, 0.3);
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
 /* <= 320 — very small phones */
@@ -130,11 +175,11 @@
   .statsCard { width: 210px; height: 54px; margin: 0 auto; }
   .userIcons img { width: 26px; height: 26px; }
   .arrowBtn { width: 24px; height: 24px; }
-  .mainTitle { font-size: 26px; line-height: 1.05; max-width: 100%; }
+  .mainTitle { font-size: 26px; line-height: 1.05; max-width: 100%; -webkit-line-clamp: 3; line-clamp: 3; }
   .descriptionAndActions { flex-direction: column; align-items: center; }
   .btnRead { height: 48px; padding: 10px 20px; font-size: 16px; }
   .btnBookmark, .btnShare { width: 42px; height: 42px; }
-  .description { font-size: 16px; line-height: 24px; max-width: 100%; }
+  .description { font-size: 16px; line-height: 24px; max-width: 100%; -webkit-line-clamp: 4; line-clamp: 4; }
 }
 
 /* 321–375 — small modern phones */
@@ -145,11 +190,11 @@
   .statsCard { width: 220px; height: 56px; margin: 0 auto; }
   .userIcons img { width: 28px; height: 28px; }
   .arrowBtn { width: 24px; height: 24px; }
-  .mainTitle { font-size: 30px; line-height: 1.05; max-width: 100%; }
+  .mainTitle { font-size: 30px; line-height: 1.05; max-width: 100%; -webkit-line-clamp: 3; line-clamp: 3; }
   .descriptionAndActions { flex-direction: column; align-items: center; }
   .btnRead { height: 50px; padding: 12px 22px; font-size: 17px; }
   .btnBookmark, .btnShare { width: 44px; height: 44px; }
-  .description { font-size: 16px; line-height: 26px; max-width: 100%; }
+  .description { font-size: 16px; line-height: 26px; max-width: 100%; -webkit-line-clamp: 4; line-clamp: 4; }
 }
 
 /* 376–425 — large phones */
@@ -160,11 +205,11 @@
   .statsCard { width: 232px; height: 58px; margin: 0 auto; }
   .userIcons img { width: 30px; height: 30px; }
   .arrowBtn { width: 24px; height: 24px; }
-  .mainTitle { font-size: 34px; line-height: 1.05; max-width: 100%; }
+  .mainTitle { font-size: 34px; line-height: 1.05; max-width: 100%; -webkit-line-clamp: 3; line-clamp: 3; }
   .descriptionAndActions { flex-direction: column; align-items: center; }
   .btnRead { height: 52px; padding: 12px 24px; font-size: 18px; }
   .btnBookmark, .btnShare { width: 46px; height: 46px; }
-  .description { font-size: 17px; line-height: 26px; max-width: 100%; }
+  .description { font-size: 17px; line-height: 26px; max-width: 100%; -webkit-line-clamp: 4; line-clamp: 4; }
 }
 
 /* 426–768 — tablet portrait */
@@ -174,11 +219,11 @@
   .imageWrapper { width: 360px; height: 470px; }
   .statsCard { width: 246px; height: 60px; margin: 0 auto; }
   .userIcons img { width: 31px; height: 31px; }
-  .mainTitle { font-size: 40px; line-height: 1.06; max-width: 100%; }
+  .mainTitle { font-size: 40px; line-height: 1.06; max-width: 100%; -webkit-line-clamp: 3; line-clamp: 3; }
   .descriptionAndActions { flex-direction: column; align-items: center; }
   .btnRead { height: 56px; padding: 14px 26px; font-size: 18px; }
   .btnBookmark, .btnShare { width: 50px; height: 50px; }
-  .description { font-size: 18px; line-height: 28px; max-width: 95%; }
+  .description { font-size: 18px; line-height: 28px; max-width: 95%; -webkit-line-clamp: 4; line-clamp: 4; }
 }
 
 /* 769–1024 — tablet landscape / small laptop */
@@ -187,25 +232,25 @@
   .imageColumn { order: -1; }
   .imageWrapper { width: 420px; height: 540px; }
   .statsCard { width: 254px; height: 60px; margin: 0 auto; }
-  .mainTitle { font-size: 48px; line-height: 1.06; max-width: 900px; margin-left: auto; margin-right: auto; }
+  .mainTitle { font-size: 48px; line-height: 1.06; max-width: 900px; margin-left: auto; margin-right: auto; -webkit-line-clamp: 3; line-clamp: 3; }
   .descriptionAndActions { flex-direction: column; align-items: center; }
   .btnRead { height: 58px; padding: 14px 28px; font-size: 19px; }
   .btnBookmark, .btnShare { width: 52px; height: 52px; }
-  .description { font-size: 18px; line-height: 30px; max-width: 85%; }
+  .description { font-size: 18px; line-height: 30px; max-width: 85%; -webkit-line-clamp: 4; line-clamp: 4; }
 }
 
 /* 1025–1280 — normal laptop / small desktop */
 @media (min-width: 1025px) and (max-width: 1280px) {
   .heroContainer { grid-template-columns: 1fr 1.4fr; gap: 40px; }
   .imageWrapper { width: 440px; height: 580px; }
-  .mainTitle { font-size: 56px; }
+  .mainTitle { font-size: 56px; -webkit-line-clamp: 3; line-clamp: 3; }
 }
 
 /* 1281–1440 — large laptop / small desktop monitor */
 @media (min-width: 1281px) and (max-width: 1440px) {
   .heroContainer { grid-template-columns: 1fr 1.5fr; gap: 48px; }
   .imageWrapper { width: 480px; height: 620px; }
-  .mainTitle { font-size: 64px; }
+  .mainTitle { font-size: 64px; -webkit-line-clamp: 3; line-clamp: 3; }
 }
 
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import MainLayout from "../../layouts/MainLayout";
 import useTranslation from "next-translate/useTranslation";
 import HeadMeta from '../../components/HeadMeta';
@@ -6,8 +6,10 @@ import Link from 'next/link';
 import { GetServerSideProps } from 'next';
 import { wrapper } from '../../store/store';
 import { fetchBlogPosts } from '../../store/actions/blog';
+import { fetchAuthorsList } from '../../store/actions/author';
 import { useAppDispatch, useAppSelector } from '../../hooks/reducer';
 import { selectBlogPosts, selectBlogLoading, selectBlogTotalPages, selectBlogCurrentPage, selectBlogError } from '../../store/selectors/blog';
+import { selectAuthors } from '../../store/selectors/author';
 import { setCurrentPage } from '../../store/reducers/BlogSlice';
 import { blogContentToPlainText, getBlogImageUrl } from '../../utils/strapiAdapter';
 import { formatBlogDate } from '../../utils/dateFormatter';
@@ -15,6 +17,8 @@ import { useRouter } from 'next/router';
 import SpinnerDots from '../../components/Ui/SpinnerDots';
 import BookipediaHero from '../../components/BookipediaHero';
 import BookipediaSection from '../../components/BookipediaSection';
+import AuthorsSection from '../../components/AuthorsSection';
+import TestimonialsSection from '../../components/TestimonialsSection';
 
 const BookipediaPage = () => {
     const { t } = useTranslation('common');
@@ -25,6 +29,7 @@ const BookipediaPage = () => {
     const totalPages = useAppSelector(selectBlogTotalPages);
     const currentPage = useAppSelector(selectBlogCurrentPage);
     const error = useAppSelector(selectBlogError);
+    const { authorsList, loading: authorsLoading } = useAppSelector(selectAuthors);
 
     const handlePageChange = async (page: number) => {
         dispatch(setCurrentPage(page));
@@ -36,6 +41,14 @@ const BookipediaPage = () => {
         const plainText = blogContentToPlainText(content);
         return plainText.length > 150 ? plainText.substring(0, 150) + '...' : plainText;
     };
+
+    // Client-side fetch for authors if not loaded
+    useEffect(() => {
+        if (!authorsLoading && (!authorsList || authorsList.length === 0)) {
+            dispatch(fetchAuthorsList({ locale: router.locale || 'uz' }));
+        }
+    }, [dispatch, router.locale, authorsLoading, authorsList]);
+
 
     return (
         <MainLayout>
@@ -82,6 +95,27 @@ const BookipediaPage = () => {
                 {!loading && posts.length > 0 && (
                     <BookipediaSection posts={posts} />
                 )}
+
+                {authorsLoading && (
+                    <div className="flex justify-center py-10">
+                        <SpinnerDots />
+                    </div>
+                )}
+
+                {!authorsLoading && authorsList && authorsList.length > 0 && (
+                    <AuthorsSection authors={authorsList} />
+                )}
+
+                {!authorsLoading && (!authorsList || authorsList.length === 0) && (
+                    <div className="text-center py-10">
+                        <p className="text-gray-500">Mualliflar topilmadi</p>
+                    </div>
+                )}
+
+                {/* Testimonials Section */}
+                <section className="container mx-auto px-3 md:mb-12 mb-7">
+                    <TestimonialsSection />
+                </section>
             </div>
         </MainLayout>
     );
@@ -89,7 +123,10 @@ const BookipediaPage = () => {
 
 export const getServerSideProps: GetServerSideProps = wrapper.getServerSideProps(
     (store) => async ({ locale }) => {
-        await store.dispatch(fetchBlogPosts({ locale: locale || 'uz', page: 1 }));
+        await Promise.all([
+            store.dispatch(fetchBlogPosts({ locale: locale || 'uz', page: 1 })),
+            store.dispatch(fetchAuthorsList({ locale: locale || 'uz' }))
+        ]);
         
         return {
             props: {},

@@ -61,7 +61,7 @@ export default class AuthorService {
     }
 
     static async fetchAuthorsList({locale, config, ctx}: FetchParams): Promise<AxiosResponse<IListResponse<IAuthor[]>>> {
-        return await fetcherJson(`/api/mualliflars?locale=${locale}`, config, ctx)
+        return await fetcherJson(`/api/mualliflars?locale=${locale}&populate=rasmi`, config, ctx)
     }
 
     static async fetchAuthorOne({locale, slug, config, ctx}: FetchParams): Promise<AxiosResponse<IListResponse<IAuthor[]>>> {

@@ -37,8 +37,8 @@ const AuthorsSection: React.FC<AuthorsSectionProps> = ({ authors }) => {
 
     const items = useMemo(() => {
         const list = authors || [];
-        if (list.length <= 4) return list;
-        return list.slice(-4);
+        if (list.length <= 3) return list;
+        return list.slice(-3);
     }, [authors]);
 
     const showNav = (items?.length || 0) >= 4;
