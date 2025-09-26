@@ -14,8 +14,18 @@ const BookipediaSection: React.FC<BookipediaSectionProps> = ({ posts }) => {
     const [visibleCount, setVisibleCount] = useState<number>(6);
 
     const safePosts = Array.isArray(posts) ? posts : [];
-    const visiblePosts = useMemo(() => safePosts.slice(0, visibleCount), [safePosts, visibleCount]);
-    const hasMore = visibleCount < safePosts.length;
+    const sortedPosts = useMemo(() => {
+        const arr = [...safePosts];
+        arr.sort((a, b) => {
+            const aDate = new Date(a.publishedAt || a.createdAt || a.updatedAt || a.chop_sanasi || 0).getTime();
+            const bDate = new Date(b.publishedAt || b.createdAt || b.updatedAt || b.chop_sanasi || 0).getTime();
+            return bDate - aDate;
+        });
+        return arr;
+    }, [safePosts]);
+
+    const visiblePosts = useMemo(() => sortedPosts.slice(0, visibleCount), [sortedPosts, visibleCount]);
+    const hasMore = visibleCount < sortedPosts.length;
 
     return (
         <section className={styles.bookipediaSection}>
