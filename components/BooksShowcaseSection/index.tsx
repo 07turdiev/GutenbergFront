@@ -146,6 +146,7 @@ const BooksShowcaseSection: React.FC = () => {
                     </div>
                 </header>
 
+                
                 <div
                     className={styles.cardSliderContainer}
                     onTouchStart={(e) => {
