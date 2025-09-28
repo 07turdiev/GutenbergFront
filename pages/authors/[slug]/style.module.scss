@@ -1,0 +1,377 @@
+/* Saytning asosiy container o'lchamlari */
+/* Container max-width: 1140px (xl va yuqori) */
+
+.authorHero {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  min-height: 600px;
+  padding: 20px 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+.authorHero::before,
+.authorHero::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.2;
+  z-index: -1;
+}
+
+
+.heroContainer {
+  display: flex;
+  align-items: center;
+  gap: 60px;
+  width: 100%;
+  position: relative; /* Tailwind container ichida ishlashi uchun */
+}
+
+.authorImageWrapper {
+  flex-shrink: 0;
+}
+
+.authorImage {
+  width: 452px;
+  height: 585px;
+  position: relative;
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+.authorDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.authorName {
+  font-size: 80px;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+  color: #212121;
+  margin: 0 0 40px 0;
+}
+
+.authorStats {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 60px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.authorStatItem {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 26px;
+  font-weight: 500;
+  color: #212121;
+}
+
+.statIcon {
+  color: #555;
+  width: 30px;
+  text-align: center;
+}
+
+.statLabel {
+  font-weight: 500;
+  color: #1f2937; /* gray-900 */
+}
+
+.statValue {
+  font-weight: 400;
+  color: #111827; /* gray-900 */
+}
+
+.authorQuote {
+  position: relative;
+  max-width: 740px;
+  margin: 0;
+  padding-left: 30px;
+}
+
+.authorQuote svg {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  width: 80px;
+  height: 80px;
+  color: #e0e0e0;
+  opacity: 0.8;
+  z-index: 0;
+}
+
+.authorQuoteText {
+  position: relative;
+  z-index: 1;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: #383838;
+  margin: 0;
+  white-space: pre-line;
+}
+
+.articleSection {
+  padding: 30px 0;
+  background-color: #fff;
+  font-family: 'Poppins', sans-serif;
+}
+
+.articleContainer {
+  width: 100%;
+  position: relative; /* Tailwind container ichida ishlashi uchun */
+}
+
+.articleTitle {
+  font-size: 70px;
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+  color: #212121;
+  margin-bottom: 24px;
+}
+
+.articleText {
+  font-size: 26px;
+  line-height: 1.5;
+  text-align: justify;
+  color: #383838;
+  margin-bottom: 60px;
+  white-space: pre-line;
+}
+
+.videoPlaceholder {
+  position: relative;
+  width: 100%;
+  height: 534px;
+  margin-bottom: 60px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.videoImage {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  background-color: #c4c4c4;
+}
+
+.playButton {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 50px;
+  color: white;
+  backdrop-filter: blur(5px);
+  transition: transform 0.3s ease;
+}
+
+.videoPlaceholder:hover .playButton {
+  transform: scale(1.1);
+}
+
+/* Responsive YouTube embed */
+.videoEmbed {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
+  overflow: hidden;
+  border-radius: 20px;
+  background: #000;
+  margin-bottom: 40px;
+}
+
+.videoEmbed iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: 20px;
+}
+
+@media (max-width: 992px) {
+  .heroContainer {
+    flex-direction: column;
+    text-align: center;
+    gap: 40px;
+  }
+  .authorDetails {
+    align-items: center;
+  }
+  .authorStats {
+    align-items: center;
+    max-width: 400px;
+  }
+  .authorStatItem {
+    justify-content: flex-start;
+    width: 100%;
+    max-width: 350px;
+  }
+}
+
+/* Mobil telefon (0 - 480px) */
+@media (max-width: 480px) {
+  .authorHero {
+    min-height: auto;
+  }
+  .heroContainer {
+    gap: 24px;
+  }
+  .authorName {
+    font-size: 40px;
+    text-align: center;
+    width: 100%;
+  }
+  .authorImage {
+    width: 260px;
+    height: 340px;
+  }
+  .authorStats {
+    align-items: center;
+    max-width: 300px;
+  }
+  .authorStatItem {
+    font-size: 18px;
+    justify-content: flex-start;
+    width: 100%;
+    max-width: 280px;
+  }
+  .articleTitle {
+    font-size: 36px;
+  }
+  .articleText {
+    font-size: 18px;
+  }
+  .videoPlaceholder {
+    height: 220px;
+  }
+  .playButton {
+    width: 80px;
+    height: 80px;
+    font-size: 26px;
+  }
+}
+
+/* Katta telefon (481 - 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+  .authorHero {
+    min-height: auto;
+  }
+  .heroContainer {
+    gap: 32px;
+  }
+  .authorName {
+    font-size: 48px;
+    text-align: center;
+    width: 100%;
+  }
+  .authorImage {
+    width: 300px;
+    height: 400px;
+  }
+  .authorStats {
+    align-items: center;
+    max-width: 350px;
+  }
+  .authorStatItem {
+    font-size: 20px;
+    justify-content: flex-start;
+    width: 100%;
+    max-width: 320px;
+  }
+  .articleTitle {
+    font-size: 42px;
+  }
+  .articleText {
+    font-size: 20px;
+  }
+  .videoPlaceholder {
+    height: 300px;
+  }
+  .playButton {
+    width: 100px;
+    height: 100px;
+    font-size: 30px;
+  }
+}
+
+/* Planshet (769 - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .heroContainer {
+    gap: 48px;
+  }
+  .authorName {
+    font-size: 56px;
+    text-align: center;
+  }
+  .authorImage {
+    width: 360px;
+    height: 480px;
+  }
+  .articleTitle {
+    font-size: 56px;
+  }
+  .articleText {
+    font-size: 22px;
+  }
+  .videoPlaceholder {
+    height: 400px;
+  }
+}
+
+/* Kichik noutbuk (1025 - 1280px) */
+@media (min-width: 1025px) and (max-width: 1280px) {
+  .authorName {
+    font-size: 72px;
+  }
+  .authorImage {
+    width: 420px;
+    height: 540px;
+  }
+  .articleTitle {
+    font-size: 64px;
+  }
+  .articleText {
+    font-size: 24px;
+  }
+  .videoPlaceholder {
+    height: 500px;
+  }
+}
+
+/* O'rta monitor (1281 - 1536px) */
+@media (min-width: 1281px) and (max-width: 1536px) {
+  /* Container o'zi 1140px ga cheklangan, qo'shimcha cheklov kerak emas */
+}
+
+/* Juda katta monitor (1537px va yuqori) */
+@media (min-width: 1537px) {
+  /* Container o'zi 1140px ga cheklangan, qo'shimcha cheklov kerak emas */
+}
+
+

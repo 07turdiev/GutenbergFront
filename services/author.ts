@@ -35,9 +35,9 @@ export default class AuthorService {
             }
         }
 
-        // Ensure author images are populated unless caller specified otherwise
+        // Ensure author relations are populated unless caller specified otherwise
         if (!('populate' in params)) {
-            params.populate = 'rasmi';
+            params.populate = 'kitoblars,rasmi';
         }
 
         // Encode params to query string
@@ -61,7 +61,7 @@ export default class AuthorService {
     }
 
     static async fetchAuthorsList({locale, config, ctx}: FetchParams): Promise<AxiosResponse<IListResponse<IAuthor[]>>> {
-        return await fetcherJson(`/api/mualliflars?locale=${locale}&populate=rasmi`, config, ctx)
+        return await fetcherJson(`/api/mualliflars?locale=${locale}&populate=kitoblars&populate=rasmi`, config, ctx)
     }
 
     static async fetchAuthorOne({locale, slug, config, ctx}: FetchParams): Promise<AxiosResponse<IListResponse<IAuthor[]>>> {
