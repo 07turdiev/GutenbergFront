@@ -1,0 +1,99 @@
+.documentsPage {
+  font-family: 'Poppins', sans-serif;
+  background-color: #ffffff;
+  max-width: 100%;
+  margin: 0 auto;
+  margin-bottom: 50px;
+}
+
+.mainDocsSection,
+.legalCardsSection {
+  padding-top: 50px;
+}
+
+.sectionTitle {
+  font-size: 50px;
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 40px;
+}
+
+.docsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 400px);
+  gap: 40px;
+}
+
+.docGrid:hover {
+  color: #009DFF;
+}
+
+.docCard img {
+  width: 100%;
+  height: 547px;
+  border-radius: 20px;
+  object-fit: cover;
+  background-color: #c4c4c4;
+  margin-bottom: 20px;
+}
+
+.docCard h3 {
+  font-size: 24px;
+  font-weight: 500;
+  color: #212121;
+}
+
+.docCard h3:hover { color: #009DFF; }
+
+.legalCardsSection {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.legalCard {
+  padding: 40px;
+  border-radius: 20px;
+}
+
+.termsCard { background: rgba(0, 157, 255, 0.1); }
+.privacyCard { background: rgba(88, 187, 67, 0.1); }
+
+.legalCard h3 {
+  font-size: 50px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #383838;
+}
+
+.legalCard p {
+  font-size: 20px;
+  font-weight: 300;
+  margin-bottom: 30px;
+  text-align: justify;
+  color: #000000;
+}
+
+.legalCard a {
+  display: inline-block;
+  padding: 7px 14px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 22px;
+  color: #000000;
+}
+
+.termsCard a { background: rgba(0, 157, 255, 0.2); border: 1px solid #383838; }
+.privacyCard a { background: rgba(88, 187, 67, 0.2); border: 1px solid #383838; }
+
+@media (max-width: 1200px){
+  .docsGrid, .legalCardsSection { grid-template-columns: 1fr; }
+  .docsGrid { justify-items: center; }
+}
+
+@media (max-width: 768px){
+  .sectionTitle { font-size: 40px; }
+}
+
+

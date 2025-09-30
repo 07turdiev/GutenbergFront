@@ -38,7 +38,7 @@ const Header = () => {
                     { text: t('contact'), url: '/contact', active: isActive('/contact') },
                     { text: t('termsOfUse'), url: '#', active: false },
                     { text: t('privacyPolicy'), url: '#', active: false },
-                    { text: t('publisherDocuments'), url: '#', active: false },
+                    { text: t('publisherDocuments'), url: '/documents', active: isActive('/documents') },
                 ],
             },
         ];

@@ -6,6 +6,8 @@ import stylesAbout from './AboutPageStyle.module.scss';
 import Image from 'next/image';
 import aboutImg from '../../assets/images/aboutImg.png';
 import useTranslation from 'next-translate/useTranslation';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay } from 'swiper';
 
 interface FormDataState {
     firstName: string;
@@ -37,6 +39,7 @@ const ContactPage: React.FC = () => {
     const socialIcons = ['facebook-f', 'google', 'instagram', 'youtube'];
 
     const testimonials = [
+        { name: "A.Sa’dullayev", text: 'Gutenberg nashriyot uyi zamonaviy dunyo qarashdagi, mas’uliyati yoshlar ishlovchi nashriyot. Kelajakda o’z nomiga munosib tarzda buyuk ishlarni amalga oshirishiga ishonaman' },
         { name: "A.Sa’dullayev", text: 'Gutenberg nashriyot uyi zamonaviy dunyo qarashdagi, mas’uliyati yoshlar ishlovchi nashriyot. Kelajakda o’z nomiga munosib tarzda buyuk ishlarni amalga oshirishiga ishonaman' },
         { name: "A.Sa’dullayev", text: 'Gutenberg nashriyot uyi zamonaviy dunyo qarashdagi, mas’uliyati yoshlar ishlovchi nashriyot. Kelajakda o’z nomiga munosib tarzda buyuk ishlarni amalga oshirishiga ishonaman' },
         { name: "A.Sa’dullayev", text: 'Gutenberg nashriyot uyi zamonaviy dunyo qarashdagi, mas’uliyati yoshlar ishlovchi nashriyot. Kelajakda o’z nomiga munosib tarzda buyuk ishlarni amalga oshirishiga ishonaman' },
@@ -171,15 +174,29 @@ const ContactPage: React.FC = () => {
                 <section className={`${styles.testimonialsSection} ${styles.pageSection}`}>
                     <div className="container mx-auto px-3">
                         <h2 className={styles.sectionTitle}>Hamkorlarimizning biz haqimizdagi fikr-mulohazalari</h2>
-                        <div className={styles.testimonialsGrid}>
+                        <Swiper
+                            modules={[Autoplay]}
+                            autoplay={{ delay: 5000, disableOnInteraction: false }}
+                            loop
+                            slidesPerView={2.5}
+                            spaceBetween={20}
+                            breakpoints={{
+                                320: { slidesPerView: 1.1, spaceBetween: 12 },
+                                640: { slidesPerView: 1.6, spaceBetween: 16 },
+                                1024: { slidesPerView: 2.5, spaceBetween: 20 },
+                                1400: { slidesPerView: 2.5, spaceBetween: 20 },
+                            }}
+                        >
                             {testimonials.map((testimonial) => (
-                                <div className={styles.testimonialCard} key={testimonial.name}>
-                                    <div className={styles.cardIcon}></div>
-                                    <p className={styles.testimonialText}>{testimonial.text}</p>
-                                    <p className={styles.testimonialAuthor}>{testimonial.name}</p>
-                                </div>
+                                <SwiperSlide key={testimonial.name}>
+                                    <div className={styles.testimonialCard}>
+                                        <div className={styles.cardIcon}></div>
+                                        <p className={styles.testimonialText}>{testimonial.text}</p>
+                                        <p className={styles.testimonialAuthor}>{testimonial.name}</p>
+                                    </div>
+                                </SwiperSlide>
                             ))}
-                        </div>
+                        </Swiper>
                     </div>
                 </section>
             </div>
