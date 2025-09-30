@@ -35,7 +35,7 @@ const Header = () => {
                 title: t('menuAboutSection'),
                 items: [
                     { text: t('about'), url: '/about', active: isActive('/about') },
-                    { text: t('contact'), url: '/#contact', active: router.asPath.includes('#contact') },
+                    { text: t('contact'), url: '/contact', active: isActive('/contact') },
                     { text: t('termsOfUse'), url: '#', active: false },
                     { text: t('privacyPolicy'), url: '#', active: false },
                     { text: t('publisherDocuments'), url: '#', active: false },
@@ -97,7 +97,7 @@ const Header = () => {
                         <div className="flex items-center gap-4 justify-end flex-1">
                             <div className="hidden lg:block"><LocaleSwitcher/></div>
                             <button
-                                onClick={() => router.push('/#contact')}
+                                onClick={() => router.push('/contact')}
                                 className="hidden md:inline-flex items-center justify-center h-11 px-5 py-2.5 rounded-full bg-[#EB0000] text-white font-medium shadow-[0_5px_15px_-5px_rgba(235,0,0,0.5)] relative overflow-hidden group transition-all duration-300 ease-out group-hover:w-11 group-hover:px-0"
                             >
                                 <span className="block transition-all duration-300 ease-out group-hover:opacity-0 group-hover:translate-y-2">{t('contact')}</span>

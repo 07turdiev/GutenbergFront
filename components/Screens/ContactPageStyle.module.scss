@@ -1,0 +1,148 @@
+.contactPage {
+  font-family: 'Poppins', sans-serif;
+  background-color: #fff;
+  margin-bottom: 50px;
+}
+
+.pageSection {
+  padding-top: 50px;
+}
+
+/* Hero Section */
+.heroSection {
+  padding: 0;
+}
+.heroBox {
+  background-color: #f3f3f3;
+  border-radius: 2px;
+  padding: 32px 24px;
+  margin-top: 4rem;
+}
+.heroTitle {
+  font-size: 64px;
+  font-weight: 700;
+  color: #000;
+}
+.heroSubtitle {
+  font-size: 20px;
+  color: #383838;
+  text-align: left;
+}
+
+.heroContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 24px;
+}
+
+/* Form Section */
+.contactForm {
+  background: rgba(88, 187, 67, 0.15);
+  border-radius: 20px;
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.formGroup label {
+  font-size: 18px;
+  font-weight: 300;
+  color: #202023;
+}
+.formGroup input,
+.formGroup textarea {
+  padding: 10px 16px;
+  border-radius: 20px;
+  border: 1px solid #E3E3E4;
+  font-size: 16px;
+  font-family: 'Poppins', sans-serif;
+}
+.btnSubmit {
+  align-self: flex-start;
+  padding: 8px 30px;
+  background-color: #58BB43;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Detailed Info Section */
+.sectionTitle { font-size: 50px; font-weight: 700; color: #000; }
+
+.sectionDescription {
+  font-size: 20px;
+  color: #383838;
+  margin: 20px 0 40px 0;
+  text-align: justify; }
+
+.contactGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+.contactItem p { font-size: 20px; font-weight: 300; margin-bottom: 5px; }
+.contactItem strong { font-size: 20px; font-weight: 700; }
+
+/* Location and Social Section */
+.locationSocialSection {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.infoCard {
+  padding: 40px;
+  border-radius: 20px;
+}
+.locationCard { background: rgba(0, 157, 255, 0.1); }
+.socialCard { background: rgba(88, 187, 67, 0.1); }
+.infoCard h3 { font-size: 50px; font-weight: 700; margin-bottom: 20px; color: #383838; }
+.infoCard p { font-size: 20px; font-weight: 300; margin-bottom: 30px; text-align: justify; color: #000; }
+.infoCard strong { font-size: 24px; font-weight: 700; color: #383838; display: block; margin-bottom: 30px; text-align: justify; }
+.mapLink {
+  display: inline-block;
+  padding: 10px 20px;
+  border: 1px solid #383838;
+  border-radius: 20px;
+  text-decoration: none;
+  color: #000;
+  font-weight: 500;
+}
+.socialLinks { display: flex; gap: 10px; }
+.socialLinks a { display: flex; justify-content: center; align-items: center; width: 50px; height: 50px; border: 1px solid #696969; border-radius: 50%; color: #212121; font-size: 20px; }
+
+/* Testimonials Section */
+.testimonialsGrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.testimonialCard {
+  border: 2px dashed #CECECE;
+  border-radius: 20px;
+  padding: 25px;
+}
+.cardIcon { width: 47px; height: 45px; background: #EB0000; border-radius: 10px; margin-bottom: 25px; }
+.testimonialText { font-size: 18px; line-height: 1.5; text-align: justify; margin-bottom: 20px; }
+.testimonialAuthor { font-size: 32px; font-weight: 700; color: #212121; }
+
+/* Responsive Styles */
+@media (max-width: 1024px) {
+  .contactGrid, .locationSocialSection, .testimonialsGrid { grid-template-columns: 1fr; }
+  .heroTitle, .sectionTitle, .infoCard h3 { font-size: 40px; }
+}
+@media (max-width: 768px) {
+  .formRow { grid-template-columns: 1fr; }
+  .heroContainer { grid-template-columns: 1fr; }
+}
+
+
