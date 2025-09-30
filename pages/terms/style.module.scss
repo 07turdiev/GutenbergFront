@@ -1,0 +1,274 @@
+.termsPage {
+  padding: 80px 20px;
+  font-family: 'Poppins', sans-serif;
+  background-color: #fff;
+}
+
+
+.pageTitle {
+  font-size: 64px;
+  font-weight: 700;
+  color: #212121;
+  margin-bottom: 60px;
+}
+
+.contentText {
+  font-size: 26px;
+  line-height: 1.6;
+  text-align: justify;
+  color: #383838;
+  margin-bottom: 80px;
+}
+
+.brandbookCard {
+  background: rgba(0, 157, 255, 0.1);
+  border-radius: 20px;
+  padding: 40px;
+  width: 580px;
+}
+
+.brandbookCard h2 {
+  font-size: 50px;
+  font-weight: 700;
+  color: #383838;
+  margin: 0 0 15px 0;
+}
+
+.brandbookCard p {
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 1.5;
+  color: #000;
+  margin: 0 0 30px 0;
+  max-width: 480px;
+}
+
+.downloadButton {
+  display: inline-block;
+  padding: 10px 25px;
+  background: rgba(0, 157, 255, 0.2);
+  border: 1px solid #383838;
+  border-radius: 20px;
+  font-size: 22px;
+  font-weight: 500;
+  color: #000;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.downloadButton:hover {
+  background: rgba(0, 157, 255, 0.4);
+}
+
+/* Mobil telefon (0 - 480px) */
+@media (max-width: 480px) {
+  .termsPage {
+    padding: 40px 10px;
+  }
+  
+  .pageTitle {
+    font-size: 32px;
+    margin-bottom: 30px;
+  }
+  
+  .contentText {
+    font-size: 16px;
+    margin-bottom: 40px;
+  }
+  
+  .brandbookCard {
+    width: 100%;
+    padding: 20px;
+  }
+  
+  .brandbookCard h2 {
+    font-size: 24px;
+  }
+  
+  .brandbookCard p {
+    font-size: 14px;
+  }
+  
+  .downloadButton {
+    font-size: 16px;
+    padding: 8px 16px;
+  }
+}
+
+/* Katta telefon (481 - 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+  .termsPage {
+    padding: 50px 15px;
+  }
+  
+  .pageTitle {
+    font-size: 40px;
+    margin-bottom: 40px;
+  }
+  
+  .contentText {
+    font-size: 18px;
+    margin-bottom: 50px;
+  }
+  
+  .brandbookCard {
+    width: 100%;
+    padding: 30px;
+  }
+  
+  .brandbookCard h2 {
+    font-size: 32px;
+  }
+  
+  .brandbookCard p {
+    font-size: 16px;
+  }
+  
+  .downloadButton {
+    font-size: 18px;
+    padding: 10px 20px;
+  }
+}
+
+/* Planshet (769 - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .termsPage {
+    padding: 60px 20px;
+  }
+  
+  .pageTitle {
+    font-size: 48px;
+    margin-bottom: 50px;
+  }
+  
+  .contentText {
+    font-size: 22px;
+    margin-bottom: 60px;
+  }
+  
+  .brandbookCard {
+    width: 100%;
+    max-width: 580px;
+    padding: 35px;
+  }
+  
+  .brandbookCard h2 {
+    font-size: 40px;
+  }
+  
+  .brandbookCard p {
+    font-size: 18px;
+  }
+  
+  .downloadButton {
+    font-size: 20px;
+    padding: 10px 22px;
+  }
+}
+
+/* Kichik noutbuk (1025 - 1280px) */
+@media (min-width: 1025px) and (max-width: 1280px) {
+  .termsPage {
+    padding: 70px 20px;
+  }
+  
+  .pageTitle {
+    font-size: 56px;
+    margin-bottom: 55px;
+  }
+  
+  .contentText {
+    font-size: 24px;
+    margin-bottom: 70px;
+  }
+  
+  .brandbookCard {
+    width: 580px;
+    padding: 40px;
+  }
+  
+  .brandbookCard h2 {
+    font-size: 45px;
+  }
+  
+  .brandbookCard p {
+    font-size: 19px;
+  }
+  
+  .downloadButton {
+    font-size: 21px;
+    padding: 10px 24px;
+  }
+}
+
+/* O'rta monitor (1281 - 1536px) */
+@media (min-width: 1281px) and (max-width: 1536px) {
+  .termsPage {
+    padding: 80px 20px;
+  }
+  
+  .pageTitle {
+    font-size: 64px;
+    margin-bottom: 60px;
+  }
+  
+  .contentText {
+    font-size: 26px;
+    margin-bottom: 80px;
+  }
+  
+  .brandbookCard {
+    width: 580px;
+    padding: 40px;
+  }
+  
+  .brandbookCard h2 {
+    font-size: 50px;
+  }
+  
+  .brandbookCard p {
+    font-size: 20px;
+  }
+  
+  .downloadButton {
+    font-size: 22px;
+    padding: 10px 25px;
+  }
+}
+
+/* Juda katta monitor (1537px va yuqori) */
+@media (min-width: 1537px) {
+  .termsPage {
+    padding: 100px 20px;
+  }
+  
+  .pageTitle {
+    font-size: 72px;
+    margin-bottom: 70px;
+  }
+  
+  .contentText {
+    font-size: 28px;
+    margin-bottom: 90px;
+  }
+  
+  .brandbookCard {
+    width: 580px;
+    padding: 50px;
+  }
+  
+  .brandbookCard h2 {
+    font-size: 55px;
+  }
+  
+  .brandbookCard p {
+    font-size: 22px;
+  }
+  
+  .downloadButton {
+    font-size: 24px;
+    padding: 12px 30px;
+  }
+}
+
+

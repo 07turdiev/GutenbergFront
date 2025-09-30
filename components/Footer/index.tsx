@@ -52,7 +52,7 @@ const Index = () => {
         {
             title: t('footer_legal'),
             links: [
-                { text: t('termsOfUse'), url: '/rules' },
+                { text: t('termsOfUse'), url: '/terms' },
                 { text: t('privacyPolicy'), url: '/privacy-policy' },
                 { text: t('publisherDocuments'), url: '#' }
             ],
