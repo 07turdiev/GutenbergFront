@@ -28,7 +28,6 @@
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  transform: rotate(-10deg);
 }
 
 .heroImg {
@@ -37,7 +36,6 @@
   border-radius: 30px;
   background-color: #C4C4C4;
   object-fit: cover;
-  box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.1);
   position: relative;
   z-index: 1;
 }
@@ -79,17 +77,68 @@
   .heroContainer {
     flex-direction: column;
     text-align: center;
-    gap: 60px;
+    gap: 48px;
   }
   .textWrapper {
     text-align: center;
   }
   .heroTitle {
-    font-size: 64px;
+    font-size: 56px;
   }
   
 }
 
+
+/* Tablet */
+@media (max-width: 768px) {
+  .staticHero {
+    min-height: auto;
+    padding: 48px 16px;
+    margin-top: -1.5rem;
+    margin-bottom: 2rem;
+  }
+  .heroContainer {
+    gap: 32px;
+  }
+  .heroImg {
+    width: 240px;
+    height: auto;
+    border-radius: 24px;
+  }
+  .heroTitle {
+    font-size: 44px;
+    line-height: 1.05;
+    margin-bottom: 12px;
+  }
+  .heroSubtitle {
+    font-size: 18px;
+    line-height: 26px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .staticHero {
+    padding: 36px 14px;
+    margin-top: -1rem;
+    margin-bottom: 1.5rem;
+  }
+  .heroContainer {
+    gap: 24px;
+  }
+  .heroImg {
+    width: 180px;
+    height: auto;
+    border-radius: 20px;
+  }
+  .heroTitle {
+    font-size: 34px;
+  }
+  .heroSubtitle {
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
 
 /* Title parts */
 .gutenberg {
@@ -102,3 +151,225 @@
   letter-spacing: 0; /* 0% */
 }
 
+
+/* About Publisher Section */
+.aboutPublisherSection {
+  background-color: #fff;
+}
+
+.aboutContainer {
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.sectionTitle {
+  font-size: 64px;
+  font-weight: 700;
+  color: #212121;
+  margin-bottom: 20px;
+}
+
+.sectionText {
+  font-size: 26px;
+  line-height: 1.5;
+  text-align: justify;
+  color: #383838;
+}
+
+/* Ensure paragraph blocks from rich text have visible spacing */
+.sectionText p {
+  margin: 16px 0;
+}
+
+@media (max-width: 1024px) {
+  .sectionTitle {
+    font-size: 48px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sectionTitle {
+    font-size: 36px;
+  }
+  .sectionText {
+    font-size: 20px;
+  }
+}
+
+/* GroupSection styles */
+.teamSection {
+  padding: 80px 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: #fff;
+  overflow: hidden;
+}
+
+.sectionContainer {
+  max-width: 1660px;
+  padding: 0 20px;
+  margin: 0 auto;
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.sectionDescription {
+  font-size: 20px;
+  line-height: 30px;
+  color: #383838;
+  max-width: 442px;
+}
+
+.teamSwiper {
+  padding: 10px;
+  margin: -10px;
+}
+
+.teamSlide {
+  width: auto;
+}
+
+.teamCard {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+.teamCard:hover {
+  transform: translateY(-2px);
+  color: #009DFF;
+}
+
+.imageWrapperTeam {
+  margin-bottom: 25px;
+}
+
+.teamImage {
+  width: 400px;
+  height: 500px;
+  border-radius: 30px;
+  background-color: #C4C4C4;
+  display: block;
+  object-fit: cover;
+}
+
+.teamInfo {
+  padding: 0 15px;
+}
+
+.teamInfo h3 {
+  font-size: 24px;
+  font-weight: 500;
+}
+
+.teamInfo p {
+  font-size: 20px;
+  font-weight: 400;
+  margin: 0;
+}
+
+.nameDefault { color: #212121; }
+.roleDefault { color: #383838; }
+
+
+@media (max-width: 1400px) {
+}
+
+@media (max-width: 768px) {
+  .sectionHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .sectionTitle { font-size: 48px; }
+  .teamSlide { width: auto; }
+  .teamImage { height: 380px; width: 100%; }
+}
+
+/* Mobil telefon (0 - 480px) */
+@media (max-width: 480px) {
+  .staticHero { padding: 32px 14px; margin-top: -1rem; margin-bottom: 1.25rem; }
+  .heroContainer { gap: 20px; }
+  .heroImg { width: 170px; height: auto; border-radius: 18px; }
+  .heroTitle { font-size: 32px; line-height: 1.08; }
+  .heroSubtitle { font-size: 15px; line-height: 22px; }
+
+  .aboutPublisherSection { padding: 48px 14px; }
+  .sectionTitle { font-size: 28px; margin-bottom: 16px; }
+  .sectionText { font-size: 18px; }
+
+  .teamSection { padding: 56px 0; }
+  .sectionHeader { margin-bottom: 24px; }
+  .teamImage { height: 340px; width: 100%; }
+}
+
+/* Katta telefon (481 - 768px) */
+@media (min-width: 481px) and (max-width: 768px) {
+  .staticHero { padding: 40px 16px; margin-top: -1.25rem; margin-bottom: 1.5rem; }
+  .heroContainer { gap: 28px; }
+  .heroImg { width: 220px; height: auto; border-radius: 22px; }
+  .heroTitle { font-size: 40px; }
+  .heroSubtitle { font-size: 17px; line-height: 24px; }
+
+  .aboutPublisherSection { padding: 56px 16px; }
+  .sectionTitle { font-size: 32px; margin-bottom: 18px; }
+  .sectionText { font-size: 19px; }
+
+  .teamSection { padding: 64px 0; }
+  .sectionHeader { margin-bottom: 28px; }
+  .teamImage { height: 360px; width: 100%; }
+}
+
+/* Planshet (769 - 1024px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .staticHero { padding: 56px 20px; margin-top: -1.75rem; margin-bottom: 2rem; }
+  .heroContainer { gap: 36px; }
+  .heroImg { width: 260px; height: auto; border-radius: 24px; }
+  .heroTitle { font-size: 52px; }
+  .heroSubtitle { font-size: 18px; line-height: 26px; }
+
+  .aboutPublisherSection { padding: 64px 20px; }
+  .sectionTitle { font-size: 40px; margin-bottom: 20px; }
+  .sectionText { font-size: 20px; }
+
+  .teamSection { padding: 72px 0; }
+  .sectionHeader { margin-bottom: 32px; }
+  .teamImage { height: 420px; width: 360px; }
+}
+
+/* Kichik noutbuk (1025 - 1280px) */
+@media (min-width: 1025px) and (max-width: 1280px) {
+  .staticHero { padding: 64px 20px; margin-top: -2rem; margin-bottom: 2rem; }
+  .heroContainer { gap: 44px; }
+  .heroImg { width: 300px; height: auto; border-radius: 26px; }
+  .heroTitle { font-size: 60px; }
+  .heroSubtitle { font-size: 19px; }
+
+  .aboutPublisherSection { padding: 72px 20px; }
+  .sectionTitle { font-size: 48px; margin-bottom: 24px; }
+  .sectionText { font-size: 22px; }
+
+  .teamSection { padding: 80px 0; }
+  .sectionHeader { margin-bottom: 36px; }
+  .teamImage { height: 460px; width: 380px; }
+}
+
+/* O‘rta monitor (1281 - 1536px) */
+@media (min-width: 1281px) and (max-width: 1536px) {
+  .staticHero { padding: 80px 20px; }
+  .heroTitle { font-size: 72px; }
+  .teamImage { height: 500px; width: 400px; }
+}
+
+/* Juda katta monitor (1537px va yuqori) */
+@media (min-width: 1537px) {
+  .staticHero { padding: 96px 24px; }
+  .heroTitle { font-size: 84px; }
+  .teamImage { height: 547px; width: 420px; }
+}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Image from "next/image";
 import aboutImg from "../../assets/images/aboutImg.png";
 import authorsCountImg from "../../assets/images/authorsCount.svg";
@@ -11,7 +11,11 @@ import {useInView} from "react-intersection-observer";
 import useTranslation from "next-translate/useTranslation";
 import {useRouter} from "next/router";
 import HeadMeta from "../HeadMeta";
+import GenresSection from "../GenresSection";
+import BooksShowcaseSection from "../BooksShowcaseSection";
+import { Swiper, SwiperSlide } from 'swiper/react';
 import styles from './AboutPageStyle.module.scss';
+import { selectTeamMembers } from "../../store/selectors/team";
 
 const AboutPage = () => {
 
@@ -25,30 +29,40 @@ const AboutPage = () => {
         triggerOnce: true,
     });
 
+    const genres = [
+        'Fan',
+        'Texnika',
+        'Badiiy',
+        'Ilmiy',
+        'Komiks',
+        "She’riy",
+        'Moliya',
+        'Innovatsiya',
+    ];
+    const [activeGenre, setActiveGenre] = useState<string>('Innovatsiya');
+
+    const teamMembersStore = useAppSelector(selectTeamMembers);
+    const teamMembers = (teamMembersStore || []).map((m)=>({
+        id: m.id,
+        name: m.ismi,
+        role: m.Lavozimi,
+        imageUrl: m?.rasmi?.formats?.small?.url ? m.rasmi.formats.small.url : (m?.rasmi?.url ? m.rasmi.url : 'https://placehold.co/400x547/e0e0e0/e0e0e0'),
+        url: '#',
+        nameClass: styles.nameBlue,
+        roleClass: styles.roleBlue,
+    }));
+
     return (
         <>
             <HeadMeta 
-                title="Gutenberg Haqida" 
-                description="Gutenberg - O'zbekistondagi eng yirik audio kutubxona. Minglab audio kitoblar, yuzlab mualliflar va millionlab tinglovchilar. Audio adabiyot dunyosiga sayohat."
-                keywords="Gutenberg haqida, o'zbek audio kutubxona, audio kitoblar platformasi, Gutenberg tarix, audio adabiyot"
+                title={t('aboutMetaTitle')}
+                description={t('aboutMetaDescription')}
+                keywords={t('aboutMetaKeywords')}
                 ogImg="https://gutenbergnu.uz/og-default-img.jpg"
             />
             <section className={styles.staticHero}>
                 <div className={styles.heroContainer}>
                     <div className={styles.imageWrapper}>
-                        <svg className={styles.bgPathSvg} xmlns="http://www.w3.org/2000/svg" width="238" height="886" viewBox="0 0 238 886" fill="none">
-                            <path d="M-97 -9.00001C84.1494 -9.00001 231 188.89 231 433C231 677.11 84.1494 875 -97 875" stroke="url(#paint0_linear_about)" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round"/>
-                            <defs>
-                                <linearGradient id="paint0_linear_about" x1="67" y1="746.187" x2="67" y2="118.98" gradientUnits="userSpaceOnUse">
-                                    <stop stopColor="white"/>
-                                    <stop offset="0.167353" stopColor="#00EEFF"/>
-                                    <stop offset="0.39751" stopColor="#0022FF"/>
-                                    <stop offset="0.606743" stopColor="#AE00FF"/>
-                                    <stop offset="0.845" stopColor="#FF0066"/>
-                                    <stop offset="1" stopColor="white"/>
-                                </linearGradient>
-                            </defs>
-                        </svg>
                         <Image
                             src={aboutImg}
                             alt="Gutenberg Nashriyot Uyi"
@@ -63,72 +77,63 @@ const AboutPage = () => {
                             <span className={styles.nashriyot}>NASHRIYOT UYI</span>
                         </h1>
                         <p className={styles.heroSubtitle}>
-                            Ad astra per aspera - Zulmatdan ziyoga
+                            {t('heroMotto')}
                         </p>
                     </div>
                 </div>
             </section>
             <div className="container mx-auto px-3">
-                <h2 className='font-bold mb-3 text-xl'>{t('whatIs')}</h2>
-                <div className="mb-10">
-                    {description && description.description && (
-                        <div 
-                            className="prose prose-lg max-w-none"
-                            dangerouslySetInnerHTML={{__html: description.description}}
-                        />
-                    )}
-                </div>
-
-                <div className='mr-auto ml-auto' >
-                    <div className='bg-gray-100 py-10 px-10 rounded-md mb-10'>
-                        <h2 className='text-center font-bold text-3xl mb-8'>{t('statistics')}</h2>
-
-                        <div className="grid grid-cols-1 gap-10 md:grid-cols-3 md:gap-5" ref={ref}>
-                            <div className="col-span-1">
-                                <div className="text-center">
-                                    <div className='bg-white shadow-2xl w-24 h-24 flex items-center justify-center rounded-md ml-auto mr-auto mb-5'>
-                                        <Image src={authorsCountImg}/>
-                                    </div>
-                                    <div className='text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent'>
-                                        <CountUp start={0} end={inView ? (statistics?.authors ?? 0) : 0} duration={2} separator=" "/>
-                                    </div>
-                                    <h2 className='font-bold text-xl'>
-                                        {t('authorsCountText')}
-                                    </h2>
-                                </div>
-                            </div>
-                            <div className="col-span-1">
-                                <div className="text-center">
-                                    <div className='bg-white shadow-2xl w-24 h-24 flex items-center justify-center rounded-md ml-auto mr-auto mb-5'>
-                                        <Image src={booksCountImg}/>
-                                    </div>
-                                    <div className='text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent mb-3'>
-                                        <CountUp start={0} end={inView ? (statistics?.novels ?? 0) : 0} duration={2} separator=" "/>
-                                    </div>
-                                    <h2 className='font-bold text-xl'>
-                                        {t('Books')}
-                                    </h2>
-                                </div>
-                            </div>
-                            <div className="col-span-1">
-                                <div className="text-center">
-                                    <div className='bg-white shadow-2xl w-24 h-24 flex items-center justify-center rounded-md ml-auto mr-auto mb-5 mb-3'>
-                                        <Image src={personCountImg}/>
-                                    </div>
-                                    <div className='text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent mb-3'>
-                                        <CountUp start={0} end={inView ? (statistics?.users ?? 0) : 0} duration={2} separator=" "/>
-                                    </div>
-                                    <h2 className='font-bold text-xl'>
-                                        {t('readersCountText')}
-                                    </h2>
-                                </div>
-                            </div>
-                        </div>
-
+                
+                <GenresSection genres={genres} activeGenre={activeGenre} onSelect={setActiveGenre} />
+                <section className={styles.aboutPublisherSection}>
+                    <div className={styles.aboutContainer}>
+                        <h2 className={styles.sectionTitle}>{t('publisherAboutTitle')}</h2>
+                        {description && (description as any).description && (
+                            <div className={styles.sectionText} dangerouslySetInnerHTML={{ __html: (description as any).description }} />
+                        )}
                     </div>
-                </div>
+                </section>
 
+                {/* GroupSection */}
+                <section className={styles.teamSection}>
+                    <div className={styles.sectionContainer}>
+                        <header className={styles.sectionHeader}>
+                            <h2 className={styles.sectionTitle}>{t('team')}</h2>
+                            <p className={styles.sectionDescription}>
+                                {t('teamSubtitle')}
+                            </p>
+                        </header>
 
+                        <Swiper
+                            slidesPerView={3.5}
+                            spaceBetween={20}
+                            className={styles.teamSwiper}
+                            breakpoints={{
+                                320: { slidesPerView: 1.5, spaceBetween: 16 },
+                                640: { slidesPerView: 2, spaceBetween: 20 },
+                                1024: { slidesPerView: 3, spaceBetween: 20 },
+                                1400: { slidesPerView: 3.5, spaceBetween: 20 },
+                            }}
+                        >
+                            {teamMembers.map((member) => (
+                                <SwiperSlide key={member.id} className={styles.teamSlide}>
+                                    <a href={member.url} className={styles.teamCard}>
+                                        <div className={styles.imageWrapperTeam}>
+                                            <img src={member.imageUrl?.startsWith('http') ? member.imageUrl : `${process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:1337'}${member.imageUrl}`} alt={member.name} className={styles.teamImage} />
+                                        </div>
+                                        <div className={styles.teamInfo}>
+                                            <h3 className={member.nameClass}>{member.name}</h3>
+                                            <p className={member.roleClass}>{member.role}</p>
+                                        </div>
+                                    </a>
+                                </SwiperSlide>
+                            ))}
+                        </Swiper>
+                    </div>
+                </section>
+                <section className="container mx-auto px-3 md:mb-12 mb-7 md:mt-16 mt-10">
+                    <BooksShowcaseSection />
+                </section>
             </div>
         </>
     );

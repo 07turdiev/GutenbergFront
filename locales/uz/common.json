@@ -78,6 +78,11 @@
   "statistics":"Statistika",
   "authorsCountText": "Mualliflar",
   "readersCountText": "Foydalanuvchilar",
+  "aboutMetaTitle": "Gutenberg Haqida",
+  "aboutMetaDescription": "Gutenberg - O'zbekistondagi eng yirik audio kutubxona. Minglab audio kitoblar, yuzlab mualliflar va millionlab tinglovchilar. Audio adabiyot dunyosiga sayohat.",
+  "aboutMetaKeywords": "Gutenberg haqida, o'zbek audio kutubxona, audio kitoblar platformasi, Gutenberg tarix, audio adabiyot",
+  "heroMotto": "Ad astra per aspera - Zulmatdan ziyoga",
+  "publisherAboutTitle": "Nashriyot haqida",
 
   "popular": "Mashhur",
   "new": "Yangi",
