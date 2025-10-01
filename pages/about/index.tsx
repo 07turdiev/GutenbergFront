@@ -121,19 +121,19 @@ const AboutPage = () => {
                         </header>
 
                         <Swiper
-                            slidesPerView={3.5}
+                            slidesPerView={2.5}
                             spaceBetween={20}
                             className={styles.teamSwiper}
                             breakpoints={{
                                 320: { slidesPerView: 1.5, spaceBetween: 16 },
                                 640: { slidesPerView: 2, spaceBetween: 20 },
-                                1024: { slidesPerView: 3, spaceBetween: 20 },
-                                1400: { slidesPerView: 3.5, spaceBetween: 20 },
+                                1024: { slidesPerView: 2.5, spaceBetween: 20 },
+                                1400: { slidesPerView: 2.5, spaceBetween: 20 },
                             }}
                         >
                             {teamMembers.map((member) => (
                                 <SwiperSlide key={member.id} className={styles.teamSlide}>
-                                    <a href={member.url} className={styles.teamCard}>
+                                    <div className={styles.teamCard}>
                                         <div className={styles.imageWrapperTeam}>
                                             <img src={member.imageUrl?.startsWith('http') ? member.imageUrl : `${process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:1337'}${member.imageUrl}`} alt={member.name} className={styles.teamImage} />
                                         </div>
@@ -141,7 +141,7 @@ const AboutPage = () => {
                                             <h3 className={member.nameClass}>{member.name}</h3>
                                             <p className={member.roleClass}>{member.role}</p>
                                         </div>
-                                    </a>
+                                    </div>
                                 </SwiperSlide>
                             ))}
                         </Swiper>
