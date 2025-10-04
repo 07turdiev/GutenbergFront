@@ -224,5 +224,15 @@
   "contactLocationMap": "Посмотреть на карте",
   "contactSocialTitle": "Официальные страницы",
   "contactSocialDescription": "Вы можете связаться с нами через официальные страницы издательства Гутенберг в социальных сетях.",
-  "contactTestimonialsTitle": "Мнения наших партнеров о нас"
+  "contactTestimonialsTitle": "Мнения наших партнеров о нас",
+  
+  "termsMetaTitle": "Условия использования | Гутенберг",
+  "termsMetaDescription": "Условия использования и правила платформы Гутенберг",
+  "termsMetaKeywords": "условия использования, terms, правила, Гутенберг",
+  "termsPageTitle": "Условия использования",
+  "termsLoading": "Загрузка данных...",
+  "termsError": "Произошла ошибка:",
+  "termsBrandbookTitle": "Брендбук",
+  "termsBrandbookDescription": "Общие указания по использованию бренда издательства - брендбук",
+  "termsBrandbookDownload": "Скачать"
 }

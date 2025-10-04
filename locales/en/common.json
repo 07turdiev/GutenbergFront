@@ -228,5 +228,15 @@
   "contactLocationMap": "View on map",
   "contactSocialTitle": "Official pages",
   "contactSocialDescription": "You can contact us through the official pages of Gutenberg Publishing House on social networks.",
-  "contactTestimonialsTitle": "Our partners' opinions about us"
+  "contactTestimonialsTitle": "Our partners' opinions about us",
+  
+  "termsMetaTitle": "Terms of Use | Gutenberg",
+  "termsMetaDescription": "Terms of use and rules of the Gutenberg platform",
+  "termsMetaKeywords": "terms of use, terms, rules, Gutenberg",
+  "termsPageTitle": "Terms of Use",
+  "termsLoading": "Loading data...",
+  "termsError": "An error occurred:",
+  "termsBrandbookTitle": "Brandbook",
+  "termsBrandbookDescription": "General guidelines for using the publishing house brand - brandbook",
+  "termsBrandbookDownload": "Download"
 }

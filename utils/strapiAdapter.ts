@@ -4,6 +4,7 @@ import {IAuthor} from "../models/IAuthors";
 import {IAbout, IContacts, ISocial, IStatistics} from "../models/IAbout";
 import {ITeamMember} from "../models/ITeam";
 import {IBlogPost} from "../models/IBlog";
+import {ITermsData, ITermsResponse} from "../models/ITerms";
 import { getApiBaseUrl, ensureAbsoluteUrl } from "../config/api";
 
 // Convert Strapi rich text to plain text
@@ -445,4 +446,42 @@ export const extractIframeSrc = (iframeHtml: string): string | null => {
     if (!iframeHtml) return null;
     const srcMatch = iframeHtml.match(/src="([^"]+)"/);
     return srcMatch ? srcMatch[1] : null;
+};
+
+// Convert terms rich text to HTML
+export const termsTextToHtml = (text: any[]): string => {
+    if (!text || !Array.isArray(text)) return '';
+    
+    return text
+        .map(block => {
+            if (block.type === 'paragraph') {
+                const content = block.children
+                    ?.map((child: any) => {
+                        let textContent = child.text || '';
+                        if (child.bold) textContent = `<strong>${textContent}</strong>`;
+                        if (child.italic) textContent = `<em>${textContent}</em>`;
+                        if (child.underline) textContent = `<u>${textContent}</u>`;
+                        return textContent;
+                    })
+                    .join('');
+                return content ? `<p>${content}</p>` : '';
+            }
+            return '';
+        })
+        .join('')
+        .trim();
+};
+
+// Convert new Terms format to backward compatible format
+export const adaptTermsData = (terms: ITermsResponse): ITermsData => {
+    if (!terms || !terms.data) return null;
+    
+    return {
+        ...terms.data,
+        // Ensure Brendbook URL is absolute
+        Brendbook: terms.data.Brendbook ? {
+            ...terms.data.Brendbook,
+            url: ensureAbsoluteUrl(terms.data.Brendbook.url)
+        } : terms.data.Brendbook
+    };
 }; 

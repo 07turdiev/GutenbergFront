@@ -228,5 +228,15 @@
   "contactLocationMap": "Xaritadan ko'rish",
   "contactSocialTitle": "Rasmiy sahifalar",
   "contactSocialDescription": "Gutenberg nashriyot uyi ning ijtimoiy tarmoqlardagi rasmiy sahifalari orqali aloqaga chiqish mumkin.",
-  "contactTestimonialsTitle": "Hamkorlarimizning biz haqimizdagi fikr-mulohazalari"
+  "contactTestimonialsTitle": "Hamkorlarimizning biz haqimizdagi fikr-mulohazalari",
+  
+  "termsMetaTitle": "Foydalanish shartlari | Gutenberg",
+  "termsMetaDescription": "Gutenberg platformasidan foydalanish shartlari va qoidalari",
+  "termsMetaKeywords": "foydalanish shartlari, terms, qoidalar, Gutenberg",
+  "termsPageTitle": "Foydalanish shartlari",
+  "termsLoading": "Ma'lumotlar yuklanmoqda...",
+  "termsError": "Xatolik yuz berdi:",
+  "termsBrandbookTitle": "Brendbook",
+  "termsBrandbookDescription": "Nashriyot brendidan foydalanish yuzasidan umumiy ko'rsatmalar - brendbook",
+  "termsBrandbookDownload": "Yuklab olish"
 }

@@ -7,9 +7,23 @@ import Image from 'next/image';
 import aboutImg from '../../assets/images/aboutImg.png';
 import useTranslation from 'next-translate/useTranslation';
 import GenresSection from '../../components/GenresSection';
+import { useAppSelector } from '../../hooks/reducer';
+import { selectTermsData } from '../../store/selectors/terms';
+import { termsTextToHtml } from '../../utils/strapiAdapter';
+import { wrapper } from '../../store/store';
+import { fetchTerms } from '../../store/actions/terms';
+
+export const getServerSideProps = wrapper.getServerSideProps(store => async (ctx) => {
+    const dispatch = store.dispatch;
+    await dispatch(fetchTerms({locale: ctx.locale}))
+    return {
+        props: {},
+    };
+});
 
 const TermsPage: React.FC = () => {
     const { t } = useTranslation('common');
+    const { data: termsData, loading, error } = useAppSelector(selectTermsData);
     
     const genres = [
         'Fan',
@@ -26,9 +40,9 @@ const TermsPage: React.FC = () => {
     return (
         <MainLayout>
             <HeadMeta 
-                title="Foydalanish shartlari | Gutenberg" 
-                description="Gutenberg platformasidan foydalanish shartlari va qoidalari"
-                keywords="foydalanish shartlari, terms, qoidalar, Gutenberg"
+                title={t('termsMetaTitle')} 
+                description={t('termsMetaDescription')}
+                keywords={t('termsMetaKeywords')}
                 ogImg="https://gutenbergnu.uz/og-default-img.jpg"
             />
 
@@ -55,29 +69,51 @@ const TermsPage: React.FC = () => {
                 </div>
             </section>
 
-            <div className="container mx-auto px-3">
+            <div className="mx-auto px-3">
                 <GenresSection genres={genres} activeGenre={activeGenre} onSelect={setActiveGenre} />
             </div>
 
             <div className={styles.termsPage}>
                 <div className="container mx-auto px-3">
-                    <h1 className={styles.pageTitle}>Foydalanish shartlari</h1>
+                    <h1 className={styles.pageTitle}>{t('termsPageTitle')}</h1>
 
-                    <p className={styles.contentText}>
-                        Stenford professori Ilya Strebulaev va texnologiya sohasida katta tajribaga ega Alex Dang tomonidan yozilgan "The Venture Mindset" ("Venchur Tafakkuri") kitobi bugungi tez o'zgaruvchan dunyoda shunchaki omon qolish emas, balki g'ayrioddiy o'sishga erishishni maqsad qilgan har bir rahbar, tadbirkor va qaror qabul qiluvchi uchun qimmatli qo'llanmadir. Asarning asosiy g'oyasi — har qanday tashkilot, xoh u yirik korporatsiya bo'lsin, xoh kichik zavod, o'z faoliyatiga Silikon vodiysidagi eng muvaffaqiyatli venchur kapitalistlar (VC)ning tafakkur tarzini tatbiq etish orqali innovatsiyalarni rag'batlantirishi va raqobatchilardan o'zib ketishi mumkinligidadir.
-                        <br /><br />
-                        Stenford professori Ilya Strebulaev va texnologiya sohasida katta tajribaga ega Alex Dang tomonidan yozilgan "The Venture Mindset" ("Venchur Tafakkuri") kitobi bugungi tez o'zgaruvchan dunyoda shunchaki omon qolish emas, balki g'ayrioddiy o'sishga erishishni maqsad qilgan har bir rahbar, tadbirkor va qaror qabul qiluvchi uchun qimmatli qo'llanmadir. Asarning asosiy g'oyasi — har qanday tashkilot, xoh u yirik korporatsiya bo'lsin, xoh kichik zavod, o'z faoliyatiga Silikon vodiysidagi eng muvaffaqiyatli venchur kapitalistlar (VC)ning tafakkur tarzini tatbiq etish orqali innovatsiyalarni rag'batlantirishi va raqobatchilardan o'zib ketishi mumkinligidadir.
-                        <br /><br />
-                        Stenford professori Ilya Strebulaev va texnologiya sohasida katta tajribaga ega Alex Dang tomonidan yozilgan "The Venture Mindset" ("Venchur Tafakkuri") kitobi bugungi tez o'zgaruvchan dunyoda shunchaki omon qolish emas, balki g'ayrioddiy o'sishga erishishni maqsad qilgan har bir rahbar, tadbirkor va qaror qabul qiluvchi uchun qimmatli qo'llanmadir. Asarning asosiy g'oyasi — har qanday tashkilot, xoh u yirik korporatsiya bo'lsin, xoh kichik zavod, o'z faoliyatiga Silikon vodiysidagi eng muvaffaqiyatli venchur kapitalistlar (VC)ning tafakkur tarzini tatbiq etish orqali innovatsiyalarni rag'batlantirishi va raqobatchilardan o'zib ketishi mumkinligidadir.
-                    </p>
+                    {loading && (
+                        <div className={styles.contentText}>
+                            <p>{t('termsLoading')}</p>
+                        </div>
+                    )}
 
-                    <div className={styles.brandbookCard}>
-                        <h2>Brendbook</h2>
-                        <p>
-                            Nashriyot brendidan foydalanish yuzasidan umumiy ko'rsatmalar - brendbook
-                        </p>
-                        <a href="#" className={styles.downloadButton}>Yuklab olish</a>
-                    </div>
+                    {error && (
+                        <div className={styles.contentText}>
+                            <p>{t('termsError')} {error}</p>
+                        </div>
+                    )}
+
+                    {termsData && termsData.text && (
+                        <div 
+                            className={styles.contentText}
+                            dangerouslySetInnerHTML={{ 
+                                __html: termsTextToHtml(termsData.text) 
+                            }}
+                        />
+                    )}
+
+                    {termsData && termsData.Brendbook && (
+                        <div className={styles.brandbookCard}>
+                            <h2>{t('termsBrandbookTitle')}</h2>
+                            <p>
+                                {t('termsBrandbookDescription')}
+                            </p>
+                            <a 
+                                href={termsData.Brendbook.url} 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className={styles.downloadButton}
+                            >
+                                {t('termsBrandbookDownload')}
+                            </a>
+                        </div>
+                    )}
                 </div>
             </div>
         </MainLayout>
