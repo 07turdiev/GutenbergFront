@@ -60,7 +60,7 @@ function HeadMeta({ title, description, ogImg, themeColor, keywords, canonical, 
 			{/* Additional SEO meta tags */}
 			<meta name="robots" content="index, follow" />
 			<meta name="author" content="Gutenberg" />
-			<meta name="viewport" content="width=device-width, initial-scale=1" />
+			{/* viewport is defined globally in _document.tsx to avoid duplicates */}
 			
 			{/* Structured Data */}
 			<script
@@ -88,7 +88,7 @@ function HeadMeta({ title, description, ogImg, themeColor, keywords, canonical, 
 
 HeadMeta.defaultProps = {
 	title: 'Gutenberg',
-	description: 'Gutenberg — это современная аудио-библиотека в интернете, которая открывает вам доступ к каталогу бестселлеров и классической литературы, включая новинки разных аудио жанров',
+	description: 'Gutenberg nashriyot uyi — bu shunchaki nashriyot emas, balki innovatsiya va bilimlar koʻprigidir. Biz dunyo ilm-fanidagi yangi, zamonaviy asarlarni oʻzbek tiliga oʻgirib, ularni kitobxonlarga ilmiy-ommabop asarlar shaklida yetkazib beruvchi kreativ nashriyotmiz.',
 	ogImg: `${sitePath}og-default-img.jpg`
 }
 

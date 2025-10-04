@@ -21,6 +21,15 @@ body,
     min-height: 100%;
     height: 100%;
 }
+#__next, html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* Prevent long words (e.g., Russian) from causing overflow on small screens */
+*, *::before, *::after {
+    word-break: break-word;
+}
 #__next{
     display: flex;
     flex-direction: column;
