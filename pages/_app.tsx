@@ -41,14 +41,16 @@ const AppContent: React.FC<{Component: any, pageProps: any}> = ({ Component, pag
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
             // Ctrl+F or Cmd+F for search
-            if (e.key === 'f' || e.key === 'F') {
+            if ((e.ctrlKey || e.metaKey) && (e.key === 'f' || e.key === 'F')) {
                 e.preventDefault();
                 setIsSearchModalOpen(true);
+                return;
             }
-            // M key for menu toggle
-            if (e.key === 'm' || e.key === 'M') {
+            // Ctrl+M or Cmd+M for menu toggle
+            if ((e.ctrlKey || e.metaKey) && (e.key === 'm' || e.key === 'M')) {
                 e.preventDefault();
                 toggleMenu();
+                return;
             }
         };
 
