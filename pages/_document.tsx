@@ -15,7 +15,6 @@ class MyDocument extends Document {
           <meta name="apple-mobile-web-app-title" content="Gutenberg" />
           
           {/* Additional mobile optimizations */}
-          <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes" />
           <meta name="mobile-web-app-capable" content="yes" />
           <meta name="format-detection" content="telephone=no" />
           

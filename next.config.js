@@ -48,7 +48,6 @@ module.exports = nextTranslate({
     compress: true,
     // Performance optimizatsiyasi
     experimental: {
-        optimizeCss: true,
-        optimizePackageImports: ['react', 'react-dom']
+        optimizeCss: true
     }
 })
