@@ -1,6 +1,6 @@
 import {createAsyncThunk} from "@reduxjs/toolkit";
 import DocumentsService from "../../services/documents";
-import {FetchParams} from "../models/Actions/Params";
+import {FetchParams} from "../../models/Actions/Params";
 import {adaptDocumentsData} from "../../utils/strapiAdapter";
 
 export const fetchDocuments = createAsyncThunk(
