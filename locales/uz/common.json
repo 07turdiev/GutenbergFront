@@ -238,5 +238,23 @@
   "termsError": "Xatolik yuz berdi:",
   "termsBrandbookTitle": "Brendbook",
   "termsBrandbookDescription": "Nashriyot brendidan foydalanish yuzasidan umumiy ko'rsatmalar - brendbook",
-  "termsBrandbookDownload": "Yuklab olish"
+  "termsBrandbookDownload": "Yuklab olish",
+  
+  "privacyMetaTitle": "Maxfiylik va xavfsizlik siyosati | Gutenberg",
+  "privacyMetaDescription": "Gutenberg platformasining maxfiylik va xavfsizlik siyosati, shaxsiy ma'lumotlarni himoya qilish",
+  "privacyMetaKeywords": "maxfiylik, xavfsizlik, privacy, security, shaxsiy ma'lumotlar, Gutenberg",
+  "privacyPageTitle": "Maxfiylik siyosati",
+  "privacyLoading": "Ma'lumotlar yuklanmoqda...",
+  "privacyError": "Xatolik yuz berdi:",
+  
+  "documentsMetaTitle": "Hujjatlar | Gutenberg",
+  "documentsMetaDescription": "Gutenberg nashriyot uyining hujjatlar bo'limi",
+  "documentsMetaKeywords": "hujjatlar, guvohnoma, tasdiqnoma, shartlar, maxfiylik, Gutenberg",
+  "documentsPageTitle": "Hujjatlar",
+  "documentsLoading": "Ma'lumotlar yuklanmoqda...",
+  "documentsError": "Xatolik yuz berdi:",
+  "documentsViewImage": "Rasmni ko'rish",
+  "documentsTermsDescription": "Nashriyotning elektron resurslaridan, brending ma'lumotlaridan, nashr etilgan kitoblaridan hamda kitoblardagi parchalardan foydalnish shartlari.",
+  "documentsPrivacyDescription": "\"Gutenberg nashriyot uyi\" MChJ tomonidan tuzilgan shartnomalar, hamkorlik memorandumlari, veb-resurslarda foydalanuvchilar tomonidan kiritilgan ma'lumotlarning maxfiyligini ta'minlash to'g'risida.",
+  "readMore": "Batafsil"
 }

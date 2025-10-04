@@ -5,6 +5,8 @@ import {IAbout, IContacts, ISocial, IStatistics} from "../models/IAbout";
 import {ITeamMember} from "../models/ITeam";
 import {IBlogPost} from "../models/IBlog";
 import {ITermsData, ITermsResponse} from "../models/ITerms";
+import {IPrivacyData, IPrivacyResponse} from "../models/IPrivacy";
+import {IDocument, IDocumentsResponse} from "../models/IDocuments";
 import { getApiBaseUrl, ensureAbsoluteUrl } from "../config/api";
 
 // Convert Strapi rich text to plain text
@@ -484,4 +486,45 @@ export const adaptTermsData = (terms: ITermsResponse): ITermsData => {
             url: ensureAbsoluteUrl(terms.data.Brendbook.url)
         } : terms.data.Brendbook
     };
+};
+
+// Convert new Privacy format to backward compatible format
+export const adaptPrivacyData = (privacy: IPrivacyResponse): IPrivacyData => {
+    if (!privacy || !privacy.data) return null;
+    
+    return {
+        ...privacy.data
+    };
+};
+
+// Convert new Documents format to backward compatible format
+export const adaptDocumentsData = (documents: IDocumentsResponse): IDocument[] => {
+    if (!documents || !documents.data) return [];
+    
+    return documents.data.map(document => ({
+        ...document,
+        // Ensure image URLs are absolute
+        Rasmi: document.Rasmi ? {
+            ...document.Rasmi,
+            url: ensureAbsoluteUrl(document.Rasmi.url),
+            formats: document.Rasmi.formats ? {
+                thumbnail: document.Rasmi.formats.thumbnail ? {
+                    ...document.Rasmi.formats.thumbnail,
+                    url: ensureAbsoluteUrl(document.Rasmi.formats.thumbnail.url)
+                } : null,
+                small: document.Rasmi.formats.small ? {
+                    ...document.Rasmi.formats.small,
+                    url: ensureAbsoluteUrl(document.Rasmi.formats.small.url)
+                } : null,
+                medium: document.Rasmi.formats.medium ? {
+                    ...document.Rasmi.formats.medium,
+                    url: ensureAbsoluteUrl(document.Rasmi.formats.medium.url)
+                } : null,
+                large: document.Rasmi.formats.large ? {
+                    ...document.Rasmi.formats.large,
+                    url: ensureAbsoluteUrl(document.Rasmi.formats.large.url)
+                } : null,
+            } : null
+        } : null
+    }));
 }; 

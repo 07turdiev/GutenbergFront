@@ -238,5 +238,23 @@
   "termsError": "An error occurred:",
   "termsBrandbookTitle": "Brandbook",
   "termsBrandbookDescription": "General guidelines for using the publishing house brand - brandbook",
-  "termsBrandbookDownload": "Download"
+  "termsBrandbookDownload": "Download",
+  
+  "privacyMetaTitle": "Privacy and Security Policy | Gutenberg",
+  "privacyMetaDescription": "Gutenberg platform privacy and security policy, personal data protection",
+  "privacyMetaKeywords": "privacy, security, personal data, Gutenberg",
+  "privacyPageTitle": "Privacy Policy",
+  "privacyLoading": "Loading data...",
+  "privacyError": "An error occurred:",
+  
+  "documentsMetaTitle": "Documents | Gutenberg",
+  "documentsMetaDescription": "Gutenberg publishing house documents section",
+  "documentsMetaKeywords": "documents, certificate, attestation, terms, privacy, Gutenberg",
+  "documentsPageTitle": "Documents",
+  "documentsLoading": "Loading data...",
+  "documentsError": "An error occurred:",
+  "documentsViewImage": "View image",
+  "documentsTermsDescription": "Terms of use for the publishing house's electronic resources, branding information, published books and excerpts from books.",
+  "documentsPrivacyDescription": "Ensuring confidentiality of information entered by users in web resources, contracts and cooperation memorandums concluded by Gutenberg Publishing House LLC.",
+  "readMore": "Read more"
 }

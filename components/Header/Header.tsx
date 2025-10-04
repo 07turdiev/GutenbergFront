@@ -37,7 +37,7 @@ const Header = () => {
                     { text: t('about'), url: '/about', active: isActive('/about') },
                     { text: t('contact'), url: '/contact', active: isActive('/contact') },
                     { text: t('termsOfUse'), url: '/terms', active: isActive('/terms') },
-                    { text: t('privacyPolicy'), url: '#', active: false },
+                    { text: t('privacyPolicy'), url: '/privacy-policy', active: isActive('/privacy-policy') },
                     { text: t('publisherDocuments'), url: '/documents', active: isActive('/documents') },
                 ],
             },

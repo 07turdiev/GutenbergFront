@@ -19,6 +19,8 @@ import notificationsReducer from "./reducers/NotificationsSlive";
 import teamReducer from "./reducers/TeamSlice";
 import blogReducer from "./reducers/BlogSlice";
 import termsReducer from "./reducers/TermsSlice";
+import privacyReducer from "./reducers/PrivacySlice";
+import documentsReducer from "./reducers/DocumentsSlice";
 
 const reducers = combineReducers(
     {
@@ -35,7 +37,9 @@ const reducers = combineReducers(
         notificationsReducer,
         teamReducer,
         blogReducer,
-        termsReducer
+        termsReducer,
+        privacyReducer,
+        documentsReducer
     }
 )
 
