@@ -7,7 +7,8 @@ import {
     fetchNovelOne,
     rateNovel,
     saveNovel,
-    fetchNovelsByCategory
+    fetchNovelsByCategory,
+    fetchNovelByDocumentId
 } from "../../../store/actions/novel";
 import {useAppSelector} from "../../../hooks/reducer";
 import classNames from "classnames";
@@ -36,11 +37,14 @@ import HeadMeta from '../../../components/HeadMeta';
 import { formatPublishedDate } from '../../../utils/dateFormatter';
 import { useNovelAudioDuration } from '../../../hooks/useAudioDuration';
 import GenresSection from '../../../components/GenresSection';
+import NovelService from "../../../services/novels";
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (ctx) => {
     const dispatch = store.dispatch;
     const slug =  encodeURI(ctx.query.slug + '');
+    
 
+    // 1) Try to fetch by current locale
     await dispatch(fetchNovelOne({
         locale: ctx.locale,
         slug: slug,
@@ -48,12 +52,64 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (ctx
         ctx: ctx
     }));
 
-    // Check if the novel exists in the redux store
-    const state = store.getState();
-    const novel = state.novelReducer.novel;
-    if (!novel) {
-        return { notFound: true };
+    // 2) If not found, retry with default locale fallback (uz)
+    let state = store.getState();
+    let novel = state.novelReducer.novel;
+    if (!novel && ctx.locale !== 'uz') {
+        await dispatch(fetchNovelOne({
+            locale: 'uz',
+            slug: slug,
+            opt: {},
+            ctx: ctx
+        }));
+        state = store.getState();
+        novel = state.novelReducer.novel;
     }
+
+    // 3) If still not found, try to resolve by slug without locale to get documentId, then refetch by documentId
+    if (!novel) {
+        try {
+            const res = await NovelService.fetchNovels({
+                'filters[slug][$eq]': slug,
+                populate: 'muqova'
+            }, {}, ctx as any);
+            const items = res?.data?.data || [];
+            const first = Array.isArray(items) && items.length > 0 ? items[0] : null;
+            const documentId = first?.documentId || first?.id;
+            if (documentId) {
+                await dispatch(fetchNovelByDocumentId({
+                    locale: ctx.locale,
+                    documentId: String(documentId),
+                    opt: {},
+                    ctx: ctx
+                }));
+                let st2 = store.getState();
+                let byDoc = st2.novelReducer.novel;
+                if (!byDoc && ctx.locale !== 'uz') {
+                    await dispatch(fetchNovelByDocumentId({
+                        locale: 'uz',
+                        documentId: String(documentId),
+                        opt: {},
+                        ctx: ctx
+                    }));
+                    st2 = store.getState();
+                    byDoc = st2.novelReducer.novel;
+                }
+                if (!byDoc) {
+                    return { notFound: true };
+                }
+            } else {
+                return { notFound: true };
+            }
+        } catch (e) {
+            return { notFound: true };
+        }
+    }
+
+    // Ensure we read the latest novel from store (after any fallback fetches)
+    state = store.getState();
+    novel = state.novelReducer.novel;
+    
 
     // Fetch novels by the first category (same genre) of the current novel
     const firstCategorySlug = novel?.kategoriya && Array.isArray(novel.kategoriya) && novel.kategoriya.length > 0
@@ -93,6 +149,7 @@ const Index = () => {
     const dispatch = useDispatch();
     const { novel, audioList, novels: novelsByCategory } = useAppSelector(selectNovels);
     const {t} = useTranslation('common')
+    
 
     const {author, novels, loading: authorLoading} = useAppSelector(selectAuthors);
 

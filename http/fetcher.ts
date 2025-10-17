@@ -17,10 +17,17 @@ export const fetcherJson = async (url: string, config:AxiosRequestConfig, contex
     try {
         return await $api(url, config);
     } catch (error) {
-        // Log the error for debugging but don't crash the app
+        // Log the error for debugging
         console.error(`API Error for ${url}:`, error.message);
+        console.error('Full error:', error);
         
-        // Return a mock response structure to prevent app crashes
+        // For server-side rendering, we should let the error bubble up
+        // so that getServerSideProps can handle it properly (return 404, etc.)
+        if (context) {
+            throw error;
+        }
+        
+        // For client-side, return a mock response structure to prevent app crashes
         return {
             data: {
                 data: [],

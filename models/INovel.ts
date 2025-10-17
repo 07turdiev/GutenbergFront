@@ -81,6 +81,12 @@ export interface INovel {
     muqova?: IMedia;
     mualliflar?: IAuthor;
     kategoriya?: ICategory[];
+    
+    // Additional media fields
+    Rasm?: IMedia;
+    Rasm1?: IMedia;
+    Rasm2?: IMedia;
+    Fragment?: IMedia;
 
     // Deprecated fields (for backward compatibility)
     name?: string;

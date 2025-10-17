@@ -71,14 +71,34 @@ export default class NovelService {
     }
 
     static async fetchNovelOne(locale: string, slug: string, config: AxiosRequestConfig = {}, ctx?: GetServerSidePropsContext): Promise<AxiosResponse<IListResponse<INovel[]>>> {
-        const populateParams = "populate=audio&populate=muqova&populate=mualliflar&populate=kategoriya";
-        return await fetcherJson(`/api/kitoblars?filters[slug][$eq]=${slug}&locale=${locale}&${populateParams}`, config, ctx)
+        // Populate all fields needed by the frontend detail page
+        const populateParams = [
+            'populate=muqova',
+            'populate=mualliflar',
+            'populate=kategoriya',
+            'populate=Rasm',
+            'populate=Rasm1',
+            'populate=Rasm2',
+            'populate=Fragment'
+        ].join('&');
+        const url = `/api/kitoblars?filters[slug][$eq]=${slug}&locale=${locale}&${populateParams}`;
+        return await fetcherJson(url, config, ctx);
     }
 
     // Bitta kitob - documentId orqali  
     static async fetchNovelByDocumentId(locale: string, documentId: string, config: AxiosRequestConfig = {}, ctx?: GetServerSidePropsContext): Promise<AxiosResponse<any>> {
-        const populateParams = "populate=audio&populate=muqova&populate=mualliflar&populate=kategoriya";
-        return await fetcherJson(`/api/kitoblars/${documentId}?locale=${locale}&${populateParams}`, config, ctx)
+        // Populate all fields needed by the frontend detail page
+        const populateParams = [
+            'populate=muqova',
+            'populate=mualliflar',
+            'populate=kategoriya',
+            'populate=Rasm',
+            'populate=Rasm1',
+            'populate=Rasm2',
+            'populate=Fragment'
+        ].join('&');
+        const url = `/api/kitoblars/${documentId}?locale=${locale}&${populateParams}`;
+        return await fetcherJson(url, config, ctx);
     }
 
     static async fetchNovelActual(locale: string, config: AxiosRequestConfig = {}, ctx?: GetServerSidePropsContext): Promise<AxiosResponse<IListResponse<INovel[]>>> {
