@@ -52,8 +52,8 @@ const Index:React.FC<Props> = ({novel}) => {
                 <div className='flex items-center mb-2 flex-wrap'>
 
 
-                    {novel.author && (
-                        <div onClick={() => router.push(`/authors/${novel.author.slug}`)} className='text-gray-400 mr-3 hover:text-primary cursor-pointer'>{novel.author.name}</div>
+                    {novel.mualliflar && (
+                        <div onClick={() => router.push(`/authors/${novel.mualliflar.slug}`)} className='text-gray-400 mr-3 hover:text-primary cursor-pointer'>{novel.mualliflar.ismi}</div>
                     )}
 
                     <div className='mr-3 flex items-center font-bold'>

@@ -38,6 +38,7 @@ import { formatPublishedDate } from '../../../utils/dateFormatter';
 import { useNovelAudioDuration } from '../../../hooks/useAudioDuration';
 import GenresSection from '../../../components/GenresSection';
 import NovelService from "../../../services/novels";
+import { ensureAbsoluteUrl } from '../../../config/api';
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (ctx) => {
     const dispatch = store.dispatch;
@@ -173,11 +174,12 @@ const Index = () => {
         'Innovatsiya',
     ];
     const [activeGenre, setActiveGenre] = useState<string>('Innovatsiya');
+    // Create gallery images from API response
     const galleryImages = [
-        { id: 1, url: 'https://placehold.co/507x374/e0e0e0/e0e0e0' },
-        { id: 2, url: 'https://placehold.co/507x374/d4d4d4/d4d4d4' },
-        { id: 3, url: 'https://placehold.co/507x374/c8c8c8/c8c8c8' },
-    ];
+        novel?.Rasm ? { id: 1, url: ensureAbsoluteUrl(novel.Rasm.url) } : null,
+        novel?.Rasm1 ? { id: 2, url: ensureAbsoluteUrl(novel.Rasm1.url) } : null,
+        novel?.Rasm2 ? { id: 3, url: ensureAbsoluteUrl(novel.Rasm2.url) } : null,
+    ].filter(Boolean);
     const [isGalleryOpen, setIsGalleryOpen] = useState(false);
     const [activeGalleryIndex, setActiveGalleryIndex] = useState(0);
     const openGallery = (index: number) => { setActiveGalleryIndex(index); setIsGalleryOpen(true); };
@@ -352,10 +354,36 @@ const Index = () => {
                                             <span className="text-gray-600">Narxi:</span>
                                             <strong>{formatPrice((novel as any)?.narxi) || '-'}</strong>
                                         </li>
+                                        <li className="flex items-center gap-5 text-[18px] sm:text-[22px] lg:text-[28px] font-medium text-[#212121]">
+                                        <svg xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" fill="#000000" version="1.1" id="Capa_1" width="20" height="20" viewBox="0 0 433.328 433.328" xmlSpace="preserve">
+                                        <g>
+                                            <g>
+                                                <rect x="224.024" y="62.608" width="12.716" height="306.88"/>
+                                                <rect x="287.958" y="60.094" width="29.91" height="309.395"/>
+                                                <polygon points="258.059,60.094 257.909,60.094 257.909,62.608 243.112,62.608 243.112,369.488 258.059,369.488   "/>
+                                                <rect x="332.172" y="60.094" width="12.728" height="309.395"/>
+                                                <rect x="370.369" y="60.094" width="25.443" height="309.395"/>
+                                                <rect x="38.443" y="60.094" width="12.72" height="309.395"/>
+                                                <rect x="57.535" y="60.094" width="14.95" height="309.395"/>
+                                                <path d="M0,35.489v362.35h433.328V35.489H0z M422.123,386.633H11.207V46.696h410.916V386.633z"/>
+                                                <rect x="146.596" y="60.094" width="12.73" height="309.395"/>
+                                                <polygon points="210.232,62.608 210.194,62.608 210.194,60.094 184.788,60.094 184.788,369.488 210.232,369.488   "/>
+                                                <rect x="102.379" y="60.094" width="29.916" height="309.395"/>
+                                            </g>
+                                        </g>
+                                        </svg>
+                                            <span className="text-gray-600">ISBN:</span>
+                                            <strong>{(novel as any)?.ISBN || '-'}</strong>
+                                        </li>
                                     </ul>
 
                                     <div className="flex gap-6">
-                                        <a href="#" className="inline-flex items-center justify-center px-6 py-3 rounded-[75px] text-white font-semibold text-[18px] sm:text-[20px] lg:text-[22px] bg-[#58BB43] shadow-[0_10px_20px_-5px_rgba(88,187,67,0.4)] hover:shadow-[0_10px_25px_-5px_rgba(88,187,67,0.6)] transition">
+                                        <a 
+                                            href={(novel as any)?.sotib_olish || "#"} 
+                                            target={(novel as any)?.sotib_olish ? "_blank" : "_self"}
+                                            rel={(novel as any)?.sotib_olish ? "noopener noreferrer" : undefined}
+                                            className="inline-flex items-center justify-center px-6 py-3 rounded-[75px] text-white font-semibold text-[18px] sm:text-[20px] lg:text-[22px] bg-[#58BB43] shadow-[0_10px_20px_-5px_rgba(88,187,67,0.4)] hover:shadow-[0_10px_25px_-5px_rgba(88,187,67,0.6)] transition"
+                                        >
                                             <span>Sotib olish</span>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none" className="ml-2">
                                                 <path d="M1.6313 1.68437L13.6313 1.68437M13.6313 1.68437L13.6313 13.6844M13.6313 1.68437L2 13.3157" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
@@ -388,40 +416,61 @@ const Index = () => {
                             <div className="w-full max-w-[1240px] px-3">
                                 <div className="flex items-center justify-between mb-10 flex-wrap gap-5">
                                     <h2 className="text-[48px] lg:text-[64px] font-normal text-[#212121]">Asar haqida</h2>
-                                    <a href="#" className="inline-flex items-center justify-center px-6 py-3 gap-4 bg-[#EB0000] rounded-[75px] text-white no-underline text-[20px] font-semibold transition hover:shadow-[0_10px_20px_-5px_rgba(235,0,0,0.4)]">
-                                        <span>Fragment o'qish</span>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none">
-                                            <path d="M1.6313 1.68437L13.6313 1.68437M13.6313 1.68437L13.6313 13.6844M13.6313 1.68437L2 13.3157" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                                        </svg>
-                                    </a>
+                                    {novel?.Fragment?.url ? (
+                                        <a 
+                                            href={ensureAbsoluteUrl(novel.Fragment.url)}
+                                            download={novel.Fragment.name || 'fragment.pdf'}
+                                            className="inline-flex items-center justify-center px-6 py-3 gap-4 bg-[#EB0000] rounded-[75px] text-white no-underline text-[20px] font-semibold transition hover:shadow-[0_10px_20px_-5px_rgba(235,0,0,0.4)]"
+                                        >
+                                            <div className="flex flex-col items-center">
+                                                <span>Fragment yuklab olish</span>
+                                            </div>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none">
+                                                <path d="M1.6313 1.68437L13.6313 1.68437M13.6313 1.68437L13.6313 13.6844M13.6313 1.68437L2 13.3157" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                                            </svg>
+                                        </a>
+                                    ) : (
+                                        <a href="#" className="inline-flex items-center justify-center px-6 py-3 gap-4 bg-[#EB0000] rounded-[75px] text-white no-underline text-[20px] font-semibold transition hover:shadow-[0_10px_20px_-5px_rgba(235,0,0,0.4)]">
+                                            <span>Fragment o'qish</span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none">
+                                                <path d="M1.6313 1.68437L13.6313 1.68437M13.6313 1.68437L13.6313 13.6844M13.6313 1.68437L2 13.3157" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                                            </svg>
+                                        </a>
+                                    )}
                                     </div>
 
-                                <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-10">
-                                    {galleryImages.map((image, index) => (
-                                        <div key={image.id} className="cursor-pointer overflow-hidden rounded-[20px]" onClick={() => openGallery(index)}>
-                                            <img src={image.url} alt="gallery" className="w-full h-[280px] md:h-[374px] object-cover bg-[#C4C4C4] rounded-[20px] transition-transform duration-300 ease-in-out hover:scale-[1.05]"/>
-                                        </div>
-                                    ))}
-                                        </div>
+                                {galleryImages.length > 0 && (
+                                    <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-10">
+                                        {galleryImages.map((image, index) => (
+                                            <div key={image.id} className="cursor-pointer overflow-hidden rounded-[20px]" onClick={() => openGallery(index)}>
+                                                <img src={image.url} alt="gallery" className="w-full h-[280px] md:h-[374px] object-cover bg-[#C4C4C4] rounded-[20px] transition-transform duration-300 ease-in-out hover:scale-[1.05]"/>
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
 
                                 <p className="text-[20px] md:text-[22px] lg:text-[26px] leading-relaxed text-justify text-[#383838]">
                                     <span dangerouslySetInnerHTML={{ __html: novel?.description || '' }} />
                                 </p>
                             </div>
                         </div>
-                        {isGalleryOpen && (
+                        {isGalleryOpen && galleryImages.length > 0 && (
                             <div className="fixed inset-0 bg-black/90 z-[1000] flex items-center justify-between" onClick={closeGallery}>
-                                <button className="ml-5 bg-[rgba(40,40,40,0.5)] border border-[rgba(255,255,255,0.2)] text-white rounded-full w-[50px] h-[50px] text-[20px] flex items-center justify-center hover:bg-[rgba(60,60,60,0.7)] transition" onClick={(e) => { e.stopPropagation(); prevImage(); }}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-5 h-5">
-                                        <path fillRule="evenodd" d="M10.78 12.28a.75.75 0 01-1.06 0L5.47 8.03a.75.75 0 010-1.06l4.25-4.25a.75.75 0 111.06 1.06L7.06 7.5l3.72 3.72a.75.75 0 010 1.06z" clipRule="evenodd" />
-                                    </svg>
-                                </button>
-                                <img src={galleryImages[activeGalleryIndex].url} alt="gallery-large" className="max-w-[calc(100vw-160px)] max-h-[calc(100vh-80px)] object-contain rounded-[10px] mx-2" onClick={(e) => e.stopPropagation()} />
-                                <button className="mr-5 bg-[rgba(40,40,40,0.5)] border border-[rgba(255,255,255,0.2)] text-white rounded-full w-[50px] h-[50px] text-[20px] flex items-center justify-center hover:bg-[rgba(60,60,60,0.7)] transition" onClick={(e) => { e.stopPropagation(); nextImage(); }}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-5 h-5 rotate-180">
-                                        <path fillRule="evenodd" d="M10.78 12.28a.75.75 0 01-1.06 0L5.47 8.03a.75.75 0 010-1.06l4.25-4.25a.75.75 0 111.06 1.06L7.06 7.5l3.72 3.72a.75.75 0 010 1.06z" clipRule="evenodd" />
-                                    </svg>
-                                </button>
+                                {galleryImages.length > 1 && (
+                                    <button className="ml-5 bg-[rgba(40,40,40,0.5)] border border-[rgba(255,255,255,0.2)] text-white rounded-full w-[50px] h-[50px] text-[20px] flex items-center justify-center hover:bg-[rgba(60,60,60,0.7)] transition" onClick={(e) => { e.stopPropagation(); prevImage(); }}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-5 h-5">
+                                            <path fillRule="evenodd" d="M10.78 12.28a.75.75 0 01-1.06 0L5.47 8.03a.75.75 0 010-1.06l4.25-4.25a.75.75 0 111.06 1.06L7.06 7.5l3.72 3.72a.75.75 0 010 1.06z" clipRule="evenodd" />
+                                        </svg>
+                                    </button>
+                                )}
+                                <img src={galleryImages[activeGalleryIndex]?.url} alt="gallery-large" className="max-w-[calc(100vw-160px)] max-h-[calc(100vh-80px)] object-contain rounded-[10px] mx-2" onClick={(e) => e.stopPropagation()} />
+                                {galleryImages.length > 1 && (
+                                    <button className="mr-5 bg-[rgba(40,40,40,0.5)] border border-[rgba(255,255,255,0.2)] text-white rounded-full w-[50px] h-[50px] text-[20px] flex items-center justify-center hover:bg-[rgba(60,60,60,0.7)] transition" onClick={(e) => { e.stopPropagation(); nextImage(); }}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-5 h-5 rotate-180">
+                                            <path fillRule="evenodd" d="M10.78 12.28a.75.75 0 01-1.06 0L5.47 8.03a.75.75 0 010-1.06l4.25-4.25a.75.75 0 111.06 1.06L7.06 7.5l3.72 3.72a.75.75 0 010 1.06z" clipRule="evenodd" />
+                                        </svg>
+                                    </button>
+                                )}
                                 <button className="absolute top-[30px] right-[30px] bg-[rgba(40,40,40,0.5)] border border-[rgba(255,255,255,0.2)] text-white rounded-full w-[50px] h-[50px] text-[20px] flex items-center justify-center hover:bg-[rgba(60,60,60,0.7)] transition" onClick={(e) => { e.stopPropagation(); closeGallery(); }}>
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
                                         <path fillRule="evenodd" d="M6.225 4.811a.75.75 0 011.06 0L12 9.525l4.715-4.714a.75.75 0 111.06 1.06L13.06 10.586l4.715 4.715a.75.75 0 11-1.06 1.06L12 11.646l-4.715 4.715a.75.75 0 11-1.06-1.06l4.714-4.715-4.714-4.715a.75.75 0 010-1.06z" clipRule="evenodd" />

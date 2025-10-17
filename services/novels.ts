@@ -35,7 +35,7 @@ export default class NovelService {
         }
 
         // Use the same populate format as other functions
-        const populateParams = "populate=muqova";
+        const populateParams = "populate=muqova&populate=mualliflar";
         const queryParams = new URLSearchParams();
         
         // Add locale
@@ -45,6 +45,7 @@ export default class NovelService {
         
         // Add populate params
         queryParams.append('populate', 'muqova');
+        queryParams.append('populate', 'mualliflar');
         
         // Add other params
         for (const key in params) {

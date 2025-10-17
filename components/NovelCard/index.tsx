@@ -26,16 +26,16 @@ const Index:React.FC<Props> = ({novel}) => {
                         priority={false}
                         loading="lazy"
                     />
-                    {novel.author ? (
+                    {novel.mualliflar ? (
                         <div className={classes.authorOverlay}>
-                            {novel.author.name}
+                            {novel.mualliflar.ismi}
                         </div>
                     ) : null}
                 </div>
                 <div className={classes.bookInfo}>
                     <h3 className={classes.titleDefault}>{novel.name}</h3>
-                    {novel.author ? (
-                        <p className={classes.authorDefault}>{novel.author.name}</p>
+                    {novel.mualliflar ? (
+                        <p className={classes.authorDefault}>{novel.mualliflar.ismi}</p>
                     ) : null}
                 </div>
             </a>

@@ -75,6 +75,7 @@ export interface INovel {
     updatedAt: string;
     publishedAt: string;
     locale: string;
+    sotib_olish?: string;
     
     // Relations
     audio?: IMedia;
