@@ -35,7 +35,7 @@ export default class NovelService {
         }
 
         // Use the same populate format as other functions
-        const populateParams = "populate=muqova&populate=mualliflar";
+        const populateParams = "populate=muqova&populate=mualliflar&populate=Ilova";
         const queryParams = new URLSearchParams();
         
         // Add locale
@@ -46,6 +46,7 @@ export default class NovelService {
         // Add populate params
         queryParams.append('populate', 'muqova');
         queryParams.append('populate', 'mualliflar');
+        queryParams.append('populate', 'Ilova');
         
         // Add other params
         for (const key in params) {
@@ -80,7 +81,8 @@ export default class NovelService {
             'populate=Rasm',
             'populate=Rasm1',
             'populate=Rasm2',
-            'populate=Fragment'
+            'populate=Fragment',
+            'populate=Ilova'
         ].join('&');
         const url = `/api/kitoblars?filters[slug][$eq]=${slug}&locale=${locale}&${populateParams}`;
         return await fetcherJson(url, config, ctx);
@@ -96,7 +98,8 @@ export default class NovelService {
             'populate=Rasm',
             'populate=Rasm1',
             'populate=Rasm2',
-            'populate=Fragment'
+            'populate=Fragment',
+            'populate=Ilova'
         ].join('&');
         const url = `/api/kitoblars/${documentId}?locale=${locale}&${populateParams}`;
         return await fetcherJson(url, config, ctx);

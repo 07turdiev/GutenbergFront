@@ -88,6 +88,7 @@ export interface INovel {
     Rasm1?: IMedia;
     Rasm2?: IMedia;
     Fragment?: IMedia;
+    Ilova?: IMedia;
 
     // Deprecated fields (for backward compatibility)
     name?: string;

@@ -414,7 +414,7 @@ const Index = () => {
                         {/* About Work Section (Description + Gallery) */}
                         <div className="flex justify-center py-10 lg:py-16 bg-[#fdfdff]">
                             <div className="w-full max-w-[1240px] px-3">
-                                <div className="flex items-center justify-between mb-10 flex-wrap gap-5">
+                                <div className="flex items-center justify-between mb-5 flex-wrap gap-5">
                                     <h2 className="text-[48px] lg:text-[64px] font-normal text-[#212121]">Asar haqida</h2>
                                     {novel?.Fragment?.url ? (
                                         <a 
@@ -438,6 +438,22 @@ const Index = () => {
                                         </a>
                                     )}
                                     </div>
+
+                                    {/* Ilova yuklab olish tugmasi */}
+                                    {novel?.Ilova?.url && (
+                                        <div className="flex justify-start sm:justify-end mb-10">
+                                            <a 
+                                                href={ensureAbsoluteUrl(novel.Ilova.url)}
+                                                download={novel.Ilova.name || 'ilova.pdf'}
+                                                className="inline-flex items-center justify-center px-6 py-3 gap-4 bg-[#4CAF50] rounded-[75px] text-white no-underline text-[18px] sm:text-[20px] lg:text-[22px] font-semibold transition hover:shadow-[0_10px_20px_-5px_rgba(76,175,80,0.4)]"
+                                            >
+                                                <span>Ilova yuklab olish</span>
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none">
+                                                <path d="M1.6313 1.68437L13.6313 1.68437M13.6313 1.68437L13.6313 13.6844M13.6313 1.68437L2 13.3157" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                                                </svg>
+                                            </a>
+                                        </div>
+                                    )}
 
                                 {galleryImages.length > 0 && (
                                     <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-10">
