@@ -377,21 +377,21 @@ const Index = () => {
                                         </li>
                                     </ul>
 
-                                    <div className="flex gap-6">
+                                    <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 lg:gap-6 w-full sm:w-auto">
                                         <a 
                                             href={(novel as any)?.sotib_olish || "#"} 
                                             target={(novel as any)?.sotib_olish ? "_blank" : "_self"}
                                             rel={(novel as any)?.sotib_olish ? "noopener noreferrer" : undefined}
-                                            className="inline-flex items-center justify-center px-6 py-3 rounded-[75px] text-white font-semibold text-[18px] sm:text-[20px] lg:text-[22px] bg-[#58BB43] shadow-[0_10px_20px_-5px_rgba(88,187,67,0.4)] hover:shadow-[0_10px_25px_-5px_rgba(88,187,67,0.6)] transition"
+                                            className="inline-flex items-center justify-center px-4 py-3 sm:px-6 lg:px-8 rounded-[75px] text-white font-semibold text-[16px] sm:text-[18px] lg:text-[20px] xl:text-[22px] bg-[#58BB43] shadow-[0_10px_20px_-5px_rgba(88,187,67,0.4)] hover:shadow-[0_10px_25px_-5px_rgba(88,187,67,0.6)] transition-all duration-300 hover:scale-[1.02] w-full sm:w-auto"
                                         >
                                             <span>Sotib olish</span>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none" className="ml-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none" className="ml-2 flex-shrink-0">
                                                 <path d="M1.6313 1.68437L13.6313 1.68437M13.6313 1.68437L13.6313 13.6844M13.6313 1.68437L2 13.3157" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                                             </svg>
                                         </a>
-                                        <a href="#" className="inline-flex items-center justify-center px-6 py-3 rounded-[75px] font-semibold text-[18px] sm:text-[20px] lg:text-[20px] text-[#AE00FF] border border-[#AE00FF] bg-[rgba(174,0,255,0.1)] hover:bg-[rgba(174,0,255,0.2)] transition">
+                                        <a href="#" className="inline-flex items-center justify-center px-4 py-3 sm:px-6 lg:px-8 rounded-[75px] font-semibold text-[16px] sm:text-[18px] lg:text-[20px] xl:text-[22px] text-[#AE00FF] border border-[#AE00FF] bg-[rgba(174,0,255,0.1)] hover:bg-[rgba(174,0,255,0.2)] transition-all duration-300 hover:scale-[1.02] w-full sm:w-auto">
                                             <span>Hadya qilish</span>
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none" className="ml-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none" className="ml-2 flex-shrink-0">
                                                 <path d="M1.6313 1.68437L13.6313 1.68437M13.6313 1.68437L13.6313 13.6844M13.6313 1.68437L2 13.3157" stroke="#AE00FF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                                             </svg>
                                         </a>
@@ -480,16 +480,16 @@ const Index = () => {
                         )}
 
                         <div className="container mx-auto px-3 mt-8">
-                            <div className="flex items-center justify-between mb-20 flex-wrap gap-5">
-                                <h2 className="text-[48px] lg:text-[64px] font-normal text-[#212121]">Shu janrdagi kitoblar</h2>
-                                <div className="flex items-center gap-2">
-                                    <a href="#" className="inline-flex items-center justify-center px-6 py-3 gap-4 bg-[#EB0000] rounded-[75px] text-white no-underline text-[20px] font-semibold transition hover:scale-[1.05] hover:shadow-[0_10px_20px_-5px_rgba(235,0,0,0.4)]">
+                            <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-12 sm:mb-16 lg:mb-20 gap-4 sm:gap-5">
+                                <h2 className="text-[32px] sm:text-[40px] md:text-[48px] lg:text-[56px] xl:text-[64px] font-normal text-[#212121] leading-tight">Shu janrdagi kitoblar</h2>
+                                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3 lg:gap-4 w-full sm:w-auto">
+                                    <a href="#" className="inline-flex items-center justify-center px-4 py-3 sm:px-5 lg:px-6 gap-3 sm:gap-4 bg-[#EB0000] rounded-[75px] text-white no-underline text-[16px] sm:text-[18px] lg:text-[20px] font-semibold transition-all duration-300 hover:scale-[1.02] sm:hover:scale-[1.05] hover:shadow-[0_10px_20px_-5px_rgba(235,0,0,0.4)] w-full sm:w-auto">
                                         <span>Bo'limga o'tish</span>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none" className="flex-shrink-0">
                                             <path d="M1.6313 1.68437L13.6313 1.68437M13.6313 1.68437L13.6313 13.6844M13.6313 1.68437L2 13.3157" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                                         </svg>
                                     </a>
-                                    <a href="#" className="inline-flex items-center justify-center px-6 py-3 h-[60px] rounded-[75px] text-[20px] font-normal bg-[rgba(0,157,255,0.1)] text-[#009DFF] border border-[#009DFF]">
+                                    <a href="#" className="inline-flex items-center justify-center px-4 py-3 sm:px-5 lg:px-6 h-[48px] sm:h-[52px] lg:h-[60px] rounded-[75px] text-[16px] sm:text-[18px] lg:text-[20px] font-normal bg-[rgba(0,157,255,0.1)] text-[#009DFF] border border-[#009DFF] transition-all duration-300 hover:bg-[rgba(0,157,255,0.2)] hover:scale-[1.02] w-full sm:w-auto">
                                         Barchasi
                                     </a>
                                 </div>
