@@ -480,11 +480,11 @@ export const adaptTermsData = (terms: ITermsResponse): ITermsData => {
     
     return {
         ...terms.data,
-        // Ensure Brendbook URL is absolute
+        // Ensure Brendbook URL is absolute, or set to null if undefined
         Brendbook: terms.data.Brendbook ? {
             ...terms.data.Brendbook,
             url: ensureAbsoluteUrl(terms.data.Brendbook.url)
-        } : terms.data.Brendbook
+        } : null
     };
 };
 

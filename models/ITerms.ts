@@ -36,7 +36,7 @@ export interface ITermsData {
     updatedAt: string;
     publishedAt: string;
     locale: string;
-    Brendbook: ITermsBrendbook;
+    Brendbook: ITermsBrendbook | null;
 }
 
 export interface ITermsResponse {
