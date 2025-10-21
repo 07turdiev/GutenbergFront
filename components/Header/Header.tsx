@@ -51,7 +51,7 @@ const Header = () => {
                 <div className='container mx-auto px-3 relative z-30'>
                     <nav className="flex items-center justify-between">
                         {/* Left */}
-                        <div className="flex items-center gap-5 flex-1">
+                        <div className="flex items-center gap-8 flex-1">
                             <button
                                 onClick={toggleMenu}
                                 className="inline-flex items-center gap-2 text-gray-700 hover:text-black"
@@ -75,7 +75,7 @@ const Header = () => {
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                                     </svg>
                                 </button>
-                                <span className="text-gray-700">
+                                {/*<span className="text-gray-700">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 11 11" fill="none" className="w-5 h-5">
                                         <path d="M3.55762 3.19231V1" stroke="#383838" strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round"/>
                                         <path d="M5.75 3.19231V1" stroke="#383838" strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round"/>
@@ -84,7 +84,7 @@ const Header = () => {
                                         <path d="M3.19238 5.75H8.30777" stroke="#383838" strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round"/>
                                         <path d="M3.19238 7.94238H6.11546" stroke="#383838" strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round"/>
                                     </svg>
-                                </span>
+                                </span>*/}
                             </div>
                         </div>
 
