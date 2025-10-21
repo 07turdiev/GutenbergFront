@@ -146,13 +146,13 @@ const Header = () => {
                         {/* Drawer */}
                         <div
                             className={classNames(
-                                "absolute top-0 left-0 h-full w-[90%] max-w-[524px] bg-white shadow-2xl px-10 py-7 flex flex-col transform transition-transform duration-400",
+                                "absolute top-0 left-0 h-full w-[95%] sm:w-[90%] md:w-[80%] lg:w-[70%] xl:w-[60%] max-w-[600px] bg-white shadow-2xl px-4 sm:px-6 md:px-8 lg:px-10 py-4 sm:py-6 md:py-7 flex flex-col transform transition-transform duration-400",
                                 isMenuOpen ? "translate-x-0" : "-translate-x-full"
                             )}
                         >
                             {/* Header */}
-                            <div className="flex items-center justify-between pb-7">
-                                <button onClick={() => router.push('/')} className="inline-flex items-center pl-[60px]">
+                            <div className="flex items-center justify-between pb-4 sm:pb-6 md:pb-7">
+                                <button onClick={() => router.push('/')} className="inline-flex items-center pl-8 sm:pl-12 md:pl-16 lg:pl-[60px]">
                                     <SiteLogo />
                                 </button>
                                 <button
@@ -167,17 +167,17 @@ const Header = () => {
                             </div>
 
                             {/* Body */}
-                            <div className="flex-1 overflow-y-auto pl-[60px]">
+                            <div className="flex-1 overflow-y-auto pl-8 sm:pl-12 md:pl-16 lg:pl-[60px]">
                                 {menuSections.map(section => (
-                                    <div key={section.title} className="mb-12">
-                                        <h2 className="text-[22px] font-semibold text-black mb-5">{section.title}</h2>
-                                        <ul className="flex flex-col gap-5">
+                                    <div key={section.title} className="mb-8 sm:mb-10 md:mb-12">
+                                        <h2 className="text-lg sm:text-xl md:text-[22px] font-semibold text-black mb-3 sm:mb-4 md:mb-5">{section.title}</h2>
+                                        <ul className="flex flex-col gap-3 sm:gap-4 md:gap-5">
                                             {section.items.map(item => (
                                                 <li key={item.text}>
                                                     {item.url === '#' ? (
                                                         <span
                                                             className={classNames(
-                                                                "inline-block text-[20px] font-normal text-black px-4 py-1.5 rounded-2xl",
+                                                                "inline-block text-base sm:text-lg md:text-[20px] font-normal text-black px-3 sm:px-4 py-1 sm:py-1.5 rounded-2xl",
                                                                 item.active ? "bg-[#D9F0FF] border border-[#009DFF] text-[#009DFF]" : "hover:bg-gray-50"
                                                             )}
                                                         >
@@ -188,7 +188,7 @@ const Header = () => {
                                                             <a
                                                                 onClick={closeMenu}
                                                                 className={classNames(
-                                                                    "inline-block text-[20px] font-normal text-black px-4 py-1.5 rounded-2xl transition",
+                                                                    "inline-block text-base sm:text-lg md:text-[20px] font-normal text-black px-3 sm:px-4 py-1 sm:py-1.5 rounded-2xl transition",
                                                                     item.active ? "bg-[#D9F0FF] border border-[#009DFF] text-[#009DFF]" : "hover:bg-gray-50"
                                                                 )}
                                                             >
@@ -204,8 +204,8 @@ const Header = () => {
                             </div>
 
                             {/* Footer */}
-                            <div className="pt-7 pl-[60px]">
-                                <p className="text-[16px] font-light leading-6 text-black">
+                            <div className="pt-4 sm:pt-6 md:pt-7 pl-8 sm:pl-12 md:pl-16 lg:pl-[60px]">
+                                <p className="text-sm sm:text-base md:text-[16px] font-light leading-5 sm:leading-6 text-black">
                                     &copy; {t('copyRight')}<br />
                                     {t('companyFooter')}
                                 </p>
