@@ -264,11 +264,11 @@ const BlogPostPage = () => {
                     </div>
 
                     {/* Footer stats and actions */}
-                    <footer className="flex items-center justify-between flex-wrap gap-y-5 gap-x-10 mb-10">
-                        <div className="flex items-center flex-wrap gap-y-5 gap-x-10 text-[22px] sm:text-[24px] lg:text-[25px]">
+                    <footer className="flex items-center justify-between flex-wrap gap-y-3 gap-x-4 sm:gap-y-4 sm:gap-x-6 md:gap-x-8 mb-6 sm:mb-8">
+                        <div className="flex items-center flex-wrap gap-y-3 gap-x-3 sm:gap-y-4 sm:gap-x-4 md:gap-x-6 text-sm sm:text-base md:text-lg">
                             {readingTime && (
-                                <div className="flex items-center gap-3 text-gray-700">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <div className="flex items-center gap-2 text-gray-700">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" className="w-4 h-4 sm:w-5 sm:h-5">
                                     <path d="M11.6667 0.333252C5.2234 0.333252 0 5.55642 0 11.9999C0 18.4434 5.22328 23.6666 11.6667 23.6666C18.1099 23.6666 23.3333 18.4434 23.3333 11.9999C23.3333 5.55642 18.1099 0.333252 11.6667 0.333252ZM11.6667 2.66659C16.8214 2.66659 21 6.84558 21 11.9999C21 17.1543 16.8214 21.3333 11.6667 21.3333C6.51198 21.3333 2.33333 17.1543 2.33333 11.9999C2.33333 6.84558 6.51198 2.66659 11.6667 2.66659ZM11.6667 4.99992C11.0223 4.99992 10.5 5.52258 10.5 6.16658V11.9999C10.5 12.3091 10.6093 12.6194 10.8281 12.8387L14.3281 16.3387C14.7838 16.7937 15.5496 16.7937 16.0053 16.3387C16.4608 15.8826 16.4608 15.1173 16.0053 14.6611L12.8333 11.4889V6.16658C12.8333 5.52258 12.311 4.99992 11.6667 4.99992Z" fill="black"/>
                                     </svg>
                                     <span className="text-gray-900 font-medium ">O'qish uchun:</span>
@@ -276,16 +276,16 @@ const BlogPostPage = () => {
                                 </div>
                             )}
                             {rating && (
-                                <div className="flex items-center gap-3 text-gray-700">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24" fill="none">
+                                <div className="flex items-center gap-2 text-gray-700">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 25 24" fill="none" className="w-4 h-4 sm:w-5 sm:h-5">
                                     <path d="M12.6505 0.828613C11.9844 0.82838 11.3043 1.24278 10.9014 2.06762L8.42352 7.1691L2.77545 7.97072C0.95907 8.22342 0.370603 10.0054 1.68229 11.2864L5.76341 15.2589L4.81607 20.8344C4.5041 22.6392 6.00105 23.7301 7.6219 22.8749C8.24817 22.5436 11.4683 20.8752 12.6505 20.2511L17.679 22.8749C19.3018 23.7301 20.8034 22.6404 20.4849 20.8344L19.501 15.2589L23.5823 11.2864C24.9001 10.0101 24.342 8.22855 22.5255 7.97072L16.841 7.1691L14.3995 2.06762C13.9973 1.24243 13.3165 0.828963 12.6505 0.828613ZM12.6505 3.85308L15.0554 8.77245C15.2251 9.12047 15.5467 9.33758 15.93 9.39195L21.3959 10.1932L17.424 14.0199C17.146 14.2894 17.0289 14.6592 17.0961 15.0395L18.0435 20.433L13.1971 17.8827C12.8566 17.7031 12.4442 17.7031 12.1039 17.8827C11.4992 18.2012 8.54381 19.754 7.25744 20.433L8.16849 15.0769C8.2337 14.6977 8.11506 14.2882 7.84054 14.0199L3.90502 10.1932L9.33446 9.42835C9.71876 9.37491 10.0752 9.12105 10.2455 8.77245L12.6505 3.85308Z" fill="black"/>
                                     </svg>
                                     <span className="text-gray-900 font-medium">Reytingi:</span>
                                     <strong className="font-light text-gray-900">{rating}</strong>
                                 </div>
                             )}
-                            <div className="flex items-center gap-3 text-gray-700">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="23" viewBox="0 0 24 23" fill="none">
+                            <div className="flex items-center gap-2 text-gray-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 23" fill="none" className="w-4 h-4 sm:w-5 sm:h-5">
                             <path d="M6.63576 0.349854C5.93449 0.349854 5.36603 0.87252 5.36603 1.51652C2.5598 1.51652 0.287109 3.60719 0.287109 6.18319V8.51652V17.8499C0.287109 20.4259 2.56107 22.5165 5.36603 22.5165H18.0633C20.8682 22.5165 23.1422 20.427 23.1422 17.8499V8.51652V6.18319C23.1422 3.61069 20.8669 1.51652 18.0633 1.51652C18.0633 0.87252 17.4945 0.349854 16.7936 0.349854C16.0927 0.349854 15.5239 0.87252 15.5239 1.51652H7.90549C7.90549 0.87252 7.33703 0.349854 6.63576 0.349854ZM5.36603 3.84985C5.36603 4.49385 5.93449 5.01652 6.63576 5.01652C7.33703 5.01652 7.90549 4.49385 7.90549 3.84985H15.5239C15.5239 4.49385 16.0927 5.01652 16.7936 5.01652C17.4945 5.01652 18.0633 4.49385 18.0633 3.84985C19.4613 3.84985 20.6028 4.89052 20.6028 6.18319V7.34985C18.1573 7.34985 5.27156 7.34985 2.82657 7.34985V6.18319C2.82657 4.89752 3.95968 3.84985 5.36603 3.84985ZM2.82657 9.68319C5.27016 9.68319 18.1586 9.68319 20.6028 9.68319V17.8499C20.6028 19.1367 19.4664 20.1832 18.0633 20.1832H5.36603C3.96349 20.1832 2.82657 19.139 2.82657 17.8499V9.68319ZM6.63576 12.0165C5.93449 12.0165 5.36603 12.5392 5.36603 13.1832C5.36603 13.8272 5.93449 14.3499 6.63576 14.3499C7.33703 14.3499 7.90549 13.8272 7.90549 13.1832C7.90549 12.5392 7.33703 12.0165 6.63576 12.0165ZM11.7147 12.0165C11.0138 12.0165 10.4449 12.5392 10.4449 13.1832C10.4449 13.8272 11.0138 14.3499 11.7147 14.3499C12.4156 14.3499 12.9844 13.8272 12.9844 13.1832C12.9844 12.5392 12.4156 12.0165 11.7147 12.0165ZM16.7936 12.0165C16.0927 12.0165 15.5239 12.5392 15.5239 13.1832C15.5239 13.8272 16.0927 14.3499 16.7936 14.3499C17.4945 14.3499 18.0633 13.8272 18.0633 13.1832C18.0633 12.5392 17.4945 12.0165 16.7936 12.0165ZM6.63576 15.5165C5.93449 15.5165 5.36603 16.0392 5.36603 16.6832C5.36603 17.3272 5.93449 17.8499 6.63576 17.8499C7.33703 17.8499 7.90549 17.3272 7.90549 16.6832C7.90549 16.0392 7.33703 15.5165 6.63576 15.5165ZM11.7147 15.5165C11.0138 15.5165 10.4449 16.0392 10.4449 16.6832C10.4449 17.3272 11.0138 17.8499 11.7147 17.8499C12.4156 17.8499 12.9844 17.3272 12.9844 16.6832C12.9844 16.0392 12.4156 15.5165 11.7147 15.5165ZM16.7936 15.5165C16.0927 15.5165 15.5239 16.0392 15.5239 16.6832C15.5239 17.3272 16.0927 17.8499 16.7936 17.8499C17.4945 17.8499 18.0633 17.3272 18.0633 16.6832C18.0633 16.0392 17.4945 15.5165 16.7936 15.5165Z" fill="black"/>
                             </svg>
                                 <strong className="font-light text-gray-900">{formatDateDayMonthYearDots(post.chop_sanasi)}</strong>
@@ -323,11 +323,11 @@ const BlogPostPage = () => {
                     </footer>
 
                     {/* Title */}
-                    <h1 className="text-[48px] lg:text-[80px] font-medium leading-tight text-gray-900 mb-8">{post.sarlavha}</h1>
+                    <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-medium leading-tight text-gray-900 mb-6 sm:mb-8">{post.sarlavha}</h1>
 
                     {/* Content */}
                     <div
-                        className="prose max-w-none mb-10 text-[#383838] text-[26px] text-justify"
+                        className="prose prose-base sm:prose-lg md:prose-xl lg:prose-2xl max-w-none mb-10 text-[#383838] text-justify leading-relaxed"
                         dangerouslySetInnerHTML={{ __html: blogContentToHtml(post.kontent) }}
                     />
 
@@ -343,10 +343,10 @@ const BlogPostPage = () => {
                     )}
 
                     {/* Footer: rating + read complete */}
-                    <footer className="flex items-center justify-between flex-wrap gap-6">
-                        <div className="flex items-center gap-5">
-                            <span className="text-[24px] md:text-[28px] lg:text-[30px] font-normal">Baholang:</span>
-                            <div className="flex items-center gap-3 text-[24px] md:text-[26px] lg:text-[28px]">
+                    <footer className="flex items-center justify-between flex-wrap gap-4 sm:gap-6">
+                        <div className="flex items-center gap-3 sm:gap-4 md:gap-5">
+                            <span className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-normal">Baholang:</span>
+                            <div className="flex items-center gap-2 sm:gap-3">
                                 {[1, 2, 3, 4, 5].map((star) => {
                                     const active = (hoverRating || currentRating) >= star;
                                     return (
@@ -362,7 +362,7 @@ const BlogPostPage = () => {
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 viewBox="0 0 24 24"
-                                                className={`w-7 h-7 ${active ? 'text-[#FFCC00]' : 'text-gray-300'}`}
+                                                className={`w-5 h-5 sm:w-6 sm:h-6 md:w-7 md:h-7 ${active ? 'text-[#FFCC00]' : 'text-gray-300'}`}
                                                 fill={active ? 'currentColor' : 'none'}
                                                 stroke="currentColor"
                                                 strokeWidth="1.5"
@@ -378,7 +378,7 @@ const BlogPostPage = () => {
                             type="button"
                             onClick={markReadComplete}
                             disabled={readComplete}
-                            className={`flex items-center gap-2 px-4 md:px-6 h-[50px] rounded-full font-bold text-white border transition-colors ${readComplete ? 'bg-green-500 border-green-500' : 'bg-primary border-primary hover:bg-[#0aa3ff]'}`}
+                            className={`flex items-center gap-2 px-3 sm:px-4 md:px-6 h-10 sm:h-12 md:h-[50px] rounded-full font-bold text-sm sm:text-base md:text-lg text-white border transition-colors ${readComplete ? 'bg-green-500 border-green-500' : 'bg-primary border-primary hover:bg-[#0aa3ff]'}`}
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" width="22" height="13" viewBox="0 0 22 13" fill="none">
                             <path d="M14.6825 0.496429C14.4051 0.496429 14.1494 0.623192 13.9382 0.834442L4.45901 10.28C4.17951 10.5595 3.89891 10.5411 3.68008 10.2128L2.15583 7.94435C1.82433 7.4471 1.1635 7.30734 0.66733 7.63993C0.170078 7.97143 0.0303301 8.63118 0.361831 9.12951L1.88499 11.3969C2.86216 12.8638 4.77101 13.0501 6.01576 11.8043L15.4614 2.35867C15.8839 1.93509 15.8839 1.25803 15.4614 0.834442C15.2501 0.623192 14.9598 0.496429 14.6825 0.496429ZM20.7762 0.496429C20.4989 0.496429 20.2086 0.589603 19.9973 0.800853C19.9973 0.800853 8.78911 11.9798 8.65586 12.0751C9.68287 12.8302 11.0814 12.7998 12.0759 11.8043L21.5551 2.35867C21.9776 1.93509 21.9776 1.22444 21.5551 0.800853C21.3439 0.589603 21.0536 0.496429 20.7762 0.496429Z" fill="white"/>
