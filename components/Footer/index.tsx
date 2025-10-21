@@ -1,6 +1,5 @@
 import React, {useEffect, useMemo} from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import {useAppSelector} from "../../hooks/reducer";
 import {selectTrack} from "../../store/selectors/player";
 import {useDispatch} from "react-redux";
@@ -8,8 +7,8 @@ import {fetchSocialLinks} from "../../store/actions/about";
 import {selectSocialLinks} from "../../store/selectors/about";
 import {useRouter} from "next/router";
 import styles from './style.module.scss';
-import BooksCount from '../../assets/images/whiteLogo.svg';
-import { FaFacebookF, FaGoogle, FaInstagram, FaYoutube, FaWhatsapp, FaTelegramPlane, FaWeixin } from 'react-icons/fa';
+import SiteLogo from '../SiteLogo/SiteLogo';
+import { FaFacebookF, FaInstagram, FaYoutube, FaWhatsapp, FaTelegramPlane, FaTwitter } from 'react-icons/fa';
 import useTranslation from 'next-translate/useTranslation';
 
 const Index = () => {
@@ -64,17 +63,17 @@ const Index = () => {
             title: t('footer_subscribe'),
             links: [
                 { url: getSocialUrl('facebook_url'), label: 'Facebook', icon: <FaFacebookF /> },
-                { url: '#', label: 'Google', icon: <FaGoogle /> },
+                { url: getSocialUrl('twitter_url'), label: 'Twitter', icon: <FaTwitter /> },
                 { url: getSocialUrl('instagram_url'), label: 'Instagram', icon: <FaInstagram /> },
                 { url: getSocialUrl('youtube_url'), label: 'YouTube', icon: <FaYoutube /> },
+                { url: getSocialUrl('telegram_channel_url'), label: 'Telegram', icon: <FaTelegramPlane /> },
             ],
         },
         {
             title: t('footer_quick_contact'),
             links: [
-                { url: '#', label: 'WhatsApp', icon: <FaWhatsapp /> },
+                { url: getSocialUrl('whatsapp_url'), label: 'WhatsApp', icon: <FaWhatsapp /> },
                 { url: getSocialUrl('telegram_url'), label: 'Telegram', icon: <FaTelegramPlane /> },
-                { url: '#', label: 'WeChat', icon: <FaWeixin /> },
             ],
         },
     ]), [social, t]);
@@ -87,7 +86,7 @@ const Index = () => {
                         <div className={styles.logo}>
                             <Link href="/">
                                 <a>
-                                    <Image src={BooksCount} alt="Gutenberg logo" />
+                                    <SiteLogo white />
                                 </a>
                             </Link>
                         </div>

@@ -152,8 +152,8 @@ const Header = () => {
                         >
                             {/* Header */}
                             <div className="flex items-center justify-between pb-7">
-                                <button onClick={() => router.push('/')} className="inline-flex items-center">
-                                    <span className="text-[32px] font-extrabold text-[#1a2a52] leading-none">gutenberg<span className="text-[#4c6fff]">.</span></span>
+                                <button onClick={() => router.push('/')} className="inline-flex items-center pl-[60px]">
+                                    <SiteLogo />
                                 </button>
                                 <button
                                     className="w-9 h-9 inline-flex items-center justify-center rounded-full hover:bg-gray-100"

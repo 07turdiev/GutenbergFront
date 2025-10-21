@@ -189,9 +189,11 @@ export const adaptSocialData = (social: any): ISocial => {
     const socialArray: [string, string][] = [
         ['facebook_url', social.data.facebook_havolasi],
         ['telegram_url', social.data.telegram_havolasi],
+        ['telegram_channel_url', social.data.Telegram_kanal],
         ['instagram_url', social.data.instagram_havolasi],
         ['youtube_url', social.data.youtube_havolasi],
-        ['x_url', social.data.twitter_havolasi], 
+        ['twitter_url', social.data.twitter_havolasi],
+        ['whatsapp_url', social.data.Whatsapp_havolasi],
     ].filter(([_, value]) => !!value) as [string, string][];
     
     return {
