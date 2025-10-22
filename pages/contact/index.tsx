@@ -46,6 +46,8 @@ interface ContactPageProps {
         google?: string;
         instagram?: string;
         youtube?: string;
+        telegram?: string;
+        twitter?: string;
     };
 }
 
@@ -305,14 +307,6 @@ const ContactPage: React.FC<ContactPageProps> = ({ contactData, testimonials, so
                                     </svg>
                                 </a>
                                 )}
-                                {socialLinks?.google && (
-                                <a href={socialLinks.google} target="_blank" rel="noopener noreferrer" aria-label="google">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="16" viewBox="0 0 24 16" fill="none">
-                                        <path d="M7.64091 6.71675V9.5435H11.9713C11.851 10.6862 10.7082 12.8514 7.64091 12.8514C5.05474 12.8514 2.94971 10.6862 2.94971 8.03991C2.94971 5.39359 4.93445 3.22842 7.52063 3.22842C9.02422 3.22842 10.0467 3.82985 10.588 4.37115L12.693 2.38641C11.6142 1.36269 10.256 0.68192 8.79029 0.430228C7.32455 0.178536 5.81708 0.367227 4.45859 0.972431C3.1001 1.57763 1.95163 2.57216 1.15846 3.83019C0.365295 5.08822 -0.0369313 6.55324 0.00266623 8.03991C0.00266623 12.25 3.43086 15.6782 7.64091 15.6782C12.0915 15.6782 14.9784 12.4905 14.9784 8.1602L14.8582 6.71675" fill="#212121"/>
-                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M21.3236 8.61128V11.2877H19.5794V8.61128H16.903V6.86712H19.5794V4.19072H21.3236V6.86712H24V8.61128H21.3236Z" fill="#212121"/>
-                                    </svg>
-                                </a>
-                                )}
                                 {socialLinks?.instagram && (
                                 <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer" aria-label="instagram">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -326,6 +320,19 @@ const ContactPage: React.FC<ContactPageProps> = ({ contactData, testimonials, so
                                 <a href={socialLinks.youtube} target="_blank" rel="noopener noreferrer" aria-label="youtube">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="16" viewBox="0 0 22 16" fill="none">
                                         <path d="M21.45 2.42857C21.175 1.42857 20.4875 0.714286 19.525 0.428572C17.875 2.55448e-07 10.8625 0 10.8625 0C10.8625 0 3.98751 2.55448e-07 2.20001 0.428572C1.23751 0.714286 0.549996 1.42857 0.274996 2.42857C-4.20026e-06 4.28572 0 8 0 8C0 8 4.17978e-06 11.7143 0.412504 13.5714C0.687504 14.5714 1.375 15.2857 2.3375 15.5714C3.9875 16 11 16 11 16C11 16 17.875 16 19.6625 15.5714C20.625 15.2857 21.3125 14.5714 21.5875 13.5714C22 11.7143 22 8 22 8C22 8 22 4.28572 21.45 2.42857ZM8.79999 11.4286V4.57143L14.575 8L8.79999 11.4286Z" fill="#212121"/>
+                                    </svg>
+                                </a>
+                                )}
+                                {socialLinks?.telegram && (
+                                <a href={socialLinks.telegram} target="_blank" rel="noopener noreferrer" aria-label="telegram">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+<path xmlns="http://www.w3.org/2000/svg" d="M1.09992 6.09647C5.39487 4.26188 8.25885 3.05241 9.69185 2.46805C13.7834 0.799594 14.6335 0.509765 15.1877 0.500093C15.3095 0.49809 15.582 0.527703 15.7586 0.66813C15.9076 0.786703 15.9486 0.94688 15.9683 1.0593C15.9879 1.17172 16.0123 1.42782 15.9929 1.62793C15.7712 3.91192 14.8118 9.45457 14.3237 12.0127C14.1172 13.0951 13.7105 13.458 13.3168 13.4936C12.4613 13.5707 11.8116 12.9392 10.9829 12.4067C9.68624 11.5733 8.95369 11.0545 7.69503 10.2414C6.24042 9.30157 7.18338 8.78505 8.01236 7.94091C8.22931 7.71999 11.999 4.35836 12.0719 4.05341C12.0811 4.01527 12.0895 3.87311 12.0034 3.79804C11.9172 3.72297 11.7901 3.74864 11.6983 3.76906C11.5683 3.79799 9.4968 5.14035 5.48389 7.79611C4.89591 8.19195 4.36333 8.38482 3.88616 8.37472C3.36012 8.36357 2.34822 8.08311 1.59598 7.84338C0.673328 7.54933 -0.0599784 7.39387 0.00387615 6.8945C0.0371355 6.63439 0.402482 6.36838 1.09992 6.09647Z" fill="#212121"/>                                    </svg>
+                                </a>
+                                )}
+                                {socialLinks?.twitter && (
+                                <a href={socialLinks.twitter} target="_blank" rel="noopener noreferrer" aria-label="twitter">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                        <path d="M16 3.039c-.59.261-1.22.437-1.885.517.677-.407 1.198-1.05 1.443-1.816-.634.375-1.337.648-2.085.795-.598-.638-1.45-1.036-2.396-1.036-1.812 0-3.282 1.468-3.282 3.282 0 .258.029.509.085.749-2.728-.137-5.147-1.444-6.766-3.43-.283.485-.444 1.049-.444 1.65 0 1.14.58 2.143 1.46 2.732-.538-.017-1.044-.165-1.487-.41v.041c0 1.591 1.132 2.917 2.633 3.219-.275.074-.565.114-.865.114-.211 0-.416-.02-.615-.058.416 1.299 1.624 2.245 3.055 2.271-1.119.877-2.529 1.4-4.061 1.4-.264 0-.524-.015-.78-.045 1.447.928 3.166 1.469 5.013 1.469 6.015 0 9.304-4.983 9.304-9.304 0-.141-.003-.282-.01-.422A6.643 6.643 0 0016 3.039z" fill="#212121"/>
                                     </svg>
                                 </a>
                                 )}
@@ -393,9 +400,10 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
         const socialData = socialRes?.data?.data || {};
         const socialLinks = {
             facebook: ensureHttpUrl(socialData.facebook_havolasi),
-            google: ensureHttpUrl(socialData.Google_havolasi),
             instagram: ensureHttpUrl(socialData.instagram_havolasi),
             youtube: ensureHttpUrl(socialData.youtube_havolasi),
+            telegram: ensureHttpUrl(socialData.telegram_havolasi),
+            twitter: ensureHttpUrl(socialData.twitter_havolasi),
         };
 
         return {
