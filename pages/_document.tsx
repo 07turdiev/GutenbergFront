@@ -35,11 +35,11 @@ class MyDocument extends Document {
           <link rel="apple-touch-icon" sizes="72x72" href="/favicon.png" />
           <link rel="apple-touch-icon" sizes="60x60" href="/favicon.png" />
           <link rel="apple-touch-icon" sizes="57x57" href="/favicon.png" />
+          <link rel="apple-touch-icon" sizes="32x32" href="/favicon.png" />
           
           {/* Favicon */}
           <link rel="icon" type="image/x-icon" href="/favicon.ico" />
           <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" />
-          <link rel="icon" type="image/png" sizes="16x16" href="/favicon.png" />
           
           {/* Google Fonts: Poppins */}
           <link

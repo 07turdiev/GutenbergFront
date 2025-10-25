@@ -63,7 +63,7 @@ const Header = () => {
                             </button>
 
                             {/* Mobile logo (left-shifted) */}
-                            <div className='md:hidden w-24 cursor-pointer' onClick={()=>router.push('/')}> <SiteLogo white/> </div>
+                            <div className='md:hidden w-16 cursor-pointer' onClick={()=>router.push('/')}> <SiteLogo white mobile/> </div>
 
                             <div className="hidden md:flex items-center gap-4">
                                 <button

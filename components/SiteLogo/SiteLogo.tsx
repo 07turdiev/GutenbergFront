@@ -2,17 +2,18 @@ import React from 'react';
 
 interface Props {
     white?: boolean;
+    mobile?: boolean;
 }
 
-const SiteLogo: React.FC<Props> = ({ white }) => {
+const SiteLogo: React.FC<Props> = ({ white, mobile }) => {
     return (
         <svg 
             xmlns="http://www.w3.org/2000/svg" 
             viewBox="0 0 704.33 61.58"
             style={{ 
                 width: 'auto', 
-                height: 'clamp(24px, 4vw, 40px)',
-                maxWidth: '200px'
+                height: mobile ? 'clamp(16px, 3vw, 24px)' : 'clamp(24px, 4vw, 40px)',
+                maxWidth: mobile ? '120px' : '200px'
             }}
         >
             <defs>

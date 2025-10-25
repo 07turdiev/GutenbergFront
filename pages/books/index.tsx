@@ -93,25 +93,9 @@ const Index = () => {
                 keywords="audio kitoblar, audio romanlar, o'zbek audio kitoblar, bepul audio kitoblar, online audio kutubxona, audio hikoyalar, audiokitoblar"
                 ogImg="https://gutenbergnu.uz/og-default-img.jpg"
             />
-            {/* Breadcrumb Navigation */}
-            <div className="mb-4 mt-2 sm:mt-2">
-                    <nav className="flex items-center text-sm text-gray-600 display: flex" aria-label="Breadcrumb">
-                        <Link href="/">
-                            <a className="text-primary hover:text-accent transition-colors">
-                                {t('home')}
-                            </a>
-                        </Link>
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 mx-2 text-gray-400">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-                        </svg>
-                        <span className="text-gray-900 font-medium">
-                            {t('books')}
-                        </span>
-                    </nav>
-                </div>
                 
             {/* Books Slider Section */}
-            <div className="lg:-mt-32 -mt-20 sm:-mt-24">
+            <div className="lg:-mt-40 -mt-30 sm:-mt-24">
                 <BooksSlider />
             </div>
             {/* Genres Section (after slider) */}
