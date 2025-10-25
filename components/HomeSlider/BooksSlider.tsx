@@ -178,15 +178,15 @@ const BooksSlider: React.FC = () => {
       >
         {/* Decorative path */}
         <svg className={styles.pathSvg} xmlns="http://www.w3.org/2000/svg" width="238" height="886" viewBox="0 0 238 886" fill="none">
-        <path d="M-97 -9.00001C84.1494 -9.00001 231 188.89 231 433C231 677.11 84.1494 875 -97 875" stroke="url(#paint0_linear_78_660)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M-97 -9.00001C84.1494 -9.00001 231 188.89 231 433C231 677.11 84.1494 875 -97 875" stroke="url(#paint0_linear_78_660)" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round"/>
         <defs>
           <linearGradient id="paint0_linear_78_660" x1="67" y1="746.187" x2="67" y2="118.98" gradientUnits="userSpaceOnUse">
-          <stop stop-color="white"/>
-        <stop offset="0.167353" stop-color="#00EEFF"/>
-        <stop offset="0.39751" stop-color="#0022FF"/>
-        <stop offset="0.606743" stop-color="#AE00FF"/>
-        <stop offset="0.845" stop-color="#FF0066"/>
-        <stop offset="1" stop-color="white"/>
+          <stop stopColor="white"/>
+        <stop offset="0.167353" stopColor="#00EEFF"/>
+        <stop offset="0.39751" stopColor="#0022FF"/>
+        <stop offset="0.606743" stopColor="#AE00FF"/>
+        <stop offset="0.845" stopColor="#FF0066"/>
+        <stop offset="1" stopColor="white"/>
         </linearGradient>
         </defs>
         </svg>
@@ -226,6 +226,23 @@ const BooksSlider: React.FC = () => {
         <div className={styles.contentArea}>
           <div key={`title-${activeBook.id}-${activeIndex}`} className={`${styles.textContent} ${styles.fadeText}`}>
             <h5 className={styles.mainTitle}>{activeBook.nomi}</h5>
+            {/* Mobil uchun muallif */}
+            {activeBook.mualliflar && (
+              <p className={styles.authorName}>
+                <span className={styles.authorLabel}>{t('author')}:</span> {activeBook.mualliflar.ismi}
+              </p>
+            )}
+            {/* Mobil uchun narx */}
+            <div className={styles.mobilePriceSection}>
+              {activeBook.chegirma_narxi ? (
+                <div className={styles.priceInfo}>
+                  <span className={styles.originalPrice}>{activeBook.narxi?.toLocaleString()} so'm</span>
+                  <span className={styles.discountPrice}>{activeBook.chegirma_narxi.toLocaleString()} so'm</span>
+                </div>
+              ) : activeBook.narxi ? (
+                <span className={styles.price}>{activeBook.narxi.toLocaleString()} so'm</span>
+              ) : null}
+            </div>
           </div>
 
           
@@ -241,6 +258,26 @@ const BooksSlider: React.FC = () => {
           
           </Link>
         </div>
+        
+        {/* Custom Pagination */}
+        {books.length > 1 && (
+          <div className={styles.customPagination}>
+            {books.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => {
+                  setActiveIndex(index);
+                  setAnimationKey((k) => k + 1);
+                  setShowSwipeHint(false);
+                }}
+                className={`${styles.paginationBullet} ${
+                  index === activeIndex ? styles.paginationBulletActive : ''
+                }`}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+          </div>
+        )}
         
         {/* Swipe indicator for mobile */}
         {showSwipeHint && (

@@ -102,8 +102,8 @@ const Index = () => {
             />
             <StructuredData type="website" data={{}} />
             
-            {/* Books Slider Section - New Books */}
-            <div className="lg:-mt-32 -mt-20 sm:-mt-24">
+            {/* Books Slider Section - Yangi kitoblar */}
+            <div className="lg:-mt-40 -mt-30 sm:-mt-24">
                 <BooksSlider />
             </div>
             
