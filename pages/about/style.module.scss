@@ -1,7 +1,7 @@
 .staticHero {
   width: 100%;
-  min-height: 800px;
-  padding: 80px 20px;
+  min-height: 500px;
+  padding: 40px 20px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -9,7 +9,7 @@
   background-color: #ffffff;
   overflow: hidden;
   margin-top: -2.5rem; /* matches -mt-10 */
-  margin-bottom: 2.5rem; /* matches mb-10 */
+  margin-bottom: 1rem; /* reduced from 2.5rem */
 }
 
 .heroContainer {
@@ -198,7 +198,7 @@
 
 /* GroupSection styles */
 .teamSection {
-  padding: 80px 0;
+  padding: 40px 0;
   font-family: 'Poppins', sans-serif;
   background-color: #fff;
   overflow: hidden;
@@ -294,82 +294,82 @@
 
 /* Mobil telefon (0 - 480px) */
 @media (max-width: 480px) {
-  .staticHero { padding: 32px 0; margin-top: -1rem; margin-bottom: 1.25rem; }
+  .staticHero { padding: 20px 0; margin-top: -1rem; margin-bottom: 1.25rem; }
   .heroContainer { gap: 20px; }
   .heroImg { width: 170px; height: auto; border-radius: 18px; }
   .heroTitle { font-size: 32px; line-height: 1.08; }
   .heroSubtitle { font-size: 15px; line-height: 22px; }
 
-  .aboutPublisherSection { padding: 48px 0; }
+  .aboutPublisherSection { padding: 24px 0; }
   .sectionTitle { font-size: 28px; margin-bottom: 16px; }
   .sectionText { font-size: 18px; }
 
-  .teamSection { padding: 56px 0; }
+  .teamSection { padding: 28px 0; }
   .sectionHeader { margin-bottom: 24px; }
   .teamImage { height: 340px; width: 100%; }
 }
 
 /* Katta telefon (481 - 768px) */
 @media (min-width: 481px) and (max-width: 768px) {
-  .staticHero { padding: 40px 16px; margin-top: -1.25rem; margin-bottom: 1.5rem; }
+  .staticHero { padding: 25px 16px; margin-top: -1.25rem; margin-bottom: 1.5rem; }
   .heroContainer { gap: 28px; }
   .heroImg { width: 220px; height: auto; border-radius: 22px; }
   .heroTitle { font-size: 40px; }
   .heroSubtitle { font-size: 17px; line-height: 24px; }
 
-  .aboutPublisherSection { padding: 56px 16px; }
+  .aboutPublisherSection { padding: 28px 16px; }
   .sectionTitle { font-size: 32px; margin-bottom: 18px; }
   .sectionText { font-size: 19px; }
 
-  .teamSection { padding: 64px 0; }
+  .teamSection { padding: 32px 0; }
   .sectionHeader { margin-bottom: 28px; }
   .teamImage { height: 360px; width: 100%; }
 }
 
 /* Planshet (769 - 1024px) */
 @media (min-width: 769px) and (max-width: 1024px) {
-  .staticHero { padding: 56px 20px; margin-top: -1.75rem; margin-bottom: 2rem; }
+  .staticHero { padding: 30px 20px; margin-top: -1.75rem; margin-bottom: 2rem; }
   .heroContainer { gap: 36px; }
   .heroImg { width: 260px; height: auto; border-radius: 24px; }
   .heroTitle { font-size: 52px; }
   .heroSubtitle { font-size: 18px; line-height: 26px; }
 
-  .aboutPublisherSection { padding: 64px 20px; }
+  .aboutPublisherSection { padding: 32px 20px; }
   .sectionTitle { font-size: 40px; margin-bottom: 20px; }
   .sectionText { font-size: 20px; }
 
-  .teamSection { padding: 72px 0; }
+  .teamSection { padding: 36px 0; }
   .sectionHeader { margin-bottom: 32px; }
   .teamImage { height: 420px; width: 360px; }
 }
 
 /* Kichik noutbuk (1025 - 1280px) */
 @media (min-width: 1025px) and (max-width: 1280px) {
-  .staticHero { padding: 64px 20px; margin-top: -2rem; margin-bottom: 2rem; }
+  .staticHero { padding: 35px 20px; margin-top: -2rem; margin-bottom: 2rem; }
   .heroContainer { gap: 44px; }
   .heroImg { width: 300px; height: auto; border-radius: 26px; }
   .heroTitle { font-size: 60px; }
   .heroSubtitle { font-size: 19px; }
 
-  .aboutPublisherSection { padding: 72px 20px; }
+  .aboutPublisherSection { padding: 36px 20px; }
   .sectionTitle { font-size: 48px; margin-bottom: 24px; }
   .sectionText { font-size: 22px; }
 
-  .teamSection { padding: 80px 0; }
+  .teamSection { padding: 40px 0; }
   .sectionHeader { margin-bottom: 36px; }
   .teamImage { height: 460px; width: 380px; }
 }
 
 /* O'rta monitor (1281 - 1536px) */
 @media (min-width: 1281px) and (max-width: 1536px) {
-  .staticHero { padding: 80px 20px; }
+  .staticHero { padding: 40px 20px; }
   .heroTitle { font-size: 72px; }
   .teamImage { height: 500px; width: 400px; }
 }
 
 /* Juda katta monitor (1537px va yuqori) */
 @media (min-width: 1537px) {
-  .staticHero { padding: 96px 24px; }
+  .staticHero { padding: 50px 24px; }
   .heroTitle { font-size: 84px; }
   .teamImage { height: 547px; width: 420px; }
 }

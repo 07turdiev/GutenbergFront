@@ -1,5 +1,5 @@
 .termsPage {
-  padding: 80px 20px;
+  padding: 40px 20px;
   font-family: 'Poppins', sans-serif;
   background-color: #fff;
 }
@@ -169,17 +169,17 @@
 /* Kichik noutbuk (1025 - 1280px) */
 @media (min-width: 1025px) and (max-width: 1280px) {
   .termsPage {
-    padding: 70px 20px;
+    padding: 30px 20px;
   }
   
   .pageTitle {
     font-size: 56px;
-    margin-bottom: 55px;
+    margin-bottom: 35px;
   }
   
   .contentText {
     font-size: 24px;
-    margin-bottom: 70px;
+    margin-bottom: 50px;
   }
   
   .brandbookCard {
@@ -204,17 +204,17 @@
 /* O'rta monitor (1281 - 1536px) */
 @media (min-width: 1281px) and (max-width: 1536px) {
   .termsPage {
-    padding: 80px 20px;
+    padding: 40px 20px;
   }
   
   .pageTitle {
     font-size: 64px;
-    margin-bottom: 60px;
+    margin-bottom: 40px;
   }
   
   .contentText {
     font-size: 26px;
-    margin-bottom: 80px;
+    margin-bottom: 50px;
   }
   
   .brandbookCard {
@@ -239,17 +239,17 @@
 /* Juda katta monitor (1537px va yuqori) */
 @media (min-width: 1537px) {
   .termsPage {
-    padding: 100px 20px;
+    padding: 50px 20px;
   }
   
   .pageTitle {
     font-size: 72px;
-    margin-bottom: 70px;
+    margin-bottom: 50px;
   }
   
   .contentText {
     font-size: 28px;
-    margin-bottom: 90px;
+    margin-bottom: 60px;
   }
   
   .brandbookCard {
