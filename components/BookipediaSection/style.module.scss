@@ -36,7 +36,6 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 60px 20px;
-  margin-bottom: 60px;
 }
 
 .articleCard {
@@ -73,7 +72,6 @@
   font-size: 20px;
   font-weight: 400;
   color: #212121;
-  margin: 0 0 5px 0;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -133,13 +131,23 @@
 }
 
 @media (max-width: 1024px) {
-  .articlesGrid { grid-template-columns: repeat(2, 1fr); }
-  .sectionFooter { justify-content: center; }
+  .articlesGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .sectionFooter {
+    justify-content: center;
+  }
 }
 
 @media (max-width: 768px) {
-  .sectionTitle { font-size: 48px; }
-  .articlesGrid { grid-template-columns: 1fr; }
+  .sectionTitle {
+    font-size: 48px;
+  }
+
+  .articlesGrid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .bookipediaSection {
@@ -150,9 +158,9 @@
   font-family: 'Poppins', sans-serif;
 }
 
-.sectionContainer { 
-  width: 100%; 
-  
+.sectionContainer {
+  width: 100%;
+
   @media (max-width: 1024px) {
     width: 100%;
   }
@@ -162,7 +170,6 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 80px;
 }
 
 .sectionTitle {
@@ -172,13 +179,14 @@
   margin: 0;
 }
 
-.sectionDetails { max-width: 442px; }
+.sectionDetails {
+  max-width: 442px;
+}
 
 .sectionDescription {
   font-size: 20px;
   line-height: 30px;
   color: #383838;
-  margin: 0 0 25px 0;
 }
 
 .sectionLink {
@@ -210,10 +218,9 @@
   border-color: #e0e0e0;
 }
 
-.cardImageWrapper { 
-  height: 380px; 
-  overflow: hidden; 
-  margin-bottom: 15px;
+.cardImageWrapper {
+  height: 380px;
+  overflow: hidden;
 }
 
 .cardImageWrapper img {
@@ -264,16 +271,20 @@
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.sectionLink .arrowCircle { font-size: 18px; width: 24px; height: 24px; }
+.sectionLink .arrowCircle {
+  font-size: 18px;
+  width: 24px;
+  height: 24px;
+}
 
 
-  /* Mobile hover effects */
-  @media (max-width: 768px) {
-    .articleCard:hover {
-      border-color: #009DFF;
-      box-shadow: 0 4px 12px rgba(0, 157, 255, 0.2);
-    }
+/* Mobile hover effects */
+@media (max-width: 768px) {
+  .articleCard:hover {
+    border-color: #009DFF;
+    box-shadow: 0 4px 12px rgba(0, 157, 255, 0.2);
   }
+}
 
 /* Mobile Responsive Styles */
 @media (max-width: 768px) {
@@ -369,7 +380,6 @@
 
 @media (max-width: 480px) {
   .sectionContainer {
-    padding: 0 0.75rem;
   }
 
   .sectionTitle {
@@ -397,58 +407,140 @@
 
 /* <= 320 — very small phones */
 @media (max-width: 320px) {
-  .articlesGrid { grid-template-columns: 1fr; justify-content: stretch; }
-  .articleCard { width: 100%; height: auto; }
-  .cardImageWrapper { height: 240px; margin-bottom: 12px; }
+  .articlesGrid {
+    grid-template-columns: 1fr;
+    justify-content: stretch;
+  }
+
+  .articleCard {
+    width: 100%;
+    height: auto;
+  }
+
+  .cardImageWrapper {
+    height: 240px;
+    margin-bottom: 12px;
+  }
 }
 
 /* 321–375 — small modern phones */
 @media (min-width: 321px) and (max-width: 375px) {
-  .articlesGrid { grid-template-columns: 1fr; justify-content: stretch; }
-  .articleCard { width: 100%; height: auto; }
-  .cardImageWrapper { height: 270px; margin-bottom: 12px; }
+  .articlesGrid {
+    grid-template-columns: 1fr;
+    justify-content: stretch;
+  }
+
+  .articleCard {
+    width: 100%;
+    height: auto;
+  }
+
+  .cardImageWrapper {
+    height: 270px;
+    margin-bottom: 12px;
+  }
 }
 
 /* 376–425 — large phones */
 @media (min-width: 376px) and (max-width: 425px) {
-  .articlesGrid { grid-template-columns: 1fr; justify-content: stretch; }
-  .articleCard { width: 100%; height: auto; }
-  .cardImageWrapper { height: 300px; margin-bottom: 12px; }
+  .articlesGrid {
+    grid-template-columns: 1fr;
+    justify-content: stretch;
+  }
+
+  .articleCard {
+    width: 100%;
+    height: auto;
+  }
+
+  .cardImageWrapper {
+    height: 300px;
+    margin-bottom: 12px;
+  }
 }
 
 /* 426–768 — tablet portrait */
 @media (min-width: 426px) and (max-width: 768px) {
-  .articlesGrid { grid-template-columns: repeat(2, 1fr); justify-content: center; column-gap: 16px; row-gap: 18px; }
-  .articleCard { width: 100%; height: auto; }
-  .cardImageWrapper { height: 320px; }
+  .articlesGrid {
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+    column-gap: 16px;
+    row-gap: 18px;
+  }
+
+  .articleCard {
+    width: 100%;
+    height: auto;
+  }
+
+  .cardImageWrapper {
+    height: 320px;
+  }
 }
 
 /* 769–1024 — tablet landscape / small laptop */
 @media (min-width: 769px) and (max-width: 1024px) {
-  .articlesGrid { grid-template-columns: repeat(2, 1fr); justify-content: center; column-gap: 18px; row-gap: 20px; }
-  .articleCard { width: 100%; height: auto; }
-  .cardImageWrapper { height: 340px; }
+  .articlesGrid {
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+    column-gap: 18px;
+    row-gap: 20px;
+  }
+
+  .articleCard {
+    width: 100%;
+    height: auto;
+  }
+
+  .cardImageWrapper {
+    height: 340px;
+  }
 }
 
 /* 1025–1280 — normal laptop / small desktop (base sizing kept) */
 @media (min-width: 1025px) and (max-width: 1280px) {
-  .articlesGrid { grid-template-columns: repeat(3, 1fr); }
-  .articleCard { width: 100%; height: 490px; }
-  .cardImageWrapper { height: 380px; }
+  .articlesGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .articleCard {
+    width: 100%;
+    height: 490px;
+  }
+
+  .cardImageWrapper {
+    height: 380px;
+  }
 }
 
 /* 1281–1440 — large laptop / small desktop monitor */
 @media (min-width: 1281px) and (max-width: 1440px) {
-  .articlesGrid { grid-template-columns: repeat(3, 1fr); }
-  .articleCard { width: 100%; height: 490px; }
-  .cardImageWrapper { height: 392px; }
+  .articlesGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .articleCard {
+    width: 100%;
+    height: 490px;
+  }
+
+  .cardImageWrapper {
+    height: 392px;
+  }
 }
 
 /* > 1440 — very large screens / 4K / TV */
 @media (min-width: 1441px) {
-  .articlesGrid { grid-template-columns: repeat(3, 1fr); }
-  .articleCard { width: 100%; height: 476px; }
-  .cardImageWrapper { height: 402px; }
+  .articlesGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .articleCard {
+    width: 100%;
+    height: 476px;
+  }
+
+  .cardImageWrapper {
+    height: 402px;
+  }
 }
-
-

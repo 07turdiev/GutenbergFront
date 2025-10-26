@@ -15,7 +15,7 @@ import {useAppSelector} from "../hooks/reducer";
 import {selectNovels} from "../store/selectors/novel";
 import {selectCategories} from "../store/selectors/genre";
 import {selectAuthors} from "../store/selectors/author";
-import {selectLatestBlogPosts} from "../store/selectors/blog";
+import {selectLatestBlogPosts, selectBlogPosts} from "../store/selectors/blog";
 import {useRouter} from "next/router";
 import {BooksSlider} from "../components/HomeSlider";
 // import PopularAuthorsSlider from "../components/PopularAuthorsSlider";
@@ -38,7 +38,7 @@ import {
     fetchAdvertisingMainTop,
     fetchAdvertisingSection
 } from "../store/actions/advertising";
-import { fetchLatestBlogPosts } from "../store/actions/blog";
+import { fetchLatestBlogPosts, fetchBlogPosts } from "../store/actions/blog";
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (ctx) => {
     const dispatch = store.dispatch;
@@ -60,6 +60,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (ctx
     await dispatch(fetchAdvertisingMainBottom({locale: ctx.locale, type: 'main-bottom'}))
     await dispatch(fetchAdvertisingSection({locale: ctx.locale, type: 'middle'}))
     await dispatch(fetchLatestBlogPosts({locale: ctx.locale, ctx, limit: 6}))
+    await dispatch(fetchBlogPosts({ locale: ctx.locale, ctx, page: 1, pageSize: 6 }))
 
     return {
         props: {
@@ -77,6 +78,7 @@ const Index = () => {
     const {mainBottom, mainTop, middle: sectionBanner} = useAppSelector(s=>s.advertisingReducer)
     const {authors} = useAppSelector(selectAuthors)
     const latestBlogPosts = useAppSelector(selectLatestBlogPosts)
+    const bookipediaPosts = useAppSelector(selectBlogPosts)
 
     const router = useRouter();
 
@@ -140,7 +142,7 @@ const Index = () => {
             </section>
 
             <section className="container mx-auto px-3 md:mb-12 mb-7">
-                <BookipediaSection />
+                <BookipediaSection posts={bookipediaPosts} />
             </section>
 
             {
