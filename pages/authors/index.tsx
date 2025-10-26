@@ -1,7 +1,6 @@
 import React from 'react';
 import HeadMeta from "../../components/HeadMeta";
 import SectionTitle from "../../components/SectionTitle";
-import AuthorListItem from "../../components/AuthorListItem";
 import Image from "next/image";
 import Pagination from "../../components/Ui/Pagination";
 import {useAppSelector} from "../../hooks/reducer";
@@ -12,6 +11,9 @@ import MainLayout from "../../layouts/MainLayout";
 import {wrapper} from "../../store/store";
 import {fetchAuthors} from "../../store/actions/author";
 import {fetchAdvertisingRight} from "../../store/actions/advertising";
+import { ensureAbsoluteUrl } from "../../config/api";
+import noPhoto from "../../assets/images/noPhotoAvtor.jpg";
+import styles from './style.module.scss';
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (ctx) => {
     const dispatch = store.dispatch;
@@ -34,6 +36,21 @@ const AuthorsPage = () => {
     const {authors} = useAppSelector(selectAuthors);
     const {right: asideBanner} = useAppSelector(s=>s.advertisingReducer)
     const {t} = useTranslation('common')
+
+    const getImageUrl = (author: any): string => {
+        if (author.rasmi?.url) {
+            return ensureAbsoluteUrl(author.rasmi.url);
+        }
+        if (author.photo?.src) {
+            return author.photo.src;
+        }
+        return noPhoto.src;
+    };
+
+    const getBooksCountText = (author: any): string => {
+        const count = author.romanlar_soni || author.novels_count || 0;
+        return `${count} ${t('sliderAuthor_books')}`;
+    };
 
     return (
         <MainLayout>
@@ -64,25 +81,34 @@ const AuthorsPage = () => {
 
                 <SectionTitle>{t('authorsPage')}</SectionTitle>
 
-                <div className="grid grid-cols-12 gap-5">
-                    <div className="col-span-12 md:col-span-9">
-                        {
-                            authors.results.map((author)=>{
-                                return(
-                                    <AuthorListItem author={author} key={author.slug}/>
-                                )
-                            })
-                        }
-                    </div>
-
-                    <div className="col-span-3 relative">
-                        {
-                            asideBanner && asideBanner.img ?
-                                <div className='relative cursor-pointer'>
-                                    <Image src={asideBanner.img.src} width={asideBanner.img.width} height={asideBanner.img.height}/>
-                                </div>
-                                : null
-                        }
+                <div className="w-full">
+                    <div className={styles.authorsGrid}>
+                        {authors.results.map((author) => (
+                            <Link key={author.slug} href={`/authors/${author.slug}`}>
+                                <a className={styles.authorCard}>
+                                    <div className={styles.cardImageWrapper}>
+                                        <Image
+                                            src={getImageUrl(author)}
+                                            alt={author.ismi || author.name || t('author')}
+                                            width={400}
+                                            height={547}
+                                            className={styles.authorImage}
+                                        />
+                                    </div>
+                                    <div className={styles.cardContent}>
+                                        <div className={styles.cardText}>
+                                            <h3>{author.ismi || author.name}</h3>
+                                            <p>{getBooksCountText(author)}</p>
+                                        </div>
+                                        <span className={styles.arrowCircle}>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="39" height="39" viewBox="0 0 39 39" fill="none">
+                                                <path d="M13 12.9994H26M26 12.9994V25.9994M26 12.9994L13 25.9994" stroke="#009DFF"/>
+                                            </svg>
+                                        </span>
+                                    </div>
+                                </a>
+                            </Link>
+                        ))}
                     </div>
                 </div>
 
