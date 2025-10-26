@@ -52,10 +52,10 @@ const BooksSlider: React.FC = () => {
   const fetchLatestBooks = async () => {
     try {
       const response = await fetch(
-        `${getApiUrl()}api/kitoblars?locale=${router.locale || 'uz'}&populate=mualliflar&populate=muqova&sort=createdAt:desc&pagination[limit]=5`
+        `${getApiUrl()}api/kitoblars?locale=${router.locale || 'uz'}&populate=mualliflar&populate=muqova&sort=createdAt:desc&pagination[limit]=3`
       );
       const data = await response.json();
-      setBooks(data.data || []);
+      setBooks((data.data || []).slice(0, 3));
     } catch (error) {
       console.error('Error fetching books:', error);
     } finally {
