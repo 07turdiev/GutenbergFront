@@ -46,8 +46,8 @@ const Header = () => {
 
     return (
         <>
-            <div className='py-3 shadow-lg fixed top-0 left-0 w-full z-50'>
-                <div className={classNames('absolute top-0 left-0 w-full h-full ',  classes.blurred)} />
+            <div className='py-3 shadow-lg fixed top-0 left-0 right-0 z-50'>
+                <div className={classNames('absolute top-0 left-0 right-0 h-full ',  classes.blurred)} />
                 <div className='container mx-auto px-3 relative z-30'>
                     <nav className="flex items-center justify-between">
                         {/* Left */}

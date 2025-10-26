@@ -92,12 +92,9 @@
 .authorsCarouselWrapper {
   display: flex;
   gap: 20px;
-  overflow-x: auto;
+  overflow: visible;
   padding-bottom: 20px;
-  scroll-snap-type: x mandatory;
-  scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
-  cursor: grab;
 }
 
 .carouselContainer {
@@ -155,7 +152,7 @@
   text-decoration: none;
   color: inherit;
   transition: transform 0.3s ease;
-  scroll-snap-align: start;
+  height: 100%;
 }
 
 
@@ -170,7 +167,7 @@
 }
 
 .authorInfo {
-  padding: 25px 15px;
+  padding-left: 15px;
 }
 .authorCard:hover .authorInfo h3,
 .authorCard:hover .authorInfo p {
