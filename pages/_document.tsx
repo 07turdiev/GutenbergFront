@@ -47,24 +47,33 @@ class MyDocument extends Document {
             rel="stylesheet"
           />
           
-          {/* Google Analytics */}
-          <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', 'GA_MEASUREMENT_ID', {
-                  page_title: 'Gutenberg',
-                  page_location: window.location.href,
-                });
-              `,
-            }}
-          />
+          {process.env.NEXT_PUBLIC_GA_ID && (
+            <>
+              <script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`} />
+              <script
+                dangerouslySetInnerHTML={{
+                  __html: `
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+                    gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}');
+                  `,
+                }}
+              />
+            </>
+          )}
           
-          {/* Google Search Console */}
-          <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE" />
+          {process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION && (
+            <meta name="google-site-verification" content={process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION} />
+          )}
+          
+          {process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION && (
+            <meta name="msvalidate.01" content={process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION} />
+          )}
+          
+          {process.env.NEXT_PUBLIC_YANDEX_VERIFICATION && (
+            <meta name="yandex-verification" content={process.env.NEXT_PUBLIC_YANDEX_VERIFICATION} />
+          )}
         </Head>
         <body>
           <Main />

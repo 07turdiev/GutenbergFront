@@ -1,126 +1,88 @@
 import React from 'react';
+import Head from 'next/head';
+import { useRouter } from 'next/router';
 
 interface StructuredDataProps {
-  type: 'website' | 'book' | 'author' | 'article' | 'organization';
-  data: any;
+  type: 'Website' | 'Organization' | 'Article' | 'Book' | 'Author' | 'BlogPosting';
+  data?: any;
 }
 
 const StructuredData: React.FC<StructuredDataProps> = ({ type, data }) => {
-  const getStructuredData = () => {
+  const router = useRouter();
+  const baseUrl = 'https://gutenbergnu.uz';
+  const currentUrl = `${baseUrl}${router.asPath}`;
+
+  const getWebsiteData = () => ({
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Gutenberg Audio Kutubxona",
+    "description": "O'zbekistondagi eng yirik audio kutubxona. Audio kitoblar, romanlar va hikoyalar bepul tinglash imkoniyati.",
+    "url": baseUrl,
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": `${baseUrl}/search?q={search_term_string}`
+      },
+      "query-input": "required name=search_term_string"
+    },
+    "inLanguage": ["uz", "ru", "en"],
+    "publisher": {
+      "@type": "Organization",
+      "name": "Gutenberg Nashriyot Uyi",
+      "logo": {
+        "@type": "ImageObject",
+        "url": `${baseUrl}/favicon.png`
+      }
+    }
+  });
+
+  const getOrganizationData = () => ({
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Gutenberg Nashriyot Uyi",
+    "url": baseUrl,
+    "logo": `${baseUrl}/favicon.png`,
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "customer service",
+      "availableLanguage": ["Uzbek", "Russian", "English"]
+    },
+    "sameAs": [
+      "https://www.facebook.com/gutenbergnu",
+      "https://www.instagram.com/gutenbergnu",
+      "https://t.me/gutenbergnu"
+    ]
+  });
+
+  const getData = () => {
     switch (type) {
-      case 'website':
-        return {
-          "@context": "https://schema.org",
-          "@type": "WebSite",
-          "name": "Gutenberg",
-          "description": "O'zbekistondagi eng yirik audio kutubxona",
-          "url": "https://gutenbergnu.uz",
-          "potentialAction": {
-            "@type": "SearchAction",
-            "target": "https://gutenbergnu.uz/search?q={search_term_string}",
-            "query-input": "required name=search_term_string"
-          },
-          "publisher": {
-            "@type": "Organization",
-            "name": "Gutenberg",
-            "url": "https://gutenbergnu.uz"
-          }
-        };
-      
-      case 'book':
-        return {
-          "@context": "https://schema.org",
-          "@type": "Audiobook",
-          "name": data.title,
-          "author": {
-            "@type": "Person",
-            "name": data.author
-          },
-          "description": data.description,
-          "url": `https://gutenbergnu.uz/books/${data.slug}`,
-          "image": data.image,
-          "publisher": {
-            "@type": "Organization",
-            "name": "Gutenberg"
-          },
-          "inLanguage": "uz",
-          "genre": data.category
-        };
-      
-      case 'author':
-        return {
-          "@context": "https://schema.org",
-          "@type": "Person",
-          "name": data.name,
-          "description": data.bio,
-          "url": `https://gutenbergnu.uz/authors/${data.slug}`,
-          "image": data.image,
-          "jobTitle": "Yozuvchi",
-          "worksFor": {
-            "@type": "Organization",
-            "name": "Gutenberg"
-          }
-        };
-      
-      case 'article':
-        return {
-          "@context": "https://schema.org",
-          "@type": "Article",
-          "headline": data.title,
-          "description": data.description,
-          "image": data.image,
-          "author": {
-            "@type": "Organization",
-            "name": "Gutenberg"
-          },
-          "publisher": {
-            "@type": "Organization",
-            "name": "Gutenberg",
-            "logo": {
-              "@type": "ImageObject",
-              "url": "https://gutenbergnu.uz/logo.png"
-            }
-          },
-          "datePublished": data.publishedAt,
-          "dateModified": data.updatedAt,
-          "mainEntityOfPage": {
-          "@type": "WebPage",
-          "@id": `https://gutenbergnu.uz/bookipedia/${data.slug}`
-          }
-        };
-      
-      case 'organization':
-        return {
-          "@context": "https://schema.org",
-          "@type": "Organization",
-          "name": "Gutenberg",
-          "description": "O'zbekistondagi eng yirik audio kutubxona",
-          "url": "https://gutenbergnu.uz",
-          "logo": "https://gutenbergnu.uz/logo.png",
-          "sameAs": [
-            "https://t.me/gutenbergnu",
-            "https://instagram.com/gutenbergnu"
-          ],
-          "contactPoint": {
-            "@type": "ContactPoint",
-            "contactType": "customer service",
-            "availableLanguage": ["Uzbek", "Russian", "English"]
-          }
-        };
-      
+      case 'Website':
+        return getWebsiteData();
+      case 'Organization':
+        return getOrganizationData();
+      case 'Article':
+      case 'BlogPosting':
+        return data;
+      case 'Book':
+        return data;
+      case 'Author':
+        return data;
       default:
-        return {};
+        return getWebsiteData();
     }
   };
 
+  const structuredData = getData();
+
   return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{
-        __html: JSON.stringify(getStructuredData())
-      }}
-    />
+    <Head>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+    </Head>
   );
 };
 
-export default StructuredData; 
+export default StructuredData;

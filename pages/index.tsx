@@ -102,7 +102,7 @@ const Index = () => {
                 keywords="audio kitoblar, audiokitoblar, audio romanlar, audio hikoyalar, o'zbek audio kitoblar, bepul audio kitoblar, online audio kutubxona, Gutenberg"
                 ogImg="https://gutenbergnu.uz/og-default-img.jpg"
             />
-            <StructuredData type="website" data={{}} />
+            <StructuredData type="Website" data={{}} />
             
             {/* Books Slider Section - Yangi kitoblar */}
             <div className="lg:-mt-40 -mt-30 sm:-mt-24">
