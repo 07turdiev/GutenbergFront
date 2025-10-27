@@ -9,7 +9,7 @@ import { wrapper } from '../../store/store';
 import { fetchBlogPostBySlug } from '../../store/actions/blog';
 import { useAppSelector } from '../../hooks/reducer';
 import { selectCurrentBlogPost, selectBlogLoading } from '../../store/selectors/blog';
-import { blogContentToHtml, getBlogImageUrl } from '../../utils/strapiAdapter';
+import { blogContentToHtml, getBlogImageUrl, blogContentToPlainText } from '../../utils/strapiAdapter';
 import { formatDateDayMonthYearDots } from '../../utils/dateFormatter';
 import SpinnerDots from '../../components/Ui/SpinnerDots';
 import YouTubeEmbed from '../../components/Ui/YouTubeEmbed';
@@ -221,8 +221,9 @@ const BlogPostPage = () => {
     }
 
     const metaTitle = `${post.sarlavha} | Gutenberg Bookipedia`
-    const metaDescription = post.description || post.sarlavha
-    const metaImage = post.rasm?.url ? getBlogImageUrl(post.rasm) : 'https://gutenbergnu.uz/og-default-img.jpg'
+    const metaDescriptionText = post.kontent ? blogContentToPlainText(post.kontent).substring(0, 160) : post.sarlavha
+    const metaDescription = metaDescriptionText || post.sarlavha
+    const metaImage = post.rasmi?.url ? getBlogImageUrl(post.rasmi) : 'https://gutenbergnu.uz/og-default-img.jpg'
     const metaKeywords = `${post.sarlavha}, bookipedia, Gutenberg, kitob`
 
     return (

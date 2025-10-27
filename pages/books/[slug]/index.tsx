@@ -272,10 +272,11 @@ const Index = () => {
         }
     }
 
-    const metaTitle = novel ? `${novel.name} | Gutenberg Audio Kutubxona` : 'Audio Kitob | Gutenberg'
-    const metaDescription = novel ? `${novel.name} - ${novel.author?.map(a => a.name).join(', ')}. ${t('books')} - Gutenberg audio kutubxonasi` : t('books')
+    const metaTitle = novel ? `${novel.name || novel.nomi} | Gutenberg Audio Kutubxona` : 'Audio Kitob | Gutenberg'
+    const authorName = novel?.author?.name || novel?.mualliflar?.name || novel?.mualliflar?.ismi || ''
+    const metaDescription = novel ? `${novel.name || novel.nomi}${authorName ? ` - ${authorName}` : ''}. ${t('books')} - Gutenberg audio kutubxonasi` : t('books')
     const metaImage = novel?.cover?.src ? ensureAbsoluteUrl(novel.cover.src) : 'https://gutenbergnu.uz/og-default-img.jpg'
-    const metaKeywords = novel ? `${novel.name}, ${novel.author?.map(a => a.name).join(', ')}, audio kitob, audiokitob, Gutenberg` : 'audio kitob, audiokitob'
+    const metaKeywords = novel ? `${novel.name || novel.nomi}${authorName ? `, ${authorName}` : ''}, audio kitob, audiokitob, Gutenberg` : 'audio kitob, audiokitob'
 
     return (
         <MainLayout>
