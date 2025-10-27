@@ -24,11 +24,20 @@ const TeamPage = () => {
     const { t } = useTranslation('common');
     const teamMembers = useSelector(selectTeamMembers);
     const loading = useSelector(selectTeamLoading);
+    
+    const metaTitle = t('teamMetaTitle')
+    const metaDescription = t('teamMetaDescription')
+    const metaKeywords = t('teamMetaKeywords')
 
     if (loading) {
         return (
             <MainLayout>
-                <HeadMeta title={t('team')} description={t('team')} />
+                <HeadMeta 
+                    title={metaTitle}
+                    description={metaDescription}
+                    keywords={metaKeywords}
+                    ogImg="https://gutenbergnu.uz/og-default-img.jpg"
+                />
                 <div className="container mx-auto px-3 mb-10">
                     <div className="flex justify-center items-center h-96">
                         <SpinnerDots />
@@ -40,7 +49,12 @@ const TeamPage = () => {
 
     return (
         <MainLayout>
-            <HeadMeta title={t('team')} description={t('team')} />
+            <HeadMeta 
+                title={metaTitle}
+                description={metaDescription}
+                keywords={metaKeywords}
+                ogImg="https://gutenbergnu.uz/og-default-img.jpg"
+            />
             <div className="container mx-auto px-3 mb-10">
                 
                 {/* Breadcrumb Navigation */}

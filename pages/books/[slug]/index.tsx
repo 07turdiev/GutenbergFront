@@ -272,9 +272,19 @@ const Index = () => {
         }
     }
 
+    const metaTitle = novel ? `${novel.name} | Gutenberg Audio Kutubxona` : 'Audio Kitob | Gutenberg'
+    const metaDescription = novel ? `${novel.name} - ${novel.author?.map(a => a.name).join(', ')}. ${t('books')} - Gutenberg audio kutubxonasi` : t('books')
+    const metaImage = novel?.cover?.src ? ensureAbsoluteUrl(novel.cover.src) : 'https://gutenbergnu.uz/og-default-img.jpg'
+    const metaKeywords = novel ? `${novel.name}, ${novel.author?.map(a => a.name).join(', ')}, audio kitob, audiokitob, Gutenberg` : 'audio kitob, audiokitob'
+
     return (
         <MainLayout>
-            <HeadMeta title={novel ? novel.name : 'Сервис аудиокниг'} description={novel ? novel.name : 'Сервис аудиокниг'} ogImg={novel && novel?.cover?.src } />
+            <HeadMeta 
+                title={metaTitle}
+                description={metaDescription}
+                keywords={metaKeywords}
+                ogImg={metaImage}
+            />
 
             {
                 !novel ?

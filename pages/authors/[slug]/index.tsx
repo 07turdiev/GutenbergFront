@@ -98,9 +98,19 @@ const Index = () => {
     }
 
 
+    const metaTitle = `${author.name} | Gutenberg Muallif`
+    const metaDescription = author.biography ? `${author.name} - ${author.biography.substring(0, 150)}...` : `${author.name} - Gutenberg audio kutubxonasining muallifi`
+    const metaImage = author?.photo?.src || 'https://gutenbergnu.uz/og-default-img.jpg'
+    const metaKeywords = `${author.name}, muallif, yozuvchi, Gutenberg mualliflar`
+
     return (
         <MainLayout>
-            <HeadMeta title={author.name} description={author.name} ogImg={ author?.photo?.src}/>
+            <HeadMeta 
+                title={metaTitle}
+                description={metaDescription}
+                keywords={metaKeywords}
+                ogImg={metaImage}
+            />
             <div className="container mx-auto px-3 mb-6">
                 {/* Breadcrumb Navigation */}
                 <div className="mb-4 mt-2 sm:mt-2">

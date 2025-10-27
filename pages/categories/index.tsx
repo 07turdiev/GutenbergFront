@@ -42,6 +42,10 @@ const Index = () => {
     const {query, locale} = useRouter();
 
     const {t} = useTranslation('common')
+    
+    const metaTitle = t('categoriesMetaTitle')
+    const metaDescription = t('categoriesMetaDescription')
+    const metaKeywords = t('categoriesMetaKeywords')
 
     const addNovelToMark = async (slug, saved) => {
         if(!saved){
@@ -66,9 +70,9 @@ const Index = () => {
     return (
         <MainLayout>
             <HeadMeta 
-                title="Audio Kitob Kategoriyalari | Gutenberg Audio Kutubxona" 
-                description="Gutenberg audio kutubxonasida turli kategoriyalardagi audio kitoblar: romanlar, hikoyalar, tarix, ilm-fan, diniy kitoblar va boshqalar."
-                keywords="audio kitob kategoriyalari, audio romanlar, audio hikoyalar, diniy audio kitoblar, tarix audio kitoblar, ilm-fan audio kitoblar"
+                title={metaTitle}
+                description={metaDescription}
+                keywords={metaKeywords}
                 ogImg="https://gutenbergnu.uz/og-default-img.jpg"
             />
             <div className="container mx-auto px-3 mb-10">

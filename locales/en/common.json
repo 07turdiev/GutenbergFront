@@ -256,5 +256,18 @@
   "documentsViewImage": "View image",
   "documentsTermsDescription": "Terms of use for the publishing house's electronic resources, branding information, published books and excerpts from books.",
   "documentsPrivacyDescription": "Ensuring confidentiality of information entered by users in web resources, contracts and cooperation memorandums concluded by Gutenberg Publishing House LLC.",
+  
+  "genresMetaTitle": "Genres | Gutenberg Audiobooks",
+  "genresMetaDescription": "Audiobooks of various genres in the Gutenberg library. Fiction, scientific, history, religious and other audiobook genres.",
+  "genresMetaKeywords": "audiobook genres, audio novels, audio stories, religious audiobooks, historical audiobooks, scientific audiobooks, Gutenberg genres",
+  
+  "teamMetaTitle": "Team | Gutenberg Publishing House",
+  "teamMetaDescription": "Meet the professional team of Gutenberg Publishing House. Our team members and their positions.",
+  "teamMetaKeywords": "Gutenberg team, publishing team members, editor, author, professional team, Gutenberg",
+  
+  "categoriesMetaTitle": "Categories | Gutenberg Audiobooks",
+  "categoriesMetaDescription": "Audiobooks of various categories in the Gutenberg library. Novels, stories, history, science and other categories.",
+  "categoriesMetaKeywords": "audiobook categories, audio novels, audio stories, religious audiobooks, historical audiobooks, scientific audiobooks, Gutenberg categories",
+  
   "readMore": "Read more"
 }

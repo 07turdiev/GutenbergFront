@@ -42,6 +42,10 @@ const Index = () => {
     const {query, locale} = useRouter();
 
     const {t} = useTranslation('common')
+    
+    const metaTitle = t('genresMetaTitle')
+    const metaDescription = t('genresMetaDescription')
+    const metaKeywords = t('genresMetaKeywords')
 
     const addNovelToMark = async (slug, saved) => {
         if(!saved){
@@ -65,7 +69,12 @@ const Index = () => {
 
     return (
         <MainLayout>
-            <HeadMeta title={t('category')} description={t('category')} />
+            <HeadMeta 
+                title={metaTitle}
+                description={metaDescription}
+                keywords={metaKeywords}
+                ogImg="https://gutenbergnu.uz/og-default-img.jpg"
+            />
             <div className="container mx-auto px-3 mb-10">
 
                 <div>

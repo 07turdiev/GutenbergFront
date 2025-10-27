@@ -1,25 +1,31 @@
 User-agent: *
 Allow: /
 
-# Sitemap
-Sitemap: https://gutenbergnu.uz/sitemap.xml
-
-# Crawl-delay
-Crawl-delay: 1
-
-# Disallow admin and private areas
-Disallow: /admin/
-Disallow: /private/
 Disallow: /api/
 Disallow: /_next/
-Disallow: /static/
+Disallow: /admin/
+Disallow: /private/
+Disallow: /profile/
+Disallow: /*.json$
+Disallow: /*?sort=
+Disallow: /*?filter=
 
-# Allow important pages
+Sitemap: https://gutenbergnu.uz/sitemap.xml
+
+Crawl-delay: 0
+
+User-agent: Googlebot
 Allow: /
-Allow: /books/
-Allow: /authors/
-Allow: /categories/
-Allow: /genres/
-Allow: /bookipedia/
-Allow: /about/
-Allow: /team/ 
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Yandex
+Allow: /
+Crawl-delay: 0
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 0

@@ -220,9 +220,19 @@ const BlogPostPage = () => {
         );
     }
 
+    const metaTitle = `${post.sarlavha} | Gutenberg Bookipedia`
+    const metaDescription = post.description || post.sarlavha
+    const metaImage = post.rasm?.url ? getBlogImageUrl(post.rasm) : 'https://gutenbergnu.uz/og-default-img.jpg'
+    const metaKeywords = `${post.sarlavha}, bookipedia, Gutenberg, kitob`
+
     return (
         <MainLayout>
-            <HeadMeta title={post.sarlavha} description={post.sarlavha} />
+            <HeadMeta 
+                title={metaTitle}
+                description={metaDescription}
+                keywords={metaKeywords}
+                ogImg={metaImage}
+            />
             <div className="container mx-auto px-3 mb-10">
                 {/* Breadcrumb */}
                 <div className="mb-4 mt-2 sm:mt-2">

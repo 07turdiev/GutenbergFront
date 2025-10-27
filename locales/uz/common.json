@@ -256,5 +256,16 @@
   "documentsViewImage": "Rasmni ko'rish",
   "documentsTermsDescription": "Nashriyotning elektron resurslaridan, brending ma'lumotlaridan, nashr etilgan kitoblaridan hamda kitoblardagi parchalardan foydalnish shartlari.",
   "documentsPrivacyDescription": "\"Gutenberg nashriyot uyi\" MChJ tomonidan tuzilgan shartnomalar, hamkorlik memorandumlari, veb-resurslarda foydalanuvchilar tomonidan kiritilgan ma'lumotlarning maxfiyligini ta'minlash to'g'risida.",
-  "readMore": "Batafsil"
+  
+  "genresMetaTitle": "Janrlar | Gutenberg Audio Kutubxona",
+  "genresMetaDescription": "Gutenberg audio kutubxonasida turli janrlardagi audio kitoblar. Badiiy, ilmiy, tarix, diniy va boshqa janrlardagi audio kitoblar.",
+  "genresMetaKeywords": "audio kitob janrlari, audio romanlar, audio hikoyalar, diniy audio kitoblar, tarix audio kitoblar, ilm-fan audio kitoblar, Gutenberg janrlari",
+  
+  "teamMetaTitle": "Jamoa | Gutenberg Nashriyot Uyi",
+  "teamMetaDescription": "Gutenberg nashriyot uyining professional jamoasi bilan tanishing. Bizning jamoa a'zolarimiz va ularning lavozimlari.",
+  "teamMetaKeywords": "Gutenberg jamoasi, nashriyot jamoa a'zolari, redaktor, muallif, professional jamoa, Gutenberg",
+  
+  "categoriesMetaTitle": "Kategoriyalar | Gutenberg Audio Kutubxona",
+  "categoriesMetaDescription": "Gutenberg audio kutubxonasida turli kategoriyalardagi audio kitoblar. Romanlar, hikoyalar, tarix, ilm-fan va boshqa kategoriyalar.",
+  "categoriesMetaKeywords": "audio kitob kategoriyalari, audio romanlar, audio hikoyalar, diniy audio kitoblar, tarix audio kitoblar, ilm-fan audio kitoblar, Gutenberg kategoriyalari"
 }
