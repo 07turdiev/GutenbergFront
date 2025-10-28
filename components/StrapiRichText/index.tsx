@@ -91,8 +91,16 @@ const StrapiRichText: React.FC<StrapiRichTextProps> = ({
         }
     };
 
-    // Use variant styles if no custom classes provided
-    const styles = variant !== 'default' ? variants[variant] : {};
+    // Always resolve to a full style object to satisfy TS
+    const styles: {
+        className: string;
+        imageClassName: string;
+        linkClassName: string;
+        headingClassName: string;
+        paragraphClassName: string;
+        listClassName: string;
+        quoteClassName: string;
+    } = (variants as any)[variant] || variants.default;
 
     return (
         <RichTextRenderer
