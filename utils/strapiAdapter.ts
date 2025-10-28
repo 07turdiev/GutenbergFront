@@ -124,7 +124,7 @@ export const adaptAuthorData = (author: IAuthor): IAuthor => {
                 .replace(/\n+/g, ' ') // Replace newlines with spaces
                 .replace(/\s+/g, ' ') // Normalize whitespace
                 .trim()
-            : author.tarjimai_holi ? richTextToPlainText(author.tarjimai_holi) : (author.biography || ''),
+            : Array.isArray(author.tarjimai_holi) ? richTextToPlainText(author.tarjimai_holi) : (author.biography || ''),
         novels_count: author.romanlar_soni || author.novels_count || 0,
         photo: photo,
         // Ensure all fields are serializable
