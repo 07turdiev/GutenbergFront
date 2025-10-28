@@ -78,9 +78,6 @@ export default class NovelService {
             'populate=muqova',
             'populate=mualliflar',
             'populate=kategoriya',
-            'populate=Rasm',
-            'populate=Rasm1',
-            'populate=Rasm2',
             'populate=Fragment',
             'populate=Ilova'
         ].join('&');
@@ -95,9 +92,6 @@ export default class NovelService {
             'populate=muqova',
             'populate=mualliflar',
             'populate=kategoriya',
-            'populate=Rasm',
-            'populate=Rasm1',
-            'populate=Rasm2',
             'populate=Fragment',
             'populate=Ilova'
         ].join('&');

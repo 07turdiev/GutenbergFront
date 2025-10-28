@@ -75,23 +75,44 @@ const BooksSlider: React.FC = () => {
     return '/assets/images/noPhotoNovel.jpg';
   };
 
-  // Strapi richtext to plain text (best-effort)
-  const extractPlainText = (tavsifi: any[] | undefined): string => {
-    if (!tavsifi || !Array.isArray(tavsifi)) return '';
-    try {
-      const walk = (nodes: any[]): string =>
-        nodes
-          .map((node) => {
-            if (typeof node === 'string') return node;
-            if (node?.text) return node.text as string;
-            if (Array.isArray(node?.children)) return walk(node.children);
-            return '';
-          })
-          .join(' ');
-      return walk(tavsifi).replace(/\s+/g, ' ').trim();
-    } catch {
-      return '';
+  // Extract plain text from markdown string (new format)
+  const extractPlainText = (tavsifi: string | any[] | undefined): string => {
+    if (!tavsifi) return '';
+    
+    // If it's a string (new markdown format), extract plain text
+    if (typeof tavsifi === 'string') {
+      // Remove markdown formatting
+      return tavsifi
+        .replace(/!\[([^\]]*)\]\([^)]+\)/g, '') // Remove images
+        .replace(/\*\*([^*]+)\*\*/g, '$1') // Remove bold
+        .replace(/_([^_]+)_/g, '$1') // Remove italic
+        .replace(/<u>([^<]+)<\/u>/g, '$1') // Remove underline
+        .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1') // Remove links
+        .replace(/```[\s\S]*?```/g, '') // Remove code blocks
+        .replace(/\n+/g, ' ') // Replace newlines with spaces
+        .replace(/\s+/g, ' ') // Normalize whitespace
+        .trim();
     }
+    
+    // If it's an array (old rich text format), use old logic
+    if (Array.isArray(tavsifi)) {
+      try {
+        const walk = (nodes: any[]): string =>
+          nodes
+            .map((node) => {
+              if (typeof node === 'string') return node;
+              if (node?.text) return node.text as string;
+              if (Array.isArray(node?.children)) return walk(node.children);
+              return '';
+            })
+            .join(' ');
+        return walk(tavsifi).replace(/\s+/g, ' ').trim();
+      } catch {
+        return '';
+      }
+    }
+    
+    return '';
   };
 
   // Swipe detection functions

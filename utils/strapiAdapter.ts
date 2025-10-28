@@ -45,13 +45,20 @@ export const adaptNovelData = (novel: INovel): INovel => {
         // Map new fields to old field names for backward compatibility
         name: novel.nomi || novel.name || '',
         slug: novel.slug || novel.slug, // ensure slug is preserved
-        description: Array.isArray((novel as any).tavsifi)
-            ? richTextToPlainText((novel as any).tavsifi as any)
-            : (typeof (novel as any).tavsifi === 'string'
-                ? parseBookipediaMarkdownToBlocks((novel as any).tavsifi)
-                    .map((b: any) => (b.children || []).map((c: any) => c.text || '').join(''))
-                    .join('\n\n')
-                : (novel.description || '')),
+        description: typeof (novel as any).tavsifi === 'string'
+            ? (novel as any).tavsifi
+                .replace(/!\[([^\]]*)\]\([^)]+\)/g, '') // Remove images
+                .replace(/\*\*([^*]+)\*\*/g, '$1') // Remove bold
+                .replace(/_([^_]+)_/g, '$1') // Remove italic
+                .replace(/<u>([^<]+)<\/u>/g, '$1') // Remove underline
+                .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1') // Remove links
+                .replace(/```[\s\S]*?```/g, '') // Remove code blocks
+                .replace(/\n+/g, ' ') // Replace newlines with spaces
+                .replace(/\s+/g, ' ') // Normalize whitespace
+                .trim()
+            : Array.isArray((novel as any).tavsifi)
+                ? richTextToPlainText((novel as any).tavsifi as any)
+                : (novel.description || ''),
         age_rate: cleanAgeRate(novel.yosh_chegarasi || novel.age_rate || ''),
         actual: novel.dolzarb ?? novel.actual ?? false,
         new: novel.yangi ?? novel.new ?? false,
@@ -106,7 +113,18 @@ export const adaptAuthorData = (author: IAuthor): IAuthor => {
     return {
         ...author,
         name: author.ismi || author.name || '',
-        biography: author.tarjimai_holi ? richTextToPlainText(author.tarjimai_holi) : (author.biography || ''),
+        biography: typeof (author as any).tarjimai_holi === 'string'
+            ? (author as any).tarjimai_holi
+                .replace(/!\[([^\]]*)\]\([^)]+\)/g, '') // Remove images
+                .replace(/\*\*([^*]+)\*\*/g, '$1') // Remove bold
+                .replace(/_([^_]+)_/g, '$1') // Remove italic
+                .replace(/<u>([^<]+)<\/u>/g, '$1') // Remove underline
+                .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1') // Remove links
+                .replace(/```[\s\S]*?```/g, '') // Remove code blocks
+                .replace(/\n+/g, ' ') // Replace newlines with spaces
+                .replace(/\s+/g, ' ') // Normalize whitespace
+                .trim()
+            : author.tarjimai_holi ? richTextToPlainText(author.tarjimai_holi) : (author.biography || ''),
         novels_count: author.romanlar_soni || author.novels_count || 0,
         photo: photo,
         // Ensure all fields are serializable

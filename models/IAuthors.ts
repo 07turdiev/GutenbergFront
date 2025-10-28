@@ -6,7 +6,7 @@ export interface IAuthor {
     documentId: string;
     ismi: string;
     slug: string;
-    tarjimai_holi: IRichTextContent[];
+    tarjimai_holi: string | IRichTextContent[];
     romanlar_soni: number;
     createdAt: string;
     updatedAt: string;
@@ -20,7 +20,7 @@ export interface IAuthor {
         documentId: string;
         nomi: string;
         slug: string;
-        tavsifi: IRichTextContent[];
+        tavsifi: string | IRichTextContent[];
         yosh_chegarasi: string;
         dolzarb: boolean;
         yangi: boolean;

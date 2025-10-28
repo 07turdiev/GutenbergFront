@@ -59,7 +59,7 @@ export interface INovel {
     documentId: string;
     nomi: string;
     slug: string;
-    tavsifi: IRichTextContent[];
+    tavsifi: string | IRichTextContent[];
     yosh_chegarasi: string;
     dolzarb: boolean;
     yangi: boolean;
