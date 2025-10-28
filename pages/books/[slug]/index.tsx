@@ -39,6 +39,8 @@ import { useNovelAudioDuration } from '../../../hooks/useAudioDuration';
 import GenresSection from '../../../components/GenresSection';
 import NovelService from "../../../services/novels";
 import { ensureAbsoluteUrl } from '../../../config/api';
+import StrapiRichText from '../../../components/StrapiRichText';
+import { parseBookipediaMarkdownToBlocks } from '../../../utils/strapiAdapter';
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (ctx) => {
     const dispatch = store.dispatch;
@@ -174,18 +176,6 @@ const Index = () => {
         'Innovatsiya',
     ];
     const [activeGenre, setActiveGenre] = useState<string>('Innovatsiya');
-    // Create gallery images from API response
-    const galleryImages = [
-        novel?.Rasm ? { id: 1, url: ensureAbsoluteUrl(novel.Rasm.url) } : null,
-        novel?.Rasm1 ? { id: 2, url: ensureAbsoluteUrl(novel.Rasm1.url) } : null,
-        novel?.Rasm2 ? { id: 3, url: ensureAbsoluteUrl(novel.Rasm2.url) } : null,
-    ].filter(Boolean);
-    const [isGalleryOpen, setIsGalleryOpen] = useState(false);
-    const [activeGalleryIndex, setActiveGalleryIndex] = useState(0);
-    const openGallery = (index: number) => { setActiveGalleryIndex(index); setIsGalleryOpen(true); };
-    const closeGallery = () => setIsGalleryOpen(false);
-    const nextImage = () => setActiveGalleryIndex(prev => (prev + 1) % galleryImages.length);
-    const prevImage = () => setActiveGalleryIndex(prev => (prev - 1 + galleryImages.length) % galleryImages.length);
 
 
     useEffect(()=>{
@@ -466,45 +456,14 @@ const Index = () => {
                                     </div>
                                 </div>
 
-                                {galleryImages.length > 0 && (
-                                    <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-10">
-                                        {galleryImages.map((image, index) => (
-                                            <div key={image.id} className="cursor-pointer overflow-hidden rounded-[20px]" onClick={() => openGallery(index)}>
-                                                <img src={image.url} alt="gallery" className="w-full h-[280px] md:h-[374px] object-cover bg-[#C4C4C4] rounded-[20px] transition-transform duration-300 ease-in-out hover:scale-[1.05]"/>
-                                            </div>
-                                        ))}
-                                    </div>
-                                )}
 
-                                <p className="text-[20px] md:text-[22px] lg:text-[26px] leading-relaxed text-justify text-[#383838]">
-                                    <span dangerouslySetInnerHTML={{ __html: novel?.description || '' }} />
-                                </p>
+                                <StrapiRichText
+                                    content={parseBookipediaMarkdownToBlocks((novel as any)?.tavsifi || '')}
+                                    className="text-[20px] md:text-[22px] lg:text-[26px] leading-relaxed text-justify text-[#383838]"
+                                    variant="detailed"
+                                />
                             </div>
                         </div>
-                        {isGalleryOpen && galleryImages.length > 0 && (
-                            <div className="fixed inset-0 bg-black/90 z-[1000] flex items-center justify-between" onClick={closeGallery}>
-                                {galleryImages.length > 1 && (
-                                    <button className="ml-5 bg-[rgba(40,40,40,0.5)] border border-[rgba(255,255,255,0.2)] text-white rounded-full w-[50px] h-[50px] text-[20px] flex items-center justify-center hover:bg-[rgba(60,60,60,0.7)] transition" onClick={(e) => { e.stopPropagation(); prevImage(); }}>
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-5 h-5">
-                                            <path fillRule="evenodd" d="M10.78 12.28a.75.75 0 01-1.06 0L5.47 8.03a.75.75 0 010-1.06l4.25-4.25a.75.75 0 111.06 1.06L7.06 7.5l3.72 3.72a.75.75 0 010 1.06z" clipRule="evenodd" />
-                                        </svg>
-                                    </button>
-                                )}
-                                <img src={galleryImages[activeGalleryIndex]?.url} alt="gallery-large" className="max-w-[calc(100vw-160px)] max-h-[calc(100vh-80px)] object-contain rounded-[10px] mx-2" onClick={(e) => e.stopPropagation()} />
-                                {galleryImages.length > 1 && (
-                                    <button className="mr-5 bg-[rgba(40,40,40,0.5)] border border-[rgba(255,255,255,0.2)] text-white rounded-full w-[50px] h-[50px] text-[20px] flex items-center justify-center hover:bg-[rgba(60,60,60,0.7)] transition" onClick={(e) => { e.stopPropagation(); nextImage(); }}>
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-5 h-5 rotate-180">
-                                            <path fillRule="evenodd" d="M10.78 12.28a.75.75 0 01-1.06 0L5.47 8.03a.75.75 0 010-1.06l4.25-4.25a.75.75 0 111.06 1.06L7.06 7.5l3.72 3.72a.75.75 0 010 1.06z" clipRule="evenodd" />
-                                        </svg>
-                                    </button>
-                                )}
-                                <button className="absolute top-[30px] right-[30px] bg-[rgba(40,40,40,0.5)] border border-[rgba(255,255,255,0.2)] text-white rounded-full w-[50px] h-[50px] text-[20px] flex items-center justify-center hover:bg-[rgba(60,60,60,0.7)] transition" onClick={(e) => { e.stopPropagation(); closeGallery(); }}>
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
-                                        <path fillRule="evenodd" d="M6.225 4.811a.75.75 0 011.06 0L12 9.525l4.715-4.714a.75.75 0 111.06 1.06L13.06 10.586l4.715 4.715a.75.75 0 11-1.06 1.06L12 11.646l-4.715 4.715a.75.75 0 11-1.06-1.06l4.714-4.715-4.714-4.715a.75.75 0 010-1.06z" clipRule="evenodd" />
-                                    </svg>
-                                </button>
-                            </div>
-                        )}
 
                         <div className="container mx-auto px-3 mt-8">
                             <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-12 sm:mb-16 lg:mb-20 gap-4 sm:gap-5">

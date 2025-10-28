@@ -44,7 +44,14 @@ export const adaptNovelData = (novel: INovel): INovel => {
         ...novel,
         // Map new fields to old field names for backward compatibility
         name: novel.nomi || novel.name || '',
-        description: novel.tavsifi ? richTextToPlainText(novel.tavsifi) : (novel.description || ''),
+        slug: novel.slug || novel.slug, // ensure slug is preserved
+        description: Array.isArray((novel as any).tavsifi)
+            ? richTextToPlainText((novel as any).tavsifi as any)
+            : (typeof (novel as any).tavsifi === 'string'
+                ? parseBookipediaMarkdownToBlocks((novel as any).tavsifi)
+                    .map((b: any) => (b.children || []).map((c: any) => c.text || '').join(''))
+                    .join('\n\n')
+                : (novel.description || '')),
         age_rate: cleanAgeRate(novel.yosh_chegarasi || novel.age_rate || ''),
         actual: novel.dolzarb ?? novel.actual ?? false,
         new: novel.yangi ?? novel.new ?? false,
@@ -134,8 +141,224 @@ export const adaptCategoriesArray = (categories: ICategory[]): ICategory[] => {
     return categories.map(category => adaptCategoryData(category));
 };
 
-// Convert Strapi rich text to HTML
-export const richTextToHtml = (richText: IRichTextContent[]): string => {
+// Parse Bookipedia markdown-like plain text to rich text blocks
+// Supports: images (![alt](url)), links ([text](url)), bold (**text**), italic (_text_), underline (<u>text</u> or escaped \u003C tags), line breaks
+export const parseBookipediaMarkdownToBlocks = (input: string): any[] => {
+    if (!input || typeof input !== 'string') return [];
+
+    // Unescape escaped HTML entities like \u003C and \u003E to real < and >
+    const unescaped = input.replace(/\\u003C/g, '<').replace(/\\u003E/g, '>');
+
+    // First extract fenced code blocks ```...```
+    const codeFenceRegex = /```[\s\S]*?```/g;
+    const preCodeSegments: Array<{ type: 'text' | 'code'; value: string }> = [];
+    let cfLast = 0; let cfMatch: RegExpExecArray | null;
+    while ((cfMatch = codeFenceRegex.exec(unescaped)) !== null) {
+        if (cfMatch.index > cfLast) {
+            preCodeSegments.push({ type: 'text', value: unescaped.slice(cfLast, cfMatch.index) });
+        }
+        const fenced = cfMatch[0].replace(/^```\n?/, '').replace(/```$/, '');
+        preCodeSegments.push({ type: 'code', value: fenced });
+        cfLast = codeFenceRegex.lastIndex;
+    }
+    if (cfLast < unescaped.length) {
+        preCodeSegments.push({ type: 'text', value: unescaped.slice(cfLast) });
+    }
+
+    // Then within text segments, split around images so images can become standalone blocks
+    const segments: Array<{ type: 'text' | 'image' | 'code'; value: string; alt?: string; url?: string }> = [];
+    const imageRegex = /!\[([^\]]*)\]\(([^)]+)\)/g;
+    for (const seg of preCodeSegments) {
+        if (seg.type === 'code') {
+            segments.push(seg);
+            continue;
+        }
+        let lastIndex = 0; let match: RegExpExecArray | null; const chunk = seg.value;
+        while ((match = imageRegex.exec(chunk)) !== null) {
+            if (match.index > lastIndex) {
+                segments.push({ type: 'text', value: chunk.slice(lastIndex, match.index) });
+            }
+            segments.push({ type: 'image', value: '', alt: match[1] || '', url: match[2] });
+            lastIndex = imageRegex.lastIndex;
+        }
+        if (lastIndex < chunk.length) {
+            segments.push({ type: 'text', value: chunk.slice(lastIndex) });
+        }
+    }
+
+    // Helper to parse inline formatting into children array
+        const parseInline = (text: string): any[] => {
+        const children: any[] = [];
+        if (!text) return children;
+
+        // Normalize Windows newlines
+        let t = text.replace(/\r\n/g, '\n');
+
+        // Process underline HTML tags into markers
+        // Replace <u>...</u> with special tokens to avoid conflict during bold/italic parsing
+        const underlineOpen = '__UNDERLINE_OPEN__';
+        const underlineClose = '__UNDERLINE_CLOSE__';
+        t = t.replace(/<u>/gi, underlineOpen).replace(/<\/u>/gi, underlineClose);
+
+        // Tokenize by underline markers first
+        const partsByUnderline = t.split(new RegExp(`(${underlineOpen}|${underlineClose})`, 'g'));
+        let underlineActive = false;
+        for (const part of partsByUnderline) {
+            if (part === underlineOpen) { underlineActive = true; continue; }
+            if (part === underlineClose) { underlineActive = false; continue; }
+            if (!part) continue;
+
+            // Within current underline state, further split by bold (**...**)
+            const boldRegex = /\*\*([^*]+)\*\*/g;
+            let cursor = 0;
+            let m: RegExpExecArray | null;
+            const pushText = (s: string, opts?: { bold?: boolean; italic?: boolean; underline?: boolean }) => {
+                if (!s) return;
+                
+                // First handle links [text](url)
+                const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
+                let lcursor = 0;
+                let lm: RegExpExecArray | null;
+                while ((lm = linkRegex.exec(s)) !== null) {
+                    const beforeLink = s.slice(lcursor, lm.index);
+                    if (beforeLink) {
+                        // Process italic in the text before link
+                        const italicRegex = /_([^_]+)_/g;
+                        let icursor = 0; let im: RegExpExecArray | null;
+                        while ((im = italicRegex.exec(beforeLink)) !== null) {
+                            const beforeItalic = beforeLink.slice(icursor, im.index);
+                            if (beforeItalic) {
+                                const node: any = { text: beforeItalic, type: 'text' };
+                                if (opts?.underline) node.underline = true;
+                                if (opts?.bold) node.bold = true;
+                                children.push(node);
+                            }
+                            const ital = im[1];
+                            const node: any = { text: ital, type: 'text', italic: true };
+                            if (opts?.underline) node.underline = true;
+                            if (opts?.bold) node.bold = true;
+                            children.push(node);
+                            icursor = italicRegex.lastIndex;
+                        }
+                        const afterItalic = beforeLink.slice(icursor);
+                        if (afterItalic) {
+                            const node: any = { text: afterItalic, type: 'text' };
+                            if (opts?.underline) node.underline = true;
+                            if (opts?.bold) node.bold = true;
+                            children.push(node);
+                        }
+                    }
+                    
+                    // Add the link
+                    const linkText = lm[1];
+                    const linkUrl = lm[2];
+                    const linkNode: any = { 
+                        text: linkText, 
+                        type: 'text',
+                        link: { url: linkUrl }
+                    };
+                    if (opts?.underline) linkNode.underline = true;
+                    if (opts?.bold) linkNode.bold = true;
+                    children.push(linkNode);
+                    lcursor = linkRegex.lastIndex;
+                }
+                
+                // Process remaining text after links
+                const remaining = s.slice(lcursor);
+                if (remaining) {
+                    const italicRegex = /_([^_]+)_/g;
+                    let icursor = 0; let im: RegExpExecArray | null;
+                    while ((im = italicRegex.exec(remaining)) !== null) {
+                        const before = remaining.slice(icursor, im.index);
+                        if (before) {
+                            const node: any = { text: before, type: 'text' };
+                            if (opts?.underline) node.underline = true;
+                            if (opts?.bold) node.bold = true;
+                            children.push(node);
+                        }
+                        const ital = im[1];
+                        const node: any = { text: ital, type: 'text', italic: true };
+                        if (opts?.underline) node.underline = true;
+                        if (opts?.bold) node.bold = true;
+                        children.push(node);
+                        icursor = italicRegex.lastIndex;
+                    }
+                    const after = remaining.slice(icursor);
+                    if (after) {
+                        const node: any = { text: after, type: 'text' };
+                        if (opts?.underline) node.underline = true;
+                        if (opts?.bold) node.bold = true;
+                        children.push(node);
+                    }
+                }
+            };
+            while ((m = boldRegex.exec(part)) !== null) {
+                const before = part.slice(cursor, m.index);
+                pushText(before, { underline: underlineActive });
+                const boldText = m[1];
+                pushText(boldText, { underline: underlineActive, bold: true });
+                cursor = boldRegex.lastIndex;
+            }
+            const rest = part.slice(cursor);
+            pushText(rest, { underline: underlineActive });
+        }
+
+        // Replace single newlines with literal newlines in text nodes; renderer turns them into <br/>
+        // Ensure no undefined properties in children
+        return children.map(c => {
+            if (!c) return c;
+            const cleaned: any = { text: c.text, type: c.type };
+            if (c.bold === true) cleaned.bold = true;
+            if (c.italic === true) cleaned.italic = true;
+            if (c.underline === true) cleaned.underline = true;
+            if (c.strikethrough === true) cleaned.strikethrough = true;
+            if (c.code === true) cleaned.code = true;
+            if (c.link) cleaned.link = c.link;
+            return cleaned;
+        });
+    };
+
+    // Build blocks from segments; split text segments into paragraphs by double newlines
+    const blocks: any[] = [];
+    for (const seg of segments) {
+        if (seg.type === 'image' && seg.url) {
+            blocks.push({
+                type: 'image',
+                image: {
+                    id: 0,
+                    documentId: '',
+                    name: seg.alt || 'image',
+                    alternativeText: seg.alt || null,
+                    caption: null,
+                    width: 0,
+                    height: 0,
+                    url: ensureAbsoluteUrl(seg.url)
+                }
+            });
+        } else if (seg.type === 'code') {
+            // Preserve fenced code as its own block
+            blocks.push({
+                type: 'code',
+                children: [ { text: seg.value, type: 'text' } ]
+            });
+        } else if (seg.type === 'text' && seg.value) {
+            const paragraphs = seg.value.split(/\n\n+/);
+            paragraphs.forEach(p => {
+                const trimmed = p.trim();
+                if (!trimmed) return;
+                blocks.push({
+                    type: 'paragraph',
+                    children: parseInline(trimmed)
+                });
+            });
+        }
+    }
+
+    return blocks;
+};
+
+// Convert Strapi rich text to HTML (enhanced version with images and links)
+export const richTextToHtml = (richText: any[]): string => {
     if (!richText || !Array.isArray(richText)) return '';
     
     return richText
@@ -144,15 +367,91 @@ export const richTextToHtml = (richText: IRichTextContent[]): string => {
                 const content = block.children
                     ?.map((child: any) => {
                         let text = child.text || '';
+                        
+                        // Handle links
+                        if (child.link) {
+                            const href = child.link.url;
+                            const target = child.link.target || (href.startsWith('http') ? '_blank' : '');
+                            const rel = child.link.rel || (href.startsWith('http') ? 'noopener noreferrer' : '');
+                            text = `<a href="${href}" target="${target}" rel="${rel}" class="text-primary hover:text-accent underline">${text}</a>`;
+                        }
+                        
+                        // Handle images
+                        if (child.type === 'image' && child.image) {
+                            const imageUrl = ensureAbsoluteUrl(child.image.url);
+                            const altText = child.image.alternativeText || child.image.name || 'Image';
+                            const caption = child.image.caption ? `<p class="text-sm text-gray-600 mt-2 text-center italic">${child.image.caption}</p>` : '';
+                            text = `<div class="my-6"><div class=\"flex justify-center\"><div class=\"w-full max-w-[640px]\"><img src=\"${imageUrl}\" alt=\"${altText}\" class=\"w-full h-auto rounded-lg\" style=\"object-fit: contain;\" /></div></div>${caption}</div>`;
+                        }
+                        
+                        // Handle text formatting
                         if (child.bold) text = `<strong>${text}</strong>`;
                         if (child.italic) text = `<em>${text}</em>`;
                         if (child.underline) text = `<u>${text}</u>`;
+                        if (child.code) text = `<code class="bg-gray-100 px-1 py-0.5 rounded text-sm font-mono">${text}</code>`;
+                        if (child.strikethrough) text = `<del>${text}</del>`;
+                        
                         return text;
                     })
                     .join('');
                 // Convert newline characters to HTML line breaks
                 const contentWithBreaks = content.replace(/\n/g, '<br/>' );
-                return `<p>${contentWithBreaks}</p>`;
+                return `<p class="mb-4">${contentWithBreaks}</p>`;
+            } else if (block.type === 'heading') {
+                const level = block.level || 2;
+                const text = block.children?.map((child: any) => {
+                    let textContent = child.text || '';
+                    if (child.link) {
+                        const href = child.link.url;
+                        const target = child.link.target || (href.startsWith('http') ? '_blank' : '');
+                        const rel = child.link.rel || (href.startsWith('http') ? 'noopener noreferrer' : '');
+                        textContent = `<a href="${href}" target="${target}" rel="${rel}" class="text-primary hover:text-accent underline">${textContent}</a>`;
+                    }
+                    return textContent;
+                }).join('');
+                return `<h${level} class="font-bold mb-4 mt-6">${text}</h${level}>`;
+            } else if (block.type === 'list') {
+                const tag = block.format === 'ordered' ? 'ol' : 'ul';
+                const items = block.children
+                    ?.map((item: any) => {
+                        const text = item.children?.map((child: any) => {
+                            let textContent = child.text || '';
+                            if (child.link) {
+                                const href = child.link.url;
+                                const target = child.link.target || (href.startsWith('http') ? '_blank' : '');
+                                const rel = child.link.rel || (href.startsWith('http') ? 'noopener noreferrer' : '');
+                                textContent = `<a href="${href}" target="${target}" rel="${rel}" class="text-primary hover:text-accent underline">${textContent}</a>`;
+                            }
+                            return textContent;
+                        }).join('');
+                        return `<li class="mb-2">${text}</li>`;
+                    })
+                    .join('');
+                return `<${tag} class="mb-4 ml-6">${items}</${tag}>`;
+            } else if (block.type === 'quote') {
+                const text = block.children?.map((child: any) => {
+                    let textContent = child.text || '';
+                    if (child.link) {
+                        const href = child.link.url;
+                        const target = child.link.target || (href.startsWith('http') ? '_blank' : '');
+                        const rel = child.link.rel || (href.startsWith('http') ? 'noopener noreferrer' : '');
+                        textContent = `<a href="${href}" target="${target}" rel="${rel}" class="text-primary hover:text-accent underline">${textContent}</a>`;
+                    }
+                    return textContent;
+                }).join('');
+                return `<blockquote class="border-l-4 border-gray-300 pl-4 italic mb-4">${text}</blockquote>`;
+            } else if (block.type === 'code') {
+                const text = block.children?.map((child: any) => child.text || '').join('');
+                return `<pre class="bg-gray-100 p-4 rounded-lg overflow-x-auto mb-4"><code>${text}</code></pre>`;
+            } else if (block.type === 'image') {
+                // Handle standalone image blocks
+                const image = block.image || block;
+                if (image && image.url) {
+                    const imageUrl = ensureAbsoluteUrl(image.url);
+                    const altText = image.alternativeText || image.name || 'Image';
+                    const caption = image.caption ? `<p class="text-sm text-gray-600 mt-2 text-center italic">${image.caption}</p>` : '';
+                    return `<div class="my-6"><img src="${imageUrl}" alt="${altText}" class="w-full h-auto rounded-lg" style="object-fit: contain;" />${caption}</div>`;
+                }
             }
             return '';
         })
@@ -254,7 +553,7 @@ export const adaptTeamMembersArray = (members: ITeamMember[]): ITeamMember[] => 
     return members.map(member => adaptTeamMemberData(member));
 };
 
-// Convert blog content blocks to HTML
+// Convert blog content blocks to HTML (enhanced version with images and links)
 export const blogContentToHtml = (content: any[]): string => {
     if (!content || !Array.isArray(content)) return '';
     
@@ -264,36 +563,199 @@ export const blogContentToHtml = (content: any[]): string => {
                 const text = block.children
                     ?.map((child: any) => {
                         let textContent = child.text || '';
+                        
+                        // Handle links
+                        if (child.link) {
+                            const href = child.link.url;
+                            const target = child.link.target || (href.startsWith('http') ? '_blank' : '');
+                            const rel = child.link.rel || (href.startsWith('http') ? 'noopener noreferrer' : '');
+                            textContent = `<a href="${href}" target="${target}" rel="${rel}" class="text-primary hover:text-accent underline">${textContent}</a>`;
+                        }
+                        
+                        // Handle images
+                        if (child.type === 'image' && child.image) {
+                            const imageUrl = ensureAbsoluteUrl(child.image.url);
+                            const altText = child.image.alternativeText || child.image.name || 'Image';
+                            const caption = child.image.caption ? `<p class="text-sm text-gray-600 mt-2 text-center italic">${child.image.caption}</p>` : '';
+                            textContent = `<div class="my-6"><img src="${imageUrl}" alt="${altText}" class="w-full h-auto rounded-lg" style="object-fit: contain;" />${caption}</div>`;
+                        }
+                        
+                        // Handle text formatting
                         if (child.bold) textContent = `<strong>${textContent}</strong>`;
                         if (child.italic) textContent = `<em>${textContent}</em>`;
                         if (child.underline) textContent = `<u>${textContent}</u>`;
-                        if (child.code) textContent = `<code>${textContent}</code>`;
+                        if (child.code) textContent = `<code class="bg-gray-100 px-1 py-0.5 rounded text-sm font-mono">${textContent}</code>`;
+                        if (child.strikethrough) textContent = `<del>${textContent}</del>`;
+                        
                         // Convert newlines inside inline runs
                         return textContent.replace(/\n/g, '<br/>' );
                     })
                     .join('');
-                return `<p>${text}</p>`;
+                return `<p class="mb-4">${text}</p>`;
             } else if (block.type === 'heading') {
-                const level = block.level || 2;
-                const text = block.children?.map((child: any) => child.text || '').join('');
-                return `<h${level}>${text}</h${level}>`;
+                const level = (block as any).level || 2;
+                const text = block.children?.map((child: any) => {
+                    let textContent = child.text || '';
+                    if (child.link) {
+                        const href = child.link.url;
+                        const target = child.link.target || (href.startsWith('http') ? '_blank' : '');
+                        const rel = child.link.rel || (href.startsWith('http') ? 'noopener noreferrer' : '');
+                        textContent = `<a href="${href}" target="${target}" rel="${rel}" class="text-primary hover:text-accent underline">${textContent}</a>`;
+                    }
+                    return textContent;
+                }).join('');
+                return `<h${level} class="font-bold mb-4 mt-6">${text}</h${level}>`;
             } else if (block.type === 'list') {
-                const tag = block.format === 'ordered' ? 'ol' : 'ul';
+                const tag = (block as any).format === 'ordered' ? 'ol' : 'ul';
                 const items = block.children
                     ?.map((item: any) => {
-                        const text = item.children?.map((child: any) => child.text || '').join('');
-                        return `<li>${text}</li>`;
+                        const text = item.children?.map((child: any) => {
+                            let textContent = child.text || '';
+                            if (child.link) {
+                                const href = child.link.url;
+                                const target = child.link.target || (href.startsWith('http') ? '_blank' : '');
+                                const rel = child.link.rel || (href.startsWith('http') ? 'noopener noreferrer' : '');
+                                textContent = `<a href="${href}" target="${target}" rel="${rel}" class="text-primary hover:text-accent underline">${textContent}</a>`;
+                            }
+                            return textContent;
+                        }).join('');
+                        return `<li class="mb-2">${text}</li>`;
                     })
                     .join('');
-                return `<${tag}>${items}</${tag}>`;
+                return `<${tag} class="mb-4 ml-6">${items}</${tag}>`;
             } else if (block.type === 'quote') {
+                const text = block.children?.map((child: any) => {
+                    let textContent = child.text || '';
+                    if (child.link) {
+                        const href = child.link.url;
+                        const target = child.link.target || (href.startsWith('http') ? '_blank' : '');
+                        const rel = child.link.rel || (href.startsWith('http') ? 'noopener noreferrer' : '');
+                        textContent = `<a href="${href}" target="${target}" rel="${rel}" class="text-primary hover:text-accent underline">${textContent}</a>`;
+                    }
+                    return textContent;
+                }).join('');
+                return `<blockquote class="border-l-4 border-gray-300 pl-4 italic mb-4">${text}</blockquote>`;
+            } else if (block.type === 'code') {
                 const text = block.children?.map((child: any) => child.text || '').join('');
-                return `<blockquote>${text}</blockquote>`;
+                return `<pre class="bg-gray-100 p-4 rounded-lg overflow-x-auto mb-4"><code>${text}</code></pre>`;
+            } else if (block.type === 'image') {
+                // Handle standalone image blocks
+                const image = (block as any).image || block;
+                if (image && image.url) {
+                    const imageUrl = ensureAbsoluteUrl(image.url);
+                    const altText = image.alternativeText || image.name || 'Image';
+                    const caption = image.caption ? `<p class="text-sm text-gray-600 mt-2 text-center italic">${image.caption}</p>` : '';
+                    return `<div class="my-6"><div class=\"flex justify-center\"><div class=\"w-full max-w-[640px]\"><img src=\"${imageUrl}\" alt=\"${altText}\" class=\"w-full h-auto rounded-lg\" style=\"object-fit: contain;\" /></div></div>${caption}</div>`;
+                }
             }
             return '';
         })
         .join('')
         .trim();
+};
+
+// Convert Strapi rich text content to RichTextRenderer format
+export const convertToRichTextRendererFormat = (content: any[]): any[] => {
+    if (!content || !Array.isArray(content)) return [];
+    
+    return content.map(block => {
+        // Handle different block types
+        if (block.type === 'paragraph' || block.type === 'heading' || block.type === 'list' || block.type === 'quote' || block.type === 'code') {
+            return {
+                type: block.type,
+                level: block.level,
+                format: block.format,
+                children: block.children?.map((child: any) => {
+                    // Handle image children
+                    if (child.type === 'image' && child.image) {
+                        return {
+                            type: 'image',
+                            image: {
+                                id: child.image.id,
+                                documentId: child.image.documentId,
+                                name: child.image.name,
+                                alternativeText: child.image.alternativeText,
+                                caption: child.image.caption,
+                                width: child.image.width,
+                                height: child.image.height,
+                                url: ensureAbsoluteUrl(child.image.url),
+                                formats: child.image.formats ? Object.keys(child.image.formats).reduce((acc: any, key: string) => {
+                                    const format = child.image.formats[key];
+                                    acc[key] = {
+                                        url: ensureAbsoluteUrl(format.url),
+                                        width: format.width,
+                                        height: format.height
+                                    };
+                                    return acc;
+                                }, {}) : undefined
+                            }
+                        };
+                    }
+                    
+                    // Handle link children
+                    if (child.link) {
+                        return {
+                            text: child.text,
+                            type: child.type,
+                            bold: child.bold,
+                            italic: child.italic,
+                            underline: child.underline,
+                            strikethrough: child.strikethrough,
+                            code: child.code,
+                            link: {
+                                url: child.link.url,
+                                target: child.link.target,
+                                rel: child.link.rel
+                            }
+                        };
+                    }
+                    
+                    // Handle regular text children
+                    return {
+                        text: child.text,
+                        type: child.type,
+                        bold: child.bold,
+                        italic: child.italic,
+                        underline: child.underline,
+                        strikethrough: child.strikethrough,
+                        code: child.code
+                    };
+                })
+            };
+        }
+        
+        // Handle standalone image blocks
+        if (block.type === 'image') {
+            return {
+                type: 'image',
+                children: [{
+                    type: 'image',
+                    image: {
+                        id: block.id || block.image?.id,
+                        documentId: block.documentId || block.image?.documentId,
+                        name: block.name || block.image?.name,
+                        alternativeText: block.alternativeText || block.image?.alternativeText,
+                        caption: block.caption || block.image?.caption,
+                        width: block.width || block.image?.width,
+                        height: block.height || block.image?.height,
+                        url: ensureAbsoluteUrl(block.url || block.image?.url),
+                        formats: (block.formats || block.image?.formats) ? Object.keys(block.formats || block.image?.formats).reduce((acc: any, key: string) => {
+                            const format = (block.formats || block.image?.formats)[key];
+                            acc[key] = {
+                                url: ensureAbsoluteUrl(format.url),
+                                width: format.width,
+                                height: format.height
+                            };
+                            return acc;
+                        }, {}) : undefined
+                    }
+                }]
+            };
+        }
+        
+        // Return block as-is for unknown types
+        return block;
+    });
 };
 
 // Convert blog content to plain text
@@ -323,19 +785,7 @@ export const adaptBookipediaPost = (item: any): IBlogPost => {
     const image = item.Rasmi_asosiy || item.Rasmi || null;
 
     const contentText: string = item.Matn || '';
-    const contentBlocks: any[] = contentText
-        ? [
-            {
-                type: 'paragraph',
-                children: [
-                    {
-                        text: contentText,
-                        type: 'text'
-                    }
-                ]
-            }
-        ]
-        : [];
+    const contentBlocks: any[] = contentText ? parseBookipediaMarkdownToBlocks(contentText) : [];
 
     const viewsRaw = item.korishlar_soni ?? item.Obunachilar ?? 0;
     const views = typeof viewsRaw === 'string' ? parseInt(viewsRaw, 10) || 0 : (viewsRaw || 0);

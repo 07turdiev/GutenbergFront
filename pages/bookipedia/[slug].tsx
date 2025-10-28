@@ -9,10 +9,12 @@ import { wrapper } from '../../store/store';
 import { fetchBlogPostBySlug } from '../../store/actions/blog';
 import { useAppSelector } from '../../hooks/reducer';
 import { selectCurrentBlogPost, selectBlogLoading } from '../../store/selectors/blog';
-import { blogContentToHtml, getBlogImageUrl, blogContentToPlainText } from '../../utils/strapiAdapter';
+import { blogContentToHtml, getBlogImageUrl, blogContentToPlainText, convertToRichTextRendererFormat } from '../../utils/strapiAdapter';
 import { formatDateDayMonthYearDots } from '../../utils/dateFormatter';
 import SpinnerDots from '../../components/Ui/SpinnerDots';
 import YouTubeEmbed from '../../components/Ui/YouTubeEmbed';
+import RichTextRenderer from '../../components/Ui/RichTextRenderer';
+import StrapiRichText from '../../components/StrapiRichText';
 
 const BlogPostPage = () => {
     const router = useRouter();
@@ -337,9 +339,10 @@ const BlogPostPage = () => {
                     <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-medium leading-tight text-gray-900 mb-6 sm:mb-8">{post.sarlavha}</h1>
 
                     {/* Content */}
-                    <div
-                        className="prose prose-base sm:prose-lg md:prose-xl lg:prose-2xl max-w-none mb-10 text-[#383838] text-justify leading-relaxed"
-                        dangerouslySetInnerHTML={{ __html: blogContentToHtml(post.kontent) }}
+                    <StrapiRichText
+                        content={post.kontent}
+                        className="prose-base sm:prose-lg md:prose-xl lg:prose-2xl max-w-none mb-10 text-[#383838] text-justify leading-relaxed"
+                        variant="detailed"
                     />
 
                     {/* Optional image gallery */}
