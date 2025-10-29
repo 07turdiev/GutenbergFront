@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import styles from './style.module.scss';
 import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
@@ -11,7 +11,6 @@ interface BookipediaSectionProps {
 
 const BookipediaSection: React.FC<BookipediaSectionProps> = ({ posts }) => {
     const { t } = useTranslation('common');
-    const [visibleCount, setVisibleCount] = useState<number>(6);
 
     const safePosts = Array.isArray(posts) ? posts : [];
     const sortedPosts = useMemo(() => {
@@ -24,17 +23,28 @@ const BookipediaSection: React.FC<BookipediaSectionProps> = ({ posts }) => {
         return arr;
     }, [safePosts]);
 
-    const visiblePosts = useMemo(() => sortedPosts.slice(0, visibleCount), [sortedPosts, visibleCount]);
-    const hasMore = visibleCount < sortedPosts.length;
+    const visiblePosts = useMemo(() => sortedPosts.slice(0, 3), [sortedPosts]);
 
     return (
         <section className={styles.bookipediaSection}>
             <div className={styles.sectionContainer}>
                 <header className={styles.sectionHeader}>
                     <h2 className={styles.sectionTitle}>{t('bookipedia')}</h2>
-                    <p className={styles.sectionDescription}>
-                        {t('bookipediaDescription')}
-                    </p>
+                    <div className={styles.sectionDetails}>
+                        <p className={styles.sectionDescription}>
+                            {t('bookipediaDescription')}
+                        </p>
+                        <Link href="/bookipedia">
+                            <a className={styles.sectionLink}>
+                            Ko‘proq o‘qish
+                                <span className={styles.arrowCircle}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 39 39" fill="none">
+                                        <path d="M13 12.9994H26M26 12.9994V25.9994M26 12.9994L13 25.9994" stroke="#009DFF"/>
+                                    </svg>
+                                </span>
+                            </a>
+                        </Link>
+                    </div>
                 </header>
 
                 <main className={styles.articlesGrid}>
@@ -60,11 +70,7 @@ const BookipediaSection: React.FC<BookipediaSectionProps> = ({ posts }) => {
                     ))}
                 </main>
 
-                {hasMore && (
-                    <footer className={styles.sectionFooter}>
-                        <button className={styles.btnLoadMore} onClick={() => setVisibleCount((c) => c + 3)}>{t('loadMore')}</button>
-                    </footer>
-                )}
+                {/* Only showing the latest 3 posts; no load more button */}
             </div>
         </section>
     );
