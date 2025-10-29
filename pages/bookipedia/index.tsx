@@ -16,7 +16,7 @@ import { formatBlogDate } from '../../utils/dateFormatter';
 import { useRouter } from 'next/router';
 import SpinnerDots from '../../components/Ui/SpinnerDots';
 import BookipediaHero from '../../components/BookipediaHero';
-import BookipediaSection from '../../components/BookipediaSection';
+import BookipediaAllSection from '../../components/BookipediaAllSection';
 import AuthorsSection from '../../components/AuthorsSection';
 import TestimonialsSection from '../../components/TestimonialsSection';
 
@@ -93,7 +93,7 @@ const BookipediaPage = () => {
                 )}
 
                 {!loading && posts.length > 0 && (
-                    <BookipediaSection posts={posts} />
+                    <BookipediaAllSection posts={posts} />
                 )}
 
                 {authorsLoading && (
