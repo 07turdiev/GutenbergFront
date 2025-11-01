@@ -2,13 +2,13 @@
   "requiredField": "Field is required",
   "requiredPhone": "Enter your phone number",
 
-  "authorName": "Author name",
-  "bookTitle": "Book title",
-  "releaseYear": "Release year",
-  "orderBook": "Order book",
-  "executor": "Performer",
+  "authorName": "Author's Name",
+  "bookTitle": "Book Title",
+  "releaseYear": "Year of Publication",
+  "orderBook": "Order Now",
+  "executor": "Executor",
   "name":"Name",
-  "login":"Login",
+  "login":"Username",
   "password":"Password",
 
   "changePassword": "Change password",
@@ -17,7 +17,7 @@
   "confirmPassword": "Confirm password",
   "change":"Change",
   "saveChanges":"Save changes",
-  "uploadPhoto": "Upload photo",
+  "uploadPhoto": "Upload Image",
 
-  "passwordMinLength": "Minimum 6 characters"
+  "passwordMinLength": "Must be at least 6 characters"
 } 

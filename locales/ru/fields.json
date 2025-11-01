@@ -1,10 +1,10 @@
 {
-  "requiredField": "Поле обязательное",
-  "requiredPhone": "Введите свой номер телефона",
+  "requiredField": "Обязательные поля",
+  "requiredPhone": "Введите номер телефона",
 
   "authorName": "Имя автора",
   "bookTitle": "Название книги",
-  "releaseYear":"Год выпуска",
+  "releaseYear":"Год издания",
   "orderBook": "Заказать",
   "executor": "Исполнитель",
   "name":"Имя",
@@ -17,8 +17,8 @@
   "confirmPassword": "Повторите пароль",
   "change":"Изменить",
   "saveChanges":"Сохранить изменения",
-  "uploadPhoto":"Загрузить фото",
+  "uploadPhoto":"Загрузить изображение",
 
-  "passwordMinLength": "Минимум 6 символов"
+  "passwordMinLength": "Должен содержать не менее 6 символов"
 
 }

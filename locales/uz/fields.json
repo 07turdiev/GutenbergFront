@@ -1,5 +1,5 @@
 {
-  "requiredField": "Maydon talab qilinadi",
+  "requiredField": "Maydonni toʻldirish talab qilinadi",
   "requiredPhone": "Telefon raqamingizni kiriting",
 
   "authorName": "Muallifning ismi",
@@ -11,14 +11,14 @@
   "login":"Login",
   "password":"Parol",
 
-  "changePassword": "Parol o'zgartirish",
+  "changePassword": "Parolni oʻzgartirish",
   "currentPassword": "Joriy parol",
   "newPassword": "Yangi Parol",
   "confirmPassword": "Parolni qayta kiriting",
-  "change":"O'zgartirish",
-  "saveChanges":"O'zgarishlarni saqlang",
-  "uploadPhoto": "Surat yuklang",
+  "change":"Oʻzgartirish",
+  "saveChanges":"Oʻzgarishlarni saqlang",
+  "uploadPhoto": "Suratni yuklang",
 
-  "passwordMinLength": "Kamida 6 ta belgi"
+  "passwordMinLength": "Kamida 6 ta belgidan iborat boʻlsin"
 
 }
