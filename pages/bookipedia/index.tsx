@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import MainLayout from "../../layouts/MainLayout";
 import useTranslation from "next-translate/useTranslation";
 import HeadMeta from '../../components/HeadMeta';
@@ -30,6 +30,7 @@ const BookipediaPage = () => {
     const currentPage = useAppSelector(selectBlogCurrentPage);
     const error = useAppSelector(selectBlogError);
     const { authorsList, loading: authorsLoading } = useAppSelector(selectAuthors);
+    const hasFetchedRef = useRef<{ [key: string]: boolean }>({});
 
     const handlePageChange = async (page: number) => {
         dispatch(setCurrentPage(page));
@@ -42,12 +43,17 @@ const BookipediaPage = () => {
         return plainText.length > 150 ? plainText.substring(0, 150) + '...' : plainText;
     };
 
-    // Client-side fetch for authors if not loaded
+    // Client-side fetch for authors if not loaded (only once per locale)
     useEffect(() => {
-        if (!authorsLoading && (!authorsList || authorsList.length === 0)) {
-            dispatch(fetchAuthorsList({ locale: router.locale || 'uz' }));
+        const currentLocale = router.locale || 'uz';
+        
+        // Reset flag if locale changed (but we already have data from getServerSideProps)
+        // Only fetch if we don't have data and haven't fetched for this locale
+        if (!authorsLoading && (!authorsList || authorsList.length === 0) && !hasFetchedRef.current[currentLocale]) {
+            hasFetchedRef.current[currentLocale] = true;
+            dispatch(fetchAuthorsList({ locale: currentLocale }));
         }
-    }, [dispatch, router.locale, authorsLoading, authorsList]);
+    }, [dispatch, router.locale, authorsLoading]);
 
 
     return (

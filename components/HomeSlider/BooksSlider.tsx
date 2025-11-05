@@ -27,7 +27,8 @@ interface Book {
   tavsifi: any[];
   narxi?: number | null;
   chegirma_narxi?: number | null;
-  mualliflar: Author;
+  mualliflar?: Author;
+  mualliflars?: Author[];
   muqova: BookCover;
 }
 
@@ -52,7 +53,7 @@ const BooksSlider: React.FC = () => {
   const fetchLatestBooks = async () => {
     try {
       const response = await fetch(
-        `${getApiUrl()}api/kitoblars?locale=${router.locale || 'uz'}&populate=mualliflar&populate=muqova&sort=createdAt:desc&pagination[limit]=3`
+        `${getApiUrl()}api/kitoblars?locale=${router.locale || 'uz'}&populate=mualliflars&populate=muqova&sort=createdAt:desc&pagination[limit]=3`
       );
       const data = await response.json();
       setBooks((data.data || []).slice(0, 3));
@@ -248,11 +249,17 @@ const BooksSlider: React.FC = () => {
           <div key={`title-${activeBook.id}-${activeIndex}`} className={`${styles.textContent} ${styles.fadeText}`}>
             <h5 className={styles.mainTitle}>{activeBook.nomi}</h5>
             {/* Mobil uchun muallif */}
-            {activeBook.mualliflar && (
-              <p className={styles.authorName}>
-                <span className={styles.authorLabel}>{t('author')}:</span> {activeBook.mualliflar.ismi}
-              </p>
-            )}
+            {(() => {
+              const authors = activeBook.mualliflars || (activeBook.mualliflar ? [activeBook.mualliflar] : []);
+              if (Array.isArray(authors) && authors.length > 0) {
+                return (
+                  <p className={styles.authorName}>
+                    <span className={styles.authorLabel}>{t('author')}{authors.length > 1 ? 'lar' : ''}:</span> {authors.map((a: any) => a?.ismi || a?.name).filter(Boolean).join(', ')}
+                  </p>
+                );
+              }
+              return null;
+            })()}
             {/* Mobil uchun narx */}
             <div className={styles.mobilePriceSection}>
               {activeBook.chegirma_narxi ? (

@@ -37,7 +37,7 @@ export default class AuthorService {
 
         // Ensure author relations are populated unless caller specified otherwise
         if (!('populate' in params)) {
-            params.populate = 'kitoblars,rasmi';
+            params.populate = 'rasmi';
         }
 
         // Encode params to query string
@@ -61,16 +61,16 @@ export default class AuthorService {
     }
 
     static async fetchAuthorsList({locale, config, ctx}: FetchParams): Promise<AxiosResponse<IListResponse<IAuthor[]>>> {
-        return await fetcherJson(`/api/mualliflars?locale=${locale}&populate=kitoblars&populate=rasmi`, config, ctx)
+        return await fetcherJson(`/api/mualliflars?locale=${locale}&populate=rasmi`, config, ctx)
     }
 
     static async fetchAuthorOne({locale, slug, config, ctx}: FetchParams): Promise<AxiosResponse<IListResponse<IAuthor[]>>> {
-        const populateParams = "populate=kitoblars&populate=rasmi";
+        const populateParams = "populate=rasmi";
         return await fetcherJson(`/api/mualliflars?filters[slug][$eq]=${slug}&locale=${locale}&${populateParams}`, config, ctx)
     }
 
     static async fetchAuthorByDocumentId({locale, documentId, config, ctx}: FetchParams & {documentId: string}): Promise<AxiosResponse<IListResponse<IAuthor>>> {
-        const populateParams = "populate=kitoblars&populate=rasmi";
+        const populateParams = "populate=rasmi";
         return await fetcherJson(`/api/mualliflars/${documentId}?locale=${locale}&${populateParams}`, config, ctx)
     }
 
@@ -91,7 +91,7 @@ export default class AuthorService {
     }
 
     static async fetchFollowedAuthors(locale: string, config: AxiosRequestConfig = {}, ctx?: GetServerSidePropsContext ): Promise<AxiosResponse<IListResponse<IAuthor[]>>> {
-        const populateParams = "populate=kitoblars&populate=rasmi";
+        const populateParams = "populate=rasmi";
         return await fetcherJson(`/api/mualliflars/kuzatilayotgan?locale=${locale}&${populateParams}`, config, ctx)
     }
 }

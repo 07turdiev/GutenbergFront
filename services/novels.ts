@@ -35,7 +35,7 @@ export default class NovelService {
         }
 
         // Use the same populate format as other functions
-        const populateParams = "populate=muqova&populate=mualliflar&populate=Ilova";
+        const populateParams = "populate=muqova&populate=mualliflars&populate=Ilova";
         const queryParams = new URLSearchParams();
         
         // Add locale
@@ -45,7 +45,7 @@ export default class NovelService {
         
         // Add populate params
         queryParams.append('populate', 'muqova');
-        queryParams.append('populate', 'mualliflar');
+        queryParams.append('populate', 'mualliflars');
         queryParams.append('populate', 'Ilova');
         
         // Add other params
@@ -68,7 +68,7 @@ export default class NovelService {
     }
 
     static async fetchNovelsList(locale: string, config: AxiosRequestConfig = {}, ctx?: GetServerSidePropsContext): Promise<AxiosResponse<IListResponse<INovel[]>>> {
-        const populateParams = "populate=audio&populate=muqova&populate=mualliflar&populate=kategoriya";
+        const populateParams = "populate=audio&populate=muqova&populate=mualliflars&populate=kategoriya";
         return await fetcherJson(`/api/kitoblars?locale=${locale}&${populateParams}`, config, ctx)
     }
 
@@ -76,7 +76,7 @@ export default class NovelService {
         // Populate all fields needed by the frontend detail page
         const populateParams = [
             'populate=muqova',
-            'populate=mualliflar',
+            'populate=mualliflars',
             'populate=kategoriya',
             'populate=Fragment',
             'populate=Ilova'
@@ -90,7 +90,7 @@ export default class NovelService {
         // Populate all fields needed by the frontend detail page
         const populateParams = [
             'populate=muqova',
-            'populate=mualliflar',
+            'populate=mualliflars',
             'populate=kategoriya',
             'populate=Fragment',
             'populate=Ilova'
@@ -100,59 +100,59 @@ export default class NovelService {
     }
 
     static async fetchNovelActual(locale: string, config: AxiosRequestConfig = {}, ctx?: GetServerSidePropsContext): Promise<AxiosResponse<IListResponse<INovel[]>>> {
-        const populateParams = "populate=audio&populate=muqova&populate=mualliflar&populate=kategoriya";
+        const populateParams = "populate=audio&populate=muqova&populate=mualliflars&populate=kategoriya";
         return await fetcherJson(`/api/kitoblars?filters[dolzarb][$eq]=true&locale=${locale}&${populateParams}`, config, ctx)
     }
 
     static async fetchNovelPopular(locale: string, config: AxiosRequestConfig = {}, ctx?: GetServerSidePropsContext): Promise<AxiosResponse<IListResponse<INovel[]>>> {
-        const populateParams = "populate=audio&populate=muqova&populate=mualliflar&populate=kategoriya";
+        const populateParams = "populate=audio&populate=muqova&populate=mualliflars&populate=kategoriya";
         return await fetcherJson(`/api/kitoblars?filters[popular][$eq]=true&locale=${locale}&${populateParams}`, config, ctx)
     }
 
     static async fetchNovelNew(locale: string, config: AxiosRequestConfig = {}, ctx?: GetServerSidePropsContext): Promise<AxiosResponse<IListResponse<INovel[]>>> {
-        const populateParams = "populate=audio&populate=muqova&populate=mualliflar&populate=kategoriya";
+        const populateParams = "populate=audio&populate=muqova&populate=mualliflars&populate=kategoriya";
         return await fetcherJson(`/api/kitoblars?filters[yangi][$eq]=true&locale=${locale}&${populateParams}`, config, ctx)
     }
 
     static async fetchNewNovels(locale: string, config: AxiosRequestConfig = {}, ctx?: GetServerSidePropsContext): Promise<AxiosResponse<IListResponse<INovel[]>>> {
-        const populateParams = "populate=audio&populate=muqova&populate=mualliflar&populate=kategoriya";
+        const populateParams = "populate=audio&populate=muqova&populate=mualliflars&populate=kategoriya";
         return await fetcherJson(`/api/kitoblars?filters[yangi][$eq]=true&locale=${locale}&${populateParams}`, config, ctx)
     }
 
     // Kategoriya bo'yicha kitoblar
     static async fetchNovelsByCategory(locale: string, categorySlug: string, config: AxiosRequestConfig = {}, ctx?: GetServerSidePropsContext): Promise<AxiosResponse<IListResponse<INovel[]>>> {
-        const populateParams = "populate=audio&populate=muqova&populate=mualliflar&populate=kategoriya";
+        const populateParams = "populate=audio&populate=muqova&populate=mualliflars&populate=kategoriya";
         return await fetcherJson(`/api/kitoblars?filters[kategoriya][slug][$eq]=${categorySlug}&locale=${locale}&${populateParams}`, config, ctx)
     }
 
     static async fetchNovelSaved(locale: string, config: AxiosRequestConfig = {}, ctx?: GetServerSidePropsContext): Promise<AxiosResponse<IListResponse<INovel[]>>> {
-        const populateParams = "populate=audio&populate=muqova&populate=mualliflar&populate=kategoriya";
+        const populateParams = "populate=audio&populate=muqova&populate=mualliflars&populate=kategoriya";
         return await fetcherJson(`/api/kitoblars?filters[saved][$eq]=true&locale=${locale}&${populateParams}`, config, ctx)
     }
 
     static async fetchSavedNovels(locale: string, config: AxiosRequestConfig = {}, ctx?: GetServerSidePropsContext): Promise<AxiosResponse<IListResponse<INovel[]>>> {
-        const populateParams = "populate=audio&populate=muqova&populate=mualliflar&populate=kategoriya";
+        const populateParams = "populate=audio&populate=muqova&populate=mualliflars&populate=kategoriya";
         return await fetcherJson(`/api/kitoblars/saqlangan?locale=${locale}&${populateParams}`, config, ctx)
     }
 
     static async fetchNovelFollowed(locale: string, config: AxiosRequestConfig = {}, ctx?: GetServerSidePropsContext): Promise<AxiosResponse<IListResponse<INovel[]>>> {
-        const populateParams = "populate=audio&populate=muqova&populate=mualliflar&populate=kategoriya";
+        const populateParams = "populate=audio&populate=muqova&populate=mualliflars&populate=kategoriya";
         return await fetcherJson(`/api/kitoblars?filters[followed][$eq]=true&locale=${locale}&${populateParams}`, config, ctx)
     }
 
     static async fetchNovelAudio(locale: string, config: AxiosRequestConfig = {}, ctx?: GetServerSidePropsContext): Promise<AxiosResponse<IListResponse<INovel[]>>> {
-        const populateParams = "populate=audio&populate=muqova&populate=mualliflar&populate=kategoriya";
+        const populateParams = "populate=audio&populate=muqova&populate=mualliflars&populate=kategoriya";
         return await fetcherJson(`/api/kitoblars?filters[audio][$notNull]=true&locale=${locale}&${populateParams}`, config, ctx)
     }
 
     static async fetchAudioNovels(locale: string, config: AxiosRequestConfig = {}, ctx?: GetServerSidePropsContext): Promise<AxiosResponse<IListResponse<INovel[]>>> {
-        const populateParams = "populate=audio&populate=muqova&populate=mualliflar&populate=kategoriya";
+        const populateParams = "populate=audio&populate=muqova&populate=mualliflars&populate=kategoriya";
         return await fetcherJson(`/api/kitoblars?filters[audio][$notNull]=true&locale=${locale}&${populateParams}`, config, ctx)
     }
 
     // Muallif kitoblari
     static async fetchNovelsOfAuthors(locale: string, slug: string, config: AxiosRequestConfig = {}, ctx?: GetServerSidePropsContext): Promise<AxiosResponse<IListResponse<INovel[]>>> {
-        const populateParams = "populate=audio&populate=muqova&populate=mualliflar&populate=kategoriya";
+        const populateParams = "populate=audio&populate=muqova&populate=mualliflars&populate=kategoriya";
         return await fetcherJson(`/api/kitoblars?filters[mualliflar][slug][$eq]=${slug}&locale=${locale}&${populateParams}`, config, ctx)
     }
 
@@ -170,7 +170,7 @@ export default class NovelService {
     }
 
     static async fetchFollowedNovels({locale, config, ctx}: {locale: string, config?: AxiosRequestConfig, ctx?: GetServerSidePropsContext}): Promise<AxiosResponse<IListResponse<INovel[]>>> {
-        const populateParams = "populate=audio&populate=muqova&populate=mualliflar&populate=kategoriya";
+        const populateParams = "populate=audio&populate=muqova&populate=mualliflars&populate=kategoriya";
         return await fetcherJson(`/api/kitoblars/kuzatilayotgan?locale=${locale}&${populateParams}`, config, ctx)
     }
 }
