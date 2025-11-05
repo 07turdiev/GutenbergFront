@@ -12,6 +12,13 @@ interface Props {
 
 const Index:React.FC<Props> = ({novel}) => {
     const imageSrc = novel.cover ? novel.cover.src : noPhoto.src;
+    
+    const authors = (novel as any)?.mualliflars || (novel?.author ? [novel.author] : []) || (novel?.mualliflar ? [novel.mualliflar] : []);
+    const firstAuthor = Array.isArray(authors) && authors.length > 0 ? authors[0] : null;
+    const authorName = firstAuthor?.name || firstAuthor?.ismi || '';
+    const allAuthorsNames = Array.isArray(authors) && authors.length > 0 
+        ? authors.map((a: any) => a?.name || a?.ismi).filter(Boolean).join(', ')
+        : '';
 
     return (
         <Link href={'/books/' + novel.slug}>
@@ -26,16 +33,16 @@ const Index:React.FC<Props> = ({novel}) => {
                         priority={false}
                         loading="lazy"
                     />
-                    {novel.mualliflar ? (
+                    {authorName ? (
                         <div className={classes.authorOverlay}>
-                            {novel.mualliflar.ismi}
+                            {authorName}
                         </div>
                     ) : null}
                 </div>
                 <div className={classes.bookInfo}>
                     <h3 className={classes.titleDefault}>{novel.name}</h3>
-                    {novel.mualliflar ? (
-                        <p className={classes.authorDefault}>{novel.mualliflar.ismi}</p>
+                    {allAuthorsNames ? (
+                        <p className={classes.authorDefault}>{allAuthorsNames}</p>
                     ) : null}
                 </div>
             </a>
