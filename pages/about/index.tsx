@@ -21,6 +21,7 @@ import {wrapper} from "../../store/store";
 import {fetchAbout, fetchStatistics} from "../../store/actions/about";
 import {fetchNovels} from "../../store/actions/novel";
 import {fetchTeamMembers} from "../../store/actions/team";
+import { ensureAbsoluteUrl } from "../../config/api";
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (ctx) => {
     const dispatch = store.dispatch;
@@ -135,7 +136,7 @@ const AboutPage = () => {
                                 <SwiperSlide key={member.id} className={styles.teamSlide}>
                                     <div className={styles.teamCard}>
                                         <div className={styles.imageWrapperTeam}>
-                                            <img src={member.imageUrl?.startsWith('http') ? member.imageUrl : `${process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:1337'}${member.imageUrl}`} alt={member.name} className={styles.teamImage} />
+                                            <img src={member.imageUrl?.startsWith('http') ? member.imageUrl : ensureAbsoluteUrl(member.imageUrl)} alt={member.name} className={styles.teamImage} />
                                         </div>
                                         <div className={styles.teamInfo}>
                                             <h3 className={member.nameClass}>{member.name}</h3>

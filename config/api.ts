@@ -1,6 +1,8 @@
 // Centralized API configuration
 export const getApiBaseUrl = (): string => {
-  return process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:1337';
+  if (process.env.NEXT_PUBLIC_API_BASE_URL) return process.env.NEXT_PUBLIC_API_BASE_URL;
+  if (process.env.NODE_ENV === 'development') return 'http://localhost:1337';
+  return '';
 };
 
 export const getApiUrl = (): string => {

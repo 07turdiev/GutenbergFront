@@ -11,14 +11,8 @@ import { IAuthor } from "../../models/IAuthors";
 import { IBlogPost } from "../../models/IBlog";
 import { AiOutlineClose } from "react-icons/ai";
 import styles from "./style.module.scss";
+import { ensureAbsoluteUrl } from "../../config/api";
 
-// Helper: Ensure absolute image URL
-const ensureAbsoluteUrl = (url: string): string => {
-  if (!url) return "";
-  if (url.startsWith("http")) return url;
-  const baseUrl = process.env.NEXT_PUBLIC_IMAGE_API_URL || "http://localhost:1337";
-  return `${baseUrl}${url}`;
-};
 
 // Helper: Get author image (handles different data structures)
 const getAuthorImage = (author: IAuthor): string => {
