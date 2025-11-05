@@ -256,5 +256,22 @@
   "documentsViewImage": "View image",
   "documentsTermsDescription": "Terms of use for the publisher's electronic resources, branding information, published books, and excerpts from books.",
   "documentsPrivacyDescription": "Agreements and cooperation memorandums concluded by Gutenberg Publishing House LLC, and ensuring the confidentiality of user data entered on web resources.",
-  "readMore": "Read More"
+  "readMore": "Read More",
+  "authorSingleLabel": "Author:",
+  "authorPluralLabel": "Authors:",
+  "genreLabel": "Genre:",
+  "priceLabel": "Price:",
+  "isbnLabel": "ISBN:",
+  "buy": "Buy",
+  "gift": "Gift",
+  "aboutWork": "About the Work",
+  "fragmentDownload": "Download fragment",
+  "fragmentRead": "Read fragment",
+  "appendixDownload": "Download appendix",
+  "similarByGenre": "Books in this genre",
+  "goToSection": "Go to section",
+  "booksMetaTitle": "Audiobooks and Novels | Gutenberg Audio Library",
+  "booksMetaDescription": "Thousands of audiobooks, novels, and stories in Gutenberg audio library. Modern and classic literature in audio format.",
+  "booksMetaKeywords": "audiobooks, audio novels, uzbek audiobooks, free audiobooks, online audio library, audio stories, audiokitob",
+  "ratingAuthRequired": "Only authorized users can rate"
 }

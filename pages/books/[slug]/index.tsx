@@ -198,7 +198,7 @@ const Index = () => {
 
     const sendNovelRating = async (rate) => {
         if (!isLogin) {
-            toast.error('Оценивать могут только авторизованные пользователи', {
+            toast.error(t('ratingAuthRequired'), {
                 position: "bottom-center",
                 autoClose: 3000,
                 hideProgressBar: false,
@@ -339,7 +339,7 @@ const Index = () => {
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="21" viewBox="0 0 16 21" fill="none">
                                                 <path d="M11.3972 12.748C13.8099 13.4075 15.4978 15.4947 15.4978 17.9531V19.9531C15.4978 20.2293 15.274 20.4531 14.9978 20.4531H0.997803C0.721646 20.4531 0.497805 20.2293 0.497803 19.9531V17.9531C0.497803 15.4947 2.18574 13.4075 4.59839 12.748C4.69387 12.7219 4.79506 12.7289 4.91772 12.7842C5.89614 13.2251 6.94052 13.4531 7.9978 13.4531C9.05508 13.4531 10.0995 13.2251 11.0779 12.7842C11.2005 12.7289 11.3017 12.7219 11.3972 12.748ZM10.946 13.7979C9.95385 14.1731 8.98671 14.4531 7.9978 14.4531C7.00889 14.4531 6.04175 14.1731 5.04956 13.7979L4.89038 13.7373L4.72827 13.7871C2.83833 14.3596 1.4978 15.9748 1.4978 17.9531V19.4531H14.4978V17.9531C14.4978 15.9748 13.1573 14.3596 11.2673 13.7871L11.1052 13.7373L10.946 13.7979ZM7.9978 1.45312C10.4831 1.45312 12.4978 3.46787 12.4978 5.95312C12.4978 8.43838 10.4831 10.4531 7.9978 10.4531C5.51255 10.4531 3.4978 8.43838 3.4978 5.95312C3.4978 3.46787 5.51255 1.45312 7.9978 1.45312ZM7.9978 2.45312C6.06476 2.45312 4.4978 4.02008 4.4978 5.95312C4.4978 7.88617 6.06476 9.45312 7.9978 9.45312C9.93084 9.45312 11.4978 7.88617 11.4978 5.95312C11.4978 4.02008 9.93085 2.45312 7.9978 2.45312Z" fill="black" stroke="black" />
                                             </svg>
-                                            <span className="text-gray-600 whitespace-nowrap">Muallif{Array.isArray((novel as any)?.mualliflars) && (novel as any).mualliflars.length > 1 ? 'lar' : ''}:</span>
+                                            <span className="text-gray-600 whitespace-nowrap">{Array.isArray((novel as any)?.mualliflars) && (novel as any).mualliflars.length > 1 ? t('authorPluralLabel') : t('authorSingleLabel')}</span>
                                             {
                                                 (() => {
                                                     const authors = (novel as any)?.mualliflars || (novel?.author ? [novel.author] : []) || (novel?.mualliflar ? [novel.mualliflar] : []);
@@ -365,14 +365,14 @@ const Index = () => {
                                             <svg xmlns="http://www.w3.org/2000/svg" width="21" height="18" viewBox="0 0 21 18" fill="none">
                                                 <path d="M4.01416 -0.00219727C1.80516 -0.00219727 0.0141602 1.7888 0.0141602 3.9978V11.9978C0.0141602 14.2068 1.80516 15.9978 4.01416 15.9978L7.02317 16.0078C7.44917 16.0078 7.89516 16.2038 8.40616 16.6748C8.60516 16.8588 8.84316 17.0888 9.00516 17.3038C9.18516 17.5438 9.42017 18.0008 10.0142 17.9978C10.6082 17.9948 10.8012 17.5908 11.0142 17.3098C11.1752 17.1118 11.3682 16.9228 11.5672 16.7388C12.0792 16.2678 12.5882 15.9978 13.0142 15.9978H16.0142C18.2232 15.9978 20.0142 14.2068 20.0142 11.9978V3.9978C20.0142 1.7888 18.2232 -0.00219727 16.0142 -0.00219727H13.0142C11.8032 -0.00219727 10.7482 0.553808 10.0142 1.40381C9.28017 0.553808 8.22517 -0.00219727 7.01416 -0.00219727H4.01416ZM4.01416 1.9978H7.01416C8.11917 1.9978 9.01417 2.8928 9.01417 3.9978L9.02018 14.6468C8.39618 14.2418 7.72617 13.9978 7.01416 13.9978H4.01416C2.90916 13.9978 2.01416 13.1028 2.01416 11.9978V3.9978C2.01416 2.8928 2.90916 1.9978 4.01416 1.9978ZM13.0142 1.9978H16.0142C17.1192 1.9978 18.0142 2.8928 18.0142 3.9978V11.9978C18.0142 13.1028 17.1192 13.9978 16.0142 13.9978H13.0142C12.3022 13.9978 11.6342 14.2548 11.0102 14.6598L11.0142 3.9978C11.0142 2.8928 11.9092 1.9978 13.0142 1.9978Z" fill="black" />
                                             </svg>
-                                            <span className="text-gray-600">Janri:</span>
+                                            <span className="text-gray-600">{t('genreLabel')}</span>
                                             <strong>{Array.isArray(novel?.genre) ? novel.genre.join(', ') : '-'}</strong>
                                         </li>
                                         <li className="flex items-center gap-5 text-[18px] sm:text-[22px] lg:text-[28px] font-medium text-[#212121]">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17" fill="none">
                                                 <path d="M2.9989 0.90625C1.342 0.90625 -0.00109863 2.24935 -0.00109863 3.90625V13.6562C-0.00109863 15.4511 1.454 16.9062 3.2489 16.9062H16.7489C18.5438 16.9062 19.9989 15.4511 19.9989 13.6562V5.90625C19.9989 5.35395 19.5512 4.90625 18.9989 4.90625H17.9989V1.90625C17.9989 1.35395 17.5512 0.90625 16.9989 0.90625H2.9989ZM2.9989 2.90625H15.9989V4.90625H2.9989C2.4466 4.90625 1.9989 4.45855 1.9989 3.90625C1.9989 3.35395 2.4466 2.90625 2.9989 2.90625ZM2.9989 6.90625H17.9989V13.6562C17.9989 14.3466 17.4392 14.9062 16.7489 14.9062H3.2489C2.5585 14.9062 1.9989 14.3466 1.9989 13.6562L2.0047 6.73035C2.0047 6.73035 2.3627 6.90935 2.9989 6.90625ZM14.9989 9.90625C14.4466 9.90625 13.9989 10.3539 13.9989 10.9062C13.9989 11.4585 14.4466 11.9062 14.9989 11.9062C15.5512 11.9062 15.9989 11.4585 15.9989 10.9062C15.9989 10.3539 15.5512 9.90625 14.9989 9.90625Z" fill="black" />
                                             </svg>
-                                            <span className="text-gray-600">Narxi:</span>
+                                            <span className="text-gray-600">{t('priceLabel')}</span>
                                             <strong>{formatPrice((novel as any)?.narxi) || '-'}</strong>
                                         </li>
                                         <li className="flex items-center gap-5 text-[18px] sm:text-[22px] lg:text-[28px] font-medium text-[#212121]">
@@ -393,7 +393,7 @@ const Index = () => {
                                                     </g>
                                                 </g>
                                             </svg>
-                                            <span className="text-gray-600">ISBN:</span>
+                                            <span className="text-gray-600">{t('isbnLabel')}</span>
                                             <strong>{(novel as any)?.ISBN || '-'}</strong>
                                         </li>
                                     </ul>
@@ -405,13 +405,13 @@ const Index = () => {
                                             rel={(novel as any)?.sotib_olish ? "noopener noreferrer" : undefined}
                                             className="inline-flex items-center justify-center px-4 py-3 sm:px-6 lg:px-8 rounded-[75px] text-white font-semibold text-[16px] sm:text-[18px] lg:text-[20px] xl:text-[22px] bg-[#58BB43] shadow-[0_10px_20px_-5px_rgba(88,187,67,0.4)] hover:shadow-[0_10px_25px_-5px_rgba(88,187,67,0.6)] transition-all duration-300 hover:scale-[1.02] w-full sm:w-auto"
                                         >
-                                            <span>Sotib olish</span>
+                                            <span>{t('buy')}</span>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none" className="ml-2 flex-shrink-0">
                                                 <path d="M1.6313 1.68437L13.6313 1.68437M13.6313 1.68437L13.6313 13.6844M13.6313 1.68437L2 13.3157" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                                             </svg>
                                         </a>
                                         <a href="#" className="inline-flex items-center justify-center px-4 py-3 sm:px-6 lg:px-8 rounded-[75px] font-semibold text-[16px] sm:text-[18px] lg:text-[20px] xl:text-[22px] text-[#AE00FF] border border-[#AE00FF] bg-[rgba(174,0,255,0.1)] hover:bg-[rgba(174,0,255,0.2)] transition-all duration-300 hover:scale-[1.02] w-full sm:w-auto">
-                                            <span>Hadya qilish</span>
+                                            <span>{t('gift')}</span>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none" className="ml-2 flex-shrink-0">
                                                 <path d="M1.6313 1.68437L13.6313 1.68437M13.6313 1.68437L13.6313 13.6844M13.6313 1.68437L2 13.3157" stroke="#AE00FF" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                                             </svg>
@@ -436,7 +436,7 @@ const Index = () => {
                         <div className="flex justify-center py-10 lg:py-16 bg-[#fdfdff]">
                             <div className="w-full max-w-[1240px] px-3">
                                 <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-10 gap-5">
-                                    <h2 className="text-[48px] lg:text-[64px] font-normal text-[#212121]">Asar haqida</h2>
+                                    <h2 className="text-[48px] lg:text-[64px] font-normal text-[#212121]">{t('aboutWork')}</h2>
 
                                     {/* Tugmalar qatori */}
                                     <div className="flex flex-col sm:flex-row gap-4 lg:gap-6">
@@ -446,14 +446,14 @@ const Index = () => {
                                                 download={novel.Fragment.name || 'fragment.pdf'}
                                                 className="inline-flex items-center justify-center px-6 py-3 gap-4 bg-[#EB0000] rounded-[75px] text-white no-underline text-[18px] sm:text-[20px] lg:text-[22px] font-semibold transition hover:shadow-[0_10px_20px_-5px_rgba(235,0,0,0.4)] whitespace-nowrap"
                                             >
-                                                <span>Fragment yuklab olish</span>
+                                                <span>{t('fragmentDownload')}</span>
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none">
                                                     <path d="M1.6313 1.68437L13.6313 1.68437M13.6313 1.68437L13.6313 13.6844M13.6313 1.68437L2 13.3157" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                                                 </svg>
                                             </a>
                                         ) : (
                                             <a href="#" className="inline-flex items-center justify-center px-6 py-3 gap-4 bg-[#EB0000] rounded-[75px] text-white no-underline text-[18px] sm:text-[20px] lg:text-[22px] font-semibold transition hover:shadow-[0_10px_20px_-5px_rgba(235,0,0,0.4)] whitespace-nowrap">
-                                                <span>Fragment o'qish</span>
+                                                <span>{t('fragmentRead')}</span>
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none">
                                                     <path d="M1.6313 1.68437L13.6313 1.68437M13.6313 1.68437L13.6313 13.6844M13.6313 1.68437L2 13.3157" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                                                 </svg>
@@ -467,7 +467,7 @@ const Index = () => {
                                                 download={novel.Ilova.name || 'ilova.pdf'}
                                                 className="inline-flex items-center justify-center px-6 py-3 gap-4 bg-[#4CAF50] rounded-[75px] text-white no-underline text-[18px] sm:text-[20px] lg:text-[22px] font-semibold transition hover:shadow-[0_10px_20px_-5px_rgba(76,175,80,0.4)] whitespace-nowrap"
                                             >
-                                                <span>Ilova yuklab olish</span>
+                                                <span>{t('appendixDownload')}</span>
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none">
                                                     <path d="M1.6313 1.68437L13.6313 1.68437M13.6313 1.68437L13.6313 13.6844M13.6313 1.68437L2 13.3157" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                                                 </svg>
@@ -487,16 +487,16 @@ const Index = () => {
 
                         <div className="container mx-auto px-3 mt-8">
                             <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-12 sm:mb-16 lg:mb-20 gap-4 sm:gap-5">
-                                <h2 className="text-[32px] sm:text-[40px] md:text-[48px] lg:text-[56px] xl:text-[64px] font-normal text-[#212121] leading-tight">Shu janrdagi kitoblar</h2>
+                                <h2 className="text-[32px] sm:text-[40px] md:text-[48px] lg:text-[56px] xl:text-[64px] font-normal text-[#212121] leading-tight">{t('similarByGenre')}</h2>
                                 <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3 lg:gap-4 w-full sm:w-auto">
                                     <a href="#" className="inline-flex items-center justify-center px-4 py-3 sm:px-5 lg:px-6 gap-3 sm:gap-4 bg-[#EB0000] rounded-[75px] text-white no-underline text-[16px] sm:text-[18px] lg:text-[20px] font-semibold transition-all duration-300 hover:scale-[1.02] sm:hover:scale-[1.05] hover:shadow-[0_10px_20px_-5px_rgba(235,0,0,0.4)] w-full sm:w-auto">
-                                        <span>Bo'limga o'tish</span>
+                                        <span>{t('goToSection')}</span>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none" className="flex-shrink-0">
                                             <path d="M1.6313 1.68437L13.6313 1.68437M13.6313 1.68437L13.6313 13.6844M13.6313 1.68437L2 13.3157" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                                         </svg>
                                     </a>
                                     <a href="#" className="inline-flex items-center justify-center px-4 py-3 sm:px-5 lg:px-6 h-[48px] sm:h-[52px] lg:h-[60px] rounded-[75px] text-[16px] sm:text-[18px] lg:text-[20px] font-normal bg-[rgba(0,157,255,0.1)] text-[#009DFF] border border-[#009DFF] transition-all duration-300 hover:bg-[rgba(0,157,255,0.2)] hover:scale-[1.02] w-full sm:w-auto">
-                                        Barchasi
+                                        {t('all')}
                                     </a>
                                 </div>
                             </div>

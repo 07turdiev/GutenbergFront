@@ -55,8 +55,8 @@ const AuthorsPage = () => {
     return (
         <MainLayout>
             <HeadMeta 
-                title="O'zbek Mualliflar va Yozuvchilar | Gutenberg Audio Kutubxona" 
-                description="Gutenberg audio kutubxonasida O'zbekistonning eng yaxshi mualliflar va yozuvchilari. Audio kitoblar, romanlar va hikoyalar mualliflarining to'liq ro'yxati."
+                title="Mualliflar| Gutenberg" 
+                description="Gutenberg nashriyot uyi bilan hamkorlik o'rnatgan adiblar, ijodkorlar, tarjimonlar haqida"
                 keywords="o'zbek mualliflar, o'zbek yozuvchilar, audio kitob mualliflari, o'zbek adabiyot mualliflari, Gutenberg mualliflar"
                 ogImg="https://gutenbergnu.uz/og-default-img.jpg"
             />

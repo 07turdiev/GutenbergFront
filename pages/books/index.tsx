@@ -88,9 +88,9 @@ const Index = () => {
     return (
         <MainLayout>
             <HeadMeta 
-                title="Audio Kitoblar va Romanlar | Gutenberg Audio Kutubxona" 
-                description="Gutenberg audio kutubxonasida minglab audio kitoblar, romanlar va hikoyalar. Zamonaviy va klassik adabiyotlar audio formatda. Bepul tinglash va yuklab olish."
-                keywords="audio kitoblar, audio romanlar, o'zbek audio kitoblar, bepul audio kitoblar, online audio kutubxona, audio hikoyalar, audiokitoblar"
+                title={t('booksMetaTitle')} 
+                description={t('booksMetaDescription')}
+                keywords={t('booksMetaKeywords')}
                 ogImg="https://gutenbergnu.uz/og-default-img.jpg"
             />
                 

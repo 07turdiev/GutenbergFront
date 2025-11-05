@@ -35,7 +35,7 @@
   "description": "Tavsif",
   "blogPost": "Asosiy matn",
   "publishDate": "Nashr sanasi",
-  "readMore": "Batafsil",
+  
   "books":"Kitoblar",
   "showAll": "Barchasini ko‘rish",
   "listen": "Eshitish",
@@ -256,5 +256,22 @@
   "documentsViewImage": "Rasmni koʻrish",
   "documentsTermsDescription": "Nashriyotning elektron resurslaridan, brending ma'lumotlaridan, nashr etgan kitoblaridan hamda kitoblardagi parchalardan foydalanish shartlari.",
   "documentsPrivacyDescription": "\"Gutenberg nashriyot uyi\" MChJ tomonidan tuzilgan shartnomalar, hamkorlik memorandumlari, veb-resurslarda foydalanuvchilar tomonidan kiritilgan ma'lumotlarning maxfiyligini ta'minlash toʻgʻrisida.",
-  "readMore": "Batafsil"
+  "readMore": "Batafsil",
+  "authorSingleLabel": "Muallif:",
+  "authorPluralLabel": "Mualliflar:",
+  "genreLabel": "Janri:",
+  "priceLabel": "Narxi:",
+  "isbnLabel": "ISBN:",
+  "buy": "Sotib olish",
+  "gift": "Hadya qilish",
+  "aboutWork": "Asar haqida",
+  "fragmentDownload": "Fragment yuklab olish",
+  "fragmentRead": "Fragment o'qish",
+  "appendixDownload": "Ilova yuklab olish",
+  "similarByGenre": "Shu janrdagi kitoblar",
+  "goToSection": "Bo'limga o'tish",
+  "booksMetaTitle": "Audio Kitoblar va Romanlar | Gutenberg Audio Kutubxona",
+  "booksMetaDescription": "Gutenberg audio kutubxonasida minglab audio kitoblar, romanlar va hikoyalar. Zamonaviy va klassik adabiyotlar audio formatda. Bepul tinglash va yuklab olish.",
+  "booksMetaKeywords": "audio kitoblar, audio romanlar, o'zbek audio kitoblar, bepul audio kitoblar, online audio kutubxona, audio hikoyalar, audiokitoblar",
+  "ratingAuthRequired": "Baholash faqat avtorizatsiyadan o'tgan foydalanuvchilar uchun"
 }
