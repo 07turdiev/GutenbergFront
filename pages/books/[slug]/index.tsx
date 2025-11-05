@@ -347,11 +347,11 @@ const Index = () => {
                                                         return (
                                                             <strong className="font-semibold flex flex-wrap gap-2">
                                                                 {authors.map((author: any, index: number) => (
-                                                                    <span key={author?.slug || index}>
-                                                                        {index > 0 && <span className="mx-1">,</span>}
+                                                                    <span key={author?.slug || index} className="flex items-center">
                                                                         <Link href={`/authors/${author?.slug}`}>
                                                                             <a className="text-primary hover:underline">{author?.name || author?.ismi}</a>
                                                                         </Link>
+                                                                        {index < authors.length - 1 && <span className="mx-1">,</span>}
                                                                     </span>
                                                                 ))}
                                                             </strong>
