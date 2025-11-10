@@ -97,9 +97,9 @@ const Index = () => {
     return (
         <MainLayout>
             <HeadMeta 
-                title="Gutenberg - Zamonaviy Audio Kutubxona" 
-                description="Gutenberg - O'zbekistondagi eng yirik audio kutubxona. Audio kitoblar, audiokitoblar, romanlar va hikoyalar. Zamonaviy va klassik adabiyotlar audio formatda. Bepul tinglash imkoniyati."
-                keywords="audio kitoblar, audiokitoblar, audio romanlar, audio hikoyalar, o'zbek audio kitoblar, bepul audio kitoblar, online audio kutubxona, Gutenberg"
+                title="Gutenberg - birinchi raqamli biznes adabiyotlar, bestsellerlar" 
+                description="Gutenberg - birinchi raqamli biznes adabiyotlar nashriyoti.  Biznes adabiyotlar, liderlik, ilmiy-ommabop, startap adabiyotlar, o'zbekcha kitoblar. Zamonaviy va klassik asarlar o'zgacha formatda."
+                keywords="biznes adabiyotlar, liderlik, ilmiy-ommabop, startap adabiyotlar, o'zbekcha kitoblar, bepul kitoblar, online kutubxona, Gutenberg, liderlik, bestseller, klassika, universitetlar, nashriyot, startap, startup, komikslar, mangalar, texnologiya, IT"
                 ogImg="https://gutenbergnu.uz/og-default-img.jpg"
             />
             <StructuredData type="Website" data={{}} />
