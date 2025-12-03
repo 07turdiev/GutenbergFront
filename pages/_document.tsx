@@ -47,21 +47,17 @@ class MyDocument extends Document {
             rel="stylesheet"
           />
           
-          {process.env.NEXT_PUBLIC_GA_ID && (
-            <>
-              <script async src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`} />
-              <script
-                dangerouslySetInnerHTML={{
-                  __html: `
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){dataLayer.push(arguments);}
-                    gtag('js', new Date());
-                    gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}');
-                  `,
-                }}
-              />
-            </>
-          )}
+          <script async src="https://www.googletagmanager.com/gtag/js?id=G-BJM1HZGTYN" />
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', 'G-BJM1HZGTYN');
+              `,
+            }}
+          />
           
           {process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION && (
             <meta name="google-site-verification" content={process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION} />
