@@ -53,16 +53,16 @@ const Index = () => {
     const dispatch = useDispatch();
 
     const genres = [
-        'Fan',
-        'Texnika',
-        'Badiiy',
-        'Ilmiy',
-        'Komiks',
-        "She’riy",
-        'Moliya',
-        'Innovatsiya',
+        t('genreFan'),
+        t('genreTexnika'),
+        t('genreBadiiy'),
+        t('genreIlmiy'),
+        t('genreKomiks'),
+        t('genreSheriy'),
+        t('genreMoliya'),
+        t('genreInnovatsiya'),
     ];
-    const [activeGenre, setActiveGenre] = useState<string>('Innovatsiya');
+    const [activeGenre, setActiveGenre] = useState<string>(t('genreInnovatsiya'));
 
     const addNovelToMark = async (slug, saved) => {
         if(!saved){

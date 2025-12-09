@@ -273,5 +273,15 @@
   "booksMetaTitle": "Audio Kitoblar va Romanlar | Gutenberg Audio Kutubxona",
   "booksMetaDescription": "Gutenberg audio kutubxonasida minglab audio kitoblar, romanlar va hikoyalar. Zamonaviy va klassik adabiyotlar audio formatda. Bepul tinglash va yuklab olish.",
   "booksMetaKeywords": "audio kitoblar, audio romanlar, o'zbek audio kitoblar, bepul audio kitoblar, online audio kutubxona, audio hikoyalar, audiokitoblar",
-  "ratingAuthRequired": "Baholash faqat avtorizatsiyadan o'tgan foydalanuvchilar uchun"
+  "ratingAuthRequired": "Baholash faqat avtorizatsiyadan o'tgan foydalanuvchilar uchun",
+  "genreFan": "Fan",
+  "genreTexnika": "Texnika",
+  "genreBadiiy": "Badiiy",
+  "genreIlmiy": "Ilmiy",
+  "genreKomiks": "Komiks",
+  "genreSheriy": "She'riy",
+  "genreMoliya": "Moliya",
+  "genreInnovatsiya": "Innovatsiya",
+  "gutenbergBrand": "GUTENBERG",
+  "nashriyotUyi": "NASHRIYOT UYI"
 }

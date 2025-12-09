@@ -269,5 +269,15 @@
   "booksMetaTitle": "Аудиокниги и романы | Аудиобиблиотека Gutenberg",
   "booksMetaDescription": "В аудиобиблиотеке Gutenberg тысячи аудиокниг, романов и рассказов. Современная и классическая литература в аудиоформате.",
   "booksMetaKeywords": "аудиокниги, аудиороманы, узбекские аудиокниги, бесплатные аудиокниги, онлайн аудиобиблиотека, аудио рассказы, audiokitob",
-  "ratingAuthRequired": "Оценивать могут только авторизованные пользователи"
+  "ratingAuthRequired": "Оценивать могут только авторизованные пользователи",
+  "genreFan": "Наука",
+  "genreTexnika": "Техника",
+  "genreBadiiy": "Художественная",
+  "genreIlmiy": "Научная",
+  "genreKomiks": "Комиксы",
+  "genreSheriy": "Поэзия",
+  "genreMoliya": "Финансы",
+  "genreInnovatsiya": "Инновации",
+  "gutenbergBrand": "ГУТЕНБЕРГ",
+  "nashriyotUyi": "ИЗДАТЕЛЬСКИЙ ДОМ"
 }

@@ -47,16 +47,16 @@ const AboutPage = () => {
     });
 
     const genres = [
-        'Fan',
-        'Texnika',
-        'Badiiy',
-        'Ilmiy',
-        'Komiks',
-        "She'riy",
-        'Moliya',
-        'Innovatsiya',
+        t('genreFan'),
+        t('genreTexnika'),
+        t('genreBadiiy'),
+        t('genreIlmiy'),
+        t('genreKomiks'),
+        t('genreSheriy'),
+        t('genreMoliya'),
+        t('genreInnovatsiya'),
     ];
-    const [activeGenre, setActiveGenre] = useState<string>('Innovatsiya');
+    const [activeGenre, setActiveGenre] = useState<string>(t('genreInnovatsiya'));
 
     const teamMembersStore = useAppSelector(selectTeamMembers);
     const teamMembers = (teamMembersStore || []).map((m)=>({
@@ -82,7 +82,7 @@ const AboutPage = () => {
                     <div className={styles.imageWrapper}>
                         <Image
                             src={aboutImg}
-                            alt="Gutenberg Nashriyot Uyi"
+                            alt={t('siteTitle')}
                             width={317}
                             height={410}
                             className={styles.heroImg}
@@ -90,8 +90,8 @@ const AboutPage = () => {
                     </div>
                     <div className={styles.textWrapper}>
                         <h1 className={styles.heroTitle}>
-                            <span className={styles.gutenberg}>GUTENBERG</span><br/>
-                            <span className={styles.nashriyot}>NASHRIYOT UYI</span>
+                            <span className={styles.gutenberg}>{t('gutenbergBrand')}</span><br/>
+                            <span className={styles.nashriyot}>{t('nashriyotUyi')}</span>
                         </h1>
                         <p className={styles.heroSubtitle}>
                             {t('heroMotto')}

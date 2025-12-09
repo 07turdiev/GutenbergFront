@@ -273,5 +273,15 @@
   "booksMetaTitle": "Audiobooks and Novels | Gutenberg Audio Library",
   "booksMetaDescription": "Thousands of audiobooks, novels, and stories in Gutenberg audio library. Modern and classic literature in audio format.",
   "booksMetaKeywords": "audiobooks, audio novels, uzbek audiobooks, free audiobooks, online audio library, audio stories, audiokitob",
-  "ratingAuthRequired": "Only authorized users can rate"
+  "ratingAuthRequired": "Only authorized users can rate",
+  "genreFan": "Science",
+  "genreTexnika": "Technology",
+  "genreBadiiy": "Fiction",
+  "genreIlmiy": "Scientific",
+  "genreKomiks": "Comics",
+  "genreSheriy": "Poetry",
+  "genreMoliya": "Finance",
+  "genreInnovatsiya": "Innovation",
+  "gutenbergBrand": "GUTENBERG",
+  "nashriyotUyi": "PUBLISHING HOUSE"
 }

@@ -26,16 +26,16 @@ const TermsPage: React.FC = () => {
     const { data: termsData, loading, error } = useAppSelector(selectTermsData);
     
     const genres = [
-        'Fan',
-        'Texnika',
-        'Badiiy',
-        'Ilmiy',
-        'Komiks',
-        "She'riy",
-        'Moliya',
-        'Innovatsiya',
+        t('genreFan'),
+        t('genreTexnika'),
+        t('genreBadiiy'),
+        t('genreIlmiy'),
+        t('genreKomiks'),
+        t('genreSheriy'),
+        t('genreMoliya'),
+        t('genreInnovatsiya'),
     ];
-    const [activeGenre, setActiveGenre] = useState<string>('Innovatsiya');
+    const [activeGenre, setActiveGenre] = useState<string>(t('genreInnovatsiya'));
     
     return (
         <MainLayout>
@@ -51,7 +51,7 @@ const TermsPage: React.FC = () => {
                     <div className={stylesAbout.imageWrapper}>
                         <Image
                             src={aboutImg}
-                            alt="Gutenberg Nashriyot Uyi"
+                            alt={t('siteTitle')}
                             width={317}
                             height={410}
                             className={stylesAbout.heroImg}
@@ -59,8 +59,8 @@ const TermsPage: React.FC = () => {
                     </div>
                     <div className={stylesAbout.textWrapper}>
                         <h1 className={stylesAbout.heroTitle}>
-                            <span className={stylesAbout.gutenberg}>GUTENBERG</span><br/>
-                            <span className={stylesAbout.nashriyot}>NASHRIYOT UYI</span>
+                            <span className={stylesAbout.gutenberg}>{t('gutenbergBrand')}</span><br/>
+                            <span className={stylesAbout.nashriyot}>{t('nashriyotUyi')}</span>
                         </h1>
                         <p className={stylesAbout.heroSubtitle}>
                             {t('heroMotto')}

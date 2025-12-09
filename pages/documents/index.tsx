@@ -38,7 +38,7 @@ const DocumentsPage: React.FC = () => {
                         <div className={stylesAbout.imageWrapper}>
                             <Image
                                 src={aboutImg}
-                                alt="Gutenberg Nashriyot Uyi"
+                                alt={t('siteTitle')}
                                 width={317}
                                 height={400}
                                 className={stylesAbout.heroImg}
@@ -46,8 +46,8 @@ const DocumentsPage: React.FC = () => {
                         </div>
                         <div className={stylesAbout.textWrapper}>
                             <h1 className={stylesAbout.heroTitle}>
-                                <span className={stylesAbout.gutenberg}>GUTENBERG</span><br/>
-                                <span className={stylesAbout.nashriyot}>NASHRIYOT UYI</span>
+                                <span className={stylesAbout.gutenberg}>{t('gutenbergBrand')}</span><br/>
+                                <span className={stylesAbout.nashriyot}>{t('nashriyotUyi')}</span>
                             </h1>
                             <p className={stylesAbout.heroSubtitle}>
                                 {t('heroMotto')}

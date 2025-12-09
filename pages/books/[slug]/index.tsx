@@ -166,16 +166,16 @@ const Index = () => {
     const [activeTab, setActiveTab] = useState('read');
     const [isImageModalOpen, setIsImageModalOpen] = useState(false);
     const genres = [
-        'Fan',
-        'Texnika',
-        'Badiiy',
-        'Ilmiy',
-        'Komiks',
-        'She’riy',
-        'Moliya',
-        'Innovatsiya',
+        t('genreFan'),
+        t('genreTexnika'),
+        t('genreBadiiy'),
+        t('genreIlmiy'),
+        t('genreKomiks'),
+        t('genreSheriy'),
+        t('genreMoliya'),
+        t('genreInnovatsiya'),
     ];
-    const [activeGenre, setActiveGenre] = useState<string>('Innovatsiya');
+    const [activeGenre, setActiveGenre] = useState<string>(t('genreInnovatsiya'));
 
 
     useEffect(() => {
