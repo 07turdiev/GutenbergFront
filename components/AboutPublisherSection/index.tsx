@@ -72,18 +72,18 @@ const AboutPublisherSection: React.FC = () => {
                         <div className={styles.metricTextDesk}>{t('about')}</div>
                     </div>
 
-                    {/* Main Heading */}
-                    <h1 className={styles.headingAbs}>{t('aboutPublisherHeading')}</h1>
-
-                    {/* Arrow Icon */}
-                    <Link href="/about">
-                        <a className={styles.arrowAbs} aria-label="Batafsil">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" fill="none">
-                                <circle cx="30" cy="29.9993" r="29.5" fill="#009DFF" fillOpacity="0.15" stroke="#009DFF"/>
-                                <path d="M20.0001 19.9993H39.9995M39.9995 19.9993V39.9987M39.9995 19.9993L20.0001 39.9987" stroke="#009DFF"/>
-                            </svg>
-                        </a>
-                    </Link>
+                    {/* Main Heading with Arrow */}
+                    <h1 className={styles.headingAbs}>
+                        {t('aboutPublisherHeading')}
+                        <Link href="/about">
+                            <a className={styles.arrowInline} aria-label="Batafsil">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" fill="none">
+                                    <circle cx="30" cy="29.9993" r="29.5" fill="#009DFF" fillOpacity="0.15" stroke="#009DFF"/>
+                                    <path d="M20.0001 19.9993H39.9995M39.9995 19.9993V39.9987M39.9995 19.9993L20.0001 39.9987" stroke="#009DFF"/>
+                                </svg>
+                            </a>
+                        </Link>
+                    </h1>
 
                     {/* About Description */}
                     <div className={styles.descAbs}>{t('aboutPublisherDescription')}</div>
