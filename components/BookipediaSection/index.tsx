@@ -36,7 +36,7 @@ const BookipediaSection: React.FC<BookipediaSectionProps> = ({ posts }) => {
                         </p>
                         <Link href="/bookipedia">
                             <a className={styles.sectionLink}>
-                            Ko‘proq o‘qish
+                            {t('readMore')}
                                 <span className={styles.arrowCircle}>
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 39 39" fill="none">
                                         <path d="M13 12.9994H26M26 12.9994V25.9994M26 12.9994L13 25.9994" stroke="#009DFF"/>
