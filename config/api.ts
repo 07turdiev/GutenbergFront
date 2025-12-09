@@ -1,7 +1,7 @@
 // Centralized API configuration
 export const getApiBaseUrl = (): string => {
   if (process.env.NEXT_PUBLIC_API_BASE_URL) return process.env.NEXT_PUBLIC_API_BASE_URL;
-  if (process.env.NODE_ENV === 'development') return 'http://localhost:1337';
+  if (process.env.NODE_ENV === 'development') return 'http://admin.gutenbergnu.uz';
   return '';
 };
 

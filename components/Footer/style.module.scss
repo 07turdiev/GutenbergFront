@@ -104,4 +104,16 @@
     .footerNav {
         gap: 40px;
     }
+    
+    .navColumn h3 {
+        word-break: keep-all;
+        overflow-wrap: normal;
+        font-size: 14px;
+    }
+    
+    .navColumn ul li a {
+        word-break: keep-all;
+        overflow-wrap: normal;
+        font-size: 14px;
+    }
 }
