@@ -294,7 +294,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ contactData, testimonials, so
                             <h3>{t('contactLocationTitle')}</h3>
                             <p>{t('contactLocationDescription')}</p>
                             <strong>{t('contactLocationAddress')} {contactData?.Manzil || ''}</strong>
-                            <a href={`geo:${(contactData?.Joylashuv || '').trim()}`} className={styles.mapLink}>{t('contactLocationMap')}</a>
+                            <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent((contactData?.Joylashuv || '').trim())}`} target="_blank" rel="noopener noreferrer" className={styles.mapLink}>{t('contactLocationMap')}</a>
                         </div>
                         <div className={`${styles.infoCard} ${styles.socialCard}`}>
                             <h3>{t('contactSocialTitle')}</h3>
