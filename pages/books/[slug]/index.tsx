@@ -268,14 +268,14 @@ const Index = () => {
         }
     }
 
-    const metaTitle = novel ? `${novel.name || novel.nomi} | Gutenberg Audio Kutubxona` : 'Audio Kitob | Gutenberg'
+    const metaTitle = novel ? `${novel.name || novel.nomi} | Gutenberg Birinchi raqamli biznes adabiyotlar` : 'Biznes adabiyot | Gutenberg'
     const authors = (novel as any)?.mualliflars || (novel?.author ? [novel.author] : []) || (novel?.mualliflar ? [novel.mualliflar] : []);
     const authorNames = Array.isArray(authors) && authors.length > 0
         ? authors.map(a => a?.name || a?.ismi).filter(Boolean).join(', ')
         : '';
-    const metaDescription = novel ? `${novel.name || novel.nomi}${authorNames ? ` - ${authorNames}` : ''}. ${t('books')} - Gutenberg audio kutubxonasi` : t('books')
+    const metaDescription = novel ? `${novel.name || novel.nomi}${authorNames ? ` - ${authorNames}` : ''}. ${t('books')} - Gutenberg birinchi raqamli biznes adabiyotlar` : t('books')
     const metaImage = novel?.cover?.src ? ensureAbsoluteUrl(novel.cover.src) : 'https://gutenbergnu.uz/og-default-img.jpg'
-    const metaKeywords = novel ? `${novel.name || novel.nomi}${authorNames ? `, ${authorNames}` : ''}, audio kitob, audiokitob, Gutenberg` : 'audio kitob, audiokitob'
+    const metaKeywords = novel ? `${novel.name || novel.nomi}${authorNames ? `, ${authorNames}` : ''}, biznes adabiyot, biznes kitob, biznes audiokitob, Gutenberg` : 'biznes adabiyot, biznes kitob, biznes audiokitob'
 
     return (
         <MainLayout>

@@ -56,8 +56,8 @@ const AuthorsPage = () => {
         <MainLayout>
             <HeadMeta 
                 title="Mualliflar| Gutenberg" 
-                description="Gutenberg nashriyot uyi bilan hamkorlik o'rnatgan adiblar, ijodkorlar, tarjimonlar haqida"
-                keywords="o'zbek mualliflar, o'zbek yozuvchilar, audio kitob mualliflari, o'zbek adabiyot mualliflari, Gutenberg mualliflar"
+                description="Gutenberg nashriyot uyi bilan hamkorlik o'rnatgan adiblar, ijodkorlar, tarjimonlar haqida. Biznes adabiyot, liderlik, ilmiy-ommabop, startap adabiyotlar, o'zbekcha kitoblar. Zamonaviy va klassik asarlar o'zgacha formatda. Bepul tinglash va yuklab olish."
+                keywords="o'zbek mualliflar, o'zbek yozuvchilar, biznes adabiyot mualliflari, o'zbek adabiyot mualliflari, Gutenberg mualliflar"
                 ogImg="https://gutenbergnu.uz/og-default-img.jpg"
             />
             <div className="container mx-auto px-3 mb-10">

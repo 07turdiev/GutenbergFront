@@ -1,6 +1,6 @@
-# GutenberNU - Audio Kutubxona
+# GutenberNU
 
-O'zbekistondagi eng yirik audio kutubxona platformasi. Audio kitoblar, romanlar va hikoyalar bepul tinglash imkoniyati.
+O'zbekistondagi eng yirik biznes adabiyotlari jamlangan platformasi. biznes kitoblar, romanlar va hikoyalar bepul tinglash imkoniyati.
 
 ## 🚀 Xususiyatlar
 

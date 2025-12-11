@@ -60,8 +60,8 @@ const BookipediaPage = () => {
         <MainLayout>
             <HeadMeta 
                 title="Bookipedia | Gutenberg" 
-                description="Gutenberg Bookipedia sahifasi. Kitoblar, audio kitoblar va adabiyot haqidagi maqolalar, yangiliklar va tavsiyalar."
-                keywords="bookipedia, kitob maqolalari, audio kitob yangiliklar, Gutenberg blog, audio kitob tavsiyalar"
+                description="Gutenberg Bookipedia sahifasi. Kitoblar, biznes adabiyotlar, liderlik, ilmiy-ommabop, startap adabiyotlar, o'zbekcha kitoblar. Zamonaviy va klassik asarlar o'zgacha formatda. Bepul tinglash va yuklab olish."
+                keywords="bookipedia, kitob maqolalari, biznes adabiyot, biznes kitob, biznes audiokitob, Gutenberg, biznes adabiyotlar, biznes kitoblar, biznes audiokitoblar"
                 ogImg="https://gutenbergnu.uz/og-default-img.jpg"
             />
             

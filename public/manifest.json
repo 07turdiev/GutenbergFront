@@ -1,7 +1,7 @@
 {
-  "name": "Gutenberg - Audio Kutubxona",
+  "name": "Gutenberg - Birinchi raqamli biznes adabiyotlar",
   "short_name": "Gutenberg",
-  "description": "O'zbekistondagi eng yirik audio kutubxona. Audio kitoblar, romanlar va hikoyalar bepul tinglash imkoniyati.",
+  "description": "O'zbekistondagi eng yirik birinchi raqamli biznes adabiyotlar. Biznes adabiyotlar, liderlik, ilmiy-ommabop, startap adabiyotlar, o'zbekcha kitoblar. Zamonaviy va klassik asarlar o'zgacha formatda.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
@@ -9,7 +9,7 @@
   "orientation": "portrait-primary",
   "scope": "/",
   "lang": "uz",
-  "categories": ["books", "education", "entertainment"],
+  "categories": ["books", "education", "entertainment", "business", "leadership", "ilmiy-ommabop", "startap", "o'zbekcha kitoblar", "zamonaviy asarlar", "klassik asarlar", "o'zgacha formatda"],
   "icons": [
     {
       "src": "/favicon.png",

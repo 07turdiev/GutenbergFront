@@ -16,7 +16,7 @@ const StructuredData: React.FC<StructuredDataProps> = ({ type, data }) => {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "Gutenberg kutubxona",
-    "description": "O'zbekistondagi eng yirik nashriyot uyi. Audio kitoblar, romanlar va hikoyalar bepul tinglash imkoniyati.",
+    "description": "O'zbekistondagi eng yirik nashriyot uyi. Biznes adabiyotlar, liderlik, ilmiy-ommabop, startap adabiyotlar, o'zbekcha kitoblar. Zamonaviy va klassik asarlar o'zgacha formatda. Bepul tinglash va yuklab olish.",
     "url": baseUrl,
     "potentialAction": {
       "@type": "SearchAction",

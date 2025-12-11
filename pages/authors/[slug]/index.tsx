@@ -99,7 +99,7 @@ const Index = () => {
 
 
     const metaTitle = `${author.name} | Gutenberg Muallif`
-    const metaDescription = author.biography ? `${author.name} - ${author.biography.substring(0, 150)}...` : `${author.name} - Gutenberg audio kutubxonasining muallifi`
+    const metaDescription = author.biography ? `${author.name} - ${author.biography.substring(0, 150)}...` : `${author.name} - Gutenberg birinchi raqamli biznes adabiyotlarining muallifi`
     const metaImage = author?.photo?.src || 'https://gutenbergnu.uz/og-default-img.jpg'
     const metaKeywords = `${author.name}, muallif, yozuvchi, Gutenberg mualliflar`
 
