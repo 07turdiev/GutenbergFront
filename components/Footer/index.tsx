@@ -8,7 +8,7 @@ import {selectSocialLinks} from "../../store/selectors/about";
 import {useRouter} from "next/router";
 import styles from './style.module.scss';
 import SiteLogo from '../SiteLogo/SiteLogo';
-import { FaFacebookF, FaInstagram, FaYoutube, FaWhatsapp, FaTelegramPlane, FaTwitter } from 'react-icons/fa';
+import { FaFacebookF, FaInstagram, FaYoutube, FaWhatsapp, FaTelegramPlane, FaTwitter, FaLinkedinIn } from 'react-icons/fa';
 import useTranslation from 'next-translate/useTranslation';
 
 const Index = () => {
@@ -45,7 +45,7 @@ const Index = () => {
             title: t('footer_publisher'),
             links: [
                 { text: t('about'), url: '/about' },
-                { text: t('contact'), url: getSocialUrl('telegram_url') || '#' }
+                { text: t('contact'), url: '/contact' }
             ],
         },
         {
@@ -53,7 +53,7 @@ const Index = () => {
             links: [
                 { text: t('termsOfUse'), url: '/terms' },
                 { text: t('privacyPolicy'), url: '/privacy-policy' },
-                { text: t('publisherDocuments'), url: '#' }
+                { text: t('publisherDocuments'), url: '/documents' }
             ],
         },
     ]), [social, t]);
@@ -63,18 +63,19 @@ const Index = () => {
             title: t('footer_subscribe'),
             links: [
                 { url: getSocialUrl('facebook_url'), label: 'Facebook', icon: <FaFacebookF /> },
+                { url: getSocialUrl('linkedin_url'), label: 'LinkedIn', icon: <FaLinkedinIn /> },
                 { url: getSocialUrl('twitter_url'), label: 'Twitter', icon: <FaTwitter /> },
                 { url: getSocialUrl('instagram_url'), label: 'Instagram', icon: <FaInstagram /> },
                 { url: getSocialUrl('youtube_url'), label: 'YouTube', icon: <FaYoutube /> },
                 { url: getSocialUrl('telegram_channel_url'), label: 'Telegram', icon: <FaTelegramPlane /> },
-            ],
+            ].filter(link => link.url && link.url !== '#'),
         },
         {
             title: t('footer_quick_contact'),
             links: [
                 { url: getSocialUrl('whatsapp_url'), label: 'WhatsApp', icon: <FaWhatsapp /> },
                 { url: getSocialUrl('telegram_url'), label: 'Telegram', icon: <FaTelegramPlane /> },
-            ],
+            ].filter(link => link.url && link.url !== '#'),
         },
     ]), [social, t]);
 

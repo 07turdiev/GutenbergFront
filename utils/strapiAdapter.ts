@@ -505,6 +505,7 @@ export const adaptSocialData = (social: any): ISocial => {
     
     const socialArray: [string, string][] = [
         ['facebook_url', social.data.facebook_havolasi],
+        ['linkedin_url', social.data.linkedin_havolasi],
         ['telegram_url', social.data.telegram_havolasi],
         ['telegram_channel_url', social.data.Telegram_kanal],
         ['instagram_url', social.data.instagram_havolasi],

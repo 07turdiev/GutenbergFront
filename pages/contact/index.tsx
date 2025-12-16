@@ -42,12 +42,13 @@ interface ContactPageProps {
     contactData: ContactApiData | null;
     testimonials: { name: string; text: string }[];
     socialLinks: {
-        facebook?: string;
-        google?: string;
-        instagram?: string;
-        youtube?: string;
-        telegram?: string;
-        twitter?: string;
+        facebook?: string | null;
+        google?: string | null;
+        instagram?: string | null;
+        youtube?: string | null;
+        telegram?: string | null;
+        twitter?: string | null;
+        linkedin?: string | null;
     };
 }
 
@@ -307,6 +308,20 @@ const ContactPage: React.FC<ContactPageProps> = ({ contactData, testimonials, so
                                         </svg>
                                     </a>
                                 )}
+                                {socialLinks?.linkedin && (
+                                    <a href={socialLinks.linkedin} target="_blank" rel="noopener noreferrer" aria-label="linkedin">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                            <path d="M14.5 0h-13C.675 0 0 .675 0 1.5v13c0 .825.675 1.5 1.5 1.5h13c.825 0 1.5-.675 1.5-1.5v-13c0-.825-.675-1.5-1.5-1.5zM4.75 13.5H2.5V6h2.25v7.5zm-1.125-8.55c-.72 0-1.305-.585-1.305-1.305s.585-1.305 1.305-1.305 1.305.585 1.305 1.305-.585 1.305-1.305 1.305zM13.5 13.5h-2.25v-3.65c0-.84-.015-1.92-1.17-1.92-1.17 0-1.35.915-1.35 1.86v3.71H6.48V6h2.16v1.014h.03c.3-.57 1.035-1.17 2.13-1.17 2.28 0 2.7 1.5 2.7 3.45v4.206z" fill="#212121"/>
+                                        </svg>
+                                    </a>
+                                )}
+                                {socialLinks?.twitter && (
+                                    <a href={socialLinks.twitter} target="_blank" rel="noopener noreferrer" aria-label="twitter">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                            <path d="M16 3.039c-.59.261-1.22.437-1.885.517.677-.407 1.198-1.05 1.443-1.816-.634.375-1.337.648-2.085.795-.598-.638-1.45-1.036-2.396-1.036-1.812 0-3.282 1.468-3.282 3.282 0 .258.029.509.085.749-2.728-.137-5.147-1.444-6.766-3.43-.283.485-.444 1.049-.444 1.65 0 1.14.58 2.143 1.46 2.732-.538-.017-1.044-.165-1.487-.41v.041c0 1.591 1.132 2.917 2.633 3.219-.275.074-.565.114-.865.114-.211 0-.416-.02-.615-.058.416 1.299 1.624 2.245 3.055 2.271-1.119.877-2.529 1.4-4.061 1.4-.264 0-.524-.015-.78-.045 1.447.928 3.166 1.469 5.013 1.469 6.015 0 9.304-4.983 9.304-9.304 0-.141-.003-.282-.01-.422A6.643 6.643 0 0016 3.039z" fill="#212121" />
+                                        </svg>
+                                    </a>
+                                )}
                                 {socialLinks?.instagram && (
                                     <a href={socialLinks.instagram} target="_blank" rel="noopener noreferrer" aria-label="instagram">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -327,13 +342,6 @@ const ContactPage: React.FC<ContactPageProps> = ({ contactData, testimonials, so
                                     <a href={socialLinks.telegram} target="_blank" rel="noopener noreferrer" aria-label="telegram">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 16 14" fill="none">
                                             <path xmlns="http://www.w3.org/2000/svg" d="M1.09992 6.09647C5.39487 4.26188 8.25885 3.05241 9.69185 2.46805C13.7834 0.799594 14.6335 0.509765 15.1877 0.500093C15.3095 0.49809 15.582 0.527703 15.7586 0.66813C15.9076 0.786703 15.9486 0.94688 15.9683 1.0593C15.9879 1.17172 16.0123 1.42782 15.9929 1.62793C15.7712 3.91192 14.8118 9.45457 14.3237 12.0127C14.1172 13.0951 13.7105 13.458 13.3168 13.4936C12.4613 13.5707 11.8116 12.9392 10.9829 12.4067C9.68624 11.5733 8.95369 11.0545 7.69503 10.2414C6.24042 9.30157 7.18338 8.78505 8.01236 7.94091C8.22931 7.71999 11.999 4.35836 12.0719 4.05341C12.0811 4.01527 12.0895 3.87311 12.0034 3.79804C11.9172 3.72297 11.7901 3.74864 11.6983 3.76906C11.5683 3.79799 9.4968 5.14035 5.48389 7.79611C4.89591 8.19195 4.36333 8.38482 3.88616 8.37472C3.36012 8.36357 2.34822 8.08311 1.59598 7.84338C0.673328 7.54933 -0.0599784 7.39387 0.00387615 6.8945C0.0371355 6.63439 0.402482 6.36838 1.09992 6.09647Z" fill="#212121" />                                    </svg>
-                                    </a>
-                                )}
-                                {socialLinks?.twitter && (
-                                    <a href={socialLinks.twitter} target="_blank" rel="noopener noreferrer" aria-label="twitter">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                                            <path d="M16 3.039c-.59.261-1.22.437-1.885.517.677-.407 1.198-1.05 1.443-1.816-.634.375-1.337.648-2.085.795-.598-.638-1.45-1.036-2.396-1.036-1.812 0-3.282 1.468-3.282 3.282 0 .258.029.509.085.749-2.728-.137-5.147-1.444-6.766-3.43-.283.485-.444 1.049-.444 1.65 0 1.14.58 2.143 1.46 2.732-.538-.017-1.044-.165-1.487-.41v.041c0 1.591 1.132 2.917 2.633 3.219-.275.074-.565.114-.865.114-.211 0-.416-.02-.615-.058.416 1.299 1.624 2.245 3.055 2.271-1.119.877-2.529 1.4-4.061 1.4-.264 0-.524-.015-.78-.045 1.447.928 3.166 1.469 5.013 1.469 6.015 0 9.304-4.983 9.304-9.304 0-.141-.003-.282-.01-.422A6.643 6.643 0 0016 3.039z" fill="#212121" />
-                                        </svg>
                                     </a>
                                 )}
                             </div>
@@ -390,7 +398,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
             }))
             : [];
         const ensureHttpUrl = (url?: string) => {
-            if (!url) return undefined;
+            if (!url) return null;
             let u = String(url).trim();
             if (u.startsWith('htpps://')) u = 'https://' + u.slice('htpps://'.length);
             if (!/^https?:\/\//i.test(u)) u = 'https://' + u;
@@ -404,6 +412,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
             youtube: ensureHttpUrl(socialData.youtube_havolasi),
             telegram: ensureHttpUrl(socialData.telegram_havolasi),
             twitter: ensureHttpUrl(socialData.twitter_havolasi),
+            linkedin: ensureHttpUrl(socialData.linkedin_havolasi),
         };
 
         return {
