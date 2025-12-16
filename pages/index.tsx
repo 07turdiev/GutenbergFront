@@ -99,8 +99,7 @@ const Index = () => {
             <HeadMeta 
                 title="Gutenberg - birinchi raqamli biznes adabiyotlar, bestsellerlar" 
                 description="Gutenberg - birinchi raqamli biznes adabiyotlar nashriyoti.  Biznes adabiyotlar, liderlik, ilmiy-ommabop, startap adabiyotlar, o'zbekcha kitoblar. Zamonaviy va klassik asarlar o'zgacha formatda."
-                keywords="biznes adabiyotlar, liderlik, ilmiy-ommabop, startap adabiyotlar, o'zbekcha kitoblar, bepul kitoblar, online kutubxona, Gutenberg, liderlik, bestseller, klassika, universitetlar, nashriyot, startap, startup, komikslar, mangalar, texnologiya, IT"
-                ogImg="https://gutenbergnu.uz/og-default-img.jpg"
+                keywords="biznes adabiyotlar, liderlik, ilmiy-ommabop, startap adabiyotlar, o'zbekcha kitoblar, bepul kitoblar, online kutubxona, Gutenberg, liderlik, bestseller, klassika, universitetlar, nashriyot, startap, startup, komikslar, mangalar, texnologiya, IT, Iogan Gutenberg, Johannes Gutenberg, Gutenberg nashriyoti, GutenbergNU, Gutenberg nashriyot uyi."                ogImg="https://gutenbergnu.uz/og-default-img.jpg"
             />
             <StructuredData type="Website" data={{}} />
             
